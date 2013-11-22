@@ -127,7 +127,7 @@ final class WifiDisplayAdapter extends DisplayAdapter {
         pw.println("mPendingStatusChangeBroadcast=" + mPendingStatusChangeBroadcast);
         pw.println("mPendingNotificationUpdate=" + mPendingNotificationUpdate);
         pw.println("mSupportsProtectedBuffers=" + mSupportsProtectedBuffers);
-
+ 
         // Try to dump the controller state.
         if (mDisplayController == null) {
             pw.println("mDisplayController=null");
@@ -157,20 +157,25 @@ final class WifiDisplayAdapter extends DisplayAdapter {
         });
     }
 
-    public void requestScanLocked() {
+    public void requestStartScanLocked() {
         if (DEBUG) {
-            Slog.d(TAG, "requestScanLocked");
+            Slog.d(TAG, "requestStartScanLocked");
         }
 
         getHandler().post(new Runnable() {
             @Override
             public void run() {
                 if (mDisplayController != null) {
-                    mDisplayController.requestScan();
+                    mDisplayController.requestStartScan();
                 }
             }
         });
     }
+
+    public void requestStopScanLocked() {
+        if (DEBUG) {
+            Slog.d(TAG, "requestStopScanLocked");
+        }
 
     public void requestConnectLocked(final String address, final boolean trusted) {
         if (DEBUG) {
@@ -185,6 +190,20 @@ final class WifiDisplayAdapter extends DisplayAdapter {
                     return;
                 }
             }
+
+        getHandler().post(new Runnable() {
+            @Override
+            public void run() {
+                if (mDisplayController != null) {
+                    mDisplayController.requestStopScan();
+                }
+            }
+        });
+    }
+
+    public void requestConnectLocked(final String address) {
+        if (DEBUG) {
+            Slog.d(TAG, "requestConnectLocked: address=" + address);
         }
 
         getHandler().post(new Runnable() {
@@ -195,15 +214,6 @@ final class WifiDisplayAdapter extends DisplayAdapter {
                 }
             }
         });
-    }
-
-    private boolean isRememberedDisplayLocked(String address) {
-        for (WifiDisplay display : mRememberedDisplays) {
-            if (display.getDeviceAddress().equals(address)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     public void requestPauseLocked() {
@@ -545,23 +555,33 @@ final class WifiDisplayAdapter extends DisplayAdapter {
         }
 
         @Override
-        public void onScanFinished(WifiDisplay[] availableDisplays) {
+        public void onScanResults(WifiDisplay[] availableDisplays) {
             synchronized (getSyncRoot()) {
                 availableDisplays = mPersistentDataStore.applyWifiDisplayAliases(
                         availableDisplays);
 
-                // check if any of the available displays changed canConnect status
                 boolean changed = !Arrays.equals(mAvailableDisplays, availableDisplays);
+
+                // Check whether any of the available displays changed canConnect status.
                 for (int i = 0; !changed && i<availableDisplays.length; i++) {
                     changed = availableDisplays[i].canConnect()
                             != mAvailableDisplays[i].canConnect();
                 }
 
-                if (mScanState != WifiDisplayStatus.SCAN_STATE_NOT_SCANNING || changed) {
-                    mScanState = WifiDisplayStatus.SCAN_STATE_NOT_SCANNING;
+                if (changed) {
                     mAvailableDisplays = availableDisplays;
                     fixRememberedDisplayNamesFromAvailableDisplaysLocked();
                     updateDisplaysLocked();
+                    scheduleStatusChangedBroadcastLocked();
+                }
+            }
+        }
+
+        @Override
+        public void onScanFinished() {
+            synchronized (getSyncRoot()) {
+                if (mScanState != WifiDisplayStatus.SCAN_STATE_NOT_SCANNING) {
+                    mScanState = WifiDisplayStatus.SCAN_STATE_NOT_SCANNING;
                     scheduleStatusChangedBroadcastLocked();
                 }
             }
