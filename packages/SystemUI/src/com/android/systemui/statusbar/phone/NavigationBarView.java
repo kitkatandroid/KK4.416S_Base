@@ -1,6 +1,5 @@
 /*
  * Copyright (C) 2008 The Android Open Source Project
- * This code has been modified. Portions copyright (C) 2013, ParanoidAndroid Project.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -60,8 +59,6 @@ import com.android.internal.util.slim.ButtonsHelper;
 import com.android.internal.util.slim.ImageHelper;
 import com.android.internal.util.slim.DeviceUtils;
 import com.android.systemui.R;
-import com.android.systemui.recent.NavigationCallback;
-import com.android.systemui.recent.RecentsActivity;
 import com.android.systemui.statusbar.BaseStatusBar;
 import com.android.systemui.statusbar.DelegateViewHelper;
 import com.android.systemui.statusbar.policy.KeyButtonView;
@@ -73,8 +70,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NavigationBarView extends LinearLayout implements NavigationCallback {
-
+public class NavigationBarView extends LinearLayout {
     private static final int CAMERA_BUTTON_FADE_DURATION = 200;
     final static boolean DEBUG = false;
     final static String TAG = "PhoneStatusBar/NavigationBarView";
@@ -111,8 +107,7 @@ public class NavigationBarView extends LinearLayout implements NavigationCallbac
     int mDisabledFlags = 0;
     int mNavigationIconHints = 0;
 
-    private Drawable mBackIcon, mBackLandIcon, mBackAltIcon, mBackAltLandIcon,
-            mRecentIcon, mRecentLandIcon, mRecentAltIcon, mRecentAltLandIcon;
+    private Drawable mBackIcon, mBackAltIcon;
 
     protected DelegateViewHelper mDelegateHelper;
     private DeadZone mDeadZone;
@@ -202,8 +197,6 @@ public class NavigationBarView extends LinearLayout implements NavigationCallbac
         mVertical = false;
         mShowMenu = false;
         mDelegateHelper = new DelegateViewHelper(this);
-
-        RecentsActivity.setNavigationCallback(this);
 
         mBarTransitions = new NavigationBarTransitions(this);
 
@@ -312,11 +305,6 @@ public class NavigationBarView extends LinearLayout implements NavigationCallbac
     // shown when keyguard is visible and camera is available
     public View getCameraButton() {
         return mCurrentView.findViewById(R.id.camera_button);
-    }
-
-    private void getIcons(Resources res) {
-        mRecentAltIcon = res.getDrawable(R.drawable.ic_sysbar_recent_clear);
-        mRecentAltLandIcon = res.getDrawable(R.drawable.ic_sysbar_recent_clear_land);
     }
 
     @Override
@@ -603,19 +591,15 @@ public class NavigationBarView extends LinearLayout implements NavigationCallbac
     }
 
     public void setNavigationIconHints(int hints) {
-        setNavigationIconHints(NavigationCallback.NAVBAR_BACK_HINT, hints, false);
+        setNavigationIconHints(hints, false);
     }
 
     public void setNavigationIconHints(int hints, boolean force) {
-        setNavigationIconHints(NavigationCallback.NAVBAR_BACK_HINT, hints, force);
-    }
-
-    public void setNavigationIconHints(int button, int hints, boolean force) {
         if (!force && hints == mNavigationIconHints) return;
 
         if (DEBUG) {
             android.widget.Toast.makeText(mContext,
-                "Navigation icon hints = " + hints+" button = "+button,
+                "Navigation icon hints = " + hints,
                 500).show();
         }
 
@@ -640,23 +624,7 @@ public class NavigationBarView extends LinearLayout implements NavigationCallbac
                     (0 != (hints & StatusBarManager.NAVIGATION_HINT_RECENT_NOP)) ? 0.5f : 1.0f);
         }
 
-	if(button == NavigationCallback.NAVBAR_BACK_HINT) {
-            ((ImageView)getBackButton()).setImageDrawable(
-                (0 != (hints & StatusBarManager.NAVIGATION_HINT_BACK_ALT))
-                    ? (mVertical ? mBackAltLandIcon : mBackAltIcon)
-                    : (mVertical ? mBackLandIcon : mBackIcon));
-        } else if (button == NavigationCallback.NAVBAR_RECENTS_HINT) {
-            ((ImageView)getRecentsButton()).setImageDrawable(
-                (0 != (hints & StatusBarManager.NAVIGATION_HINT_RECENT_ALT))
-                    ? (mVertical ? mRecentAltLandIcon : mRecentAltIcon)
-                    : (mVertical ? mRecentLandIcon : mRecentIcon));
-	}
-
         setDisabledFlags(mDisabledFlags, true);
-    }
-
-    public int getNavigationIconHints() {
-        return mNavigationIconHints;
     }
 
     public void setDisabledFlags(int disabledFlags) {
@@ -901,9 +869,6 @@ public class NavigationBarView extends LinearLayout implements NavigationCallbac
         }
 
         setNavigationIconHints(mNavigationIconHints, true);
-        // Reset recents hints after reorienting
-        ((ImageView)getRecentsButton()).setImageDrawable(mVertical
-                ? mRecentLandIcon : mRecentIcon);
     }
 
     @Override
