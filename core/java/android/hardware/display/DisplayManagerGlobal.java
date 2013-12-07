@@ -72,8 +72,6 @@ public final class DisplayManagerGlobal {
     private final SparseArray<DisplayInfo> mDisplayInfoCache = new SparseArray<DisplayInfo>();
     private int[] mDisplayIdCache;
 
-    private int mWifiDisplayScanNestCount;
-
     private DisplayManagerGlobal(IDisplayManager dm) {
         mDm = dm;
     }
@@ -269,32 +267,11 @@ public final class DisplayManagerGlobal {
         }
     }
 
-    public void startWifiDisplayScan() {
-        synchronized (mLock) {
-            if (mWifiDisplayScanNestCount++ == 0) {
-                registerCallbackIfNeededLocked();
-                try {
-                    mDm.startWifiDisplayScan();
-                } catch (RemoteException ex) {
-                    Log.e(TAG, "Failed to scan for Wifi displays.", ex);
-                }
-            }
-        }
-    }
-
-    public void stopWifiDisplayScan() {
-        synchronized (mLock) {
-            if (--mWifiDisplayScanNestCount == 0) {
-                try {
-                    mDm.stopWifiDisplayScan();
-                } catch (RemoteException ex) {
-                    Log.e(TAG, "Failed to scan for Wifi displays.", ex);
-                }
-            } else if (mWifiDisplayScanNestCount < 0) {
-                Log.wtf(TAG, "Wifi display scan nest count became negative: "
-                        + mWifiDisplayScanNestCount);
-                mWifiDisplayScanNestCount = 0;
-            }
+    public void scanWifiDisplays() {
+        try {
+            mDm.scanWifiDisplays();
+        } catch (RemoteException ex) {
+            Log.e(TAG, "Failed to scan for Wifi displays.", ex);
         }
     }
 

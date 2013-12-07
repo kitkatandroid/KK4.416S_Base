@@ -635,12 +635,11 @@ class QuickSettingsModel implements BluetoothStateChangeCallback,
             mWifiDisplayState.label = status.getActiveDisplay().getFriendlyDisplayName();
             mWifiDisplayState.iconId = R.drawable.ic_qs_remote_display_connected;
         } else {
-            connectedRoute = null;
-            connecting = false;
-            enabled = mMediaRouter.isRouteAvailable(MediaRouter.ROUTE_TYPE_REMOTE_DISPLAY,
-                    MediaRouter.AVAILABILITY_FLAG_IGNORE_DEFAULT_ROUTE);
+            mWifiDisplayState.label = mContext.getString(
+                    R.string.quick_settings_wifi_display_no_connection_label);
+            mWifiDisplayState.iconId = R.drawable.ic_qs_remote_display;
         }
-        //mWifiDisplayCallback.refreshView(mWifiDisplayTile, mWifiDisplayState);
+        mWifiDisplayCallback.refreshView(mWifiDisplayTile, mWifiDisplayState);
 
     }
 

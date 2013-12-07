@@ -78,7 +78,6 @@ public class MediaRouter {
 
         WifiDisplayStatus mLastKnownWifiDisplayStatus;
         boolean mActivelyScanningWifiDisplays;
-        String mPreviousActiveWifiDisplayAddress;
 
         final IAudioRoutesObserver.Stub mAudioRoutesObserver = new IAudioRoutesObserver.Stub() {
             @Override
@@ -88,6 +87,16 @@ public class MediaRouter {
                         updateAudioRoutes(newRoutes);
                     }
                 });
+            }
+        };
+
+        final Runnable mScanWifiDisplays = new Runnable() {
+            @Override
+            public void run() {
+                if (mActivelyScanningWifiDisplays) {
+                    mDisplayService.scanWifiDisplays();
+                    mHandler.postDelayed(this, WIFI_DISPLAY_SCAN_INTERVAL);
+                }
             }
         };
 
@@ -204,66 +213,16 @@ public class MediaRouter {
             }
         }
 
-        //void updateActiveScan() {
-            //if (hasActiveScanCallbackOfType(ROUTE_TYPE_LIVE_VIDEO)) {
-                //if (!mActivelyScanningWifiDisplays) {
-                    //mActivelyScanningWifiDisplays = true;
-                    //mHandler.post(mScanWifiDisplays);
-        void updateDiscoveryRequest() {
-            // What are we looking for today?
-            int routeTypes = 0;
-            int passiveRouteTypes = 0;
-            boolean activeScan = false;
-            boolean activeScanWifiDisplay = false;
-            final int count = mCallbacks.size();
-            for (int i = 0; i < count; i++) {
-                CallbackInfo cbi = mCallbacks.get(i);
-                if ((cbi.flags & (CALLBACK_FLAG_PERFORM_ACTIVE_SCAN
-                        | CALLBACK_FLAG_REQUEST_DISCOVERY)) != 0) {
-                    // Discovery explicitly requested.
-                    routeTypes |= cbi.type;
-                } else if ((cbi.flags & CALLBACK_FLAG_PASSIVE_DISCOVERY) != 0) {
-                    // Discovery only passively requested.
-                    passiveRouteTypes |= cbi.type;
-                } else {
-                    // Legacy case since applications don't specify the discovery flag.
-                    // Unfortunately we just have to assume they always need discovery
-                    // whenever they have a callback registered.
-                    routeTypes |= cbi.type;
+        void updateActiveScan() {
+            if (hasActiveScanCallbackOfType(ROUTE_TYPE_LIVE_VIDEO)) {
+                if (!mActivelyScanningWifiDisplays) {
+                    mActivelyScanningWifiDisplays = true;
+                    mHandler.post(mScanWifiDisplays);
                 }
-                if ((cbi.flags & CALLBACK_FLAG_PERFORM_ACTIVE_SCAN) != 0) {
-                    activeScan = true;
-                    if ((cbi.type & ROUTE_TYPE_REMOTE_DISPLAY) != 0) {
-                        activeScanWifiDisplay = true;
-                    }
-                }
-            }
-            if (routeTypes != 0 || activeScan) {
-                // If someone else requests discovery then enable the passive listeners.
-                // This is used by the MediaRouteButton and MediaRouteActionProvider since
-                // they don't receive lifecycle callbacks from the Activity.
-                routeTypes |= passiveRouteTypes;
-            }
-
-            // Update wifi display scanning.
-            // TODO: All of this should be managed by the media router service.
-            if (mCanConfigureWifiDisplays) {
-                if (mSelectedRoute != null
-                        && mSelectedRoute.matchesTypes(ROUTE_TYPE_REMOTE_DISPLAY)) {
-                    // Don't scan while already connected to a remote display since
-                    // it may interfere with the ongoing transmission.
-                    activeScanWifiDisplay = false;
-                }
-                if (activeScanWifiDisplay) {
-                    if (!mActivelyScanningWifiDisplays) {
-                        mActivelyScanningWifiDisplays = true;
-                        mDisplayService.startWifiDisplayScan();
-                    }
-                } else {
-                    if (mActivelyScanningWifiDisplays) {
-                        mActivelyScanningWifiDisplays = false;
-                        mDisplayService.stopWifiDisplayScan();
-                    }
+            } else {
+                if (mActivelyScanningWifiDisplays) {
+                    mActivelyScanningWifiDisplays = false;
+                    mHandler.removeCallbacks(mScanWifiDisplays);
                 }
             }
         }
@@ -589,9 +548,6 @@ public class MediaRouter {
         if (route != null) {
             dispatchRouteSelected(types & route.getSupportedTypes(), route);
         }
-
-        // The behavior of active scans may depend on the currently selected route.
-        sStatic.updateDiscoveryRequest();
     }
 
     /**
@@ -919,30 +875,24 @@ public class MediaRouter {
         }
     }
 
-    static void updateWifiDisplayStatus(WifiDisplayStatus status) {
-        WifiDisplay[] displays;
-        WifiDisplay activeDisplay;
-        if (status.getFeatureState() == WifiDisplayStatus.FEATURE_STATE_ON) {
-            displays = status.getDisplays();
-            activeDisplay = status.getActiveDisplay();
+    static void updateWifiDisplayStatus(WifiDisplayStatus newStatus) {
+        final WifiDisplayStatus oldStatus = sStatic.mLastKnownWifiDisplayStatus;
 
-            // Only the system is able to connect to wifi display routes.
-            // The display manager will enforce this with a permission check but it
-            // still publishes information about all available displays.
-            // Filter the list down to just the active display.
-            if (!sStatic.mCanConfigureWifiDisplays) {
-                if (activeDisplay != null) {
-                    displays = new WifiDisplay[] { activeDisplay };
-                } else {
-                    displays = WifiDisplay.EMPTY_ARRAY;
-                }
-            }
+        // TODO Naive implementation. Make this smarter later.
+        boolean wantScan = false;
+        boolean blockScan = false;
+        WifiDisplay[] oldDisplays = oldStatus != null ?
+                oldStatus.getDisplays() : WifiDisplay.EMPTY_ARRAY;
+        WifiDisplay[] newDisplays;
+        WifiDisplay activeDisplay;
+
+        if (newStatus.getFeatureState() == WifiDisplayStatus.FEATURE_STATE_ON) {
+            newDisplays = newStatus.getDisplays();
+            activeDisplay = newStatus.getActiveDisplay();
         } else {
             newDisplays = WifiDisplay.EMPTY_ARRAY;
             activeDisplay = null;
         }
-        String activeDisplayAddress = activeDisplay != null ?
-                activeDisplay.getDeviceAddress() : null;
 
         for (int i = 0; i < newDisplays.length; i++) {
             final WifiDisplay d = newDisplays[i];
@@ -951,11 +901,9 @@ public class MediaRouter {
                 if (route == null) {
                     route = makeWifiDisplayRoute(d, newStatus);
                     addRouteStatic(route);
+                    wantScan = true;
                 } else {
-                    String address = d.getDeviceAddress();
-                    boolean disconnected = !address.equals(activeDisplayAddress)
-                            && address.equals(sStatic.mPreviousActiveWifiDisplayAddress);
-                    updateWifiDisplayRoute(route, d, status, disconnected);
+                    updateWifiDisplayRoute(route, d, newStatus);
                 }
                 if (d.equals(activeDisplay)) {
                     selectRouteStatic(route.getSupportedTypes(), route);
@@ -975,11 +923,6 @@ public class MediaRouter {
                 }
             }
         }
-
-        // Remember the current active wifi display address so that we can infer disconnections.
-        // TODO: This hack will go away once all of this is moved into the media router service.
-        sStatic.mPreviousActiveWifiDisplayAddress = activeDisplayAddress;
-    }
 
         if (wantScan && !blockScan) {
             sStatic.mDisplayService.scanWifiDisplays();
@@ -1041,8 +984,7 @@ public class MediaRouter {
     }
 
     private static void updateWifiDisplayRoute(
-            RouteInfo route, WifiDisplay display, WifiDisplayStatus wfdStatus,
-            boolean disconnected) {
+            RouteInfo route, WifiDisplay display, WifiDisplayStatus wfdStatus) {
         boolean changed = false;
         final String newName = display.getFriendlyDisplayName();
         if (!route.getName().equals(newName)) {
@@ -1060,7 +1002,7 @@ public class MediaRouter {
             dispatchRouteChanged(route);
         }
 
-        if ((!enabled || disconnected) && route.isSelected()) {
+        if (!enabled && route == sStatic.mSelectedRoute) {
             // Oops, no longer available. Reselect the default.
             final RouteInfo defaultRoute = sStatic.mDefaultAudioVideo;
             selectRouteStatic(defaultRoute.getSupportedTypes(), defaultRoute);
