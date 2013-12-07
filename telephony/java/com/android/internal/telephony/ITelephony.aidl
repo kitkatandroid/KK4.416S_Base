@@ -49,7 +49,7 @@ interface ITelephony {
      * @param boolean to turn on and off LTE
      * {@hide}
      */
-    void toggleLTE(boolean on);
+    //void toggleLTE(boolean on);
 
     /**
      * If there is currently a call in progress, show the call screen.

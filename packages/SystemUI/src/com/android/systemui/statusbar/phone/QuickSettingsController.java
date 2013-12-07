@@ -71,7 +71,7 @@ import com.android.systemui.quicksettings.BugReportTile;
 import com.android.systemui.quicksettings.ExpandedDesktopTile;
 import com.android.systemui.quicksettings.LocationTile;
 import com.android.systemui.quicksettings.InputMethodTile;
-import com.android.systemui.quicksettings.LteTile;
+//import com.android.systemui.quicksettings.LteTile;
 import com.android.systemui.quicksettings.MobileNetworkTile;
 import com.android.systemui.quicksettings.MobileNetworkTypeTile;
 import com.android.systemui.quicksettings.MusicTile;
@@ -153,7 +153,7 @@ public class QuickSettingsController {
         // Filter items not compatible with device
         boolean bluetoothSupported = DeviceUtils.deviceSupportsBluetooth();
         boolean mobileDataSupported = DeviceUtils.deviceSupportsMobileData(mContext);
-        boolean lteSupported = DeviceUtils.deviceSupportsLte(mContext);
+        //boolean lteSupported = DeviceUtils.deviceSupportsLte(mContext);
         boolean torchSupported = DeviceUtils.deviceSupportsTorch(mContext);
 
         if (!bluetoothSupported) {
@@ -166,9 +166,9 @@ public class QuickSettingsController {
             TILES_DEFAULT.remove(TILE_NETWORKMODE);
         }
 
-        if (!lteSupported) {
-            TILES_DEFAULT.remove(TILE_LTE);
-        }
+        //if (!lteSupported) {
+            //TILES_DEFAULT.remove(TILE_LTE);
+        //}
 
         if (!torchSupported) {
             TILES_DEFAULT.remove(TILE_TORCH);
@@ -229,8 +229,8 @@ public class QuickSettingsController {
                 qs = new SleepScreenTile(mContext, this);
             } else if (tile.equals(TILE_NFC)) {
                 qs = new NfcTile(mContext, this);
-            } else if (tile.equals(TILE_LTE)) {
-                qs = new LteTile(mContext, this);
+            //} else if (tile.equals(TILE_LTE)) {
+                //qs = new LteTile(mContext, this);
             } else if (tile.equals(TILE_QUIETHOURS)) {
                 qs = new QuietHoursTile(mContext, this);
             } else if (tile.equals(TILE_VOLUME)) {
