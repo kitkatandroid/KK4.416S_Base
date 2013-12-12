@@ -21,15 +21,10 @@ import static com.android.server.wm.WindowManagerService.TAG;
 
 import android.graphics.Rect;
 import android.os.Debug;
-<<<<<<< HEAD
-import android.util.Slog;
-import android.util.TypedValue;
-=======
 import android.util.EventLog;
 import android.util.Slog;
 import android.util.TypedValue;
 import com.android.server.EventLogTags;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
 import static com.android.server.am.ActivityStackSupervisor.HOME_STACK_ID;
 
@@ -52,11 +47,7 @@ public class TaskStack {
 
     /** The Tasks that define this stack. Oldest Tasks are at the bottom. The ordering must match
      * mTaskHistory in the ActivityStack with the same mStackId */
-<<<<<<< HEAD
-    private ArrayList<Task> mTasks = new ArrayList<Task>();
-=======
     private final ArrayList<Task> mTasks = new ArrayList<Task>();
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
     /** The StackBox this sits in. */
     StackBox mStackBox;
@@ -81,10 +72,6 @@ public class TaskStack {
         mService = service;
         mStackId = stackId;
         mDisplayContent = displayContent;
-<<<<<<< HEAD
-        final int displayId = displayContent.getDisplayId();
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         mDimLayer = new DimLayer(service, this);
         mAnimationBackgroundSurface = new DimLayer(service, this);
     }
@@ -134,10 +121,7 @@ public class TaskStack {
         mTasks.add(stackNdx, task);
 
         task.mStack = this;
-<<<<<<< HEAD
-=======
         mDisplayContent.addTask(task, toTop);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         return mDisplayContent.moveHomeStackBox(mStackId == HOME_STACK_ID);
     }
 
@@ -163,19 +147,13 @@ public class TaskStack {
         if (DEBUG_TASK_MOVEMENT) Slog.d(TAG, "removeTask: task=" + task);
         mStackBox.makeDirty();
         mTasks.remove(task);
-<<<<<<< HEAD
-=======
         mDisplayContent.removeTask(task);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     int remove() {
         mAnimationBackgroundSurface.destroySurface();
         mDimLayer.destroySurface();
-<<<<<<< HEAD
-=======
         EventLog.writeEvent(EventLogTags.WM_STACK_REMOVED, mStackId);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         return mStackBox.remove();
     }
 
@@ -293,11 +271,8 @@ public class TaskStack {
                 for (int winNdx = windows.size() - 1; winNdx >= 0; --winNdx) {
                     final WindowState win = windows.get(winNdx);
                     if (!resizingWindows.contains(win)) {
-<<<<<<< HEAD
-=======
                         if (WindowManagerService.DEBUG_RESIZE) Slog.d(TAG,
                                 "setBounds: Resizing " + win);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                         resizingWindows.add(win);
                     }
                     win.mUnderStatusBar = underStatusBar;

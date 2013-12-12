@@ -76,11 +76,7 @@ class TouchExplorer implements EventStreamTransformation {
     private static final int STATE_DELEGATING = 0x00000004;
     private static final int STATE_GESTURE_DETECTING = 0x00000005;
 
-<<<<<<< HEAD
-    // The minimum of the cosine between the vectors of two moving
-=======
     // The maximum of the cosine between the vectors of two moving
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     // pointers so they can be considered moving in the same direction.
     private static final float MAX_DRAGGING_ANGLE_COS = 0.525321989f; // cos(pi/4)
 
@@ -440,15 +436,6 @@ class TouchExplorer implements EventStreamTransformation {
                         final int pointerIdBits = (1 << pointerId);
                         mSendHoverEnterAndMoveDelayed.post(event, true, pointerIdBits,
                                 policyFlags);
-<<<<<<< HEAD
-                    }
-                    // Cache the event until we discern exploration from gesturing.
-                    mSendHoverEnterAndMoveDelayed.addEvent(event);
-                }
-            } break;
-            case MotionEvent.ACTION_POINTER_DOWN: {
-                /* do nothing - let the code for ACTION_MOVE decide what to do */
-=======
                     } else {
                         // Cache the event until we discern exploration from gesturing.
                         mSendHoverEnterAndMoveDelayed.addEvent(event);
@@ -462,7 +449,6 @@ class TouchExplorer implements EventStreamTransformation {
                 mSendHoverEnterAndMoveDelayed.cancel();
                 mSendHoverExitDelayed.cancel();
                 mPerformLongPressDelayed.cancel();
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             } break;
             case MotionEvent.ACTION_MOVE: {
                 final int pointerId = receivedTracker.getPrimaryPointerId();
@@ -538,22 +524,11 @@ class TouchExplorer implements EventStreamTransformation {
                                     mPerformLongPressDelayed.cancel();
                                 }
                             }
-<<<<<<< HEAD
-                            // The user is either double tapping or performing a long
-                            // press, so do not send move events yet.
-                            if (mDoubleTapDetector.firstTapDetected()) {
-                                break;
-                            }
-                            sendTouchExplorationGestureStartAndHoverEnterIfNeeded(policyFlags);
-                            sendMotionEvent(event, MotionEvent.ACTION_HOVER_MOVE, pointerIdBits,
-                                    policyFlags);
-=======
                             if (mTouchExplorationInProgress) {
                                 sendTouchExplorationGestureStartAndHoverEnterIfNeeded(policyFlags);
                                 sendMotionEvent(event, MotionEvent.ACTION_HOVER_MOVE, pointerIdBits,
                                         policyFlags);
                             }
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                         }
                     } break;
                     case 2: {
@@ -567,24 +542,6 @@ class TouchExplorer implements EventStreamTransformation {
                             mPerformLongPressDelayed.cancel();
                         } else {
                             mPerformLongPressDelayed.cancel();
-<<<<<<< HEAD
-                            // If the user is touch exploring the second pointer may be
-                            // performing a double tap to activate an item without need
-                            // for the user to lift his exploring finger.
-                            // It is *important* to use the distance traveled by the pointers
-                            // on the screen which may or may not be magnified.
-                            final float deltaX = receivedTracker.getReceivedPointerDownX(pointerId)
-                                    - rawEvent.getX(pointerIndex);
-                            final float deltaY = receivedTracker.getReceivedPointerDownY(pointerId)
-                                    - rawEvent.getY(pointerIndex);
-                            final double moveDelta = Math.hypot(deltaX, deltaY);
-                            if (moveDelta < mDoubleTapSlop) {
-                                break;
-                            }
-                            // We are sending events so send exit and gesture
-                            // end since we transition to another state.
-                            sendHoverExitAndTouchExplorationGestureEndIfNeeded(policyFlags);
-=======
                             if (mTouchExplorationInProgress) {
                                 // If the user is touch exploring the second pointer may be
                                 // performing a double tap to activate an item without need
@@ -603,7 +560,6 @@ class TouchExplorer implements EventStreamTransformation {
                                 // end since we transition to another state.
                                 sendHoverExitAndTouchExplorationGestureEndIfNeeded(policyFlags);
                             }
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                         }
 
                         // We know that a new state transition is to happen and the
@@ -785,14 +741,6 @@ class TouchExplorer implements EventStreamTransformation {
                         + "there is at least one pointer down!");
             }
             case MotionEvent.ACTION_UP: {
-<<<<<<< HEAD
-                mAms.onTouchInteractionEnd();
-                // Announce the end of a the touch interaction.
-                sendAccessibilityEvent(AccessibilityEvent.TYPE_TOUCH_INTERACTION_END);
-                mLongPressingPointerId = -1;
-                mLongPressingPointerDeltaX = 0;
-                mLongPressingPointerDeltaY = 0;
-=======
                 // Offset the event if we are doing a long press as the
                 // target is not necessarily under the user's finger.
                 if (mLongPressingPointerId >= 0) {
@@ -811,23 +759,16 @@ class TouchExplorer implements EventStreamTransformation {
                 mAms.onTouchInteractionEnd();
                 sendAccessibilityEvent(AccessibilityEvent.TYPE_TOUCH_INTERACTION_END);
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 mCurrentState = STATE_TOUCH_EXPLORING;
             } break;
             case MotionEvent.ACTION_CANCEL: {
                 clear(event, policyFlags);
             } break;
-<<<<<<< HEAD
-        }
-        // Deliver the event.
-        sendMotionEvent(event, event.getAction(), ALL_POINTER_ID_BITS, policyFlags);
-=======
             default: {
                 // Deliver the event.
                 sendMotionEvent(event, event.getAction(), ALL_POINTER_ID_BITS, policyFlags);
             }
         }
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     private void handleMotionEventGestureDetecting(MotionEvent event, int policyFlags) {
@@ -1037,32 +978,8 @@ class TouchExplorer implements EventStreamTransformation {
         // long press it, or even worse to avoid the user long pressing
         // on the wrong item since click and long press behave differently.
         if (mLongPressingPointerId >= 0) {
-<<<<<<< HEAD
-            final int remappedIndex = event.findPointerIndex(mLongPressingPointerId);
-            final int pointerCount = event.getPointerCount();
-            PointerProperties[] props = PointerProperties.createArray(pointerCount);
-            PointerCoords[] coords = PointerCoords.createArray(pointerCount);
-            for (int i = 0; i < pointerCount; i++) {
-                event.getPointerProperties(i, props[i]);
-                event.getPointerCoords(i, coords[i]);
-                if (i == remappedIndex) {
-                    coords[i].x -= mLongPressingPointerDeltaX;
-                    coords[i].y -= mLongPressingPointerDeltaY;
-                }
-            }
-            MotionEvent remapped = MotionEvent.obtain(event.getDownTime(),
-                    event.getEventTime(), event.getAction(), event.getPointerCount(),
-                    props, coords, event.getMetaState(), event.getButtonState(),
-                    1.0f, 1.0f, event.getDeviceId(), event.getEdgeFlags(),
-                    event.getSource(), event.getFlags());
-            if (event != prototype) {
-                event.recycle();
-            }
-            event = remapped;
-=======
             event = offsetEvent(event, - mLongPressingPointerDeltaX,
                     - mLongPressingPointerDeltaY);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
 
         if (DEBUG) {
@@ -1087,8 +1004,6 @@ class TouchExplorer implements EventStreamTransformation {
     }
 
     /**
-<<<<<<< HEAD
-=======
      * Offsets all pointers in the given event by adding the specified X and Y
      * offsets.
      *
@@ -1122,7 +1037,6 @@ class TouchExplorer implements EventStreamTransformation {
     }
 
     /**
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
      * Computes the action for an injected event based on a masked action
      * and a pointer index.
      *
@@ -1793,10 +1707,6 @@ class TouchExplorer implements EventStreamTransformation {
 
         // Keep track of the last up pointer data.
         private long mLastReceivedUpPointerDownTime;
-<<<<<<< HEAD
-        private int mLastReceivedUpPointerId;
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         private float mLastReceivedUpPointerDownX;
         private float mLastReceivedUpPointerDownY;
 
@@ -1812,10 +1722,6 @@ class TouchExplorer implements EventStreamTransformation {
             mReceivedPointersDown = 0;
             mPrimaryPointerId = 0;
             mLastReceivedUpPointerDownTime = 0;
-<<<<<<< HEAD
-            mLastReceivedUpPointerId = 0;
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             mLastReceivedUpPointerDownX = 0;
             mLastReceivedUpPointerDownY = 0;
         }
@@ -1948,10 +1854,6 @@ class TouchExplorer implements EventStreamTransformation {
             final int pointerId = event.getPointerId(pointerIndex);
             final int pointerFlag = (1 << pointerId);
 
-<<<<<<< HEAD
-            mLastReceivedUpPointerId = 0;
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             mLastReceivedUpPointerDownTime = 0;
             mLastReceivedUpPointerDownX = 0;
             mLastReceivedUpPointerDownX = 0;
@@ -1976,10 +1878,6 @@ class TouchExplorer implements EventStreamTransformation {
             final int pointerId = event.getPointerId(pointerIndex);
             final int pointerFlag = (1 << pointerId);
 
-<<<<<<< HEAD
-            mLastReceivedUpPointerId = pointerId;
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             mLastReceivedUpPointerDownTime = getReceivedPointerDownTime(pointerId);
             mLastReceivedUpPointerDownX = mReceivedPointerDownX[pointerId];
             mLastReceivedUpPointerDownY = mReceivedPointerDownY[pointerId];

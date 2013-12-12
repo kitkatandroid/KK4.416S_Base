@@ -28,18 +28,11 @@ import com.android.internal.statusbar.IStatusBarService;
 import com.android.systemui.R;
 import com.android.systemui.statusbar.policy.KeyButtonView;
 
-<<<<<<< HEAD
-import java.util.List;
-
-public final class NavigationBarTransitions extends BarTransitions {
-
-=======
 public final class NavigationBarTransitions extends BarTransitions {
 
     private static final float KEYGUARD_QUIESCENT_ALPHA = 0.5f;
     private static final int CONTENT_FADE_DURATION = 200;
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     private final NavigationBarView mView;
     private final IStatusBarService mBarService;
 
@@ -83,35 +76,6 @@ public final class NavigationBarTransitions extends BarTransitions {
 
     private void applyMode(int mode, boolean animate, boolean force) {
         // apply to key buttons
-<<<<<<< HEAD
-        final boolean isOpaque = mode == MODE_OPAQUE || mode == MODE_LIGHTS_OUT;
-        final float alpha = isOpaque ? KeyButtonView.DEFAULT_QUIESCENT_ALPHA : 1f;
-        final View back = mView.getBackButton();
-        final View home = mView.getHomeButton();
-        final View recent = mView.getRecentsButton();
-        if (back != null) {
-            setKeyButtonViewQuiescentAlpha(back, alpha, animate);
-        }
-        if (home != null) {
-            setKeyButtonViewQuiescentAlpha(home, alpha, animate);
-        }
-        if (recent != null) {
-            setKeyButtonViewQuiescentAlpha(recent, alpha, animate);
-        }
-        List<Integer> buttonIdList = mView.getButtonIdList();
-        for (int i = 0; i < buttonIdList.size(); i++) {
-            final View customButton = mView.getCustomButton(buttonIdList.get(i));
-            if (customButton != null) {
-                setKeyButtonViewQuiescentAlpha(customButton, alpha, animate);
-            }
-        }
-        setKeyButtonViewQuiescentAlpha(mView.getLeftMenuButton(), alpha, animate);
-        setKeyButtonViewQuiescentAlpha(mView.getRightMenuButton(), alpha, animate);
-        setKeyButtonViewQuiescentAlpha(mView.getCameraButton(), alpha, animate);
-
-        // apply to lights out
-        applyLightsOut(mode == MODE_LIGHTS_OUT, animate, force);
-=======
         final float alpha = alphaForMode(mode);
         setKeyButtonViewQuiescentAlpha(mView.getHomeButton(), alpha, animate);
         setKeyButtonViewQuiescentAlpha(mView.getRecentsButton(), alpha, animate);
@@ -161,7 +125,6 @@ public final class NavigationBarTransitions extends BarTransitions {
         if (v != null) {
             v.animate().alpha(alpha).setDuration(CONTENT_FADE_DURATION);
         }
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     private void setKeyButtonViewQuiescentAlpha(View button, float alpha, boolean animate) {

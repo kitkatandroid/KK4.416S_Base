@@ -31,12 +31,9 @@ built_framework_classes := $(call java-lib-files,framework-base)
 built_core_dep := $(call java-lib-deps,core)
 built_core_classes := $(call java-lib-files,core)
 
-<<<<<<< HEAD
-=======
 built_ext_dep := $(call java-lib-deps,ext)
 built_ext_classes := $(call java-lib-files,ext)
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 built_layoutlib_create_jar := $(call intermediates-dir-for, \
 			JAVA_LIBRARIES,layoutlib_create,HOST)/javalib.jar
 
@@ -53,10 +50,7 @@ include $(BUILD_SYSTEM)/base_rules.mk
 
 $(LOCAL_BUILT_MODULE): $(built_core_dep) \
                        $(built_framework_dep) \
-<<<<<<< HEAD
-=======
                        $(built_ext_dep) \
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                        $(built_layoutlib_create_jar)
 	$(hide) echo "host layoutlib_create: $@"
 	$(hide) mkdir -p $(dir $@)
@@ -65,12 +59,8 @@ $(LOCAL_BUILT_MODULE): $(built_core_dep) \
 	$(hide) java -jar $(built_layoutlib_create_jar) \
 	             $@ \
 	             $(built_core_classes) \
-<<<<<<< HEAD
-	             $(built_framework_classes)
-=======
 	             $(built_framework_classes) \
 	             $(built_ext_classes)
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 	$(hide) ls -l $(built_framework_classes)
 
 

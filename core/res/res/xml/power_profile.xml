@@ -58,8 +58,6 @@
   </array>
   <!-- This is the battery capacity in mAh (measured at nominal voltage) -->
   <item name="battery.capacity">1000</item>
-<<<<<<< HEAD
-=======
 
   <array name="wifi.batchedscan"> <!-- mA -->
       <value>.0002</value> <!-- 1-8/hr -->
@@ -68,5 +66,4 @@
       <value>.2</value>    <!-- 513-4,096/hr -->
       <value>2</value>    <!-- 4097-/hr -->
   </array>
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 </device>

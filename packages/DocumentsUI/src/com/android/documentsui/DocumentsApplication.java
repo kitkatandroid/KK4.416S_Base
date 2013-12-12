@@ -75,10 +75,7 @@ public class DocumentsApplication extends Application {
         packageFilter.addAction(Intent.ACTION_PACKAGE_ADDED);
         packageFilter.addAction(Intent.ACTION_PACKAGE_CHANGED);
         packageFilter.addAction(Intent.ACTION_PACKAGE_REMOVED);
-<<<<<<< HEAD
-=======
         packageFilter.addAction(Intent.ACTION_PACKAGE_DATA_CLEARED);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         packageFilter.addDataScheme("package");
         registerReceiver(mCacheReceiver, packageFilter);
 

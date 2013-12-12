@@ -22,10 +22,6 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
-<<<<<<< HEAD
-import android.app.ListFragment;
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import android.app.LoaderManager;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
@@ -50,23 +46,17 @@ import android.printservice.PrintServiceInfo;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
-<<<<<<< HEAD
-=======
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityManager;
-<<<<<<< HEAD
-=======
 import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Filter;
@@ -82,11 +72,7 @@ import java.util.List;
 /**
  * This is a fragment for selecting a printer.
  */
-<<<<<<< HEAD
-public final class SelectPrinterFragment extends ListFragment {
-=======
 public final class SelectPrinterFragment extends Fragment {
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
     private static final String LOG_TAG = "SelectPrinterFragment";
 
@@ -98,11 +84,6 @@ public final class SelectPrinterFragment extends Fragment {
     private static final String FRAGMRNT_ARGUMENT_PRINT_SERVICE_INFOS =
             "FRAGMRNT_ARGUMENT_PRINT_SERVICE_INFOS";
 
-<<<<<<< HEAD
-    private final ArrayList<PrintServiceInfo> mAddPrinterServices =
-            new ArrayList<PrintServiceInfo>();
-
-=======
     private static final String EXTRA_PRINTER_ID = "EXTRA_PRINTER_ID";
 
     private final ArrayList<PrintServiceInfo> mAddPrinterServices =
@@ -110,7 +91,6 @@ public final class SelectPrinterFragment extends Fragment {
 
     private ListView mListView;
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     private AnnounceFilterResult mAnnounceFilterResult;
 
     public static interface OnPrinterSelectedListener {
@@ -125,17 +105,12 @@ public final class SelectPrinterFragment extends Fragment {
     }
 
     @Override
-<<<<<<< HEAD
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-=======
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         View content = inflater.inflate(R.layout.select_printer_fragment, container, false);
 
         // Hook up the list view.
         mListView = (ListView) content.findViewById(android.R.id.list);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         final DestinationAdapter adapter = new DestinationAdapter();
         adapter.registerDataSetObserver(new DataSetObserver() {
             @Override
@@ -152,9 +127,6 @@ public final class SelectPrinterFragment extends Fragment {
                 }
             }
         });
-<<<<<<< HEAD
-        setListAdapter(adapter);
-=======
         mListView.setAdapter(adapter);
 
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -177,7 +149,6 @@ public final class SelectPrinterFragment extends Fragment {
         registerForContextMenu(mListView);
 
         return content;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     @Override
@@ -195,11 +166,7 @@ public final class SelectPrinterFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String searchString) {
-<<<<<<< HEAD
-                ((DestinationAdapter) getListAdapter()).getFilter().filter(searchString);
-=======
                 ((DestinationAdapter) mListView.getAdapter()).getFilter().filter(searchString);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 return true;
             }
         });
@@ -228,8 +195,6 @@ public final class SelectPrinterFragment extends Fragment {
     }
 
     @Override
-<<<<<<< HEAD
-=======
     public void onCreateContextMenu(ContextMenu menu, View view, ContextMenuInfo menuInfo) {
         if (view == mListView) {
             final int position = ((AdapterContextMenuInfo) menuInfo).position;
@@ -286,7 +251,6 @@ public final class SelectPrinterFragment extends Fragment {
     }
 
     @Override
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     public void onResume() {
         updateAddPrintersAdapter();
         getActivity().invalidateOptionsMenu();
@@ -302,21 +266,6 @@ public final class SelectPrinterFragment extends Fragment {
     }
 
     @Override
-<<<<<<< HEAD
-    public void onListItemClick(ListView list, View view, int position, long id) {
-        PrinterInfo printer = (PrinterInfo) list.getAdapter().getItem(position);
-        Activity activity = getActivity();
-        if (activity instanceof OnPrinterSelectedListener) {
-            ((OnPrinterSelectedListener) activity).onPrinterSelected(printer.getId());
-        } else {
-            throw new IllegalStateException("the host activity must implement"
-                    + " OnPrinterSelectedListener");
-        }
-    }
-
-    @Override
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_add_printer) {
             showAddPrinterSelectionDialog();
@@ -388,15 +337,9 @@ public final class SelectPrinterFragment extends Fragment {
     }
 
     public void updateEmptyView(DestinationAdapter adapter) {
-<<<<<<< HEAD
-        if (getListView().getEmptyView() == null) {
-            View emptyView = getActivity().findViewById(R.id.empty_print_state);
-            getListView().setEmptyView(emptyView);
-=======
         if (mListView.getEmptyView() == null) {
             View emptyView = getActivity().findViewById(R.id.empty_print_state);
             mListView.setEmptyView(emptyView);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
         TextView titleView = (TextView) getActivity().findViewById(R.id.title);
         View progressBar = getActivity().findViewById(R.id.progress_bar);
@@ -584,17 +527,10 @@ public final class SelectPrinterFragment extends Fragment {
         public View getView(int position, View convertView, ViewGroup parent) {
             if (convertView == null) {
                 convertView = getActivity().getLayoutInflater().inflate(
-<<<<<<< HEAD
-                        R.layout.printer_dropdown_item, parent, false);
-            }
-
-            convertView.setEnabled(isEnabled(position));
-=======
                         R.layout.printer_list_item, parent, false);
             }
 
             convertView.setEnabled(isActionable(position));
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
             CharSequence title = null;
             CharSequence subtitle = null;
@@ -636,12 +572,7 @@ public final class SelectPrinterFragment extends Fragment {
             return convertView;
         }
 
-<<<<<<< HEAD
-        @Override
-        public boolean isEnabled(int position) {
-=======
         public boolean isActionable(int position) {
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             PrinterInfo printer =  (PrinterInfo) getItem(position);
             return printer.getStatus() != PrinterInfo.STATUS_UNAVAILABLE;
         }
@@ -684,28 +615,16 @@ public final class SelectPrinterFragment extends Fragment {
 
         public void post() {
             remove();
-<<<<<<< HEAD
-            getListView().postDelayed(this, SEARCH_RESULT_ANNOUNCEMENT_DELAY);
-        }
-
-        public void remove() {
-            getListView().removeCallbacks(this);
-=======
             mListView.postDelayed(this, SEARCH_RESULT_ANNOUNCEMENT_DELAY);
         }
 
         public void remove() {
             mListView.removeCallbacks(this);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
 
         @Override
         public void run() {
-<<<<<<< HEAD
-            final int count = getListView().getAdapter().getCount();
-=======
             final int count = mListView.getAdapter().getCount();
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             final String text;
             if (count <= 0) {
                 text = getString(R.string.print_no_printers);
@@ -713,11 +632,7 @@ public final class SelectPrinterFragment extends Fragment {
                 text = getActivity().getResources().getQuantityString(
                     R.plurals.print_search_result_count_utterance, count, count);
             }
-<<<<<<< HEAD
-            getListView().announceForAccessibility(text);
-=======
             mListView.announceForAccessibility(text);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
     }
 }

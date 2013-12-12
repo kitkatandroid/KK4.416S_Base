@@ -1959,20 +1959,14 @@ final class Settings {
         }
 
         boolean doNonData = true;
-<<<<<<< HEAD
-=======
         boolean hasSchemes = false;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
         for (int ischeme=0; ischeme<tmpPa.countDataSchemes(); ischeme++) {
             boolean doScheme = true;
             String scheme = tmpPa.getDataScheme(ischeme);
-<<<<<<< HEAD
-=======
             if (scheme != null && !scheme.isEmpty()) {
                 hasSchemes = true;
             }
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             for (int issp=0; issp<tmpPa.countDataSchemeSpecificParts(); issp++) {
                 Uri.Builder builder = new Uri.Builder();
                 builder.scheme(scheme);
@@ -2026,13 +2020,6 @@ final class Settings {
         }
 
         for (int idata=0; idata<tmpPa.countDataTypes(); idata++) {
-<<<<<<< HEAD
-            Intent finalIntent = new Intent(intent);
-            String mimeType = tmpPa.getDataType(idata);
-            finalIntent.setType(mimeType);
-            applyDefaultPreferredActivityLPw(service, finalIntent, flags, cn,
-                    null, null, null, null, mimeType, userId);
-=======
             String mimeType = tmpPa.getDataType(idata);
             if (hasSchemes) {
                 Uri.Builder builder = new Uri.Builder();
@@ -2052,7 +2039,6 @@ final class Settings {
                 applyDefaultPreferredActivityLPw(service, finalIntent, flags, cn,
                         null, null, null, null, mimeType, userId);
             }
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             doNonData = false;
         }
 
@@ -2102,15 +2088,10 @@ final class Settings {
                 if (intent.getAction() != null) {
                     filter.addAction(intent.getAction());
                 }
-<<<<<<< HEAD
-                for (String cat : intent.getCategories()) {
-                    filter.addCategory(cat);
-=======
                 if (intent.getCategories() != null) {
                     for (String cat : intent.getCategories()) {
                         filter.addCategory(cat);
                     }
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 }
                 if ((flags&PackageManager.MATCH_DEFAULT_ONLY) != 0) {
                     filter.addCategory(Intent.CATEGORY_DEFAULT);
@@ -2127,8 +2108,6 @@ final class Settings {
                 if (path != null) {
                     filter.addDataPath(path);
                 }
-<<<<<<< HEAD
-=======
                 if (intent.getType() != null) {
                     try {
                         filter.addDataType(intent.getType());
@@ -2136,7 +2115,6 @@ final class Settings {
                         Slog.w(TAG, "Malformed mimetype " + intent.getType() + " for " + cn);
                     }
                 }
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 PreferredActivity pa = new PreferredActivity(filter, match, set, cn, true);
                 editPreferredActivitiesLPw(userId).addFilter(pa);
             } else if (!haveNonSys) {

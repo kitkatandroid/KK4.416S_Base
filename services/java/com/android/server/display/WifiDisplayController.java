@@ -27,10 +27,6 @@ import android.database.ContentObserver;
 import android.hardware.display.WifiDisplay;
 import android.hardware.display.WifiDisplaySessionInfo;
 import android.hardware.display.WifiDisplayStatus;
-<<<<<<< HEAD
-import android.media.AudioManager;
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import android.media.RemoteDisplay;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -78,14 +74,6 @@ final class WifiDisplayController implements DumpUtils.Dump {
 
     private static final int DEFAULT_CONTROL_PORT = 7236;
     private static final int MAX_THROUGHPUT = 50;
-<<<<<<< HEAD
-    private static final int CONNECTION_TIMEOUT_SECONDS = 60;
-    private static final int RTSP_TIMEOUT_SECONDS = 15;
-    private static final int RTSP_TIMEOUT_SECONDS_CERT_MODE = 120;
-
-    private static final int DISCOVER_PEERS_MAX_RETRIES = 10;
-    private static final int DISCOVER_PEERS_RETRY_DELAY_MILLIS = 500;
-=======
     private static final int CONNECTION_TIMEOUT_SECONDS = 30;
     private static final int RTSP_TIMEOUT_SECONDS = 30;
     private static final int RTSP_TIMEOUT_SECONDS_CERT_MODE = 120;
@@ -99,7 +87,6 @@ final class WifiDisplayController implements DumpUtils.Dump {
     // 4. We don't seem to get updated results for displays we've already found until
     //    we ask to discover again, particularly for the isSessionAvailable() property.
     private static final int DISCOVER_PEERS_INTERVAL_MILLIS = 10000;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
     private static final int CONNECT_MAX_RETRIES = 3;
     private static final int CONNECT_RETRY_DELAY_MILLIS = 500;
@@ -122,21 +109,12 @@ final class WifiDisplayController implements DumpUtils.Dump {
     // True if Wifi display is enabled by the user.
     private boolean mWifiDisplayOnSetting;
 
-<<<<<<< HEAD
-    // True if there is a call to discoverPeers in progress.
-    private boolean mDiscoverPeersInProgress;
-
-    // Number of discover peers retries remaining.
-    private int mDiscoverPeersRetriesLeft;
-
-=======
     // True if a scan was requested independent of whether one is actually in progress.
     private boolean mScanRequested;
 
     // True if there is a call to discoverPeers in progress.
     private boolean mDiscoverPeersInProgress;
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     // The device to which we want to connect, or null if we want to be disconnected.
     private WifiP2pDevice mDesiredDevice;
 
@@ -237,13 +215,8 @@ final class WifiDisplayController implements DumpUtils.Dump {
         pw.println("mWfdEnabled=" + mWfdEnabled);
         pw.println("mWfdEnabling=" + mWfdEnabling);
         pw.println("mNetworkInfo=" + mNetworkInfo);
-<<<<<<< HEAD
-        pw.println("mDiscoverPeersInProgress=" + mDiscoverPeersInProgress);
-        pw.println("mDiscoverPeersRetriesLeft=" + mDiscoverPeersRetriesLeft);
-=======
         pw.println("mScanRequested=" + mScanRequested);
         pw.println("mDiscoverPeersInProgress=" + mDiscoverPeersInProgress);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         pw.println("mDesiredDevice=" + describeWifiP2pDevice(mDesiredDevice));
         pw.println("mConnectingDisplay=" + describeWifiP2pDevice(mConnectingDevice));
         pw.println("mDisconnectingDisplay=" + describeWifiP2pDevice(mDisconnectingDevice));
@@ -265,10 +238,6 @@ final class WifiDisplayController implements DumpUtils.Dump {
         }
     }
 
-<<<<<<< HEAD
-    public void requestScan() {
-        discoverPeers();
-=======
     public void requestStartScan() {
         if (!mScanRequested) {
             mScanRequested = true;
@@ -281,7 +250,6 @@ final class WifiDisplayController implements DumpUtils.Dump {
             mScanRequested = false;
             updateScanState();
         }
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     public void requestConnect(String address) {
@@ -330,10 +298,7 @@ final class WifiDisplayController implements DumpUtils.Dump {
                             mWfdEnabling = false;
                             mWfdEnabled = true;
                             reportFeatureState();
-<<<<<<< HEAD
-=======
                             updateScanState();
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                         }
                     }
 
@@ -370,10 +335,7 @@ final class WifiDisplayController implements DumpUtils.Dump {
             mWfdEnabling = false;
             mWfdEnabled = false;
             reportFeatureState();
-<<<<<<< HEAD
-=======
             updateScanState();
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             disconnect();
         }
     }
@@ -396,14 +358,6 @@ final class WifiDisplayController implements DumpUtils.Dump {
                 WifiDisplayStatus.FEATURE_STATE_OFF;
     }
 
-<<<<<<< HEAD
-    private void discoverPeers() {
-        if (!mDiscoverPeersInProgress) {
-            mDiscoverPeersInProgress = true;
-            mDiscoverPeersRetriesLeft = DISCOVER_PEERS_MAX_RETRIES;
-            handleScanStarted();
-            tryDiscoverPeers();
-=======
     private void updateScanState() {
         if (mScanRequested && mWfdEnabled && mDesiredDevice == null) {
             if (!mDiscoverPeersInProgress) {
@@ -427,7 +381,6 @@ final class WifiDisplayController implements DumpUtils.Dump {
                     handleScanFinished();
                 }
             }
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
     }
 
@@ -439,14 +392,9 @@ final class WifiDisplayController implements DumpUtils.Dump {
                     Slog.d(TAG, "Discover peers succeeded.  Requesting peers now.");
                 }
 
-<<<<<<< HEAD
-                mDiscoverPeersInProgress = false;
-                requestPeers();
-=======
                 if (mDiscoverPeersInProgress) {
                     requestPeers();
                 }
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             }
 
             @Override
@@ -455,32 +403,6 @@ final class WifiDisplayController implements DumpUtils.Dump {
                     Slog.d(TAG, "Discover peers failed with reason " + reason + ".");
                 }
 
-<<<<<<< HEAD
-                if (mDiscoverPeersInProgress) {
-                    if (reason == 0 && mDiscoverPeersRetriesLeft > 0 && mWfdEnabled) {
-                        mHandler.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                if (mDiscoverPeersInProgress) {
-                                    if (mDiscoverPeersRetriesLeft > 0 && mWfdEnabled) {
-                                        mDiscoverPeersRetriesLeft -= 1;
-                                        if (DEBUG) {
-                                            Slog.d(TAG, "Retrying discovery.  Retries left: "
-                                                    + mDiscoverPeersRetriesLeft);
-                                        }
-                                        tryDiscoverPeers();
-                                    } else {
-                                        handleScanFinished();
-                                        mDiscoverPeersInProgress = false;
-                                    }
-                                }
-                            }
-                        }, DISCOVER_PEERS_RETRY_DELAY_MILLIS);
-                    } else {
-                        handleScanFinished();
-                        mDiscoverPeersInProgress = false;
-                    }
-=======
                 // Ignore the error.
                 // We will retry automatically in a little bit.
             }
@@ -503,7 +425,6 @@ final class WifiDisplayController implements DumpUtils.Dump {
             public void onFailure(int reason) {
                 if (DEBUG) {
                     Slog.d(TAG, "Stop peer discovery failed with reason " + reason + ".");
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 }
             }
         });
@@ -528,13 +449,9 @@ final class WifiDisplayController implements DumpUtils.Dump {
                     }
                 }
 
-<<<<<<< HEAD
-                handleScanFinished();
-=======
                 if (mDiscoverPeersInProgress) {
                     handleScanResults();
                 }
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             }
         });
     }
@@ -548,11 +465,7 @@ final class WifiDisplayController implements DumpUtils.Dump {
         });
     }
 
-<<<<<<< HEAD
-    private void handleScanFinished() {
-=======
     private void handleScanResults() {
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         final int count = mAvailableWifiDisplayPeers.size();
         final WifiDisplay[] displays = WifiDisplay.CREATOR.newArray(count);
         for (int i = 0; i < count; i++) {
@@ -564,9 +477,6 @@ final class WifiDisplayController implements DumpUtils.Dump {
         mHandler.post(new Runnable() {
             @Override
             public void run() {
-<<<<<<< HEAD
-                mListener.onScanFinished(displays);
-=======
                 mListener.onScanResults(displays);
             }
         });
@@ -577,7 +487,6 @@ final class WifiDisplayController implements DumpUtils.Dump {
             @Override
             public void run() {
                 mListener.onScanFinished();
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             }
         });
     }
@@ -620,15 +529,12 @@ final class WifiDisplayController implements DumpUtils.Dump {
             return;
         }
 
-<<<<<<< HEAD
-=======
         if (!mWfdEnabled) {
             Slog.i(TAG, "Ignoring request to connect to Wifi display because the "
                     +" feature is currently disabled: " + device.deviceName);
             return;
         }
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         mDesiredDevice = device;
         mConnectionRetriesLeft = CONNECT_MAX_RETRIES;
         updateConnection();
@@ -653,13 +559,10 @@ final class WifiDisplayController implements DumpUtils.Dump {
      * connection is established (or not).
      */
     private void updateConnection() {
-<<<<<<< HEAD
-=======
         // Step 0. Stop scans if necessary to prevent interference while connected.
         // Resume scans later when no longer attempting to connect.
         updateScanState();
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         // Step 1. Before we try to connect to a new device, tell the system we
         // have disconnected from the old one.
         if (mRemoteDisplay != null && mConnectedDevice != mDesiredDevice) {
@@ -813,11 +716,7 @@ final class WifiDisplayController implements DumpUtils.Dump {
             return; // wait for asynchronous callback
         }
 
-<<<<<<< HEAD
-        // Step 6. Listen for incoming connections.
-=======
         // Step 6. Listen for incoming RTSP connection.
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         if (mConnectedDevice != null && mRemoteDisplay == null) {
             Inet4Address addr = getInterfaceAddress(mConnectedDeviceGroupInfo);
             if (addr == null) {
@@ -973,15 +872,11 @@ final class WifiDisplayController implements DumpUtils.Dump {
             }
         } else {
             mConnectedDeviceGroupInfo = null;
-<<<<<<< HEAD
-            disconnect();
-=======
 
             // Disconnect if we lost the network while connecting or connected to a display.
             if (mConnectingDevice != null || mConnectedDevice != null) {
                 disconnect();
             }
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
             // After disconnection for a group, for some reason we have a tendency
             // to get a peer change notification with an empty list of peers.
@@ -992,8 +887,6 @@ final class WifiDisplayController implements DumpUtils.Dump {
         }
     }
 
-<<<<<<< HEAD
-=======
     private final Runnable mDiscoverPeers = new Runnable() {
         @Override
         public void run() {
@@ -1001,7 +894,6 @@ final class WifiDisplayController implements DumpUtils.Dump {
         }
     };
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     private final Runnable mConnectionTimeout = new Runnable() {
         @Override
         public void run() {
@@ -1207,12 +1099,8 @@ final class WifiDisplayController implements DumpUtils.Dump {
         void onFeatureStateChanged(int featureState);
 
         void onScanStarted();
-<<<<<<< HEAD
-        void onScanFinished(WifiDisplay[] availableDisplays);
-=======
         void onScanResults(WifiDisplay[] availableDisplays);
         void onScanFinished();
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
         void onDisplayConnecting(WifiDisplay display);
         void onDisplayConnectionFailed();

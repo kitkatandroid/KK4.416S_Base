@@ -16,16 +16,6 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-<<<<<<< HEAD
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:gravity="center">
-    <ImageView
-        android:id="@+id/image"
-        android:layout_width="@dimen/qs_tile_icon_size"
-        android:layout_height="@dimen/qs_tile_icon_size"
-        android:layout_gravity="center_horizontal"
-=======
     android:layout_height="match_parent"
     android:layout_gravity="top">
     <ImageView
@@ -35,7 +25,6 @@
         android:layout_width="@dimen/qs_tile_icon_size"
         android:layout_height="@dimen/qs_tile_icon_size"
         android:layout_gravity="top|center_horizontal"
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         android:layout_centerHorizontal="true"
         android:scaleType="centerInside"
         />
@@ -60,18 +49,9 @@
         android:id="@+id/text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-<<<<<<< HEAD
-        android:layout_gravity="center_horizontal"
-        android:gravity="center_horizontal"
-        android:singleLine="true"
-        android:layout_below="@id/image" 
-        />
-</RelativeLayout>
-=======
         android:layout_gravity="top|center_horizontal"
         android:gravity="top|center_horizontal"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/image" 
         />
 </RelativeLayout>
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1

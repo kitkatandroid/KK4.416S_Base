@@ -321,11 +321,7 @@ public final class PrintJob {
      */
     public String getAdvancedStringOption(String key) {
         PrintService.throwIfNotCalledOnMainThread();
-<<<<<<< HEAD
-        return null;
-=======
         return getInfo().getAdvancedStringOption(key);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     /**
@@ -337,11 +333,7 @@ public final class PrintJob {
      */
     public boolean hasAdvancedOption(String key) {
         PrintService.throwIfNotCalledOnMainThread();
-<<<<<<< HEAD
-        return false;
-=======
         return getInfo().hasAdvancedOption(key);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     /**
@@ -352,11 +344,7 @@ public final class PrintJob {
      */
     public int getAdvancedIntOption(String key) {
         PrintService.throwIfNotCalledOnMainThread();
-<<<<<<< HEAD
-        return 0;
-=======
         return getInfo().getAdvancedIntOption(key);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     @Override

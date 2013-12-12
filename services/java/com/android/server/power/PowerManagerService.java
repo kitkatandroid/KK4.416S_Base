@@ -149,10 +149,6 @@ public final class PowerManagerService extends IPowerManager.Stub
     // This is subtracted from the end of the screen off timeout so the
     // minimum screen off timeout should be longer than this.
     private static final int SCREEN_DIM_DURATION = 7 * 1000;
-<<<<<<< HEAD
-    private static final int BUTTON_ON_DURATION = 5 * 1000;
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
     // The maximum screen dim time expressed as a ratio relative to the screen
     // off timeout.  If the screen off timeout is very short then we want the
@@ -186,10 +182,6 @@ public final class PowerManagerService extends IPowerManager.Stub
     private SettingsObserver mSettingsObserver;
     private DreamManagerService mDreamManager;
     private LightsService.Light mAttentionLight;
-<<<<<<< HEAD
-    private LightsService.Light mButtonsLight;
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
     private final Object mLock = new Object();
 
@@ -321,14 +313,6 @@ public final class PowerManagerService extends IPowerManager.Stub
     // The screen off timeout setting value in milliseconds.
     private int mScreenOffTimeoutSetting;
 
-<<<<<<< HEAD
-    // Slim settings - override config for ElectronBeam
-    // used here to send values to DispLayPowerController handler
-    // from SettingsObserver
-    private int mElectronBeamMode;
-
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     // The maximum allowable screen off timeout according to the device
     // administration policy.  Overrides other settings.
     private int mMaximumScreenOffTimeoutFromDeviceAdmin = Integer.MAX_VALUE;
@@ -356,12 +340,6 @@ public final class PowerManagerService extends IPowerManager.Stub
     // Use 0 if there is no adjustment.
     private float mScreenAutoBrightnessAdjustmentSetting;
 
-<<<<<<< HEAD
-    // The screen auto-brightness responsitivity factor, from 0.2 to 3.
-    private float mAutoBrightnessResponsitivityFactor;
-
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     // The screen brightness mode.
     // One of the Settings.System.SCREEN_BRIGHTNESS_MODE_* constants.
     private int mScreenBrightnessModeSetting;
@@ -479,10 +457,6 @@ public final class PowerManagerService extends IPowerManager.Stub
                     mHandler);
             mSettingsObserver = new SettingsObserver(mHandler);
             mAttentionLight = mLightsService.getLight(LightsService.LIGHT_ID_ATTENTION);
-<<<<<<< HEAD
-            mButtonsLight = mLightsService.getLight(LightsService.LIGHT_ID_BUTTONS);
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
             // Register for broadcasts from other components of the system.
             IntentFilter filter = new IntentFilter();
@@ -529,15 +503,6 @@ public final class PowerManagerService extends IPowerManager.Stub
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.SCREEN_BRIGHTNESS_MODE),
                     false, mSettingsObserver, UserHandle.USER_ALL);
-<<<<<<< HEAD
-            resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.SYSTEM_POWER_CRT_MODE),
-                    false, mSettingsObserver, UserHandle.USER_ALL);
-            resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.AUTO_BRIGHTNESS_RESPONSIVENESS),
-                    false, mSettingsObserver, UserHandle.USER_ALL);
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
             // Go.
             readConfigurationLocked();
@@ -585,14 +550,6 @@ public final class PowerManagerService extends IPowerManager.Stub
         mStayOnWhilePluggedInSetting = Settings.Global.getInt(resolver,
                 Settings.Global.STAY_ON_WHILE_PLUGGED_IN, BatteryManager.BATTERY_PLUGGED_AC);
 
-<<<<<<< HEAD
-        mElectronBeamMode = Settings.System.getIntForUser(resolver,
-                Settings.System.SYSTEM_POWER_CRT_MODE,
-                1, UserHandle.USER_CURRENT);
-
-
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         final int oldScreenBrightnessSetting = mScreenBrightnessSetting;
         mScreenBrightnessSetting = Settings.System.getIntForUser(resolver,
                 Settings.System.SCREEN_BRIGHTNESS, mScreenBrightnessSettingDefault,
@@ -614,15 +571,6 @@ public final class PowerManagerService extends IPowerManager.Stub
                 Settings.System.SCREEN_BRIGHTNESS_MODE,
                 Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL, UserHandle.USER_CURRENT);
 
-<<<<<<< HEAD
-        final float newAutoBrightnessResponsitivityFactor = Settings.System.getFloatForUser(resolver,
-                Settings.System.AUTO_BRIGHTNESS_RESPONSIVENESS, 1.0f,
-                UserHandle.USER_CURRENT);
-        mAutoBrightnessResponsitivityFactor =
-                Math.min(Math.max(newAutoBrightnessResponsitivityFactor, 0.2f), 3.0f);
-
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         mDirty |= DIRTY_SETTINGS;
     }
 
@@ -799,8 +747,6 @@ public final class PowerManagerService extends IPowerManager.Stub
     }
 
     @Override // Binder call
-<<<<<<< HEAD
-=======
     public void updateWakeLockUids(IBinder lock, int[] uids) {
         WorkSource ws = null;
 
@@ -816,7 +762,6 @@ public final class PowerManagerService extends IPowerManager.Stub
     }
 
     @Override // Binder call
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     public void updateWakeLockWorkSource(IBinder lock, WorkSource ws) {
         if (lock == null) {
             throw new IllegalArgumentException("lock must not be null");
@@ -1315,15 +1260,6 @@ public final class PowerManagerService extends IPowerManager.Stub
             return false;
         }
 
-<<<<<<< HEAD
-        if (Settings.System.getIntForUser(mContext.getContentResolver(),
-                Settings.System.WAKEUP_WHEN_PLUGGED_UNPLUGGED, 1,
-                UserHandle.USER_CURRENT) == 0) {
-            return false;
-        }
-
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         // Otherwise wake up!
         return true;
     }
@@ -1429,15 +1365,6 @@ public final class PowerManagerService extends IPowerManager.Stub
                     nextTimeout = mLastUserActivityTime
                             + screenOffTimeout - screenDimDuration;
                     if (now < nextTimeout) {
-<<<<<<< HEAD
-                        if (now > mLastUserActivityTime + BUTTON_ON_DURATION) {
-                            mButtonsLight.setBrightness(0);
-                        } else {
-                            mButtonsLight.setBrightness(mDisplayPowerRequest.screenBrightness);
-                            nextTimeout = now + BUTTON_ON_DURATION;
-                        }
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                         mUserActivitySummary |= USER_ACTIVITY_SCREEN_BRIGHT;
                     } else {
                         nextTimeout = mLastUserActivityTime + screenOffTimeout;
@@ -1496,21 +1423,11 @@ public final class PowerManagerService extends IPowerManager.Stub
 
     private int getScreenOffTimeoutLocked() {
         int timeout = mScreenOffTimeoutSetting;
-<<<<<<< HEAD
-        if (timeout != mMaximumScreenOffTimeoutFromDeviceAdmin) {
-            if (isMaximumScreenOffTimeoutFromDeviceAdminEnforcedLocked()) {
-                timeout = Math.min(timeout, mMaximumScreenOffTimeoutFromDeviceAdmin);
-            }
-            if (mUserActivityTimeoutOverrideFromWindowManager >= 0) {
-                timeout = (int)Math.min(timeout, mUserActivityTimeoutOverrideFromWindowManager);
-            }
-=======
         if (isMaximumScreenOffTimeoutFromDeviceAdminEnforcedLocked()) {
             timeout = Math.min(timeout, mMaximumScreenOffTimeoutFromDeviceAdmin);
         }
         if (mUserActivityTimeoutOverrideFromWindowManager >= 0) {
             timeout = (int)Math.min(timeout, mUserActivityTimeoutOverrideFromWindowManager);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
         return Math.max(timeout, MINIMUM_SCREEN_OFF_TIMEOUT);
     }
@@ -1787,13 +1704,6 @@ public final class PowerManagerService extends IPowerManager.Stub
 
             mDisplayPowerRequest.blockScreenOn = mScreenOnBlocker.isHeld();
 
-<<<<<<< HEAD
-            mDisplayPowerRequest.electronBeamMode = mElectronBeamMode;
-
-            mDisplayPowerRequest.responsitivityFactor = mAutoBrightnessResponsitivityFactor;
-
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             mDisplayReady = mDisplayPowerController.requestPowerState(mDisplayPowerRequest,
                     mRequestWaitForNegativeProximity);
             mRequestWaitForNegativeProximity = false;

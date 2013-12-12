@@ -491,22 +491,6 @@ public final class Settings {
 
     /**
      * @hide
-<<<<<<< HEAD
-     * Activity Action: Show the "app ops" details screen.
-     * <p>
-     * Input: The Intent's data URI specifies the application package name
-     * to be shown, with the "package" scheme.  That is "package:com.my.app".
-     * <p>
-     * Output: Nothing.
-     */
-    @SdkConstant(SdkConstantType.ACTIVITY_INTENT_ACTION)
-    public static final String ACTION_APP_OPS_DETAILS_SETTINGS =
-            "android.settings.APP_OPS_DETAILS_SETTINGS";
-
-    /**
-     * @hide
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
      * Activity Action: Show the "app ops" settings screen.
      * <p>
      * Input: Nothing.
@@ -1041,12 +1025,6 @@ public final class Settings {
             MOVED_TO_SECURE.add(Secure.LOCK_PATTERN_ENABLED);
             MOVED_TO_SECURE.add(Secure.LOCK_PATTERN_VISIBLE);
             MOVED_TO_SECURE.add(Secure.LOCK_PATTERN_TACTILE_FEEDBACK_ENABLED);
-<<<<<<< HEAD
-            MOVED_TO_SECURE.add(Secure.LOCK_NUMPAD_RANDOM);
-            MOVED_TO_SECURE.add(Secure.LOCK_BEFORE_UNLOCK);
-            MOVED_TO_SECURE.add(Secure.LOCK_PATTERN_SIZE);
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             MOVED_TO_SECURE.add(Secure.LOGGING_ID);
             MOVED_TO_SECURE.add(Secure.PARENTAL_CONTROL_ENABLED);
             MOVED_TO_SECURE.add(Secure.PARENTAL_CONTROL_LAST_UPDATE);
@@ -1857,45 +1835,6 @@ public final class Settings {
         public static final int SCREEN_BRIGHTNESS_MODE_AUTOMATIC = 1;
 
         /**
-<<<<<<< HEAD
-         * Custom automatic brightness light sensor levels.
-         * The value is a comma separated int array with length N.
-         * Example: "100,300,3000".
-         *
-         * @hide
-         */
-        public static final String AUTO_BRIGHTNESS_LUX = "auto_brightness_lux";
-
-        /**
-         * Custom automatic brightness display backlight brightness values.
-         * The value is a comma separated int array with length N+1.
-         * Example: "10,50,100,255".
-         *
-         * @hide
-         */
-        public static final String AUTO_BRIGHTNESS_BACKLIGHT = "auto_brightness_backlight";
-
-        /**
-         * Correction factor for auto-brightness adjustment light sensor
-         * debounce times.
-         * Smaller factors will make the adjustment more responsive, but might
-         * cause flicker and/or cause higher CPU usage.
-         * Valid range is 0.2 ... 3
-         *
-         * @hide
-         */
-        public static final String AUTO_BRIGHTNESS_RESPONSIVENESS = "auto_brightness_responsiveness";
-
-        /**
-         * Whether to enable adjustment of automatic brightness adjustment
-         * to sunrise and sunset.
-         * @hide
-         */
-        public static final String AUTO_BRIGHTNESS_TWILIGHT_ADJUSTMENT = "auto_brightness_twilight_adjustment";
-
-        /**
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
          * Control whether the process CPU usage meter should be shown.
          *
          * @deprecated Use {@link Global#SHOW_PROCESSES} instead
@@ -2021,57 +1960,6 @@ public final class Settings {
             "notifications_use_ring_volume";
 
         /**
-<<<<<<< HEAD
-         * Volume Overlay Mode, This is behaviour of the volume overlay panel
-         * Defaults to 1 - which is expandable
-         * @hide
-         */
-        public static final String MODE_VOLUME_OVERLAY = "mode_volume_overlay";
-
-        /** @hide */
-        public static final int VOLUME_OVERLAY_SINGLE = 0;
-        /** @hide */
-        public static final int VOLUME_OVERLAY_EXPANDABLE = 1;
-        /** @hide */
-        public static final int VOLUME_OVERLAY_EXPANDED = 2;
-        /** @hide */
-        public static final int VOLUME_OVERLAY_NONE = 3;
-
-        /**
-         * Whether the phone ringtone should be played in an increasing manner
-         * @hide
-         */
-        public static final String INCREASING_RING = "increasing_ring";
-
-        /**
-         * Minimum volume index for increasing ring volume
-         * @hide
-         */
-        public static final String INCREASING_RING_MIN_VOLUME = "increasing_ring_min_vol";
-
-        /**
-         * Time (in ms) between ringtone volume increases
-         * @hide
-         */
-        public static final String INCREASING_RING_INTERVAL = "increasing_ring_interval";
-
-        /**
-         * Volume Adjust Sounds Enable, This is the noise made when using volume hard buttons
-         * Defaults to 1 - sounds enabled
-         * @hide
-         */
-        public static final String VOLUME_ADJUST_SOUNDS_ENABLED = "volume_adjust_sounds_enabled";
-
-        /**
-         * Boolean value whether to link ringtone and notification volumes
-         *
-         * @hide
-         */
-        public static final String VOLUME_LINK_NOTIFICATION = "volume_link_notification";
-
-        /**
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
          * Whether silent mode should allow vibration feedback. This is used
          * internally in AudioService and the Sound settings activity to
          * coordinate decoupling of vibrate and silent modes. This setting
@@ -2267,22 +2155,6 @@ public final class Settings {
         public static final String ACCELEROMETER_ROTATION = "accelerometer_rotation";
 
         /**
-<<<<<<< HEAD
-         * Control the type of rotation which can be performed using the accelerometer
-         * if ACCELEROMETER_ROTATION is enabled.
-         * Value is a bitwise combination of
-         * 1 = 0 degrees (portrait)
-         * 2 = 90 degrees (left)
-         * 4 = 180 degrees (inverted portrait)
-         * 8 = 270 degrees (right)
-         * Setting to 0 is effectively orientation lock
-         * @hide
-         */
-        public static final String ACCELEROMETER_ROTATION_ANGLES = "accelerometer_rotation_angles";
-
-        /**
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
          * Default screen rotation when no other policy applies.
          * When {@link #ACCELEROMETER_ROTATION} is zero and no on-screen Activity expresses a
          * preference, this rotation value will be used. Must be one of the
@@ -2380,107 +2252,6 @@ public final class Settings {
         public static final String NOTIFICATION_LIGHT_PULSE = "notification_light_pulse";
 
         /**
-<<<<<<< HEAD
-         * What color to use for the notification LED by default
-         * @hide
-         */
-        public static final String NOTIFICATION_LIGHT_PULSE_DEFAULT_COLOR = "notification_light_pulse_default_color";
-
-        /**
-         * How long to flash the notification LED by default
-         * @hide
-         */
-        public static final String NOTIFICATION_LIGHT_PULSE_DEFAULT_LED_ON = "notification_light_pulse_default_led_on";
-
-        /**
-         * How long to wait between flashes for the notification LED by default
-         * @hide
-         */
-        public static final String NOTIFICATION_LIGHT_PULSE_DEFAULT_LED_OFF = "notification_light_pulse_default_led_off";
-
-        /**
-         * What color to use for the missed call notification LED
-         * @hide
-         */
-        public static final String NOTIFICATION_LIGHT_PULSE_CALL_COLOR = "notification_light_pulse_call_color";
-
-        /**
-         * How long to flash the missed call notification LED
-         * @hide
-         */
-        public static final String NOTIFICATION_LIGHT_PULSE_CALL_LED_ON = "notification_light_pulse_call_led_on";
-
-        /**
-         * How long to wait between flashes for the missed call notification LED
-         * @hide
-         */
-        public static final String NOTIFICATION_LIGHT_PULSE_CALL_LED_OFF = "notification_light_pulse_call_led_off";
-
-        /**
-         * What color to use for the voicemail notification LED
-         * @hide
-         */
-        public static final String NOTIFICATION_LIGHT_PULSE_VMAIL_COLOR = "notification_light_pulse_vmail_color";
-
-        /**
-         * How long to flash the voicemail notification LED
-         * @hide
-         */
-        public static final String NOTIFICATION_LIGHT_PULSE_VMAIL_LED_ON = "notification_light_pulse_vmail_led_on";
-
-        /**
-         * How long to wait between flashes for the voicemail notification LED
-         * @hide
-         */
-        public static final String NOTIFICATION_LIGHT_PULSE_VMAIL_LED_OFF = "notification_light_pulse_vmail_led_off";
-
-        /**
-         * Whether to use the custom LED values for the notification pulse LED.
-         * @hide
-         */
-        public static final String NOTIFICATION_LIGHT_PULSE_CUSTOM_ENABLE = "notification_light_pulse_custom_enable";
-
-        /**
-         * Which custom LED values to use for the notification pulse LED.
-         * @hide
-         */
-        public static final String NOTIFICATION_LIGHT_PULSE_CUSTOM_VALUES = "notification_light_pulse_custom_values";
-
-        /**
-         * Whether the battery light should be enabled (if hardware supports it)
-         * The value is boolean (1 or 0).
-         * @hide
-         */
-        public static final String BATTERY_LIGHT_ENABLED = "battery_light_enabled";
-
-        /**
-         * Whether the battery LED should repeatedly flash when the battery is low
-         * on charge. The value is boolean (1 or 0).
-         * @hide
-         */
-        public static final String BATTERY_LIGHT_PULSE = "battery_light_pulse";
-
-        /**
-         * What color to use for the battery LED while charging - low
-         * @hide
-         */
-        public static final String BATTERY_LIGHT_LOW_COLOR = "battery_light_low_color";
-
-        /**
-         * What color to use for the battery LED while charging - medium
-         * @hide
-         */
-        public static final String BATTERY_LIGHT_MEDIUM_COLOR = "battery_light_medium_color";
-
-        /**
-         * What color to use for the battery LED while charging - full
-         * @hide
-         */
-        public static final String BATTERY_LIGHT_FULL_COLOR = "battery_light_full_color";
-
-        /**
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
          * Show pointer location on screen?
          * 0 = no
          * 1 = yes
@@ -2535,61 +2306,6 @@ public final class Settings {
         public static final String LOCKSCREEN_DISABLED = "lockscreen.disabled";
 
         /**
-<<<<<<< HEAD
-         * Stores values for custom lockscreen targets
-         * @hide
-         */
-        public static final String LOCKSCREEN_TARGETS = "lockscreen_targets";
-
-        /**
-         * Whether phone lockscreen uses 5 or 8 targets
-         * @hide
-         */
-        public static final String LOCKSCREEN_EIGHT_TARGETS = "lockscreen_eight_targets";
-
-        /**
-         * Defines the shortcuts to be shown on lockscreen
-         * Usage is like this: target:icon|target:icon|target:icon
-         * if :icon is not set, default application icon will be used
-         * @hide
-         */
-        public static final String LOCKSCREEN_SHORTCUTS = "lockscreen_shortcuts";
-
-        /**
-         * Whether shorcuts open with normal or longpress
-         * @hide
-         */
-        public static final String LOCKSCREEN_SHORTCUTS_LONGPRESS =
-                "lockscreen_shortcuts_longpress";
-
-        /**
-         * Whether to show the camera widget on lockscreen
-         * @hide
-         */
-        public static final String LOCKSCREEN_CAMERA_WIDGET = "lockscreen_camera_widget";
-
-        /**
-         * Whether to hide the lockscreen gadgets glowing hints
-         * @hide
-         */
-        public static final String LOCKSCREEN_DISABLE_HINTS = "lockscreen_disable_hints";
-
-        /**
-         * Whether to minimize lockscreen challenge on screen turned on
-         * @hide
-         */
-        public static final String LOCKSCREEN_MAXIMIZE_WIDGETS = "lockscreen_maximize_widgets";
-
-        /**
-         * Whether to use the carousel as widget container on portrait view
-         * @hide
-         */
-        public static final String LOCKSCREEN_USE_WIDGET_CONTAINER_CAROUSEL =
-                "lockscreen_use_widget_container_carousel";
-
-        /**
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
          * @deprecated Use {@link android.provider.Settings.Global#LOW_BATTERY_SOUND}
          * instead
          * @hide
@@ -2700,468 +2416,6 @@ public final class Settings {
         public static final String EGG_MODE = "egg_mode";
 
         /**
-<<<<<<< HEAD
-         * Show or hide clock
-         * 0 - hide
-         * 1 - show (default)
-         * @hide
-         */
-        public static final String STATUS_BAR_CLOCK = "status_bar_clock";
-
-        /**
-         * AM/PM Style for clock options
-         * 0 - Normal AM/PM
-         * 1 - Small AM/PM
-         * 2 - No AM/PM
-         * @hide
-         */
-        public static final String STATUSBAR_CLOCK_AM_PM_STYLE = "statusbar_clock_am_pm_style";
-
-        /**
-         * Style of clock
-         * 0 - Hide Clock
-         * 1 - Right Clock
-         * 2 - Center Clock
-         * @hide
-         */
-        public static final String STATUSBAR_CLOCK_STYLE = "statusbar_clock_style";
-
-        /**
-         * Setting for clock color
-         * @hide
-         */
-        public static final String STATUSBAR_CLOCK_COLOR = "statusbar_clock_color";
-
-        /**
-        * @hide
-        * Shows custom date before clock time
-        * 0 - No Date
-        * 1 - Small Date
-        * 2 - Normal Date
-        */
-        public static final String STATUSBAR_CLOCK_DATE_DISPLAY = "statusbar_clock_date_display";
-
-        /**
-        * @hide
-        * Sets the date string style
-        * 0 - Regular style
-        * 1 - Lowercase
-        * 2 - Uppercase
-        */
-        public static final String STATUSBAR_CLOCK_DATE_STYLE = "statusbar_clock_date_style";
-
-        /**
-        * @hide
-        * Stores the java DateFormat string for the date
-        */
-        public static final String STATUSBAR_CLOCK_DATE_FORMAT = "statusbar_clock_date_format";
-
-        /**
-         * Config for advanced power menu
-         *
-         * @hide
-         */
-        public static final String POWER_MENU_CONFIG = "power_menu_config";
-
-        /**
-         * Text color for advanced power menu
-         *
-         * @hide
-         */
-        public static final String POWER_MENU_TEXT_COLOR = "power_menu_text_color";
-
-        /**
-         * Icon color for advanced power menu
-         *
-         * @hide
-         */
-        public static final String POWER_MENU_ICON_COLOR = "power_menu_icon_color";
-
-        /**
-         * Icon color mode for advanced power menu
-         *
-         * @hide
-         */
-        public static final String POWER_MENU_ICON_COLOR_MODE = "power_menu_icon_color_mode";
-
-        /**
-         * Expanded desktop on/off state
-         * @hide
-         */
-        public static final String EXPANDED_DESKTOP_STATE = "expanded_desktop_state";
-
-        /**
-         * Volume rocker wake
-         * @hide
-         */
-        public static final String VOLUME_WAKE_SCREEN = "volume_wake_screen";
-
-        /**
-         * Volume music controls
-         * @hide
-         */
-        public static final String VOLUME_MUSIC_CONTROLS = "volume_music_controls";
-
-        /**
-         * Whether to prevent loud volume levels when headset is first plugged in.
-         * @hide
-         */
-        public static final String SAFE_HEADSET_VOLUME = "safe_headset_volume";
-
-        /**
-         * Whether to mute annoying notifications
-         * @hide
-         */
-        public static final String MUTE_ANNOYING_NOTIFICATIONS_THRESHOLD =
-                "mute_annoying_notifications_threshold";
-
-        /**
-         * Electronic beam animation mode
-         * 0 = off,
-         * 1 = always horizontal,
-         * 2 = always vertical,
-         * 3 = dependent on orientation
-         * @hide
-         */
-        public static final String SYSTEM_POWER_CRT_MODE = "system_power_crt_mode";
-
-        /**
-          * Volume keys control cursor in text fields (default is 0)
-          * 0 - Disabled
-          * 1 - Volume up/down moves cursor left/right
-          * 2 - Volume up/down moves cursor right/left
-          * @hide
-          */
-         public static final String VOLUME_KEY_CURSOR_CONTROL = "volume_key_cursor_control";
-
-        /**
-         * Override and forcefully disable the fullscreen keyboard
-         * @hide
-         */
-        public static final String DISABLE_FULLSCREEN_KEYBOARD = "disable_fullscreen_keyboard";
-
-        /**
-         * Whether to show the IME switcher in the status bar
-         * @hide
-         */
-        public static final String STATUS_BAR_IME_SWITCHER = "status_bar_ime_switcher";
-
-        /**
-         * Automatic keyboard rotation timeout.  0 to disable completely.
-         * @hide
-         */
-        public static final String KEYBOARD_ROTATION_TIMEOUT = "keyboard_rotation_timeout";
-
-        /**
-         * Forces formal text input.  1 to replace emoticon key with enter key.
-         * @hide
-         */
-        public static final String FORMAL_TEXT_INPUT = "formal_text_input";
-
-        /**
-         * QuickSettings configuration
-         * @hide
-         */
-        public static final String QUICK_SETTINGS_TILES = "quick_settings_tiles";
-
-        /**
-         * Number of QuickSettings tiles per row
-         * @hide
-         */
-        public static final String QUICK_TILES_PER_ROW = "quick_tiles_per_row";
-
-        /**
-         * Whether on landscape tiles quantity per row are duplicated
-         * @hide
-         */
-        public static final String QUICK_TILES_PER_ROW_DUPLICATE_LANDSCAPE =
-                "quick_tiles_per_row_duplicate_landscape";
-
-        /**
-         * Color of QuickSettings tiles text
-         * @hide
-         */
-        public static final String QUICK_TILES_TEXT_COLOR = "quick_tiles_text_color";
-
-
-        /**
-         * QuickSettings tiles background color
-         *
-         * @hide
-         */
-        public static final String QUICK_TILES_BG_COLOR = "quick_tiles_bg_color";
-
-        /**
-         * QuickSettings tiles background color on pressed
-         *
-         * @hide
-         */
-        public static final String QUICK_TILES_BG_PRESSED_COLOR = "quick_tiles_bg_pressed_color";
-
-        /**
-         * QuickSettings tiles background alpha
-         *
-         * @hide
-         */
-        public static final String QUICK_TILES_BG_ALPHA = "quick_tiles_bg_alpha";
-
-        /**
-         * QuickSettings network modes to switch
-         * @hide
-         */
-        public static final String EXPANDED_NETWORK_MODE = "expanded_network_mode";
-
-        /**
-         * QuickSettings screen timeout modes to switch
-         * @hide
-         */
-        public static final String EXPANDED_SCREENTIMEOUT_MODE = "expanded_screentimeout_mode";
-
-        /**
-         * QuickSettings ring modes to switch
-         * @hide
-         */
-        public static final String EXPANDED_RING_MODE = "expanded_ring_mode";
-
-        /**
-         * Quick Settings Quick Pulldown
-         *
-         * @hide
-         */
-        public static final String QS_QUICK_PULLDOWN = "qs_quick_pulldown";
-
-        /**
-         * Display style of the status bar battery information
-         * default: 0
-         * @hide
-         */
-        public static final String STATUS_BAR_BATTERY = "status_bar_battery";
-
-        /**
-         * Circle battery icon color
-         * in statusbar
-         * @hide
-         */
-        public static final String STATUS_BAR_BATTERY_COLOR = "status_bar_battery_color";
-
-        /**
-         * Battery icon text color
-         * in statusbar
-         * @hide
-         */
-        public static final String STATUS_BAR_BATTERY_TEXT_COLOR = "status_bar_battery_text_color";
-
-        /**
-         * Battery icon text charging color
-         * in statusbar
-         * @hide
-         */
-        public static final String STATUS_BAR_BATTERY_TEXT_CHARGING_COLOR =
-                "status_bar_battery_text_charging_color";
-
-        /**
-         * Circle battery animation speed during charge
-         * in statusbar
-         * @hide
-         */
-        public static final String STATUS_BAR_CIRCLE_BATTERY_ANIMATIONSPEED =
-                "status_bar_circle_battery_animationspeed";
-
-        /**
-        * Whether to control brightness from status bar
-        *
-        * @hide
-        */
-       public static final String STATUS_BAR_BRIGHTNESS_CONTROL = "status_bar_brightness_control";
-
-       /**
-        * Sets the portrait background of notification drawer
-        * @hide
-        */
-        public static final String NOTIFICATION_BACKGROUND = "notification_background";
-
-       /**
-        * Sets the landscape background of notification drawer
-        * @hide
-        */
-        public static final String NOTIFICATION_BACKGROUND_LANDSCAPE = "notification_background_landscape";
-
-       /**
-        * Sets the alpha (transparency) of notification wallpaper
-        * @hide
-        */
-        public static final String NOTIFICATION_BACKGROUND_ALPHA = "notification_background_alpha";
-
-       /**
-        * Sets the alpha (transparency) of the notification
-        * @hide
-        */
-        public static final String NOTIFICATION_ALPHA = "notification_alpha";
-
-        /**
-         * Navigation bar button color
-         * @hide
-         */
-        public static final String NAVIGATION_BAR_BUTTON_TINT = "navigation_bar_button_tint";
-
-        /**
-         * Option To Colorize Navigation bar buttons in different modes
-         * 0 = all, 1 = system icons, 2 = system icons + custom user icons
-         * @hide
-         */
-        public static final String NAVIGATION_BAR_BUTTON_TINT_MODE = "navigation_bar_button_tint_mode";
-
-        /**
-         * Navigation bar glow color
-         * @hide
-         */
-        public static final String NAVIGATION_BAR_GLOW_TINT = "navigation_bar_glow_tint";
-
-        /**
-         * Wether navigation bar is enabled or not
-         * @hide
-         */
-        public static final String NAVIGATION_BAR_SHOW = "navigation_bar_show";
-
-        /**
-         * Wether navigation bar is on landscape on the bottom or on the right
-         * @hide
-         */
-        public static final String NAVIGATION_BAR_CAN_MOVE = "navigation_bar_can_move";
-
-        /**
-         * Navigation bar height when it is on protrait
-         * @hide
-         */
-        public static final String NAVIGATION_BAR_HEIGHT = "navigation_bar_height";
-
-        /**
-         * Navigation bar height when it is on landscape at the bottom
-         * @hide
-         */
-        public static final String NAVIGATION_BAR_HEIGHT_LANDSCAPE = "navigation_bar_height_landscape";
-
-        /**
-         * Navigation bar height when it is on landscape at the right
-         * @hide
-         */
-        public static final String NAVIGATION_BAR_WIDTH = "navigation_bar_width";
-
-        /**
-         * Custom navigation bar intent and action configuration
-         * @hide
-         */
-        public static final String NAVIGATION_BAR_CONFIG = "navigation_bar_config";
-
-        /**
-         * Custom navring intent and action configuration
-         *
-         * @hide
-         */
-        public static final String NAVRING_CONFIG = "navring_config";
-
-        /**
-         * Wether the navbar menu button is on the left/right/both
-         * @hide
-         */
-        public static final String MENU_LOCATION = "menu_location";
-
-        /**
-         * Wether the navbar menu button should show or not
-         * @hide
-         */
-        public static final String MENU_VISIBILITY = "menu_visibility";
-
-        /**
-         * Battery warning preferences
-         *
-         * 0 = show dialog + play sound (default)
-         * 1 = fire notification + play sound
-         * 2 = show dialog only
-         * 3 = fire notification only
-         * 4 = play sound only
-         * 5 = none
-         * @hide
-         */
-        public static final String POWER_UI_LOW_BATTERY_WARNING_POLICY = "power_ui_low_battery_warning_policy";
-
-
-        /**
-         * Hide carrier information on notification drawer
-         * @hide
-         */
-        public static final String NOTIFICATION_HIDE_CARRIER = "notification_hide_carrier";
-
-
-        /**
-          * Stores values for notification shortcut targets
-          * @hide
-          */
-        public static final String NOTIFICATION_SHORTCUTS_CONFIG = "notification_shortcuts_config";
-
-        /**
-         * Stores the value for notification shortcuts icon color
-         * @hide
-         */
-        public static final String NOTIFICATION_SHORTCUTS_COLOR = "notification_shortcuts_color";
-
-        /**
-         * Whether to colorize the default application icons
-         * @hide
-         */
-        public static final String NOTIFICATION_SHORTCUTS_COLOR_MODE = "notification_shortcuts_color_mode";
-
-        /**
-         * Whether to enable quiet hours.
-         * @hide
-         */
-        public static final String QUIET_HOURS_ENABLED = "quiet_hours_enabled";
-
-        /**
-         * Sets when quiet hours starts. This is stored in minutes from the start of the day.
-         * @hide
-         */
-        public static final String QUIET_HOURS_START = "quiet_hours_start";
-
-        /**
-         * Sets when quiet hours end. This is stored in minutes from the start of the day.
-         * @hide
-         */
-        public static final String QUIET_HOURS_END = "quiet_hours_end";
-
-        /**
-         * Whether to remove the sound from outgoing notifications during quiet hours.
-         * @hide
-         */
-        public static final String QUIET_HOURS_MUTE = "quiet_hours_mute";
-
-        /**
-         * Whether to disable haptic feedback during quiet hours.
-         * @hide
-         */
-        public static final String QUIET_HOURS_HAPTIC = "quiet_hours_haptic";
-
-        /**
-         * Whether to remove the vibration from outgoing notifications during quiet hours.
-         * @hide
-         */
-        public static final String QUIET_HOURS_STILL = "quiet_hours_still";
-
-        /**
-         * Whether to attempt to dim the LED color during quiet hours.
-         * @hide
-         */
-        public static final String QUIET_HOURS_DIM = "quiet_hours_dim";
-
-        /**
-         * Whether to use the custom quick unlock screen control
-         * @hide
-         */
-        public static final String LOCKSCREEN_QUICK_UNLOCK_CONTROL = "lockscreen_quick_unlock_control";
-
-        /**
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
@@ -3226,17 +2480,7 @@ public final class Settings {
             POINTER_SPEED,
             VIBRATE_WHEN_RINGING,
             RINGTONE,
-<<<<<<< HEAD
-            NOTIFICATION_SOUND,
-            QUIET_HOURS_ENABLED,
-            QUIET_HOURS_START,
-            QUIET_HOURS_END,
-            QUIET_HOURS_MUTE,
-            QUIET_HOURS_STILL,
-            QUIET_HOURS_DIM,
-=======
             NOTIFICATION_SOUND
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         };
 
         // Settings moved to Settings.Secure
@@ -3367,16 +2611,6 @@ public final class Settings {
                 Global.WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON;
 
         /**
-<<<<<<< HEAD
-         * wake up when plugged or unplugged
-         *
-         * @hide
-         */
-        public static final String WAKEUP_WHEN_PLUGGED_UNPLUGGED = "wakeup_when_plugged_unplugged";
-
-        /**
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
          * @deprecated Use
          * {@link android.provider.Settings.Global#WIFI_NETWORKS_AVAILABLE_REPEAT_DELAY} instead
          */
@@ -3571,10 +2805,6 @@ public final class Settings {
             MOVED_TO_GLOBAL.add(Settings.Global.USE_GOOGLE_MAIL);
             MOVED_TO_GLOBAL.add(Settings.Global.WEB_AUTOFILL_QUERY_URL);
             MOVED_TO_GLOBAL.add(Settings.Global.WIFI_COUNTRY_CODE);
-<<<<<<< HEAD
-            MOVED_TO_GLOBAL.add(Settings.Global.WIFI_COUNTRY_CODE_USER);
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             MOVED_TO_GLOBAL.add(Settings.Global.WIFI_FRAMEWORK_SCAN_INTERVAL_MS);
             MOVED_TO_GLOBAL.add(Settings.Global.WIFI_FREQUENCY_BAND);
             MOVED_TO_GLOBAL.add(Settings.Global.WIFI_IDLE_MS);
@@ -4172,30 +3402,6 @@ public final class Settings {
         public static final String LOCK_PATTERN_VISIBLE = "lock_pattern_visible_pattern";
 
         /**
-<<<<<<< HEAD
-         * Whether the NumKeyPad will change the orders of numbers
-         * in a PIN locked lockscreen
-         * 0 = off | 1 = always | 2 = only on request
-         * @hide
-          */
-
-        public static final String LOCK_NUMPAD_RANDOM = "lock_numpad_random";
-
-        /**
-         *Whether lock before unlock is enabled or disabled
-         * @hide
-         */
-        public static final String LOCK_BEFORE_UNLOCK = "lock_before_unlock";
-
-        /**
-         * Determines the width and height of the LockPatternView widget
-         * @hide
-         */
-        public static final String LOCK_PATTERN_SIZE = "lock_pattern_size";
-
-        /**
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
          * Whether lock pattern will vibrate as user enters (0 = false, 1 =
          * true)
          *
@@ -5162,21 +4368,6 @@ public final class Settings {
         public static final String SMS_DEFAULT_APPLICATION = "sms_default_application";
 
         /**
-<<<<<<< HEAD
-         * Whether newly installed apps should run with privacy guard by default
-         * @hide
-         */
-        public static final String PRIVACY_GUARD_DEFAULT = "privacy_guard_default";
-
-        /**
-         * Whether privacy guard notification should show.
-         * @hide
-         */
-        public static final String PRIVACY_GUARD_NOTIFICATION = "privacy_guard_notification";
-
-        /**
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
          * Name of a package that the current user has explicitly allowed to see all of that
          * user's notifications.
          *
@@ -5252,13 +4443,7 @@ public final class Settings {
             MOUNT_UMS_AUTOSTART,
             MOUNT_UMS_PROMPT,
             MOUNT_UMS_NOTIFY_ENABLED,
-<<<<<<< HEAD
-            UI_NIGHT_MODE,
-            PRIVACY_GUARD_DEFAULT,
-            PRIVACY_GUARD_NOTIFICATION
-=======
             UI_NIGHT_MODE
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         };
 
         /**
@@ -5570,27 +4755,6 @@ public final class Settings {
         public static final String POWER_SOUNDS_ENABLED = "power_sounds_enabled";
 
         /**
-<<<<<<< HEAD
-         * Whether to sound when charger power is connected/disconnected
-         * @hide
-         */
-        public static final String POWER_NOTIFICATIONS_ENABLED = "power_notifications_enabled";
-
-        /**
-         * Whether to vibrate when charger power is connected/disconnected
-         * @hide
-         */
-        public static final String POWER_NOTIFICATIONS_VIBRATE = "power_notifications_vibrate";
-
-        /**
-         * URI for power notification sounds
-         * @hide
-         */
-        public static final String POWER_NOTIFICATIONS_RINGTONE = "power_notifications_ringtone";
-
-        /**
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
          * URI for the "wireless charging started" sound.
          * @hide
          */
@@ -6070,15 +5234,6 @@ public final class Settings {
         */
        public static final String WIFI_COUNTRY_CODE = "wifi_country_code";
 
-<<<<<<< HEAD
-        /**
-         * 802.11 country code in ISO 3166 format custom user value
-         * @hide
-         */
-        public static final String WIFI_COUNTRY_CODE_USER = "wifi_country_code_user";
-
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
        /**
         * The interval in milliseconds to issue wake up scans when wifi needs
         * to connect. This is necessary to connect to an access point when
@@ -6796,12 +5951,6 @@ public final class Settings {
             AUTO_TIME,
             AUTO_TIME_ZONE,
             POWER_SOUNDS_ENABLED,
-<<<<<<< HEAD
-            POWER_NOTIFICATIONS_ENABLED,
-            POWER_NOTIFICATIONS_VIBRATE,
-            POWER_NOTIFICATIONS_RINGTONE,
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             DOCK_SOUNDS_ENABLED,
             USB_MASS_STORAGE_ENABLED,
             ENABLE_ACCESSIBILITY_GLOBAL_GESTURE_ENABLED,

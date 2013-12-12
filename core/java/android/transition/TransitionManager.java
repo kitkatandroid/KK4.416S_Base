@@ -19,10 +19,7 @@ package android.transition;
 import android.content.Context;
 import android.util.ArrayMap;
 import android.util.Log;
-<<<<<<< HEAD
-=======
 import android.view.View;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 
@@ -213,49 +210,6 @@ public class TransitionManager {
 
     private static void sceneChangeRunTransition(final ViewGroup sceneRoot,
             final Transition transition) {
-<<<<<<< HEAD
-        if (transition != null) {
-            final ViewTreeObserver observer = sceneRoot.getViewTreeObserver();
-            final ViewTreeObserver.OnPreDrawListener listener =
-                    new ViewTreeObserver.OnPreDrawListener() {
-                public boolean onPreDraw() {
-                    sceneRoot.getViewTreeObserver().removeOnPreDrawListener(this);
-                    sPendingTransitions.remove(sceneRoot);
-                    // Add to running list, handle end to remove it
-                    final ArrayMap<ViewGroup, ArrayList<Transition>> runningTransitions =
-                            getRunningTransitions();
-                    ArrayList<Transition> currentTransitions = runningTransitions.get(sceneRoot);
-                    ArrayList<Transition> previousRunningTransitions = null;
-                    if (currentTransitions == null) {
-                        currentTransitions = new ArrayList<Transition>();
-                        runningTransitions.put(sceneRoot, currentTransitions);
-                    } else if (currentTransitions.size() > 0) {
-                        previousRunningTransitions = new ArrayList<Transition>(currentTransitions);
-                    }
-                    currentTransitions.add(transition);
-                    transition.addListener(new Transition.TransitionListenerAdapter() {
-                        @Override
-                        public void onTransitionEnd(Transition transition) {
-                            ArrayList<Transition> currentTransitions =
-                                    runningTransitions.get(sceneRoot);
-                            currentTransitions.remove(transition);
-                        }
-                    });
-                    transition.captureValues(sceneRoot, false);
-                    if (previousRunningTransitions != null) {
-                        for (Transition runningTransition : previousRunningTransitions) {
-                            runningTransition.resume();
-                        }
-                    }
-                    transition.playTransition(sceneRoot);
-
-                    return true;
-                }
-            };
-            observer.addOnPreDrawListener(listener);
-        }
-    }
-=======
         if (transition != null && sceneRoot != null) {
             MultiListener listener = new MultiListener(transition, sceneRoot);
             sceneRoot.addOnAttachStateChangeListener(listener);
@@ -340,7 +294,6 @@ public class TransitionManager {
             return true;
         }
     };
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
     private static void sceneChangeSetup(ViewGroup sceneRoot, Transition transition) {
 

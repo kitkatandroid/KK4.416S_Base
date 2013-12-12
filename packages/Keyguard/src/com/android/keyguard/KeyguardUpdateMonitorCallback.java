@@ -19,10 +19,7 @@ import android.app.PendingIntent;
 import android.app.admin.DevicePolicyManager;
 import android.graphics.Bitmap;
 import android.media.AudioManager;
-<<<<<<< HEAD
-=======
 import android.os.SystemClock;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import android.view.WindowManagerPolicy;
 
 import com.android.internal.telephony.IccCardConstants;
@@ -31,14 +28,11 @@ import com.android.internal.telephony.IccCardConstants;
  * Callback for general information relevant to lock screen.
  */
 class KeyguardUpdateMonitorCallback {
-<<<<<<< HEAD
-=======
 
     private static final long VISIBILITY_CHANGED_COLLAPSE_MS = 1000;
     private long mVisibilityChangedCalled;
     private boolean mShowing;
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     /**
      * Called when the battery status changes, e.g. when plugged in or unplugged, charge
      * level, etc. changes.
@@ -82,8 +76,6 @@ class KeyguardUpdateMonitorCallback {
      */
     void onKeyguardVisibilityChanged(boolean showing) { }
 
-<<<<<<< HEAD
-=======
     void onKeyguardVisibilityChangedRaw(boolean showing) {
         final long now = SystemClock.elapsedRealtime();
         if (showing == mShowing
@@ -93,7 +85,6 @@ class KeyguardUpdateMonitorCallback {
         mShowing = showing;
     }
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     /**
      * Called when visibility of lockscreen clock changes, such as when
      * obscured by a widget.

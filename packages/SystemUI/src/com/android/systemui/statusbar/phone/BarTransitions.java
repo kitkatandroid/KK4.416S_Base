@@ -16,18 +16,6 @@
 
 package com.android.systemui.statusbar.phone;
 
-<<<<<<< HEAD
-import android.animation.ArgbEvaluator;
-import android.animation.ValueAnimator;
-import android.animation.ValueAnimator.AnimatorUpdateListener;
-import android.app.ActivityManager;
-import android.content.res.Resources;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.TransitionDrawable;
-import android.util.Log;
-import android.view.View;
-=======
 import android.animation.TimeInterpolator;
 import android.app.ActivityManager;
 import android.content.Context;
@@ -42,7 +30,6 @@ import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
 import com.android.systemui.R;
 
@@ -62,55 +49,16 @@ public class BarTransitions {
     private final String mTag;
     private final View mView;
     private final boolean mSupportsTransitions = ActivityManager.isHighEndGfx();
-<<<<<<< HEAD
-
-    private final int mOpaque;
-    private final int mSemiTransparent;
-
-    private int mMode;
-    private ValueAnimator mColorDrawableAnimator;
-    private boolean mColorDrawableShowing;
-
-    private final ColorDrawable mColorDrawable;
-    private final TransitionDrawable mTransitionDrawable;
-    private final AnimatorUpdateListener mAnimatorListener = new AnimatorUpdateListener() {
-        @Override
-        public void onAnimationUpdate(ValueAnimator animator) {
-            mColorDrawable.setColor((Integer) animator.getAnimatedValue());
-        }
-    };
-=======
     private final BarBackgroundDrawable mBarBackground;
 
     private int mMode;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
     public BarTransitions(View view, int gradientResourceId) {
         mTag = "BarTransitions." + view.getClass().getSimpleName();
         mView = view;
-<<<<<<< HEAD
-        final Resources res = mView.getContext().getResources();
-
-        if (DEBUG_COLORS) {
-            mOpaque = 0xff0000ff;
-            mSemiTransparent = 0x7f0000ff;
-        } else {
-            mOpaque = res.getColor(R.color.system_bar_background_opaque);
-            mSemiTransparent = res.getColor(R.color.system_bar_background_semi_transparent);
-        }
-
-        mColorDrawable = new ColorDrawable(mOpaque);
-        mTransitionDrawable = new TransitionDrawable(
-                new Drawable[] { res.getDrawable(gradientResourceId), mColorDrawable });
-        mTransitionDrawable.setCrossFadeEnabled(true);
-        mTransitionDrawable.resetTransition();
-        if (mSupportsTransitions) {
-            mView.setBackground(mTransitionDrawable);
-=======
         mBarBackground = new BarBackgroundDrawable(mView.getContext(), gradientResourceId);
         if (mSupportsTransitions) {
             mView.setBackground(mBarBackground);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
     }
 
@@ -129,71 +77,11 @@ public class BarTransitions {
         }
     }
 
-<<<<<<< HEAD
-    private Integer getBackgroundColor(int mode) {
-        if (mode == MODE_SEMI_TRANSPARENT) return mSemiTransparent;
-        if (mode == MODE_OPAQUE) return mOpaque;
-        if (mode == MODE_LIGHTS_OUT) return mOpaque;
-        return null;
-    }
-
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     protected void onTransition(int oldMode, int newMode, boolean animate) {
         applyModeBackground(oldMode, newMode, animate);
     }
 
     protected void applyModeBackground(int oldMode, int newMode, boolean animate) {
-<<<<<<< HEAD
-        if (DEBUG) Log.d(mTag, String.format("applyModeBackground %s animate=%s",
-                modeToString(newMode), animate));
-        cancelColorAnimation();
-        Integer oldColor = getBackgroundColor(oldMode);
-        Integer newColor = getBackgroundColor(newMode);
-        if (newColor != null) {
-            if (animate && oldColor != null && !oldColor.equals(newColor)) {
-                startColorAnimation(oldColor, newColor);
-            } else if (!newColor.equals(mColorDrawable.getColor())) {
-                if (DEBUG) Log.d(mTag, String.format("setColor = %08x", newColor));
-                mColorDrawable.setColor(newColor);
-            }
-        }
-        if (newColor == null && mColorDrawableShowing) {
-            if (DEBUG) Log.d(mTag, "Hide color layer");
-            if (animate) {
-                mTransitionDrawable.reverseTransition(BACKGROUND_DURATION);
-            } else {
-                mTransitionDrawable.resetTransition();
-            }
-            mColorDrawableShowing = false;
-        } else if (newColor != null && !mColorDrawableShowing) {
-            if (DEBUG) Log.d(mTag, "Show color layer");
-            mTransitionDrawable.startTransition(animate ? BACKGROUND_DURATION : 0);
-            mColorDrawableShowing = true;
-        }
-    }
-
-    private void startColorAnimation(int from, int to) {
-        if (DEBUG) Log.d(mTag, String.format("startColorAnimation %08x -> %08x", from, to));
-        mColorDrawableAnimator = ValueAnimator.ofObject(new ArgbEvaluator(), from, to);
-        mColorDrawableAnimator.addUpdateListener(mAnimatorListener);
-        mColorDrawableAnimator.start();
-    }
-
-    private void cancelColorAnimation() {
-        if (mColorDrawableAnimator != null && mColorDrawableAnimator.isStarted()) {
-            mColorDrawableAnimator.cancel();
-            mColorDrawableAnimator = null;
-        }
-    }
-
-    public static String modeToString(int mode) {
-        if (mode == MODE_OPAQUE) return "MODE_OPAQUE";
-        if (mode == MODE_SEMI_TRANSPARENT) return "MODE_SEMI_TRANSPARENT";
-        if (mode == MODE_TRANSLUCENT) return "MODE_TRANSLUCENT";
-        if (mode == MODE_LIGHTS_OUT) return "MODE_LIGHTS_OUT";
-        throw new IllegalArgumentException("Unknown mode " + mode);
-=======
         if (DEBUG) Log.d(mTag, String.format("applyModeBackground oldMode=%s newMode=%s animate=%s",
                 modeToString(oldMode), modeToString(newMode), animate));
         mBarBackground.applyModeBackground(oldMode, newMode, animate);
@@ -328,6 +216,5 @@ public class BarTransitions {
                 invalidateSelf();  // keep going
             }
         }
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 }

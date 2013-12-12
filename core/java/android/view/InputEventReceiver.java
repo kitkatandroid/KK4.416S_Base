@@ -48,11 +48,7 @@ public abstract class InputEventReceiver {
             InputChannel inputChannel, MessageQueue messageQueue);
     private static native void nativeDispose(int receiverPtr);
     private static native void nativeFinishInputEvent(int receiverPtr, int seq, boolean handled);
-<<<<<<< HEAD
-    private static native void nativeConsumeBatchedInputEvents(int receiverPtr,
-=======
     private static native boolean nativeConsumeBatchedInputEvents(int receiverPtr,
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             long frameTimeNanos);
 
     /**
@@ -169,27 +165,17 @@ public abstract class InputEventReceiver {
      *
      * @param frameTimeNanos The time in the {@link System#nanoTime()} time base
      * when the current display frame started rendering, or -1 if unknown.
-<<<<<<< HEAD
-     */
-    public final void consumeBatchedInputEvents(long frameTimeNanos) {
-=======
      *
      * @return Whether a batch was consumed
      */
     public final boolean consumeBatchedInputEvents(long frameTimeNanos) {
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         if (mReceiverPtr == 0) {
             Log.w(TAG, "Attempted to consume batched input events but the input event "
                     + "receiver has already been disposed.");
         } else {
-<<<<<<< HEAD
-            nativeConsumeBatchedInputEvents(mReceiverPtr, frameTimeNanos);
-        }
-=======
             return nativeConsumeBatchedInputEvents(mReceiverPtr, frameTimeNanos);
         }
         return false;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     // Called from native code.

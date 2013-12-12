@@ -134,10 +134,7 @@ public class ChooseAccountTypeActivity extends Activity {
                 if (sequence != null) {
                     name = sequence.toString();
                 }
-<<<<<<< HEAD
-=======
                 name = sequence.toString();
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             } catch (PackageManager.NameNotFoundException e) {
                 // Nothing we can do much here, just log
                 if (Log.isLoggable(TAG, Log.WARN)) {

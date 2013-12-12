@@ -62,8 +62,6 @@ page.title=Support Library
 <div class="toggle-content opened">
   <p><a href="#" onclick="return toggleContent(this)">
     <img src="{@docRoot}assets/images/triangle-opened.png" class="toggle-content-img" alt=""
-<<<<<<< HEAD
-=======
 />Android Support Library, revision 19</a> <em>(October 2013)</em>
   </p>
   <div class="toggle-content-toggleme">
@@ -116,7 +114,6 @@ page.title=Support Library
 <div class="toggle-content closed">
   <p><a href="#" onclick="return toggleContent(this)">
     <img src="{@docRoot}assets/images/triangle-closed.png" class="toggle-content-img" alt=""
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 />Android Support Library, revision 18</a> <em>(July 2013)</em>
   </p>
   <div class="toggle-content-toggleme">

@@ -170,12 +170,9 @@ public class PhoneStatusBarView extends PanelBar {
         mBar.makeExpandedInvisibleSoon();
         mFadingPanel = null;
         mLastFullyOpenedPanel = null;
-<<<<<<< HEAD
-=======
         if (mScrimColor != 0 && ActivityManager.isHighEndGfx()) {
             mBar.mStatusBarWindow.setBackgroundColor(0);
         }
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     @Override
@@ -250,38 +247,6 @@ public class PhoneStatusBarView extends PanelBar {
 
         mBar.animateHeadsUp(mNotificationPanel == panel, mPanelExpandedFractionSum);
 
-<<<<<<< HEAD
-        updateShortcutsVisibility();
-    }
-
-    public void updateShortcutsVisibility() {
-        // Notification Shortcuts check for fully expanded panel
-        if (mBar.mSettingsButton == null || mBar.mNotificationButton == null) {
-            // Tablet
-            if (mFullyOpenedPanel != null) {
-                mBar.updateNotificationShortcutsVisibility(true);
-                mBar.updateCarrierAndWifiLabelVisibility(false, false);
-            } else {
-                mBar.updateNotificationShortcutsVisibility(false);
-                mBar.updateCarrierAndWifiLabelVisibility(false, true);
-            }
-        } else {
-            // Phone
-            if (mFullyOpenedPanel != null
-                    && (mBar.mSettingsButton.getVisibility() == View.VISIBLE &&
-                    !(mBar.mSettingsButton.getVisibility() == View.VISIBLE &&
-                    mBar.mNotificationButton.getVisibility() == View.VISIBLE))) {
-                mBar.updateNotificationShortcutsVisibility(true);
-                mBar.updateCarrierAndWifiLabelVisibility(false, false);
-            } else {
-                mBar.updateNotificationShortcutsVisibility(false);
-                mBar.updateCarrierAndWifiLabelVisibility(false, true);
-            }
-        }
-    }
-
-=======
         mBar.updateCarrierLabelVisibility(false);
     }
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 }

@@ -66,10 +66,7 @@
     <dimen name="widget_label_font_size">16dp</dimen>
     <dimen name="widget_big_font_size">141dp</dimen>
 
-<<<<<<< HEAD
-=======
     <!-- EmergencyCarrierArea overlap - amount to overlap the emergency button and carrier text.
          Should be 0 on devices with plenty of room (e.g. tablets) -->
     <dimen name="eca_overlap">0dip</dimen>
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 </resources>

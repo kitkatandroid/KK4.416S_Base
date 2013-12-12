@@ -18,10 +18,7 @@ package android.widget;
 
 import com.android.internal.R;
 
-<<<<<<< HEAD
-=======
 import android.content.ActivityNotFoundException;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -31,10 +28,7 @@ import android.content.res.TypedArray;
 import android.database.DataSetObserver;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
-<<<<<<< HEAD
-=======
 import android.util.Log;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import android.view.ActionProvider;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -71,11 +65,8 @@ import android.widget.ListPopupWindow.ForwardingListener;
  */
 public class ActivityChooserView extends ViewGroup implements ActivityChooserModelClient {
 
-<<<<<<< HEAD
-=======
     private static final String LOG_TAG = "ActivityChooserView";
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     /**
      * An adapter for displaying the activities in an {@link AdapterView}.
      */
@@ -556,15 +547,9 @@ public class ActivityChooserView extends ViewGroup implements ActivityChooserMod
         }
         // Activity chooser content.
         if (mDefaultActivityButton.getVisibility() == VISIBLE) {
-<<<<<<< HEAD
-            mActivityChooserContent.setBackgroundDrawable(mActivityChooserContentBackground);
-        } else {
-            mActivityChooserContent.setBackgroundDrawable(null);
-=======
             mActivityChooserContent.setBackground(mActivityChooserContentBackground);
         } else {
             mActivityChooserContent.setBackground(null);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
     }
 
@@ -596,12 +581,8 @@ public class ActivityChooserView extends ViewGroup implements ActivityChooserMod
                         Intent launchIntent = mAdapter.getDataModel().chooseActivity(position);
                         if (launchIntent != null) {
                             launchIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-<<<<<<< HEAD
-                            mContext.startActivity(launchIntent);
-=======
                             ResolveInfo resolveInfo = mAdapter.getDataModel().getActivity(position);
                             startActivity(launchIntent, resolveInfo);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                         }
                     }
                 } break;
@@ -619,11 +600,7 @@ public class ActivityChooserView extends ViewGroup implements ActivityChooserMod
                 Intent launchIntent = mAdapter.getDataModel().chooseActivity(index);
                 if (launchIntent != null) {
                     launchIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-<<<<<<< HEAD
-                    mContext.startActivity(launchIntent);
-=======
                     startActivity(launchIntent, defaultActivity);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 }
             } else if (view == mExpandActivityOverflowButton) {
                 mIsSelectingDefaultActivity = false;
@@ -660,8 +637,6 @@ public class ActivityChooserView extends ViewGroup implements ActivityChooserMod
                 mOnDismissListener.onDismiss();
             }
         }
-<<<<<<< HEAD
-=======
 
         private void startActivity(Intent intent, ResolveInfo resolveInfo) {
             try {
@@ -674,7 +649,6 @@ public class ActivityChooserView extends ViewGroup implements ActivityChooserMod
                 Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
             }
         }
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     /**
@@ -848,13 +822,6 @@ public class ActivityChooserView extends ViewGroup implements ActivityChooserMod
             return mDataModel.getHistorySize();
         }
 
-<<<<<<< HEAD
-        public int getMaxActivityCount() {
-            return mMaxActivityCount;
-        }
-
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         public ActivityChooserModel getDataModel() {
             return mDataModel;
         }

@@ -139,8 +139,6 @@ public class ProxyProperties implements Parcelable {
         return false;
     }
 
-<<<<<<< HEAD
-=======
     public boolean isValid() {
         if (!TextUtils.isEmpty(mPacFileUrl)) return true;
         try {
@@ -152,7 +150,6 @@ public class ProxyProperties implements Parcelable {
         return true;
     }
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     public java.net.Proxy makeProxy() {
         java.net.Proxy proxy = java.net.Proxy.NO_PROXY;
         if (mHost != null) {

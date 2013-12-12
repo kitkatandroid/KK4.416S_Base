@@ -611,13 +611,6 @@ public final class Parcel {
             here.fillInStackTrace();
             Log.d(TAG, "Writing " + N + " ArrayMap entries", here);
         }
-<<<<<<< HEAD
-        for (int i=0; i<N; i++) {
-            if (DEBUG_ARRAY_MAP) Log.d(TAG, "  Write #" + i + ": key=0x"
-                    + (val.keyAt(i) != null ? val.keyAt(i).hashCode() : 0) + " " + val.keyAt(i));
-            writeValue(val.keyAt(i));
-            writeValue(val.valueAt(i));
-=======
         int startPos;
         for (int i=0; i<N; i++) {
             if (DEBUG_ARRAY_MAP) startPos = dataPosition();
@@ -627,7 +620,6 @@ public final class Parcel {
                     + (dataPosition()-startPos) + " bytes: key=0x"
                     + Integer.toHexString(val.keyAt(i) != null ? val.keyAt(i).hashCode() : 0)
                     + " " + val.keyAt(i));
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
     }
 
@@ -2315,13 +2307,6 @@ public final class Parcel {
             here.fillInStackTrace();
             Log.d(TAG, "Reading " + N + " ArrayMap entries", here);
         }
-<<<<<<< HEAD
-        while (N > 0) {
-            Object key = readValue(loader);
-            if (DEBUG_ARRAY_MAP) Log.d(TAG, "  Read #" + (N-1) + ": key=0x"
-                    + (key != null ? key.hashCode() : 0) + " " + key);
-            Object value = readValue(loader);
-=======
         int startPos;
         while (N > 0) {
             if (DEBUG_ARRAY_MAP) startPos = dataPosition();
@@ -2330,7 +2315,6 @@ public final class Parcel {
             if (DEBUG_ARRAY_MAP) Log.d(TAG, "  Read #" + (N-1) + " "
                     + (dataPosition()-startPos) + " bytes: key=0x"
                     + Integer.toHexString((key != null ? key.hashCode() : 0)) + " " + key);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             outVal.append(key, value);
             N--;
         }

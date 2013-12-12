@@ -89,31 +89,9 @@ public class TvStatusBar extends BaseStatusBar {
     }
 
     @Override // CommandQueue
-<<<<<<< HEAD
-    public void setNavigationIconHints(int hints) {
-    }
-
-    @Override // CommandQueue
     public void setWindowState(int window, int state) {
     }
 
-    @Override // CommandQueue
-    public void setAutoRotate(boolean enabled) {
-    }
-
-    @Override // CommandQueue
-    public void toggleNotificationShade() {
-    }
-
-    @Override // CommandQueue
-    public void toggleQSShade() {
-    }
-
-=======
-    public void setWindowState(int window, int state) {
-    }
-
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     @Override
     protected void createAndAddWindows() {
     }
@@ -163,11 +141,7 @@ public class TvStatusBar extends BaseStatusBar {
     }
 
     @Override
-<<<<<<< HEAD
-    public void animateExpandSettingsPanel(boolean flip) {
-=======
     public void animateExpandSettingsPanel() {
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     @Override

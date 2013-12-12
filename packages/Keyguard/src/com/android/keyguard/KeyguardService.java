@@ -133,13 +133,6 @@ public class KeyguardService extends Service {
             checkPermission();
             mKeyguardViewMediator.showAssistant();
         }
-<<<<<<< HEAD
-        public void showCustomIntent(Intent intent) {
-            checkPermission();
-            mKeyguardViewMediator.showCustomIntent(intent);
-        }
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         public void dispatch(MotionEvent event) {
             checkPermission();
             mKeyguardViewMediator.dispatch(event);

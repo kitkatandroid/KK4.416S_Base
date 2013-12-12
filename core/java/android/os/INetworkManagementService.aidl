@@ -1,13 +1,6 @@
 /* //device/java/android/android/os/INetworkManagementService.aidl
 **
 ** Copyright 2007, The Android Open Source Project
-<<<<<<< HEAD
-** Copyright (c) 2010-2013, The Linux Foundation. All rights reserved.
-**
-** Not a Contribution. Apache license notifications and license are
-** retained for attribution purposes only.
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 **
 ** Licensed under the Apache License, Version 2.0 (the "License");
 ** you may not use this file except in compliance with the License.
@@ -202,19 +195,6 @@ interface INetworkManagementService
     void disableNat(String internalInterface, String externalInterface);
 
     /**
-<<<<<<< HEAD
-     * Add an upstream IPv6 interface
-     */
-    void addUpstreamV6Interface(String iface);
-
-    /**
-     * Remove an upstream IPv6 interface
-     */
-    void removeUpstreamV6Interface(String iface);
-
-    /**
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
      ** PPPD
      **/
 
@@ -461,30 +441,4 @@ interface INetworkManagementService
      * Determine whether the clatd (464xlat) service has been started
      */
     boolean isClatdStarted();
-<<<<<<< HEAD
-
-   /**
-    ** Policy Routing
-    **/
-
-   /**
-    * Replaces a prexisting identical route with the new metric specified.
-    * Adds a new route if none existed before.
-    */
-   boolean addRouteWithMetric(String iface, int metric, in RouteInfo route);
-
-   /**
-    * Replaces a source policy route for the given iface in a custom routing
-    * table denoted by routeId, if it already exists.
-    * Adds a new route if it did not exist.
-    */
-   boolean replaceSrcRoute(String iface, in byte[] ip, in byte[] gateway, int routeId);
-
-   /**
-    * Deletes a source policy route for the given route identifier and source
-    * address from a custom routing table denoted by routeId
-    */
-   boolean delSrcRoute(in byte[] ip, int routeId);
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 }

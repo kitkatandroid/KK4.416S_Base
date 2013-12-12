@@ -125,10 +125,6 @@ public class KeyguardViewMediator {
     private static final int DISPATCH_EVENT = 15;
     private static final int LAUNCH_CAMERA = 16;
     private static final int DISMISS = 17;
-<<<<<<< HEAD
-    private static final int START_CUSTOM_INTENT = 18;
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
     /**
      * The default amount of time we stay awake (used for all key input)
@@ -204,11 +200,7 @@ public class KeyguardViewMediator {
 
     // cached value of whether we are showing (need to know this to quickly
     // answer whether the input should be restricted)
-<<<<<<< HEAD
-    private boolean mShowing = false;
-=======
     private boolean mShowing;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
     // true if the keyguard is hidden by another window
     private boolean mHidden = false;
@@ -261,14 +253,11 @@ public class KeyguardViewMediator {
     private final float mLockSoundVolume;
 
     /**
-<<<<<<< HEAD
-=======
      * For managing external displays
      */
     private KeyguardDisplayManager mKeyguardDisplayManager;
 
     /**
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
      * Cache of avatar drawables, for use by KeyguardMultiUserAvatar.
      */
     private static MultiUserAvatarCache sMultiUserAvatarCache = new MultiUserAvatarCache();
@@ -320,14 +309,11 @@ public class KeyguardViewMediator {
          * Report that the keyguard is dismissable, pending the next keyguardDone call.
          */
         void keyguardDonePending();
-<<<<<<< HEAD
-=======
 
         /**
          * Report when keyguard is actually gone
          */
         void keyguardGone();
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     KeyguardUpdateMonitorCallback mUpdateCallback = new KeyguardUpdateMonitorCallback() {
@@ -481,14 +467,11 @@ public class KeyguardViewMediator {
         public void keyguardDonePending() {
             mKeyguardDonePending = true;
         }
-<<<<<<< HEAD
-=======
 
         @Override
         public void keyguardGone() {
             mKeyguardDisplayManager.hide();
         }
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     };
 
     private void userActivity() {
@@ -515,11 +498,8 @@ public class KeyguardViewMediator {
 
         mContext.registerReceiver(mBroadcastReceiver, new IntentFilter(DELAYED_KEYGUARD_ACTION));
 
-<<<<<<< HEAD
-=======
         mKeyguardDisplayManager = new KeyguardDisplayManager(context);
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         mAlarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
         mUpdateMonitor = KeyguardUpdateMonitor.getInstance(context);
@@ -528,13 +508,10 @@ public class KeyguardViewMediator {
                 ? lockPatternUtils : new LockPatternUtils(mContext);
         mLockPatternUtils.setCurrentUser(UserHandle.USER_OWNER);
 
-<<<<<<< HEAD
-=======
         // Assume keyguard is showing (unless it's disabled) until we know for sure...
         mShowing = (mUpdateMonitor.isDeviceProvisioned() || mLockPatternUtils.isSecure())
                 && !mLockPatternUtils.isLockScreenDisabled();
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         WindowManager wm = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
 
         mKeyguardViewManager = new KeyguardViewManager(context, wm, mViewMediatorCallback,
@@ -1120,12 +1097,6 @@ public class KeyguardViewMediator {
                 case SHOW_ASSISTANT:
                     handleShowAssistant();
                     break;
-<<<<<<< HEAD
-                case START_CUSTOM_INTENT:
-                    handleShowCustomIntent((Intent) msg.obj);
-                    break;
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 case DISPATCH_EVENT:
                     handleDispatchEvent((MotionEvent) msg.obj);
                     break;
@@ -1227,12 +1198,6 @@ public class KeyguardViewMediator {
             // If the stream is muted, don't play the sound
             if (mAudioManager.isStreamMute(mMasterStreamType)) return;
 
-<<<<<<< HEAD
-            // If music is playing, don't play the sound
-            if (mAudioManager.isMusicActive()) return;
-
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             mLockSoundStreamId = mLockSounds.play(whichSound,
                     mLockSoundVolume, mLockSoundVolume, 1/*priortiy*/, 0/*loop*/, 1.0f/*rate*/);
         }
@@ -1258,15 +1223,6 @@ public class KeyguardViewMediator {
                 if (DEBUG) Log.d(TAG, "handleShow");
             }
 
-<<<<<<< HEAD
-            new Thread(new Runnable() {
-                public void run() {
-                    playSounds(true);
-                }
-            }).start();
-
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             mKeyguardViewManager.show(options);
             mShowing = true;
             mKeyguardDonePending = false;
@@ -1278,17 +1234,12 @@ public class KeyguardViewMediator {
             } catch (RemoteException e) {
             }
 
-<<<<<<< HEAD
-            mShowKeyguardWakeLock.release();
-        }
-=======
             // Do this at the end to not slow down display of the keyguard.
             playSounds(true);
 
             mShowKeyguardWakeLock.release();
         }
         mKeyguardDisplayManager.show();
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     /**
@@ -1416,18 +1367,6 @@ public class KeyguardViewMediator {
         mKeyguardViewManager.showAssistant();
     }
 
-<<<<<<< HEAD
-    public void showCustomIntent(Intent intent) {
-        Message msg = mHandler.obtainMessage(START_CUSTOM_INTENT, intent);
-        mHandler.sendMessage(msg);
-    }
-
-    public void handleShowCustomIntent(Intent intent) {
-        mKeyguardViewManager.showCustomIntent(intent);
-    }
-
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     private boolean isAssistantAvailable() {
         return mSearchManager != null
                 && mSearchManager.getAssistIntent(mContext, false, UserHandle.USER_CURRENT) != null;

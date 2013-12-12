@@ -37,9 +37,6 @@
   </li>
   <li class="nav-section">
     <div class="nav-section-header empty"><a href="<?cs var:toroot?>google/play-services/maps.html">
-<<<<<<< HEAD
-          <span class="en">Google Maps</span>
-=======
           <span class="en">Maps</span>
       </a></div>
   </li>
@@ -56,7 +53,6 @@
   <li class="nav-section">
     <div class="nav-section-header empty"><a href="<?cs var:toroot?>google/play-services/wallet.html">
           <span class="en">Wallet</span>
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
       </a></div>
   </li>
   <li class="nav-section">

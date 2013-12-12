@@ -2861,11 +2861,6 @@ public class MediaPlayer implements SubtitleController.Listener
             }
 
             if (DEBUG) Log.v(TAG, "scheduleNotification " + type + " in " + delayUs);
-<<<<<<< HEAD
-            mStopped = type == NOTIFY_STOP;
-            mSeeking = type == NOTIFY_SEEK;
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             mEventHandler.removeMessages(NOTIFY);
             Message msg = mEventHandler.obtainMessage(NOTIFY, type, 0);
             mEventHandler.sendMessageDelayed(msg, (int) (delayUs / 1000));
@@ -2892,18 +2887,12 @@ public class MediaPlayer implements SubtitleController.Listener
             synchronized(this) {
                 if (DEBUG) Log.d(TAG, "onPaused: " + paused);
                 if (mStopped) { // handle as seek if we were stopped
-<<<<<<< HEAD
-                    scheduleNotification(NOTIFY_SEEK, 0 /* delay */);
-                } else {
-                    mPausing = paused;  // special handling if player disappeared
-=======
                     mStopped = false;
                     mSeeking = true;
                     scheduleNotification(NOTIFY_SEEK, 0 /* delay */);
                 } else {
                     mPausing = paused;  // special handling if player disappeared
                     mSeeking = false;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                     scheduleNotification(REFRESH_AND_NOTIFY_TIME, 0 /* delay */);
                 }
             }
@@ -2914,11 +2903,8 @@ public class MediaPlayer implements SubtitleController.Listener
             synchronized(this) {
                 if (DEBUG) Log.d(TAG, "onStopped");
                 mPaused = true;
-<<<<<<< HEAD
-=======
                 mStopped = true;
                 mSeeking = false;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 scheduleNotification(NOTIFY_STOP, 0 /* delay */);
             }
         }
@@ -2927,11 +2913,8 @@ public class MediaPlayer implements SubtitleController.Listener
         @Override
         public void onSeekComplete(MediaPlayer mp) {
             synchronized(this) {
-<<<<<<< HEAD
-=======
                 mStopped = false;
                 mSeeking = true;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 scheduleNotification(NOTIFY_SEEK, 0 /* delay */);
             }
         }
@@ -2940,11 +2923,8 @@ public class MediaPlayer implements SubtitleController.Listener
         public void onNewPlayer() {
             if (mRefresh) {
                 synchronized(this) {
-<<<<<<< HEAD
-=======
                     mStopped = false;
                     mSeeking = true;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                     scheduleNotification(NOTIFY_SEEK, 0 /* delay */);
                 }
             }
@@ -3170,11 +3150,8 @@ public class MediaPlayer implements SubtitleController.Listener
                         if (mTimeAdjustment > 1000000) {
                             // schedule seeked event if time jumped significantly
                             // TODO: do this properly by introducing an exception
-<<<<<<< HEAD
-=======
                             mStopped = false;
                             mSeeking = true;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                             scheduleNotification(NOTIFY_SEEK, 0 /* delay */);
                         }
                     } else {

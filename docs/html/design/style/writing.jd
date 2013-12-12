@@ -2,43 +2,6 @@ page.title=Writing Style
 page.tags="dialog","toast","notification"
 @jd:body
 
-<<<<<<< HEAD
-<p>When choosing words for your app:</p>
-<ol>
-<li>
-<p><strong>Keep it brief.</strong> Be concise, simple and precise. Start with a 30 character limit (including
-   spaces), and don't use more unless absolutely necessary.</p>
-</li>
-<li>
-<p><strong>Keep it simple.</strong> Pretend you're speaking to someone who's smart and competent, but doesn't
-   know technical jargon and may not speak English very well. Use short words, active verbs, and
-   common nouns.</p>
-</li>
-<li>
-<p><strong>Be friendly.</strong> Use contractions. Talk directly to the reader using second person ("you"). If
-   your text doesn't read the way you'd say it in casual conversation, it's probably not the way
-   you should write it. Don't be abrupt or annoying and make the user feel safe, happy and
-   energized.</p>
-</li>
-<li>
-<p><strong>Put the most important thing first.</strong> The first two words (around 11 characters, including
-   spaces) should include at least a taste of the most important information in the string. If they
-   don't, start over.</p>
-</li>
-<li>
-<p><strong>Describe only what's necessary, and no more.</strong> Don't try to explain subtle differences. They
-   will be lost on most users.</p>
-</li>
-<li>
-<p><strong>Avoid repetition.</strong> If a significant term gets repeated within a screen or block of text, find
-   a way to use it just once.</p>
-</li>
-</ol>
-
-<h2 id="examples">Examples</h2>
-
-<ol><li class="value-1"><strong>Keep it brief.</strong> From the setup wizard:</ol>
-=======
 <h2 id="voa">Android's Voice</h2>
 
 <p>When writing text that appears in your app, keep it concise, simple, and friendly.</p>
@@ -52,16 +15,11 @@ page.tags="dialog","toast","notification"
 </ul>
 
 <p><em>Avoid wordy, stilted text</em></p>
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
 <div class="layout-content-row">
   <div class="layout-content-col span-6 layout-with-list-item-margins">
 
-<<<<<<< HEAD
-    <div class="do-dont-label bad">Too formal</div>
-=======
     <div class="do-dont-label bad">Don't</div>
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
     <table class="ui-table good"><tbody><tr><td>
     Consult the documentation that came with your phone for further instructions.
@@ -70,11 +28,7 @@ page.tags="dialog","toast","notification"
   </div>
   <div class="layout-content-col span-6">
 
-<<<<<<< HEAD
-    <div class="do-dont-label good">Better</div>
-=======
     <div class="do-dont-label good">Do</div>
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
     <table class="ui-table good"><tbody><tr><td>
     Read the instructions that came with your phone.
@@ -83,45 +37,27 @@ page.tags="dialog","toast","notification"
   </div>
 </div>
 
-<<<<<<< HEAD
-<div class="vspace size-1">&nbsp;</div>
-
-<ol><li class="value-2"><strong>Keep it simple.</strong> From the Location settings screen:</ol>
-=======
 <p><em>Don't provide unnecessary information</em></p>
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
 <div class="layout-content-row">
   <div class="layout-content-col span-6 layout-with-list-item-margins">
 
-<<<<<<< HEAD
-    <div class="do-dont-label bad">Confusing</div>
-=======
     <div class="do-dont-label bad">From a Setup Wizard screen</div>
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
     <table class="ui-table bad">
     <thead>
       <tr>
         <th>
-<<<<<<< HEAD
-        Use GPS satellites
-=======
         Signing in...
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         </th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <td>
-<<<<<<< HEAD
-        When locating, accurate to street level.
-=======
         Your phone needs to communicate with<br>
         Google servers to sign in to your account.<br>
         This may take up to five minutes.
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         </td>
       </tr>
     </tbody>
@@ -130,33 +66,21 @@ page.tags="dialog","toast","notification"
   </div>
   <div class="layout-content-col span-6">
 
-<<<<<<< HEAD
-    <div class="do-dont-label good">Better</div>
-=======
     <div class="do-dont-label good">From a Setup Wizard screen</div>
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
     <table class="ui-table good">
     <thead>
       <tr>
         <th>
-<<<<<<< HEAD
-        GPS
-=======
         Signing in...
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         </th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <td>
-<<<<<<< HEAD
-        Let apps use satellites to pinpoint your location.
-=======
         Your phone is contacting Google.<br>
         This can take up to 5 minutes.
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         </td>
       </tr>
     </tbody>
@@ -165,12 +89,6 @@ page.tags="dialog","toast","notification"
   </div>
 </div>
 
-<<<<<<< HEAD
-<div class="vspace size-1">&nbsp;</div>
-
-<ol><li class="value-3"><strong>Be friendly.</strong> Dialog that appears when an application
-crashes:</ol>
-=======
 <h4 id="simple">Simple</h4>
 
 <ul>
@@ -181,139 +99,51 @@ crashes:</ol>
 </ul>
 
 <p><em>Focus on the user's concern, not technical details</em></p>
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
 <div class="layout-content-row">
   <div class="layout-content-col span-6 layout-with-list-item-margins">
 
-<<<<<<< HEAD
-    <div class="do-dont-label bad">Confusing and annoying&mdash;"Sorry" just rubs salt in the
-    wound.</div>
-
-    <table class="ui-table bad">
-    <thead>
-      <tr>
-        <th colspan="3">
-        Sorry!
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td colspan="3">
-        Activity MyAppActivity (in application MyApp)
-        is not responding.
-        </td>
-      </tr>
-    </tbody>
-    <tfoot>
-      <tr>
-        <td width="33%">Force close</td>
-        <td width="33%">Wait</td>
-        <td width="33%">Report</td>
-      </tr>
-    </tbody>
-    </table>
-=======
     <div class="do-dont-label bad">Don't</div>
 
     <table class="ui-table good"><tbody><tr><td>
     Manually control GPS to prevent other apps from using it
     </td></tr></tbody></table>
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
   </div>
   <div class="layout-content-col span-6">
 
-<<<<<<< HEAD
-    <div class="do-dont-label good">Shorter, more direct, no faux-apologetic title:<br><br></div>
-
-    <table class="ui-table good">
-    <thead>
-      <tr>
-        <th colspan="3">
-        MyApp isn't responding.
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td colspan="3">
-        Do you want to close it?
-        </td>
-      </tr>
-    </tbody>
-    <tfoot>
-      <tr>
-        <td width="33%">Wait</td>
-        <td width="33%">Report</td>
-        <td width="33%">Close</td>
-      </tr>
-    </tbody>
-    </table>
-=======
     <div class="do-dont-label good">Do</div>
 
     <table class="ui-table good"><tbody><tr><td>
     To save power, switch Location mode to Battery saving
     </td></tr></tbody></table>
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
   </div>
 </div>
 
-<<<<<<< HEAD
-<div class="vspace size-1">&nbsp;</div>
-
-<ol><li class="value-4"><strong>Put the most important thing first.</strong></ol>
-=======
 <p><em>Put top news first</em></p>
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
 <div class="layout-content-row">
   <div class="layout-content-col span-6 layout-with-list-item-margins">
 
-<<<<<<< HEAD
-    <div class="do-dont-label bad">Top news last</div>
-
-    <table class="ui-table bad"><tbody><tr><td>
-    77 other people +1'd this, including Larry Page.
-=======
     <div class="do-dont-label bad">Don't</div>
 
     <table class="ui-table good"><tbody><tr><td>
     77 other people +1’d this, including Larry Page
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     </td></tr></tbody></table>
 
   </div>
   <div class="layout-content-col span-6">
 
-<<<<<<< HEAD
-    <div class="do-dont-label good">Top news first</div>
-
-    <table class="ui-table good"><tbody><tr><td>
-    Larry Page and 77 others +1'd this.
-=======
     <div class="do-dont-label good">Do</div>
 
     <table class="ui-table good"><tbody><tr><td>
     Larry Page and 76 others +1’d this
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     </td></tr></tbody></table>
 
   </div>
 </div>
 
-<<<<<<< HEAD
-<div class="layout-content-row">
-  <div class="layout-content-col span-6 layout-with-list-item-margins">
-
-    <div class="do-dont-label bad">Task last</div>
-
-    <table class="ui-table bad"><tbody><tr><td>
-    Touch Next to complete setup using a Wi-Fi connection.
-=======
 <p><em>Put the user's goal first</em></p>
 
 <div class="layout-content-row">
@@ -323,39 +153,20 @@ crashes:</ol>
 
     <table class="ui-table good"><tbody><tr><td>
     Touch Next to complete setup using a Wi-Fi connection
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     </td></tr></tbody></table>
 
   </div>
   <div class="layout-content-col span-6">
 
-<<<<<<< HEAD
-    <div class="do-dont-label good">Task first</div>
-
-    <table class="ui-table good"><tbody><tr><td>
-    To finish setup using Wi-Fi, touch Next.
-=======
     <div class="do-dont-label good">Do</div>
 
     <table class="ui-table good"><tbody><tr><td>
     To finish setup using Wi-Fi, touch Next
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     </td></tr></tbody></table>
 
   </div>
 </div>
 
-<<<<<<< HEAD
-<div class="vspace size-1">&nbsp;</div>
-
-<ol><li class="value-5"><strong>Describe only what's necessary, and no more.</strong></ol>
-
-<div class="layout-content-row">
-  <div class="layout-content-col span-6 layout-with-list-item-margins">
-
-    <div class="do-dont-label bad">From a Setup Wizard screen</div>
-
-=======
 
 <h4 id="friendly">Friendly</h4>
 
@@ -370,30 +181,19 @@ crashes:</ol>
 <div class="layout-content-row">
   <div class="layout-content-col span-6 layout-with-list-item-margins">
     <div class="do-dont-label bad">Don't</div>
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     <table class="ui-table bad">
     <thead>
       <tr>
         <th>
-<<<<<<< HEAD
-        Signing in...
-=======
         Sorry!
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         </th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <td>
-<<<<<<< HEAD
-        Your phone needs to communicate with<br>
-        Google servers to sign in to your account.<br>
-        This may take up to five minutes.
-=======
         Activity MyAppActivity (in application<br />
         MyApp) is not responding
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         </td>
       </tr>
     </tbody>
@@ -401,43 +201,23 @@ crashes:</ol>
 
   </div>
   <div class="layout-content-col span-6">
-<<<<<<< HEAD
-
-    <div class="do-dont-label good">From a Setup Wizard screen</div>
-
-=======
     <div class="do-dont-label good">Do</div>
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     <table class="ui-table good">
     <thead>
       <tr>
         <th>
-<<<<<<< HEAD
-        Signing in...
-=======
         MyApp isn’t responding 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         </th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <td>
-<<<<<<< HEAD
-        Your phone is contacting Google.<br>
-        This can take up to 5 minutes.
-=======
         Do you want to close it?
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         </td>
       </tr>
     </tbody>
     </table>
-<<<<<<< HEAD
-
-  </div>
-</div>
-=======
   </div>
 </div>
 
@@ -540,4 +320,3 @@ will not, you will</td>
     </ul>
   </li>
 </ul>
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1

@@ -1957,8 +1957,6 @@ public class PhoneNumberUtils
     }
 
     /**
-<<<<<<< HEAD
-=======
      * Process phone number for CDMA, converting plus code using the home network number format.
      * This is used for outgoing SMS messages.
      *
@@ -1980,7 +1978,6 @@ public class PhoneNumberUtils
     }
 
     /**
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
      * This function should be called from checkAndProcessPlusCode only
      * And it is used for test purpose also.
      *

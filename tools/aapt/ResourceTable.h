@@ -13,12 +13,7 @@
 #include <set>
 #include <map>
 
-<<<<<<< HEAD
-using std::map;
-using std::set;
-=======
 using namespace std;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
 class XMLNode;
 class ResourceTable;

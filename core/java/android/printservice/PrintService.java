@@ -209,8 +209,6 @@ public abstract class PrintService extends Service {
      * PrintJob#getAdvancedStringOption(String) PrintJob.getAdvancedStringOption(String)}
      * and {@link PrintJob#getAdvancedIntOption(String) PrintJob.getAdvancedIntOption(String)}.
      * </p>
-<<<<<<< HEAD
-=======
      * <p>
      * If the advanced print options activity offers changes to the standard print
      * options, you can get the current {@link android.print.PrinterInfo} using the
@@ -219,7 +217,6 @@ public abstract class PrintService extends Service {
      * if the current printer does not support a give media size, you should not
      * offer it in the advanced print options dialog.
      * </p>
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
      */
     public static final String EXTRA_PRINT_JOB_INFO = "android.intent.extra.print.PRINT_JOB_INFO";
 

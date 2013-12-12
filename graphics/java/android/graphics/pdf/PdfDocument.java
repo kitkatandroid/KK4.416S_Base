@@ -18,10 +18,7 @@ package android.graphics.pdf;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-<<<<<<< HEAD
-=======
 import android.graphics.Paint;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import android.graphics.Rect;
 
 import dalvik.system.CloseGuard;
@@ -73,15 +70,12 @@ import java.util.List;
  */
 public class PdfDocument {
 
-<<<<<<< HEAD
-=======
     // TODO: We need a constructor that will take an OutputStream to
     // support online data serialization as opposed to the current
     // on demand one. The current approach is fine until Skia starts
     // to support online PDF generation at which point we need to
     // handle this.
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     private final byte[] mChunk = new byte[4096];
 
     private final CloseGuard mCloseGuard = CloseGuard.get();
@@ -124,11 +118,7 @@ public class PdfDocument {
         if (pageInfo == null) {
             throw new IllegalArgumentException("page cannot be null");
         }
-<<<<<<< HEAD
-        Canvas canvas = new PdfCanvas(nativeCreatePage(pageInfo.mPageWidth,
-=======
         Canvas canvas = new PdfCanvas(nativeStartPage(mNativeDocument, pageInfo.mPageWidth,
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 pageInfo.mPageHeight, pageInfo.mContentRect.left, pageInfo.mContentRect.top,
                 pageInfo.mContentRect.right, pageInfo.mContentRect.bottom));
         mCurrentPage = new Page(canvas, pageInfo);
@@ -159,11 +149,7 @@ public class PdfDocument {
         }
         mPages.add(page.getInfo());
         mCurrentPage = null;
-<<<<<<< HEAD
-        nativeAppendPage(mNativeDocument, page.mCanvas.mNativeCanvas);
-=======
         nativeFinishPage(mNativeDocument);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         page.finish();
     }
 
@@ -225,11 +211,7 @@ public class PdfDocument {
 
     private void dispose() {
         if (mNativeDocument != 0) {
-<<<<<<< HEAD
-            nativeFinalize(mNativeDocument);
-=======
             nativeClose(mNativeDocument);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             mCloseGuard.close();
             mNativeDocument = 0;
         }
@@ -255,16 +237,6 @@ public class PdfDocument {
 
     private native int nativeCreateDocument();
 
-<<<<<<< HEAD
-    private native void nativeFinalize(int document);
-
-    private native void nativeAppendPage(int document, int page);
-
-    private native void nativeWriteTo(int document, OutputStream out, byte[] chunk);
-
-    private static native int nativeCreatePage(int pageWidth, int pageHeight, int contentLeft,
-            int contentTop, int contentRight, int contentBottom);
-=======
     private native void nativeClose(int document);
 
     private native void nativeFinishPage(int document);
@@ -273,7 +245,6 @@ public class PdfDocument {
 
     private static native int nativeStartPage(int documentPtr, int pageWidth, int pageHeight,
             int contentLeft, int contentTop, int contentRight, int contentBottom);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
     private final class PdfCanvas extends Canvas {
 
@@ -427,8 +398,6 @@ public class PdfDocument {
         /**
          * Gets the {@link Canvas} of the page.
          *
-<<<<<<< HEAD
-=======
          * <p>
          * <strong>Note: </strong> There are some draw operations that are not yet
          * supported by the canvas returned by this method. More specifically:
@@ -454,7 +423,6 @@ public class PdfDocument {
          *     {@link android.graphics.PorterDuff.Mode#ADD PorterDuff.ADD}</li>
          * </ul>
          *
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
          * @return The canvas if the page is not finished, null otherwise.
          *
          * @see PdfDocument#finishPage(Page)

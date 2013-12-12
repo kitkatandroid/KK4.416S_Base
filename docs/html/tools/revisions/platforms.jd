@@ -50,19 +50,13 @@ components will not be available for download.</p>
 
 
 
-<<<<<<< HEAD
-<h2 id="4.3">Android 4.3</h2>
-=======
 <h2 id="4.4">Android 4.4</h2>
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
 
 <div class="toggle-content opened">
 
   <p><a href="#" onclick="return toggleContent(this)">
     <img src="{@docRoot}assets/images/triangle-opened.png"
-<<<<<<< HEAD
-=======
 class="toggle-content-img" alt="" />Revision 1</a> <em>(October 2013)</em>
   </p>
 
@@ -104,7 +98,6 @@ class="toggle-content-img" alt="" />Revision 1</a> <em>(October 2013)</em>
 
   <p><a href="#" onclick="return toggleContent(this)">
     <img src="{@docRoot}assets/images/triangle-closed.png"
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 class="toggle-content-img" alt="" />Revision 2</a> <em>(August 2013)</em>
   </p>
 
@@ -139,19 +132,11 @@ class="toggle-content-img" alt="" />Revision 1</a> <em>(July 2013)</em>
   </div>
 </div>
 
-<<<<<<< HEAD
-<h3 id="">Google APIs System Image</h3>
-
-<div class="toggle-content opened">
-  <p><a href="#" onclick="return toggleContent(this)">
-    <img src="{@docRoot}assets/images/triangle-opened.png"
-=======
 <h3 id="gsi-4.3">Google APIs System Image</h3>
 
 <div class="toggle-content closed">
   <p><a href="#" onclick="return toggleContent(this)">
     <img src="{@docRoot}assets/images/triangle-closed.png"
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 class="toggle-content-img" alt="" />Revision 3</a> <em>(September 2013)</em>
   </p>
 

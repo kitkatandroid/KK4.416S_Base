@@ -323,13 +323,10 @@ public class ScaleGestureDetector {
                 mInProgress = false;
                 mInitialSpan = 0;
                 mDoubleTapMode = DOUBLE_TAP_MODE_NONE;
-<<<<<<< HEAD
-=======
             } else if (mDoubleTapMode == DOUBLE_TAP_MODE_IN_PROGRESS && streamComplete) {
                 mInProgress = false;
                 mInitialSpan = 0;
                 mDoubleTapMode = DOUBLE_TAP_MODE_NONE;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             }
 
             if (streamComplete) {

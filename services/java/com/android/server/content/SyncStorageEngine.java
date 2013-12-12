@@ -1295,22 +1295,6 @@ public class SyncStorageEngine extends Handler {
     }
 
     /**
-<<<<<<< HEAD
-     * Return a list of the currently active syncs. Note that the returned items are the
-     * real, live active sync objects, so be careful what you do with it.
-     */
-    public List<SyncInfo> getCurrentSyncs(int userId) {
-        synchronized (mAuthorities) {
-            ArrayList<SyncInfo> syncs = mCurrentSyncs.get(userId);
-            if (syncs == null) {
-                syncs = new ArrayList<SyncInfo>();
-                mCurrentSyncs.put(userId, syncs);
-            }
-            return syncs;
-        }
-    }
-
-=======
      * Return a list of the currently active syncs. Note that the returned
      * items are the real, live active sync objects, so be careful what you do
      * with it.
@@ -1345,7 +1329,6 @@ public class SyncStorageEngine extends Handler {
         return syncs;
     }
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     /**
      * Return an array of the current sync status for all authorities.  Note
      * that the objects inside the array are the real, live status objects,

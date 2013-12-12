@@ -56,11 +56,7 @@ bitmap is stored in native memory. It is separate from the bitmap itself,
 which is stored in the Dalvik heap. The pixel data in native memory is
 not released in a predictable manner, potentially causing an application
 to briefly exceed its memory limits and crash.
-<<<<<<< HEAD
-<strong>As of Android 3.0 (API Level 11), the pixel data is stored on the
-=======
 <strong>As of Android 3.0 (API level 11), the pixel data is stored on the
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 Dalvik heap along with the associated bitmap.</strong></li>
 
 </ul>
@@ -144,38 +140,16 @@ private synchronized boolean hasValidBitmap() {
 
 <h2 id="inBitmap">Manage Memory on Android 3.0 and Higher</h2>
 
-<<<<<<< HEAD
-<p>Android 3.0 (API Level 11) introduces the
-=======
 <p>Android 3.0 (API level 11) introduces the
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 {@link android.graphics.BitmapFactory.Options#inBitmap BitmapFactory.Options.inBitmap}
 field. If this option is set, decode methods that take the 
 {@link android.graphics.BitmapFactory.Options Options} object
 will attempt to reuse an existing bitmap when loading content. This means
 that the bitmap's memory is reused, resulting in improved performance, and
-<<<<<<< HEAD
-removing both memory allocation and de-allocation. There are some caveats in using
-{@link android.graphics.BitmapFactory.Options#inBitmap}:</p>
-<ul>
-  <li>The reused bitmap must be of the same size as the source content (to make
-sure that the same amount of memory is used), and in JPEG or PNG format
-(whether as a resource or as a stream).</li>
-
-
-<li>The {@link android.graphics.Bitmap.Config configuration} of the reused bitmap
-overrides the setting of
-{@link android.graphics.BitmapFactory.Options#inPreferredConfig}, if set. </li>
-
-  <li>You should always use the returned bitmap of the decode method,
-because you can't assume that reusing the bitmap worked (for example, if there is
-a size mismatch).</li>
-=======
 removing both memory allocation and de-allocation. However, there are certain restrictions with how
 {@link android.graphics.BitmapFactory.Options#inBitmap} can be used. In particular, before Android
 4.4 (API level 19), only equal sized bitmaps are supported. For details, please see the
 {@link android.graphics.BitmapFactory.Options#inBitmap} documentation.
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
 <h3>Save a bitmap for later use</h3>
 
@@ -298,16 +272,6 @@ protected Bitmap getBitmapFromReusableSet(BitmapFactory.Options options) {
 satisfies the size criteria to be used for
 {@link android.graphics.BitmapFactory.Options#inBitmap}:</p>
 
-<<<<<<< HEAD
-<pre>private static boolean canUseForInBitmap(
-        Bitmap candidate, BitmapFactory.Options targetOptions) {
-    int width = targetOptions.outWidth / targetOptions.inSampleSize;
-    int height = targetOptions.outHeight / targetOptions.inSampleSize;
-
-    // Returns true if "candidate" can be used for inBitmap re-use with
-    // "targetOptions".
-    return candidate.getWidth() == width && candidate.getHeight() == height;
-=======
 <pre>static boolean canUseForInBitmap(
         Bitmap candidate, BitmapFactory.Options targetOptions) {
 
@@ -341,7 +305,6 @@ static int getBytesPerPixel(Config config) {
         return 1;
     }
     return 1;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 }</pre>
 
 </body>

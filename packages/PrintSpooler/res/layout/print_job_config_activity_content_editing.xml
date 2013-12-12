@@ -18,12 +18,7 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-<<<<<<< HEAD
-    android:scrollbars="vertical"
-    android:background="@color/editable_background">
-=======
     android:scrollbars="vertical">
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -46,10 +41,7 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-<<<<<<< HEAD
-=======
             android:layout_marginBottom="24dip"
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             android:orientation="horizontal"
             android:baselineAligned="false">
 
@@ -211,29 +203,6 @@
 
         </LinearLayout>
 
-<<<<<<< HEAD
-        <!-- Print button -->
-
-        <ImageView
-            android:layout_width="fill_parent"
-            android:layout_height="1dip"
-            android:layout_marginTop="24dip"
-            android:layout_gravity="fill_horizontal"
-            android:background="@color/separator"
-            android:contentDescription="@null">
-        </ImageView>
-
-        <Button
-            android:id="@+id/print_button"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="fill_horizontal"
-            android:text="@string/print_button"
-            android:textSize="16sp"
-            android:textColor="@color/item_text_color">
-        </Button>
-=======
         <!-- Advanced settings button -->
 
         <LinearLayout
@@ -307,7 +276,6 @@
             </Button>
 
         </FrameLayout>
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
     </LinearLayout>
 

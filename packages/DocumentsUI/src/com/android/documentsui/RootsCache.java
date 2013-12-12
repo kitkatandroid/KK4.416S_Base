@@ -60,13 +60,8 @@ import java.util.concurrent.TimeUnit;
 public class RootsCache {
     private static final boolean LOGD = true;
 
-<<<<<<< HEAD
-    // TODO: cache roots in local provider to avoid spinning up backends
-    // TODO: root updates should trigger UI refresh
-=======
     public static final Uri sNotificationUri = Uri.parse(
             "content://com.android.documentsui.roots/");
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
     private final Context mContext;
     private final ContentObserver mObserver;
@@ -206,10 +201,7 @@ public class RootsCache {
                 mStoppedAuthorities = mTaskStoppedAuthorities;
             }
             mFirstLoad.countDown();
-<<<<<<< HEAD
-=======
             resolver.notifyChange(sNotificationUri, null, false);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             return null;
         }
 

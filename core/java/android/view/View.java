@@ -18,10 +18,6 @@ package android.view;
 
 import android.content.ClipData;
 import android.content.Context;
-<<<<<<< HEAD
-import android.content.pm.ApplicationInfo;
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
@@ -3106,8 +3102,6 @@ public class View implements Drawable.Callback, KeyEvent.Callback,
     private static final int UNDEFINED_PADDING = Integer.MIN_VALUE;
 
     /**
-<<<<<<< HEAD
-=======
      * Cache if a left padding has been defined
      */
     private boolean mLeftPaddingDefined = false;
@@ -3118,7 +3112,6 @@ public class View implements Drawable.Callback, KeyEvent.Callback,
     private boolean mRightPaddingDefined = false;
 
     /**
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
      * @hide
      */
     int mOldWidthMeasureSpec = Integer.MIN_VALUE;
@@ -3546,17 +3539,10 @@ public class View implements Drawable.Callback, KeyEvent.Callback,
         int overScrollMode = mOverScrollMode;
         boolean initializeScrollbars = false;
 
-<<<<<<< HEAD
-        boolean leftPaddingDefined = false;
-        boolean rightPaddingDefined = false;
-        boolean startPaddingDefined = false;
-        boolean endPaddingDefined = false;
-=======
         boolean startPaddingDefined = false;
         boolean endPaddingDefined = false;
         boolean leftPaddingDefined = false;
         boolean rightPaddingDefined = false;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
         final int targetSdkVersion = context.getApplicationInfo().targetSdkVersion;
 
@@ -3888,14 +3874,11 @@ public class View implements Drawable.Callback, KeyEvent.Callback,
             setBackground(background);
         }
 
-<<<<<<< HEAD
-=======
         // setBackground above will record that padding is currently provided by the background.
         // If we have padding specified via xml, record that here instead and use it.
         mLeftPaddingDefined = leftPaddingDefined;
         mRightPaddingDefined = rightPaddingDefined;
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         if (padding >= 0) {
             leftPadding = padding;
             topPadding = padding;
@@ -3913,19 +3896,11 @@ public class View implements Drawable.Callback, KeyEvent.Callback,
             // Padding from the background drawable is stored at this point in mUserPaddingLeftInitial
             // and mUserPaddingRightInitial) so drawable padding will be used as ultimate default if
             // defined.
-<<<<<<< HEAD
-            if (!leftPaddingDefined && startPaddingDefined) {
-                leftPadding = startPadding;
-            }
-            mUserPaddingLeftInitial = (leftPadding >= 0) ? leftPadding : mUserPaddingLeftInitial;
-            if (!rightPaddingDefined && endPaddingDefined) {
-=======
             if (!mLeftPaddingDefined && startPaddingDefined) {
                 leftPadding = startPadding;
             }
             mUserPaddingLeftInitial = (leftPadding >= 0) ? leftPadding : mUserPaddingLeftInitial;
             if (!mRightPaddingDefined && endPaddingDefined) {
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 rightPadding = endPadding;
             }
             mUserPaddingRightInitial = (rightPadding >= 0) ? rightPadding : mUserPaddingRightInitial;
@@ -3937,17 +3912,10 @@ public class View implements Drawable.Callback, KeyEvent.Callback,
             // defined.
             final boolean hasRelativePadding = startPaddingDefined || endPaddingDefined;
 
-<<<<<<< HEAD
-            if (leftPaddingDefined && !hasRelativePadding) {
-                mUserPaddingLeftInitial = leftPadding;
-            }
-            if (rightPaddingDefined && !hasRelativePadding) {
-=======
             if (mLeftPaddingDefined && !hasRelativePadding) {
                 mUserPaddingLeftInitial = leftPadding;
             }
             if (mRightPaddingDefined && !hasRelativePadding) {
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 mUserPaddingRightInitial = rightPadding;
             }
         }
@@ -5946,11 +5914,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback,
                 sThreadLocal.set(localInsets);
             }
             boolean res = computeFitSystemWindows(insets, localInsets);
-<<<<<<< HEAD
-=======
             mUserPaddingLeftInitial = localInsets.left;
             mUserPaddingRightInitial = localInsets.right;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             internalSetPadding(localInsets.left, localInsets.top,
                     localInsets.right, localInsets.bottom);
             return res;
@@ -12184,14 +12149,6 @@ public class View implements Drawable.Callback, KeyEvent.Callback,
         if (!isTextAlignmentResolved()) {
             resolveTextAlignment();
         }
-<<<<<<< HEAD
-        if (!isPaddingResolved()) {
-            resolvePadding();
-        }
-        if (!isDrawablesResolved()) {
-            resolveDrawables();
-        }
-=======
         // Should resolve Drawables before Padding because we need the layout direction of the
         // Drawable to correctly resolve Padding.
         if (!isDrawablesResolved()) {
@@ -12200,7 +12157,6 @@ public class View implements Drawable.Callback, KeyEvent.Callback,
         if (!isPaddingResolved()) {
             resolvePadding();
         }
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         onRtlPropertiesChanged(getLayoutDirection());
         return true;
     }
@@ -12403,8 +12359,6 @@ public class View implements Drawable.Callback, KeyEvent.Callback,
             // If start / end padding are defined, they will be resolved (hence overriding) to
             // left / right or right / left depending on the resolved layout direction.
             // If start / end padding are not defined, use the left / right ones.
-<<<<<<< HEAD
-=======
             if (mBackground != null && (!mLeftPaddingDefined || !mRightPaddingDefined)) {
                 Rect padding = sThreadLocal.get();
                 if (padding == null) {
@@ -12419,7 +12373,6 @@ public class View implements Drawable.Callback, KeyEvent.Callback,
                     mUserPaddingRightInitial = padding.right;
                 }
             }
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             switch (resolvedLayoutDirection) {
                 case LAYOUT_DIRECTION_RTL:
                     if (mUserPaddingStart != UNDEFINED_PADDING) {
@@ -15415,11 +15368,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback,
                         mUserPaddingRightInitial = padding.right;
                         internalSetPadding(padding.left, padding.top, padding.right, padding.bottom);
                 }
-<<<<<<< HEAD
-=======
                 mLeftPaddingDefined = false;
                 mRightPaddingDefined = false;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             }
 
             // Compare the minimum sizes of the old Drawable and the new.  If there isn't an old or
@@ -15516,12 +15466,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback,
         mUserPaddingLeftInitial = left;
         mUserPaddingRightInitial = right;
 
-<<<<<<< HEAD
-=======
         mLeftPaddingDefined = true;
         mRightPaddingDefined = true;
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         internalSetPadding(left, top, right, bottom);
     }
 
@@ -15607,11 +15554,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback,
 
         mUserPaddingStart = start;
         mUserPaddingEnd = end;
-<<<<<<< HEAD
-=======
         mLeftPaddingDefined = true;
         mRightPaddingDefined = true;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
         switch(getLayoutDirection()) {
             case LAYOUT_DIRECTION_RTL:

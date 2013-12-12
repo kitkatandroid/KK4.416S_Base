@@ -146,13 +146,9 @@ public final class UiAutomationConnection extends IUiAutomationConnection.Stub {
     @Override
     public void shutdown() {
         synchronized (mLock) {
-<<<<<<< HEAD
-            throwIfCalledByNotTrustedUidLocked();
-=======
             if (isConnectedLocked()) {
                 throwIfCalledByNotTrustedUidLocked();
             }
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             throwIfShutdownLocked();
             mIsShutdown = true;
             if (isConnectedLocked()) {

@@ -15,10 +15,6 @@
  */
 package com.android.internal.policy;
 
-<<<<<<< HEAD
-import android.content.Intent;
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import android.view.MotionEvent;
 
 import com.android.internal.policy.IKeyguardShowCallback;
@@ -45,10 +41,6 @@ interface IKeyguardService {
     oneway void doKeyguardTimeout(in Bundle options);
     oneway void setCurrentUser(int userId);
     oneway void showAssistant();
-<<<<<<< HEAD
-    oneway void showCustomIntent(inout Intent intent);
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     oneway void dispatch(in MotionEvent event);
     oneway void launchCamera();
     oneway void onBootCompleted();

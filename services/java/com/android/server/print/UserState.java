@@ -231,17 +231,10 @@ final class UserState implements PrintSpoolerCallbacks, PrintServiceCallbacks {
         for (int i = 0; i < cachedPrintJobCount; i++) {
             PrintJobInfo cachedPrintJob = cachedPrintJobs.get(i);
             result.put(cachedPrintJob.getId(), cachedPrintJob);
-<<<<<<< HEAD
-            // Strip out the tag - it is visible only to print services.
-            // Also the cached print jobs are delivered only to apps, so
-            // stripping the tag of a cached print job is fine.
-            cachedPrintJob.setTag(null);
-=======
             // Strip out the tag and the advanced print options.
             // They are visible only to print services.
             cachedPrintJob.setTag(null);
             cachedPrintJob.setAdvancedOptions(null);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
 
         // Add everything else the spooler knows about.
@@ -252,15 +245,10 @@ final class UserState implements PrintSpoolerCallbacks, PrintServiceCallbacks {
             for (int i = 0; i < printJobCount; i++) {
                 PrintJobInfo printJob = printJobs.get(i);
                 result.put(printJob.getId(), printJob);
-<<<<<<< HEAD
-                // Strip out the tag - it is visible only to print services.
-                printJob.setTag(null);
-=======
                 // Strip out the tag and the advanced print options.
                 // They are visible only to print services.
                 printJob.setTag(null);
                 printJob.setAdvancedOptions(null);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             }
         }
 
@@ -269,12 +257,6 @@ final class UserState implements PrintSpoolerCallbacks, PrintServiceCallbacks {
 
     public PrintJobInfo getPrintJobInfo(PrintJobId printJobId, int appId) {
         PrintJobInfo printJob = mPrintJobForAppCache.getPrintJob(printJobId, appId);
-<<<<<<< HEAD
-        if (printJob != null) {
-            return printJob;
-        }
-        return mSpooler.getPrintJobInfo(printJobId, appId);
-=======
         if (printJob == null) {
             printJob = mSpooler.getPrintJobInfo(printJobId, appId);
         }
@@ -285,7 +267,6 @@ final class UserState implements PrintSpoolerCallbacks, PrintServiceCallbacks {
             printJob.setAdvancedOptions(null);
         }
         return printJob;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     public void cancelPrintJob(PrintJobId printJobId, int appId) {

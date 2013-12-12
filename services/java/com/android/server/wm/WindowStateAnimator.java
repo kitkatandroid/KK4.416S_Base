@@ -360,13 +360,10 @@ class WindowStateAnimator {
                     + mWin.mToken + ": first real window done animating");
             mService.mFinishedStarting.add(mWin.mAppToken);
             mService.mH.sendEmptyMessage(H.FINISHED_STARTING);
-<<<<<<< HEAD
-=======
         } else if (mAttrType == LayoutParams.TYPE_STATUS_BAR && mWin.mPolicyVisibility) {
             // Upon completion of a not-visible to visible status bar animation a relayout is
             // required.
             mWin.mDisplayContent.layoutNeeded = true;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
 
         finishExit();
@@ -852,15 +849,9 @@ class WindowStateAnimator {
 
         // Wallpapers are animated based on the "real" window they
         // are currently targeting.
-<<<<<<< HEAD
-        if (mIsWallpaper && mService.mLowerWallpaperTarget == null
-                && mService.mWallpaperTarget != null) {
-            final WindowStateAnimator wallpaperAnimator = mService.mWallpaperTarget.mWinAnimator;
-=======
         final WindowState wallpaperTarget = mService.mWallpaperTarget;
         if (mIsWallpaper && wallpaperTarget != null && mService.mAnimateWallpaperWithTarget) {
             final WindowStateAnimator wallpaperAnimator = wallpaperTarget.mWinAnimator;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             if (wallpaperAnimator.mHasLocalTransformation &&
                     wallpaperAnimator.mAnimation != null &&
                     !wallpaperAnimator.mAnimation.getDetachWallpaper()) {
@@ -869,14 +860,9 @@ class WindowStateAnimator {
                     Slog.v(TAG, "WP target attached xform: " + attachedTransformation);
                 }
             }
-<<<<<<< HEAD
-            final AppWindowAnimator wpAppAnimator = mAnimator.getWallpaperAppAnimator();
-            if (wpAppAnimator != null && wpAppAnimator.hasTransformation
-=======
             final AppWindowAnimator wpAppAnimator = wallpaperTarget.mAppToken == null ?
                     null : wallpaperTarget.mAppToken.mAppAnimator;
                 if (wpAppAnimator != null && wpAppAnimator.hasTransformation
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                     && wpAppAnimator.animation != null
                     && !wpAppAnimator.animation.getDetachWallpaper()) {
                 appTransformation = wpAppAnimator.transformation;
@@ -1247,13 +1233,7 @@ class WindowStateAnimator {
             // introduce a potential glitch if the window
             // becomes unhidden before it has drawn for the
             // new orientation.
-<<<<<<< HEAD
-            if (!w.isDrawnLw()) {
-                displayed = true;
-            } else if (w.mOrientationChanging) {
-=======
             if (w.mOrientationChanging) {
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 w.mOrientationChanging = false;
                 if (DEBUG_ORIENTATION) Slog.v(TAG,
                         "Orientation change skips hidden " + w);

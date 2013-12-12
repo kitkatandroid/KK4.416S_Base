@@ -97,11 +97,7 @@ public class PacProxySelector extends ProxySelector {
                 } catch (Exception e) {
                     port = 8080;
                 }
-<<<<<<< HEAD
-                ret.add(new Proxy(Type.HTTP, new InetSocketAddress(host, port)));
-=======
                 ret.add(new Proxy(Type.HTTP, InetSocketAddress.createUnresolved(host, port)));
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             }
         }
         if (ret.size() == 0) {

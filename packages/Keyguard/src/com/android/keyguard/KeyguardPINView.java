@@ -17,11 +17,6 @@
 package com.android.keyguard;
 
 import android.content.Context;
-<<<<<<< HEAD
-import android.os.UserHandle;
-import android.provider.Settings;
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
@@ -76,31 +71,6 @@ public class KeyguardPINView extends KeyguardAbsKeyInputView
             ok.setOnHoverListener(new LiftToActivateListener(getContext()));
         }
 
-<<<<<<< HEAD
-
-        final int randomDigitMode = Settings.Secure.getIntForUser(
-            mContext.getContentResolver(), Settings.Secure.LOCK_NUMPAD_RANDOM,
-            0, UserHandle.USER_CURRENT);
-
-        if (randomDigitMode > 0) {
-            final View randomButton = findViewById(R.id.key_random);
-            if (randomDigitMode == 1) {
-                buildRandomNumPadKey();
-            }
-            if (randomButton != null) {
-                randomButton.setVisibility(View.VISIBLE);
-                randomButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        doHapticKeyClick();
-                        buildRandomNumPadKey();
-                    }
-                });
-            }
-        }
-
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         // The delete button is of the PIN keyboard itself in some (e.g. tablet) layouts,
         // not a separate view
         View pinDelete = findViewById(R.id.delete_button);
@@ -137,25 +107,6 @@ public class KeyguardPINView extends KeyguardAbsKeyInputView
         mPasswordEntry.requestFocus();
     }
 
-<<<<<<< HEAD
-
-    private void buildRandomNumPadKey() {
-        NumPadKey button;
-        for (int i = 0; i < 10; i++) {
-            button = (NumPadKey) findViewById(
-                mContext.getResources()
-                    .getIdentifier("com.android.keyguard:id/key" + i, null, null));
-            if (button != null) {
-                if (i == 0) {
-                    button.initNumKeyPad();
-                }
-                button.createNumKeyPad(true);
-            }
-        }
-    }
-
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     @Override
     public void showUsabilityHint() {
     }

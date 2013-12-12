@@ -2135,20 +2135,11 @@ void KeyboardInputMapper::processKey(nsecs_t when, bool down, int32_t keyCode,
         }
     }
 
-<<<<<<< HEAD
-    bool metaStateChanged = false;
-    int32_t oldMetaState = mMetaState;
-    int32_t newMetaState = updateMetaState(keyCode, down, oldMetaState);
-    if (oldMetaState != newMetaState) {
-        mMetaState = newMetaState;
-        metaStateChanged = true;
-=======
     int32_t oldMetaState = mMetaState;
     int32_t newMetaState = updateMetaState(keyCode, down, oldMetaState);
     bool metaStateChanged = oldMetaState != newMetaState;
     if (metaStateChanged) {
         mMetaState = newMetaState;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         updateLedState(false);
     }
 
@@ -2940,10 +2931,6 @@ void TouchInputMapper::configureSurface(nsecs_t when, bool* outResetNeeded) {
     int32_t rawHeight = mRawPointerAxes.y.maxValue - mRawPointerAxes.y.minValue + 1;
 
     // Get associated display dimensions.
-<<<<<<< HEAD
-    bool viewportChanged = false;
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     DisplayViewport newViewport;
     if (mParameters.hasAssociatedDisplay) {
         if (!mConfig.getDisplayInfo(mParameters.associatedDisplayIsExternal, &newViewport)) {
@@ -2957,15 +2944,9 @@ void TouchInputMapper::configureSurface(nsecs_t when, bool* outResetNeeded) {
     } else {
         newViewport.setNonDisplayViewport(rawWidth, rawHeight);
     }
-<<<<<<< HEAD
-    if (mViewport != newViewport) {
-        mViewport = newViewport;
-        viewportChanged = true;
-=======
     bool viewportChanged = mViewport != newViewport;
     if (viewportChanged) {
         mViewport = newViewport;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
         if (mDeviceMode == DEVICE_MODE_DIRECT || mDeviceMode == DEVICE_MODE_POINTER) {
             // Convert rotated viewport to natural surface coordinates.
@@ -3034,14 +3015,8 @@ void TouchInputMapper::configureSurface(nsecs_t when, bool* outResetNeeded) {
     }
 
     // If moving between pointer modes, need to reset some state.
-<<<<<<< HEAD
-    bool deviceModeChanged;
-    if (mDeviceMode != oldDeviceMode) {
-        deviceModeChanged = true;
-=======
     bool deviceModeChanged = mDeviceMode != oldDeviceMode;
     if (deviceModeChanged) {
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         mOrientedRanges.clear();
     }
 

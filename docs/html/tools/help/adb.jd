@@ -20,10 +20,7 @@ page.tags="adb"
       <li><a href="#am">Using activity manager (am)</a></li>
       <li><a href="#pm">Using package manager (pm)</a></li>
       <li><a href="#sqlite">Examining sqlite3 databases from a remote shell</a></li>
-<<<<<<< HEAD
-=======
       <li><a href="#screenrecord">Recording a device screen</a></li>
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
       <li><a href="#monkey">UI/Application Exerciser Monkey</a></li>
       <li><a href="#othershellcommands">Other shell commands</a></li>
     </ol>
@@ -1110,15 +1107,11 @@ manage SQLite databases created by Android applications. The
 <code>.schema</code> to print the SQL CREATE statement for an existing table.
 The tool also gives you the ability to execute SQLite commands on the fly.</p>
 
-<<<<<<< HEAD
-<p>To use <code>sqlite3</code>, enter a remote shell on the emulator instance, as described above, then invoke the tool using the <code>sqlite3</code> command. Optionally, when invoking <code>sqlite3</code> you can specify the full path to the database you want to explore. Emulator/device instances store SQLite3 databases in the folder <code><span chatdir="1"><span chatindex="259474B4B070F261">/data/data/<em>&lt;package_name&gt;</em>/databases</span></span>/</code>. </p>
-=======
 <p>To use <code>sqlite3</code>, enter a remote shell on the emulator instance, as described above,
 then invoke the tool using the <code>sqlite3</code> command. Optionally, when invoking
 <code>sqlite3</code> you can specify the full path to the database you want to explore.
 Emulator/device instances store SQLite3 databases in the folder
 <code><span chatdir="1"><span chatindex="259474B4B070F261">/data/data/<em>&lt;package_name&gt;</em>/databases</span></span>/</code>. </p>
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
 <p>Here's an example: </p>
 
@@ -1129,18 +1122,12 @@ Enter &quot;.help&quot; for instructions
 <em>.... enter commands, then quit...</em>
 sqlite&gt; .exit </pre>
 
-<<<<<<< HEAD
-<p>Once you've invoked <code>sqlite3</code>, you can issue <code>sqlite3</code> commands in the shell. To exit and return to the adb remote shell, use <code>exit</code> or <code>CTRL+D</code>.
-=======
 <p>Once you've invoked <code>sqlite3</code>, you can issue <code>sqlite3</code> commands in the
 shell. To exit and return to the adb remote shell, use <code>exit</code> or <code>CTRL+D</code>.
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
 
 
 
-<<<<<<< HEAD
-=======
 <h3 id="screenrecord">Recording a device screen</h3>
 
 <p>The {@code screenrecord} command is a shell utility for recording the display of a device as you
@@ -1236,7 +1223,6 @@ $ adb pull /sdcard/demo.mp4
 </table>
 
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
 
 <h3 id="monkey">UI/Application Exerciser Monkey</h3>
@@ -1266,15 +1252,9 @@ application and sends 500 pseudo-random events to it.</p>
 
 <p>Help is available for most of the commands. </p>
 
-<<<<<<< HEAD
-<p>Table 4 lists some of the more common adb shell commands.</p>
-
-<p class="table-caption"><strong>Table 4.</strong> Some other adb shell commands</p>
-=======
 <p>Table 5 lists some of the more common adb shell commands.</p>
 
 <p class="table-caption"><strong>Table 5.</strong> Some other adb shell commands</p>
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 <table>
 <tr>
   <th>Shell Command</th>

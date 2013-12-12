@@ -17,27 +17,10 @@
 package com.android.systemui.statusbar.phone;
 
 import android.content.Context;
-<<<<<<< HEAD
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.StateListDrawable;
-import android.os.UserHandle;
-import android.provider.Settings;
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-<<<<<<< HEAD
-import android.widget.FrameLayout;
-
-import com.android.systemui.R;
-
-/**
- *
- */
-public class QuickSettingsTileView extends FrameLayout {
-=======
 import android.view.ViewParent;
 import android.widget.FrameLayout;
 
@@ -45,51 +28,18 @@ import android.widget.FrameLayout;
  *
  */
 class QuickSettingsTileView extends FrameLayout {
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     private static final String TAG = "QuickSettingsTileView";
 
     private int mContentLayoutId;
     private int mColSpan;
-<<<<<<< HEAD
-    private int mRowSpan;
-=======
     private boolean mPrepared;
     private OnPrepareListener mOnPrepareListener;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
     public QuickSettingsTileView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         mContentLayoutId = -1;
         mColSpan = 1;
-<<<<<<< HEAD
-        mRowSpan = 1;
-
-        int bgColor = Settings.System.getIntForUser(context.getContentResolver(),
-                Settings.System.QUICK_TILES_BG_COLOR, -2,
-                UserHandle.USER_CURRENT);
-        int presColor = Settings.System.getIntForUser(context.getContentResolver(),
-                Settings.System.QUICK_TILES_BG_PRESSED_COLOR, -2,
-                UserHandle.USER_CURRENT);
-        float bgAlpha = Settings.System.getFloatForUser(context.getContentResolver(),
-                Settings.System.QUICK_TILES_BG_ALPHA, 0.0f,
-                UserHandle.USER_CURRENT);
-
-        if (bgColor == -2) {
-            bgColor = context.getResources().getColor(R.color.qs_background_color);
-        }
-        if (presColor == -2) {
-            presColor = context.getResources().getColor(R.color.qs_background_pressed_color);
-        }
-        ColorDrawable bgDrawable = new ColorDrawable(bgColor);
-        ColorDrawable presDrawable = new ColorDrawable(presColor);
-        StateListDrawable states = new StateListDrawable();
-        states.addState(new int[] {android.R.attr.state_pressed}, presDrawable);
-        states.addState(new int[] {}, bgDrawable);
-        states.setAlpha((int) ((1 - bgAlpha) * 255));
-        setBackground(states);
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     void setColumnSpan(int span) {
@@ -100,11 +50,7 @@ class QuickSettingsTileView extends FrameLayout {
         return mColSpan;
     }
 
-<<<<<<< HEAD
-    public void setContent(int layoutId, LayoutInflater inflater) {
-=======
     void setContent(int layoutId, LayoutInflater inflater) {
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         mContentLayoutId = layoutId;
         inflater.inflate(layoutId, this);
     }
@@ -132,9 +78,6 @@ class QuickSettingsTileView extends FrameLayout {
         }
         super.setVisibility(vis);
     }
-<<<<<<< HEAD
-}
-=======
 
     public void setOnPrepareListener(OnPrepareListener listener) {
         if (mOnPrepareListener != listener) {
@@ -204,4 +147,3 @@ class QuickSettingsTileView extends FrameLayout {
         void onUnprepare();
     }
 }
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1

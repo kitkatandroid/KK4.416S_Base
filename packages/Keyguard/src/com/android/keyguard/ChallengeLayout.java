@@ -39,11 +39,7 @@ public interface ChallengeLayout {
      *
      * @param b true to show, false to hide
      */
-<<<<<<< HEAD
-    void showChallenge(boolean b);
-=======
     void showChallenge(boolean show);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
     /**
      * Show the bouncer challenge. This may block access to other child views.

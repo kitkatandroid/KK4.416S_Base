@@ -631,8 +631,6 @@ public interface CameraDevice extends AutoCloseable {
         }
 
         /**
-<<<<<<< HEAD
-=======
          * This method is called when some results from an image capture are
          * available.
          *
@@ -663,7 +661,6 @@ public interface CameraDevice extends AutoCloseable {
         }
 
         /**
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
          * This method is called when an image capture has completed and the
          * result metadata is available.
          *

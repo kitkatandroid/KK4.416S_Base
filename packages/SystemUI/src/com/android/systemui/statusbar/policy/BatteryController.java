@@ -45,13 +45,6 @@ public class BatteryController extends BroadcastReceiver {
         mChangeCallbacks.add(cb);
     }
 
-<<<<<<< HEAD
-    public void removeStateChangedCallback(BatteryStateChangeCallback cb) {
-        mChangeCallbacks.remove(cb);
-    }
-
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     public void onReceive(Context context, Intent intent) {
         final String action = intent.getAction();
         if (action.equals(Intent.ACTION_BATTERY_CHANGED)) {

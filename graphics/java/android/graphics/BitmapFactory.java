@@ -259,20 +259,13 @@ public class BitmapFactory {
          * (e.g. the bitmap is drawn, getPixels() is called), they will be
          * automatically re-decoded.
          *
-<<<<<<< HEAD
-         * For the re-decode to happen, the bitmap must have access to the
-=======
          * <p>For the re-decode to happen, the bitmap must have access to the
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
          * encoded data, either by sharing a reference to the input
          * or by making a copy of it. This distinction is controlled by
          * inInputShareable. If this is true, then the bitmap may keep a shallow
          * reference to the input. If this is false, then the bitmap will
          * explicitly make a copy of the input data, and keep that. Even if
          * sharing is allowed, the implementation may still decide to make a
-<<<<<<< HEAD
-         * deep copy of the input data.
-=======
          * deep copy of the input data.</p>
          *
          * <p>While inPurgeable can help avoid big Dalvik heap allocations (from
@@ -286,7 +279,6 @@ public class BitmapFactory {
          * with {@link #decodeResource(Resources, int,
          * android.graphics.BitmapFactory.Options)} or {@link #decodeFile(String,
          * android.graphics.BitmapFactory.Options)}.</p>
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
          */
         public boolean inPurgeable;
 

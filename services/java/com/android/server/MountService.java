@@ -62,10 +62,7 @@ import android.util.Xml;
 import com.android.internal.annotations.GuardedBy;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.app.IMediaContainerService;
-<<<<<<< HEAD
-=======
 import com.android.internal.util.IndentingPrintWriter;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import com.android.internal.util.Preconditions;
 import com.android.internal.util.XmlUtils;
 import com.android.server.NativeDaemonConnector.Command;
@@ -177,11 +174,8 @@ class MountService extends IMountService.Stub
          * 600 series - Unsolicited broadcasts.
          */
         public static final int VolumeStateChange              = 605;
-<<<<<<< HEAD
-=======
         public static final int VolumeUuidChange               = 613;
         public static final int VolumeUserLabelChange          = 614;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         public static final int VolumeDiskInserted             = 630;
         public static final int VolumeDiskRemoved              = 631;
         public static final int VolumeBadRemoval               = 632;
@@ -670,10 +664,7 @@ class MountService extends IMountService.Stub
         final String oldState;
         synchronized (mVolumesLock) {
             oldState = mVolumeStates.put(path, state);
-<<<<<<< HEAD
-=======
             volume.setState(state);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
 
         if (state.equals(oldState)) {
@@ -814,8 +805,6 @@ class MountService extends IMountService.Stub
             notifyVolumeStateChange(
                     cooked[2], cooked[3], Integer.parseInt(cooked[7]),
                             Integer.parseInt(cooked[10]));
-<<<<<<< HEAD
-=======
         } else if (code == VoldResponseCode.VolumeUuidChange) {
             // Format: nnn <label> <path> <uuid>
             final String path = cooked[2];
@@ -836,7 +825,6 @@ class MountService extends IMountService.Stub
                 vol.setUserLabel(userLabel);
             }
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         } else if ((code == VoldResponseCode.VolumeDiskInserted) ||
                    (code == VoldResponseCode.VolumeDiskRemoved) ||
                    (code == VoldResponseCode.VolumeBadRemoval)) {
@@ -1266,10 +1254,7 @@ class MountService extends IMountService.Stub
 
                             // Until we hear otherwise, treat as unmounted
                             mVolumeStates.put(volume.getPath(), Environment.MEDIA_UNMOUNTED);
-<<<<<<< HEAD
-=======
                             volume.setState(Environment.MEDIA_UNMOUNTED);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                         }
                     }
 
@@ -1313,10 +1298,7 @@ class MountService extends IMountService.Stub
         } else {
             // Place stub status for early callers to find
             mVolumeStates.put(volume.getPath(), Environment.MEDIA_MOUNTED);
-<<<<<<< HEAD
-=======
             volume.setState(Environment.MEDIA_MOUNTED);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
     }
 
@@ -2787,56 +2769,6 @@ class MountService extends IMountService.Stub
     }
 
     @Override
-<<<<<<< HEAD
-    protected void dump(FileDescriptor fd, PrintWriter pw, String[] args) {
-        if (mContext.checkCallingOrSelfPermission(android.Manifest.permission.DUMP) != PackageManager.PERMISSION_GRANTED) {
-            pw.println("Permission Denial: can't dump ActivityManager from from pid="
-                    + Binder.getCallingPid() + ", uid=" + Binder.getCallingUid()
-                    + " without permission " + android.Manifest.permission.DUMP);
-            return;
-        }
-
-        synchronized (mObbMounts) {
-            pw.println("  mObbMounts:");
-
-            final Iterator<Entry<IBinder, List<ObbState>>> binders = mObbMounts.entrySet().iterator();
-            while (binders.hasNext()) {
-                Entry<IBinder, List<ObbState>> e = binders.next();
-                pw.print("    Key="); pw.println(e.getKey().toString());
-                final List<ObbState> obbStates = e.getValue();
-                for (final ObbState obbState : obbStates) {
-                    pw.print("      "); pw.println(obbState.toString());
-                }
-            }
-
-            pw.println("");
-            pw.println("  mObbPathToStateMap:");
-            final Iterator<Entry<String, ObbState>> maps = mObbPathToStateMap.entrySet().iterator();
-            while (maps.hasNext()) {
-                final Entry<String, ObbState> e = maps.next();
-                pw.print("    "); pw.print(e.getKey());
-                pw.print(" -> "); pw.println(e.getValue().toString());
-            }
-        }
-
-        pw.println("");
-
-        synchronized (mVolumesLock) {
-            pw.println("  mVolumes:");
-
-            final int N = mVolumes.size();
-            for (int i = 0; i < N; i++) {
-                final StorageVolume v = mVolumes.get(i);
-                pw.print("    ");
-                pw.println(v.toString());
-                pw.println("      state=" + mVolumeStates.get(v.getPath()));
-            }
-        }
-
-        pw.println();
-        pw.println("  mConnection:");
-        mConnector.dump(fd, pw, args);
-=======
     protected void dump(FileDescriptor fd, PrintWriter writer, String[] args) {
         mContext.enforceCallingOrSelfPermission(android.Manifest.permission.DUMP, TAG);
 
@@ -2890,7 +2822,6 @@ class MountService extends IMountService.Stub
         pw.increaseIndent();
         mConnector.dump(fd, pw, args);
         pw.decreaseIndent();
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     /** {@inheritDoc} */

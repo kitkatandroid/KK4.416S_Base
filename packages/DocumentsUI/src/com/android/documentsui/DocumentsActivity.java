@@ -255,13 +255,9 @@ public class DocumentsActivity extends Activity {
         }
 
         mState.localOnly = intent.getBooleanExtra(Intent.EXTRA_LOCAL_ONLY, false);
-<<<<<<< HEAD
-        mState.showAdvanced = SettingsActivity.getDisplayAdvancedDevices(this);
-=======
         mState.forceAdvanced = intent.getBooleanExtra(DocumentsContract.EXTRA_SHOW_ADVANCED, false);
         mState.showAdvanced = mState.forceAdvanced
                 | SettingsActivity.getDisplayAdvancedDevices(this);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     private class RestoreRootTask extends AsyncTask<Void, Void, RootInfo> {
@@ -667,8 +663,6 @@ public class DocumentsActivity extends Activity {
         DirectoryFragment.get(getFragmentManager()).onUserModeChanged();
     }
 
-<<<<<<< HEAD
-=======
     public void setPending(boolean pending) {
         final SaveFragment save = SaveFragment.get(getFragmentManager());
         if (save != null) {
@@ -676,7 +670,6 @@ public class DocumentsActivity extends Activity {
         }
     }
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     @Override
     public void onBackPressed() {
         if (!mState.stackTouched) {
@@ -1067,14 +1060,11 @@ public class DocumentsActivity extends Activity {
         }
 
         @Override
-<<<<<<< HEAD
-=======
         protected void onPreExecute() {
             setPending(true);
         }
 
         @Override
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         protected Uri doInBackground(Void... params) {
             final ContentResolver resolver = getContentResolver();
             final DocumentInfo cwd = getCurrentDirectory();
@@ -1107,11 +1097,8 @@ public class DocumentsActivity extends Activity {
                 Toast.makeText(DocumentsActivity.this, R.string.save_error, Toast.LENGTH_SHORT)
                         .show();
             }
-<<<<<<< HEAD
-=======
 
             setPending(false);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
     }
 
@@ -1151,10 +1138,7 @@ public class DocumentsActivity extends Activity {
         public boolean allowMultiple = false;
         public boolean showSize = false;
         public boolean localOnly = false;
-<<<<<<< HEAD
-=======
         public boolean forceAdvanced = false;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         public boolean showAdvanced = false;
         public boolean stackTouched = false;
         public boolean restored = false;
@@ -1195,10 +1179,7 @@ public class DocumentsActivity extends Activity {
             out.writeInt(allowMultiple ? 1 : 0);
             out.writeInt(showSize ? 1 : 0);
             out.writeInt(localOnly ? 1 : 0);
-<<<<<<< HEAD
-=======
             out.writeInt(forceAdvanced ? 1 : 0);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             out.writeInt(showAdvanced ? 1 : 0);
             out.writeInt(stackTouched ? 1 : 0);
             out.writeInt(restored ? 1 : 0);
@@ -1218,10 +1199,7 @@ public class DocumentsActivity extends Activity {
                 state.allowMultiple = in.readInt() != 0;
                 state.showSize = in.readInt() != 0;
                 state.localOnly = in.readInt() != 0;
-<<<<<<< HEAD
-=======
                 state.forceAdvanced = in.readInt() != 0;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 state.showAdvanced = in.readInt() != 0;
                 state.stackTouched = in.readInt() != 0;
                 state.restored = in.readInt() != 0;

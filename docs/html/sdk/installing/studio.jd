@@ -253,63 +253,36 @@ download (or continue to use) the
     <td>Windows</td>
     <td>
   <a onclick="return onDownload(this)" id="win-studio"
-<<<<<<< HEAD
-      href="http://dl.google.com/android/studio/android-studio-bundle-130.737825-windows.exe">
-      android-studio-bundle-130.737825-windows.exe
-      </a>
-    </td>
-    <td>396091268 bytes</td>
-    <td>6da1bc8effa048c8ff669e4c484eb11f</td>
-=======
       href="http://dl.google.com/android/studio/android-studio-bundle-132.883541-windows.exe">
       android-studio-bundle-132.883541-windows.exe
       </a>
     </td>
     <td>448245492 bytes</td>
     <td>ca5f5c4d21b4350ddf3bda7021a6ee5e</td>
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
   </tr>
 
   <tr>
     <td><nobr>Mac OS X</nobr></td>
     <td>
   <a onclick="return onDownload(this)" id="mac-studio"
-<<<<<<< HEAD
-    href="http://dl.google.com/android/studio/android-studio-bundle-130.737825-mac.dmg">
-    android-studio-bundle-130.737825-mac.dmg
-    </a>
-    </td>
-    <td>383326582 bytes</td>
-    <td>2959bc5039238d286670cc6225342b89</td>
-=======
     href="http://dl.google.com/android/studio/android-studio-bundle-132.883541-mac.dmg">
     android-studio-bundle-132.883541-mac.dmg
     </a>
     </td>
     <td>427317993 bytes</td>
     <td>67831af6e7896a0a146d43423fabb542</td>
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
   </tr>
 
   <tr>
     <td>Linux</td>
     <td>
   <a onclick="return onDownload(this)" id="linux-studio"
-<<<<<<< HEAD
-    href="http://dl.google.com/android/studio/android-studio-bundle-130.737825-linux.tgz">
-    android-studio-bundle-130.737825-linux.tgz
-    </a>
-    </td>
-    <td>409935592 bytes</td>
-    <td>dcd13922f7cf577e3c852b224205d843</td>
-=======
     href="http://dl.google.com/android/studio/android-studio-bundle-132.883541-linux.tgz">
     android-studio-bundle-132.883541-linux.tgz
     </a>
     </td>
     <td>451652493 bytes</td>
     <td>7a6f9b12b2cd5321ab0818b51306e01c</td>
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
   </tr>
   </table>
 
@@ -317,11 +290,6 @@ download (or continue to use) the
 
 
 
-<<<<<<< HEAD
-<h2 id="Updating">Updating to 0.2.x</h2>
-
-<p>To update from Android Studio 0.1.x to 0.2.x,
-=======
 <h2 id="Updating">Updating from older versions</h2>
 
 <p>If you already have Android Studio installed, in most cases, you can upgrade to the latest
@@ -329,7 +297,6 @@ version by installing a patch. From within Android Studio, select
 <strong>Help &gt; Check for updates</strong> to see whether an update is available.</p>
 
 <p>If an update is not available,
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 follow the <a href="#Installing">installation instructions</a> below and replace your existing
 installation.</p>
 
@@ -341,20 +308,10 @@ SDK directory under Android Studio to a temporary location
 before installing the update. Then move them back once the update is complete.
 If you fail to copy these packages, then you can instead download them again through
 the Android SDK Manager.</p>
-<<<<<<< HEAD
-<p><strong>Windows users:</strong> Do not install Android Studio 0.2.x in the same
-location as 0.1.x. Doing so may cause errors such as ClassCastException or other unexpected
-behaviors. It's best if you remove your previous version of Android Studio 0.1.x.</p>
-</div>
-
-
-<p>Also note that due to the update to Gradle 0.5, you will encounter errors when opening
-=======
 </div>
 
 
 <p>Also note that due to the update to Android Gradle Plugin 0.6, you will encounter errors when opening
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 existing projects. See the <a href="#Troubleshooting">Troubleshooting</a> notes below for
 information about how to resolve them.</p>
 
@@ -463,18 +420,6 @@ style="vertical-align:bottom;margin:0;height:19px" /> in the toolbar.</p>
 
 <h2 id="Revisions">Revisions</h2>
 
-<<<<<<< HEAD
-<p class="note"><strong>Note:</strong> <strong>There is not a patch update available from
-0.1.9 to 0.2</strong>. To update from Android Studio 0.1.x to 0.2.x, you must
-install a new Android Studio bundle from this page.  The reason for that is that we have made
-changes to the bundled SDK such that it includes a pre-configured local Maven repository
-which can serve up the v4 support library and which is required for creating new projects.</p>
-
-
-<div class="toggle-content opened">
-  <p><a href="#" onclick="return toggleContent(this)">
-    <img src="{@docRoot}assets/images/triangle-opened.png" class="toggle-content-img"
-=======
 <div class="toggle-content opened">
   <p><a href="#" onclick="return toggleContent(this)">
     <img src="{@docRoot}assets/images/triangle-opened.png" class="toggle-content-img"
@@ -491,7 +436,6 @@ which can serve up the v4 support library and which is required for creating new
 <div class="toggle-content closed">
   <p><a href="#" onclick="return toggleContent(this)">
     <img src="{@docRoot}assets/images/triangle-closed.png" class="toggle-content-img"
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
       alt=""/>Android Studio v0.2.x</a> <em>(July 2013)</em>
   </p>
 
@@ -673,11 +617,7 @@ for possible resolutions to known issues: <a href="http://tools.android.com/know
   if (os) {
     /* set up primary ACE download button */
     $('#download-ide-button').show();
-<<<<<<< HEAD
-    $('#download-ide-button').append("Download Android Studio <span class='small'>v0.2.x</span>"
-=======
     $('#download-ide-button').append("Download Android Studio <span class='small'>v0.3.1</span>"
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         + "<br/> <span class='small'>for " + os + "</span>");
     $('#download-ide-button').click(function() {return onDownload(this,true);}).attr('href', bundlename);
 

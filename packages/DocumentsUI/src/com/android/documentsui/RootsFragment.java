@@ -16,11 +16,8 @@
 
 package com.android.documentsui;
 
-<<<<<<< HEAD
-=======
 import static com.android.documentsui.DocumentsActivity.State.ACTION_GET_CONTENT;
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -30,13 +27,9 @@ import android.content.Intent;
 import android.content.Loader;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-<<<<<<< HEAD
-import android.os.Bundle;
-=======
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import android.text.TextUtils;
 import android.text.format.Formatter;
 import android.view.LayoutInflater;
@@ -44,10 +37,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-<<<<<<< HEAD
-=======
 import android.widget.AdapterView.OnItemLongClickListener;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -146,9 +136,6 @@ public class RootsFragment extends Fragment {
 
         final Context context = getActivity();
         final State state = ((DocumentsActivity) context).getDisplayState();
-<<<<<<< HEAD
-        state.showAdvanced = SettingsActivity.getDisplayAdvancedDevices(context);
-=======
         state.showAdvanced = state.forceAdvanced
                 | SettingsActivity.getDisplayAdvancedDevices(context);
 
@@ -158,7 +145,6 @@ public class RootsFragment extends Fragment {
             mList.setOnItemLongClickListener(null);
             mList.setLongClickable(false);
         }
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
         getLoaderManager().restartLoader(2, null, mCallbacks);
     }
@@ -179,8 +165,6 @@ public class RootsFragment extends Fragment {
         }
     }
 
-<<<<<<< HEAD
-=======
     private void showAppDetails(ResolveInfo ri) {
         final Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
         intent.setData(Uri.fromParts("package", ri.activityInfo.packageName, null));
@@ -188,7 +172,6 @@ public class RootsFragment extends Fragment {
         startActivity(intent);
     }
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     private OnItemClickListener mItemListener = new OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -204,8 +187,6 @@ public class RootsFragment extends Fragment {
         }
     };
 
-<<<<<<< HEAD
-=======
     private OnItemLongClickListener mItemLongClickListener = new OnItemLongClickListener() {
         @Override
         public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
@@ -219,7 +200,6 @@ public class RootsFragment extends Fragment {
         }
     };
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     private static abstract class Item {
         private final int mLayoutId;
 

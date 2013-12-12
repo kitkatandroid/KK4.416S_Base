@@ -799,9 +799,6 @@ public class WifiManager {
      */
     public boolean requestBatchedScan(BatchedScanSettings requested) {
         try {
-<<<<<<< HEAD
-            return mService.requestBatchedScan(requested, new Binder());
-=======
             return mService.requestBatchedScan(requested, new Binder(), null);
         } catch (RemoteException e) { return false; }
     }
@@ -809,7 +806,6 @@ public class WifiManager {
     public boolean requestBatchedScan(BatchedScanSettings requested, WorkSource workSource) {
         try {
             return mService.requestBatchedScan(requested, new Binder(), workSource);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         } catch (RemoteException e) { return false; }
     }
 
@@ -950,21 +946,6 @@ public class WifiManager {
     }
 
     /**
-<<<<<<< HEAD
-     * Get the operational country code.
-     * @hide
-     */
-    public String getCountryCode() {
-        try {
-            return mService.getCountryCode();
-        } catch (RemoteException e) {
-            return null;
-        }
-    }
-
-    /**
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
      * Set the operational frequency band.
      * @param band  One of
      *     {@link #WIFI_FREQUENCY_BAND_AUTO},

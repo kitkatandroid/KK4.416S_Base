@@ -136,8 +136,6 @@ public class PowerProfile {
     public static final String POWER_CPU_SPEEDS = "cpu.speeds";
 
     /**
-<<<<<<< HEAD
-=======
      * Power consumed by wif batched scaning.  Broken down into bins by
      * Channels Scanned per Hour.  May do 1-720 scans per hour of 1-100 channels
      * for a range of 1-72,000.  Going logrithmic (1-8, 9-64, 65-512, 513-4096, 4097-)!
@@ -145,7 +143,6 @@ public class PowerProfile {
     public static final String POWER_WIFI_BATCHED_SCAN = "wifi.batchedscan";
 
     /**
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
      * Battery capacity in milliAmpHour (mAh).
      */
     public static final String POWER_BATTERY_CAPACITY = "battery.capacity";
@@ -181,11 +178,7 @@ public class PowerProfile {
 
                 String element = parser.getName();
                 if (element == null) break;
-<<<<<<< HEAD
-                
-=======
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 if (parsingArray && !element.equals(TAG_ARRAYITEM)) {
                     // Finish array
                     sPowerMap.put(arrayName, array.toArray(new Double[array.size()]));

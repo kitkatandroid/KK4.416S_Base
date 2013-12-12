@@ -106,14 +106,11 @@ public abstract class BatteryStats implements Parcelable {
     public static final int FOREGROUND_ACTIVITY = 10;
 
     /**
-<<<<<<< HEAD
-=======
      * A constant indicating a wifi batched scan is active
      */
     public static final int WIFI_BATCHED_SCAN = 11;
 
     /**
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
      * Include all of the data in the stats, including previously saved data.
      */
     public static final int STATS_SINCE_CHARGED = 0;
@@ -278,11 +275,8 @@ public abstract class BatteryStats implements Parcelable {
         public abstract void noteFullWifiLockReleasedLocked();
         public abstract void noteWifiScanStartedLocked();
         public abstract void noteWifiScanStoppedLocked();
-<<<<<<< HEAD
-=======
         public abstract void noteWifiBatchedScanStartedLocked(int csph);
         public abstract void noteWifiBatchedScanStoppedLocked();
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         public abstract void noteWifiMulticastEnabledLocked();
         public abstract void noteWifiMulticastDisabledLocked();
         public abstract void noteAudioTurnedOnLocked();
@@ -294,10 +288,7 @@ public abstract class BatteryStats implements Parcelable {
         public abstract long getWifiRunningTime(long batteryRealtime, int which);
         public abstract long getFullWifiLockTime(long batteryRealtime, int which);
         public abstract long getWifiScanTime(long batteryRealtime, int which);
-<<<<<<< HEAD
-=======
         public abstract long getWifiBatchedScanTime(int csphBin, long batteryRealtime, int which);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         public abstract long getWifiMulticastTime(long batteryRealtime,
                                                   int which);
         public abstract long getAudioTurnedOnTime(long batteryRealtime, int which);
@@ -305,11 +296,8 @@ public abstract class BatteryStats implements Parcelable {
         public abstract Timer getForegroundActivityTimer();
         public abstract Timer getVibratorOnTimer();
 
-<<<<<<< HEAD
-=======
         public static final int NUM_WIFI_BATCHED_SCAN_BINS = 5;
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         /**
          * Note that these must match the constants in android.os.PowerManager.
          * Also, if the user activity types change, the BatteryStatsImpl.VERSION must
@@ -866,21 +854,13 @@ public abstract class BatteryStats implements Parcelable {
     public static final int DATA_CONNECTION_EVDO_B = 12;
     public static final int DATA_CONNECTION_LTE = 13;
     public static final int DATA_CONNECTION_EHRPD = 14;
-<<<<<<< HEAD
-    public static final int DATA_CONNECTION_OTHER = 15;
-=======
     public static final int DATA_CONNECTION_HSPAP = 15;
     public static final int DATA_CONNECTION_OTHER = 16;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
     static final String[] DATA_CONNECTION_NAMES = {
         "none", "gprs", "edge", "umts", "cdma", "evdo_0", "evdo_A",
         "1xrtt", "hsdpa", "hsupa", "hspa", "iden", "evdo_b", "lte",
-<<<<<<< HEAD
-        "ehrpd", "other"
-=======
         "ehrpd", "hspap", "other"
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     };
     
     public static final int NUM_DATA_CONNECTION_TYPES = DATA_CONNECTION_OTHER+1;
@@ -2111,17 +2091,11 @@ public abstract class BatteryStats implements Parcelable {
                                         TimeUtils.formatDuration(ew.usedTime, pw);
                                         pw.print(" over ");
                                         TimeUtils.formatDuration(ew.overTime, pw);
-<<<<<<< HEAD
-                                        pw.print(" (");
-                                        pw.print((ew.usedTime*100)/ew.overTime);
-                                        pw.println("%)");
-=======
                                         if (ew.overTime != 0) {
                                             pw.print(" (");
                                             pw.print((ew.usedTime*100)/ew.overTime);
                                             pw.println("%)");
                                         }
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                             }
                         }
                         uidActivity = true;

@@ -34,10 +34,6 @@ import com.android.internal.telephony.SmsRawData;
  */
 
 interface ISms {
-<<<<<<< HEAD
-     void synthesizeMessages(String originatingAddress, String scAddress, in List<String> messages, long timestampMillis);
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     /**
      * Retrieves all messages currently stored on ICC.
      *

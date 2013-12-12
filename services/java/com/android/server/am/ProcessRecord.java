@@ -46,11 +46,7 @@ import java.util.ArrayList;
  * is currently running.
  */
 final class ProcessRecord {
-<<<<<<< HEAD
-    final BatteryStatsImpl.Uid.Proc batteryStats; // where to collect runtime statistics
-=======
     private final BatteryStatsImpl mBatteryStats; // where to collect runtime statistics
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     final ApplicationInfo info; // all about the first app in the process
     final boolean isolated;     // true if this is a special isolated process
     final int uid;              // uid of process; may be different from 'info' if isolated
@@ -90,10 +86,6 @@ final class ProcessRecord {
     boolean keeping;            // Actively running code so don't kill due to that?
     boolean setIsForeground;    // Running foreground UI when last set?
     boolean notCachedSinceIdle; // Has this process not been in a cached state since last idle?
-<<<<<<< HEAD
-    boolean hasActivities;      // Are there any activities running in this process?
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     boolean hasClientActivities;  // Are there any client services with activities?
     boolean hasStartedServices; // Are there any started services running in this process?
     boolean foregroundServices; // Running any services that are foreground?
@@ -272,14 +264,8 @@ final class ProcessRecord {
             pw.print(prefix); pw.print("persistent="); pw.print(persistent);
                     pw.print(" removed="); pw.println(removed);
         }
-<<<<<<< HEAD
-        if (hasActivities || hasClientActivities || foregroundActivities) {
-            pw.print(prefix); pw.print("hasActivities="); pw.print(hasActivities);
-                    pw.print(" hasClientActivities="); pw.print(hasClientActivities);
-=======
         if (hasClientActivities || foregroundActivities) {
             pw.print(prefix); pw.print("hasClientActivities="); pw.print(hasClientActivities);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                     pw.print(" foregroundActivities="); pw.println(foregroundActivities);
         }
         if (hasStartedServices) {
@@ -287,13 +273,8 @@ final class ProcessRecord {
         }
         if (!keeping) {
             long wtime;
-<<<<<<< HEAD
-            synchronized (batteryStats.getBatteryStats()) {
-                wtime = batteryStats.getBatteryStats().getProcessWakeTime(info.uid,
-=======
             synchronized (mBatteryStats) {
                 wtime = mBatteryStats.getProcessWakeTime(info.uid,
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                         pid, SystemClock.elapsedRealtime());
             }
             long timeUsed = wtime - lastWakeTime;
@@ -378,15 +359,9 @@ final class ProcessRecord {
         }
     }
     
-<<<<<<< HEAD
-    ProcessRecord(BatteryStatsImpl.Uid.Proc _batteryStats, ApplicationInfo _info,
-            String _processName, int _uid) {
-        batteryStats = _batteryStats;
-=======
     ProcessRecord(BatteryStatsImpl _batteryStats, ApplicationInfo _info,
             String _processName, int _uid) {
         mBatteryStats = _batteryStats;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         info = _info;
         isolated = _info.uid != _uid;
         uid = _uid;

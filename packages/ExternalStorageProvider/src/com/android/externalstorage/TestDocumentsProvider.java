@@ -33,10 +33,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CancellationSignal;
-<<<<<<< HEAD
-=======
 import android.os.CancellationSignal.OnCancelListener;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import android.os.ParcelFileDescriptor;
 import android.os.SystemClock;
 import android.provider.DocumentsContract;
@@ -58,17 +55,12 @@ import java.lang.ref.WeakReference;
 public class TestDocumentsProvider extends DocumentsProvider {
     private static final String TAG = "TestDocuments";
 
-<<<<<<< HEAD
-    private static final boolean ROOTS_WEDGE = false;
-    private static final boolean ROOTS_LAG = false;
-=======
     private static final boolean LAG = false;
 
     private static final boolean ROOT_LAME_PROJECTION = false;
     private static final boolean DOCUMENT_LAME_PROJECTION = false;
 
     private static final boolean ROOTS_WEDGE = false;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     private static final boolean ROOTS_CRASH = false;
     private static final boolean ROOTS_REFRESH = false;
 
@@ -99,18 +91,12 @@ public class TestDocumentsProvider extends DocumentsProvider {
     };
 
     private static String[] resolveRootProjection(String[] projection) {
-<<<<<<< HEAD
-=======
         if (ROOT_LAME_PROJECTION) return new String[0];
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         return projection != null ? projection : DEFAULT_ROOT_PROJECTION;
     }
 
     private static String[] resolveDocumentProjection(String[] projection) {
-<<<<<<< HEAD
-=======
         if (DOCUMENT_LAME_PROJECTION) return new String[0];
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         return projection != null ? projection : DEFAULT_DOCUMENT_PROJECTION;
     }
 
@@ -126,13 +112,8 @@ public class TestDocumentsProvider extends DocumentsProvider {
     public Cursor queryRoots(String[] projection) throws FileNotFoundException {
         Log.d(TAG, "Someone asked for our roots!");
 
-<<<<<<< HEAD
-        if (ROOTS_WEDGE) SystemClock.sleep(Integer.MAX_VALUE);
-        if (ROOTS_LAG) SystemClock.sleep(3000);
-=======
         if (LAG) lagUntilCanceled(null);
         if (ROOTS_WEDGE) wedgeUntilCanceled(null);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         if (ROOTS_CRASH) System.exit(12);
 
         if (ROOTS_REFRESH) {
@@ -151,11 +132,7 @@ public class TestDocumentsProvider extends DocumentsProvider {
         final MatrixCursor result = new MatrixCursor(resolveRootProjection(projection));
         final RowBuilder row = result.newRow();
         row.add(Root.COLUMN_ROOT_ID, MY_ROOT_ID);
-<<<<<<< HEAD
-        row.add(Root.COLUMN_FLAGS, Root.FLAG_SUPPORTS_RECENTS);
-=======
         row.add(Root.COLUMN_FLAGS, Root.FLAG_SUPPORTS_RECENTS | Root.FLAG_SUPPORTS_CREATE);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         row.add(Root.COLUMN_TITLE, "_Test title which is really long");
         row.add(Root.COLUMN_SUMMARY,
                 SystemClock.elapsedRealtime() + " summary which is also super long text");
@@ -167,10 +144,7 @@ public class TestDocumentsProvider extends DocumentsProvider {
     @Override
     public Cursor queryDocument(String documentId, String[] projection)
             throws FileNotFoundException {
-<<<<<<< HEAD
-=======
         if (LAG) lagUntilCanceled(null);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         if (DOCUMENT_CRASH) System.exit(12);
 
         final MatrixCursor result = new MatrixCursor(resolveDocumentProjection(projection));
@@ -178,8 +152,6 @@ public class TestDocumentsProvider extends DocumentsProvider {
         return result;
     }
 
-<<<<<<< HEAD
-=======
     @Override
     public String createDocument(String parentDocumentId, String mimeType, String displayName)
             throws FileNotFoundException {
@@ -188,7 +160,6 @@ public class TestDocumentsProvider extends DocumentsProvider {
         return super.createDocument(parentDocumentId, mimeType, displayName);
     }
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     /**
      * Holds any outstanding or finished "network" fetching.
      */
@@ -254,10 +225,7 @@ public class TestDocumentsProvider extends DocumentsProvider {
             String parentDocumentId, String[] projection, String sortOrder)
             throws FileNotFoundException {
 
-<<<<<<< HEAD
-=======
         if (LAG) lagUntilCanceled(null);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         if (CHILD_WEDGE) SystemClock.sleep(Integer.MAX_VALUE);
         if (CHILD_CRASH) System.exit(12);
 
@@ -277,11 +245,7 @@ public class TestDocumentsProvider extends DocumentsProvider {
 
         if (THUMB_HUNDREDS) {
             for (int i = 0; i < 256; i++) {
-<<<<<<< HEAD
-                includeFile(result, "i maded u an picshure", Document.FLAG_SUPPORTS_THUMBNAIL);
-=======
                 includeFile(result, "i maded u an picshure" + i, Document.FLAG_SUPPORTS_THUMBNAIL);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             }
         }
 
@@ -331,12 +295,8 @@ public class TestDocumentsProvider extends DocumentsProvider {
     public Cursor queryRecentDocuments(String rootId, String[] projection)
             throws FileNotFoundException {
 
-<<<<<<< HEAD
-        if (RECENT_WEDGE) SystemClock.sleep(Integer.MAX_VALUE);
-=======
         if (LAG) lagUntilCanceled(null);
         if (RECENT_WEDGE) wedgeUntilCanceled(null);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
         // Pretend to take a super long time to respond
         SystemClock.sleep(3000);
@@ -350,10 +310,7 @@ public class TestDocumentsProvider extends DocumentsProvider {
     @Override
     public ParcelFileDescriptor openDocument(String docId, String mode, CancellationSignal signal)
             throws FileNotFoundException {
-<<<<<<< HEAD
-=======
         if (LAG) lagUntilCanceled(null);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         throw new FileNotFoundException();
     }
 
@@ -361,10 +318,7 @@ public class TestDocumentsProvider extends DocumentsProvider {
     public AssetFileDescriptor openDocumentThumbnail(
             String docId, Point sizeHint, CancellationSignal signal) throws FileNotFoundException {
 
-<<<<<<< HEAD
-=======
         if (LAG) lagUntilCanceled(signal);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         if (THUMB_WEDGE) wedgeUntilCanceled(signal);
         if (THUMB_CRASH) System.exit(12);
 
@@ -405,17 +359,6 @@ public class TestDocumentsProvider extends DocumentsProvider {
         return true;
     }
 
-<<<<<<< HEAD
-    private static void wedgeUntilCanceled(CancellationSignal signal) {
-        if (signal != null) {
-            while (true) {
-                signal.throwIfCanceled();
-                SystemClock.sleep(500);
-            }
-        } else {
-            Log.w(TAG, "WEDGING WITHOUT A CANCELLATIONSIGNAL");
-            SystemClock.sleep(Integer.MAX_VALUE);
-=======
     private static void lagUntilCanceled(CancellationSignal signal) {
         waitForCancelOrTimeout(signal, 1500);
     }
@@ -444,7 +387,6 @@ public class TestDocumentsProvider extends DocumentsProvider {
 
         if (signal != null) {
             signal.throwIfCanceled();
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
     }
 
@@ -457,10 +399,7 @@ public class TestDocumentsProvider extends DocumentsProvider {
 
         if (MY_DOC_ID.equals(docId)) {
             row.add(Document.COLUMN_MIME_TYPE, Document.MIME_TYPE_DIR);
-<<<<<<< HEAD
-=======
             row.add(Document.COLUMN_FLAGS, Document.FLAG_DIR_SUPPORTS_CREATE);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         } else if (MY_DOC_NULL.equals(docId)) {
             // No MIME type
         } else {

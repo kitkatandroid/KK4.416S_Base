@@ -117,13 +117,8 @@ public class ProxyServer extends Thread {
                         if (!proxy.equals(Proxy.NO_PROXY)) {
                             // Only Inets created by PacProxySelector.
                             InetSocketAddress inetSocketAddress =
-<<<<<<< HEAD
-                                    (InetSocketAddress)list.get(0).address();
-                            server = new Socket(inetSocketAddress.getAddress(),
-=======
                                     (InetSocketAddress)proxy.address();
                             server = new Socket(inetSocketAddress.getHostName(),
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                                     inetSocketAddress.getPort());
                             sendLine(server, requestLine);
                         } else {

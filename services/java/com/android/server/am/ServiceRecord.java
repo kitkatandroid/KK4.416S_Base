@@ -85,10 +85,7 @@ final class ServiceRecord extends Binder {
     ProcessRecord app;      // where this service is running or null.
     ProcessRecord isolatedProc; // keep track of isolated process, if requested
     ProcessStats.ServiceState tracker; // tracking service execution, may be null
-<<<<<<< HEAD
-=======
     ProcessStats.ServiceState restartTracker; // tracking service restart
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     boolean delayed;        // are we waiting to start this service in the background?
     boolean isForeground;   // is service currently in foreground mode?
     int foregroundId;       // Notification ID of last foreground req.
@@ -344,8 +341,6 @@ final class ServiceRecord extends Binder {
         }
     }
 
-<<<<<<< HEAD
-=======
     public void makeRestarting(int memFactor, long now) {
         if (restartTracker == null) {
             if ((serviceInfo.applicationInfo.flags&ApplicationInfo.FLAG_PERSISTENT) == 0) {
@@ -359,7 +354,6 @@ final class ServiceRecord extends Binder {
         restartTracker.setRestarting(true, memFactor, now);
     }
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     public AppBindRecord retrieveAppBindingLocked(Intent intent,
             ProcessRecord app) {
         Intent.FilterComparison filter = new Intent.FilterComparison(intent);

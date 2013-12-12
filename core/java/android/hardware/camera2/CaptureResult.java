@@ -591,8 +591,6 @@ public final class CaptureResult extends CameraMetadata {
 
     /**
      * <p>
-<<<<<<< HEAD
-=======
      * Whether a result given to the framework is the
      * final one for the capture, or only a partial that contains a
      * subset of the full set of dynamic metadata
@@ -619,7 +617,6 @@ public final class CaptureResult extends CameraMetadata {
 
     /**
      * <p>
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
      * A frame counter set by the framework. This value monotonically
      * increases with every new result (that is, each new result has a unique
      * frameCount value).

@@ -16,21 +16,15 @@
 
 package android.media;
 
-<<<<<<< HEAD
-=======
 import com.android.internal.util.Objects;
 
 import android.Manifest;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import android.app.ActivityThread;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-<<<<<<< HEAD
-=======
 import android.content.pm.PackageManager;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.hardware.display.DisplayManager;
@@ -38,15 +32,10 @@ import android.hardware.display.WifiDisplay;
 import android.hardware.display.WifiDisplayStatus;
 import android.os.Handler;
 import android.os.IBinder;
-<<<<<<< HEAD
-import android.os.RemoteException;
-import android.os.ServiceManager;
-=======
 import android.os.Process;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Display;
@@ -69,16 +58,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
  */
 public class MediaRouter {
     private static final String TAG = "MediaRouter";
-<<<<<<< HEAD
-
-    static class Static implements DisplayManager.DisplayListener {
-        // Time between wifi display scans when actively scanning in milliseconds.
-        private static final int WIFI_DISPLAY_SCAN_INTERVAL = 15000;
-
-        final Resources mResources;
-        final IAudioService mAudioService;
-        final DisplayManager mDisplayService;
-=======
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
     static class Static implements DisplayManager.DisplayListener {
@@ -87,7 +66,6 @@ public class MediaRouter {
         final IAudioService mAudioService;
         final DisplayManager mDisplayService;
         final IMediaRouterService mMediaRouterService;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         final Handler mHandler;
         final CopyOnWriteArrayList<CallbackInfo> mCallbacks =
                 new CopyOnWriteArrayList<CallbackInfo>();
@@ -104,10 +82,6 @@ public class MediaRouter {
 
         RouteInfo mSelectedRoute;
 
-<<<<<<< HEAD
-        WifiDisplayStatus mLastKnownWifiDisplayStatus;
-        boolean mActivelyScanningWifiDisplays;
-=======
         final boolean mCanConfigureWifiDisplays;
         boolean mActivelyScanningWifiDisplays;
         String mPreviousActiveWifiDisplayAddress;
@@ -118,7 +92,6 @@ public class MediaRouter {
         int mCurrentUserId = -1;
         IMediaRouterClient mClient;
         MediaRouterClientState mClientState;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
         final IAudioRoutesObserver.Stub mAudioRoutesObserver = new IAudioRoutesObserver.Stub() {
             @Override
@@ -131,22 +104,8 @@ public class MediaRouter {
             }
         };
 
-<<<<<<< HEAD
-        final Runnable mScanWifiDisplays = new Runnable() {
-            @Override
-            public void run() {
-                if (mActivelyScanningWifiDisplays) {
-                    mDisplayService.scanWifiDisplays();
-                    mHandler.postDelayed(this, WIFI_DISPLAY_SCAN_INTERVAL);
-                }
-            }
-        };
-
-        Static(Context appContext) {
-=======
         Static(Context appContext) {
             mAppContext = appContext;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             mResources = Resources.getSystem();
             mHandler = new Handler(appContext.getMainLooper());
 
@@ -155,18 +114,13 @@ public class MediaRouter {
 
             mDisplayService = (DisplayManager) appContext.getSystemService(Context.DISPLAY_SERVICE);
 
-<<<<<<< HEAD
-=======
             mMediaRouterService = IMediaRouterService.Stub.asInterface(
                     ServiceManager.getService(Context.MEDIA_ROUTER_SERVICE));
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             mSystemCategory = new RouteCategory(
                     com.android.internal.R.string.default_audio_route_category_name,
                     ROUTE_TYPE_LIVE_AUDIO | ROUTE_TYPE_LIVE_VIDEO, false);
             mSystemCategory.mIsSystem = true;
-<<<<<<< HEAD
-=======
 
             // Only the system can configure wifi displays.  The display manager
             // enforces this with a permission check.  Set a flag here so that we
@@ -174,7 +128,6 @@ public class MediaRouter {
             mCanConfigureWifiDisplays = appContext.checkPermission(
                     Manifest.permission.CONFIGURE_WIFI_DISPLAY,
                     Process.myPid(), Process.myUid()) == PackageManager.PERMISSION_GRANTED;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
 
         // Called after sStatic is initialized
@@ -182,12 +135,7 @@ public class MediaRouter {
             mDefaultAudioVideo = new RouteInfo(mSystemCategory);
             mDefaultAudioVideo.mNameResId = com.android.internal.R.string.default_audio_route_name;
             mDefaultAudioVideo.mSupportedTypes = ROUTE_TYPE_LIVE_AUDIO | ROUTE_TYPE_LIVE_VIDEO;
-<<<<<<< HEAD
-            mDefaultAudioVideo.mPresentationDisplay = choosePresentationDisplayForRoute(
-                    mDefaultAudioVideo, getAllPresentationDisplays());
-=======
             mDefaultAudioVideo.updatePresentationDisplay();
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             addRouteStatic(mDefaultAudioVideo);
 
             // This will select the active wifi display route if there is one.
@@ -212,12 +160,6 @@ public class MediaRouter {
                 updateAudioRoutes(newAudioRoutes);
             }
 
-<<<<<<< HEAD
-            // Select the default route if the above didn't sync us up
-            // appropriately with relevant system state.
-            if (mSelectedRoute == null) {
-                selectRouteStatic(mDefaultAudioVideo.getSupportedTypes(), mDefaultAudioVideo);
-=======
             // Bind to the media router service.
             rebindAsUser(UserHandle.myUserId());
 
@@ -225,7 +167,6 @@ public class MediaRouter {
             // appropriately with relevant system state.
             if (mSelectedRoute == null) {
                 selectDefaultRouteStatic();
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             }
         }
 
@@ -273,11 +214,7 @@ public class MediaRouter {
                         dispatchRouteChanged(sStatic.mBluetoothA2dpRoute);
                     }
                 } else if (sStatic.mBluetoothA2dpRoute != null) {
-<<<<<<< HEAD
-                    removeRoute(sStatic.mBluetoothA2dpRoute);
-=======
                     removeRouteStatic(sStatic.mBluetoothA2dpRoute);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                     sStatic.mBluetoothA2dpRoute = null;
                 }
             }
@@ -285,47 +222,14 @@ public class MediaRouter {
             if (mBluetoothA2dpRoute != null) {
                 if (mainType != AudioRoutesInfo.MAIN_SPEAKER &&
                         mSelectedRoute == mBluetoothA2dpRoute && !a2dpEnabled) {
-<<<<<<< HEAD
-                    selectRouteStatic(ROUTE_TYPE_LIVE_AUDIO, mDefaultAudioVideo);
-                } else if ((mSelectedRoute == mDefaultAudioVideo || mSelectedRoute == null) &&
-                        a2dpEnabled) {
-                    selectRouteStatic(ROUTE_TYPE_LIVE_AUDIO, mBluetoothA2dpRoute);
-=======
                     selectRouteStatic(ROUTE_TYPE_LIVE_AUDIO, mDefaultAudioVideo, false);
                 } else if ((mSelectedRoute == mDefaultAudioVideo || mSelectedRoute == null) &&
                         a2dpEnabled) {
                     selectRouteStatic(ROUTE_TYPE_LIVE_AUDIO, mBluetoothA2dpRoute, false);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 }
             }
         }
 
-<<<<<<< HEAD
-        void updateActiveScan() {
-            if (hasActiveScanCallbackOfType(ROUTE_TYPE_LIVE_VIDEO)) {
-                if (!mActivelyScanningWifiDisplays) {
-                    mActivelyScanningWifiDisplays = true;
-                    mHandler.post(mScanWifiDisplays);
-                }
-            } else {
-                if (mActivelyScanningWifiDisplays) {
-                    mActivelyScanningWifiDisplays = false;
-                    mHandler.removeCallbacks(mScanWifiDisplays);
-                }
-            }
-        }
-
-        private boolean hasActiveScanCallbackOfType(int type) {
-            final int count = mCallbacks.size();
-            for (int i = 0; i < count; i++) {
-                CallbackInfo cbi = mCallbacks.get(i);
-                if ((cbi.flags & CALLBACK_FLAG_PERFORM_ACTIVE_SCAN) != 0
-                        && (cbi.type & type) != 0) {
-                    return true;
-                }
-            }
-            return false;
-=======
         void updateDiscoveryRequest() {
             // What are we looking for today?
             int routeTypes = 0;
@@ -391,7 +295,6 @@ public class MediaRouter {
                 mDiscoverRequestActiveScan = activeScan;
                 publishClientDiscoveryRequest();
             }
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
 
         @Override
@@ -414,20 +317,6 @@ public class MediaRouter {
         }
 
         private void updatePresentationDisplays(int changedDisplayId) {
-<<<<<<< HEAD
-            final Display[] displays = getAllPresentationDisplays();
-            final int count = mRoutes.size();
-            for (int i = 0; i < count; i++) {
-                final RouteInfo info = mRoutes.get(i);
-                Display display = choosePresentationDisplayForRoute(info, displays);
-                if (display != info.mPresentationDisplay
-                        || (display != null && display.getDisplayId() == changedDisplayId)) {
-                    info.mPresentationDisplay = display;
-                    dispatchRoutePresentationDisplayChanged(info);
-                }
-            }
-        }
-=======
             final int count = mRoutes.size();
             for (int i = 0; i < count; i++) {
                 final RouteInfo route = mRoutes.get(i);
@@ -690,7 +579,6 @@ public class MediaRouter {
                 });
             }
         }
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     static Static sStatic;
@@ -705,11 +593,7 @@ public class MediaRouter {
      * <p>Once initiated this routing is transparent to the application. All audio
      * played on the media stream will be routed to the selected destination.</p>
      */
-<<<<<<< HEAD
-    public static final int ROUTE_TYPE_LIVE_AUDIO = 0x1;
-=======
     public static final int ROUTE_TYPE_LIVE_AUDIO = 1 << 0;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
     /**
      * Route type flag for live video.
@@ -726,9 +610,6 @@ public class MediaRouter {
      * @see RouteInfo#getPresentationDisplay()
      * @see android.app.Presentation
      */
-<<<<<<< HEAD
-    public static final int ROUTE_TYPE_LIVE_VIDEO = 0x2;
-=======
     public static final int ROUTE_TYPE_LIVE_VIDEO = 1 << 1;
 
     /**
@@ -736,7 +617,6 @@ public class MediaRouter {
      * @hide To be removed when media router API is updated.
      */
     public static final int ROUTE_TYPE_REMOTE_DISPLAY = 1 << 2;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
     /**
      * Route type flag for application-specific usage.
@@ -746,14 +626,10 @@ public class MediaRouter {
      * is expected to interpret the meaning of these events and perform the requested
      * routing tasks.</p>
      */
-<<<<<<< HEAD
-    public static final int ROUTE_TYPE_USER = 0x00800000;
-=======
     public static final int ROUTE_TYPE_USER = 1 << 23;
 
     static final int ROUTE_TYPE_ANY = ROUTE_TYPE_LIVE_AUDIO | ROUTE_TYPE_LIVE_VIDEO
             | ROUTE_TYPE_REMOTE_DISPLAY | ROUTE_TYPE_USER;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
     /**
      * Flag for {@link #addCallback}: Actively scan for routes while this callback
@@ -777,17 +653,11 @@ public class MediaRouter {
      * Flag for {@link #addCallback}: Do not filter route events.
      * <p>
      * When this flag is specified, the callback will be invoked for event that affect any
-<<<<<<< HEAD
-     * route event if they do not match the callback's associated media route selector.
-=======
      * route even if they do not match the callback's filter.
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
      * </p>
      */
     public static final int CALLBACK_FLAG_UNFILTERED_EVENTS = 1 << 1;
 
-<<<<<<< HEAD
-=======
     /**
      * Explicitly requests discovery.
      *
@@ -817,7 +687,6 @@ public class MediaRouter {
      */
     public static final int AVAILABILITY_FLAG_IGNORE_DEFAULT_ROUTE = 1 << 0;
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     // Maps application contexts
     static final HashMap<Context, MediaRouter> sRouters = new HashMap<Context, MediaRouter>();
 
@@ -829,12 +698,9 @@ public class MediaRouter {
         if ((types & ROUTE_TYPE_LIVE_VIDEO) != 0) {
             result.append("ROUTE_TYPE_LIVE_VIDEO ");
         }
-<<<<<<< HEAD
-=======
         if ((types & ROUTE_TYPE_REMOTE_DISPLAY) != 0) {
             result.append("ROUTE_TYPE_REMOTE_DISPLAY ");
         }
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         if ((types & ROUTE_TYPE_USER) != 0) {
             result.append("ROUTE_TYPE_USER ");
         }
@@ -871,14 +737,11 @@ public class MediaRouter {
         return sStatic.mSystemCategory;
     }
 
-<<<<<<< HEAD
-=======
     /** @hide */
     public RouteInfo getSelectedRoute() {
         return getSelectedRoute(ROUTE_TYPE_ANY);
     }
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     /**
      * Return the currently selected route for any of the given types
      *
@@ -902,8 +765,6 @@ public class MediaRouter {
     }
 
     /**
-<<<<<<< HEAD
-=======
      * Returns true if there is a route that matches the specified types.
      * <p>
      * This method returns true if there are any available routes that match the types
@@ -936,7 +797,6 @@ public class MediaRouter {
     }
 
     /**
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
      * Add a callback to listen to events about specific kinds of media routes.
      * If the specified callback is already registered, its registration will be updated for any
      * additional route types specified.
@@ -979,13 +839,7 @@ public class MediaRouter {
             info = new CallbackInfo(cb, types, flags, this);
             sStatic.mCallbacks.add(info);
         }
-<<<<<<< HEAD
-        if ((info.flags & CALLBACK_FLAG_PERFORM_ACTIVE_SCAN) != 0) {
-            sStatic.updateActiveScan();
-        }
-=======
         sStatic.updateDiscoveryRequest();
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     /**
@@ -996,15 +850,8 @@ public class MediaRouter {
     public void removeCallback(Callback cb) {
         int index = findCallbackInfo(cb);
         if (index >= 0) {
-<<<<<<< HEAD
-            CallbackInfo info = sStatic.mCallbacks.remove(index);
-            if ((info.flags & CALLBACK_FLAG_PERFORM_ACTIVE_SCAN) != 0) {
-                sStatic.updateActiveScan();
-            }
-=======
             sStatic.mCallbacks.remove(index);
             sStatic.updateDiscoveryRequest();
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         } else {
             Log.w(TAG, "removeCallback(" + cb + "): callback not registered");
         }
@@ -1034,22 +881,6 @@ public class MediaRouter {
      * @param route Route to select
      */
     public void selectRoute(int types, RouteInfo route) {
-<<<<<<< HEAD
-        selectRouteStatic(types, route);
-    }
-    
-    /**
-     * @hide internal use
-     */
-    public void selectRouteInt(int types, RouteInfo route) {
-        selectRouteStatic(types, route);
-    }
-
-    static void selectRouteStatic(int types, RouteInfo route) {
-        final RouteInfo oldRoute = sStatic.mSelectedRoute;
-        if (oldRoute == route) return;
-        if ((route.getSupportedTypes() & types) == 0) {
-=======
         selectRouteStatic(types, route, true);
     }
 
@@ -1064,7 +895,6 @@ public class MediaRouter {
         final RouteInfo oldRoute = sStatic.mSelectedRoute;
         if (oldRoute == route) return;
         if (!route.matchesTypes(types)) {
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             Log.w(TAG, "selectRoute ignored; cannot select route with supported types " +
                     typesToString(route.getSupportedTypes()) + " into route types " +
                     typesToString(types));
@@ -1087,30 +917,17 @@ public class MediaRouter {
         final boolean newRouteHasAddress = route != null && route.mDeviceAddress != null;
         if (activeDisplay != null || oldRouteHasAddress || newRouteHasAddress) {
             if (newRouteHasAddress && !matchesDeviceAddress(activeDisplay, route)) {
-<<<<<<< HEAD
-                sStatic.mDisplayService.connectWifiDisplay(route.mDeviceAddress);
-=======
                 if (sStatic.mCanConfigureWifiDisplays) {
                     sStatic.mDisplayService.connectWifiDisplay(route.mDeviceAddress);
                 } else {
                     Log.e(TAG, "Cannot connect to wifi displays because this process "
                             + "is not allowed to do so.");
                 }
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             } else if (activeDisplay != null && !newRouteHasAddress) {
                 sStatic.mDisplayService.disconnectWifiDisplay();
             }
         }
 
-<<<<<<< HEAD
-        if (oldRoute != null) {
-            dispatchRouteUnselected(types & oldRoute.getSupportedTypes(), oldRoute);
-        }
-        sStatic.mSelectedRoute = route;
-        if (route != null) {
-            dispatchRouteSelected(types & route.getSupportedTypes(), route);
-        }
-=======
         sStatic.setSelectedRoute(route, explicit);
 
         if (oldRoute != null) {
@@ -1138,7 +955,6 @@ public class MediaRouter {
         } else {
             selectRouteStatic(ROUTE_TYPE_ANY, sStatic.mDefaultAudioVideo, false);
         }
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     /**
@@ -1203,11 +1019,7 @@ public class MediaRouter {
      * @see #addUserRoute(UserRouteInfo)
      */
     public void removeUserRoute(UserRouteInfo info) {
-<<<<<<< HEAD
-        removeRoute(info);
-=======
         removeRouteStatic(info);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     /**
@@ -1221,11 +1033,7 @@ public class MediaRouter {
             // TODO Right now, RouteGroups only ever contain user routes.
             // The code below will need to change if this assumption does.
             if (info instanceof UserRouteInfo || info instanceof RouteGroup) {
-<<<<<<< HEAD
-                removeRouteAt(i);
-=======
                 removeRouteStatic(info);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 i--;
             }
         }
@@ -1235,17 +1043,10 @@ public class MediaRouter {
      * @hide internal use only
      */
     public void removeRouteInt(RouteInfo info) {
-<<<<<<< HEAD
-        removeRoute(info);
-    }
-
-    static void removeRoute(RouteInfo info) {
-=======
         removeRouteStatic(info);
     }
 
     static void removeRouteStatic(RouteInfo info) {
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         if (sStatic.mRoutes.remove(info)) {
             final RouteCategory removingCat = info.getCategory();
             final int count = sStatic.mRoutes.size();
@@ -1257,48 +1058,9 @@ public class MediaRouter {
                     break;
                 }
             }
-<<<<<<< HEAD
-            if (info == sStatic.mSelectedRoute) {
-                // Removing the currently selected route? Select the default before we remove it.
-                // TODO: Be smarter about the route types here; this selects for all valid.
-                if (info != sStatic.mBluetoothA2dpRoute && sStatic.mBluetoothA2dpRoute != null) {
-                    selectRouteStatic(ROUTE_TYPE_LIVE_AUDIO | ROUTE_TYPE_USER,
-                            sStatic.mBluetoothA2dpRoute);
-                } else {
-                    selectRouteStatic(ROUTE_TYPE_LIVE_AUDIO | ROUTE_TYPE_USER,
-                            sStatic.mDefaultAudioVideo);
-                }
-            }
-            if (!found) {
-                sStatic.mCategories.remove(removingCat);
-            }
-            dispatchRouteRemoved(info);
-        }
-    }
-
-    void removeRouteAt(int routeIndex) {
-        if (routeIndex >= 0 && routeIndex < sStatic.mRoutes.size()) {
-            final RouteInfo info = sStatic.mRoutes.remove(routeIndex);
-            final RouteCategory removingCat = info.getCategory();
-            final int count = sStatic.mRoutes.size();
-            boolean found = false;
-            for (int i = 0; i < count; i++) {
-                final RouteCategory cat = sStatic.mRoutes.get(i).getCategory();
-                if (removingCat == cat) {
-                    found = true;
-                    break;
-                }
-            }
-            if (info == sStatic.mSelectedRoute) {
-                // Removing the currently selected route? Select the default before we remove it.
-                // TODO: Be smarter about the route types here; this selects for all valid.
-                selectRouteStatic(ROUTE_TYPE_LIVE_AUDIO | ROUTE_TYPE_LIVE_VIDEO | ROUTE_TYPE_USER,
-                        sStatic.mDefaultAudioVideo);
-=======
             if (info.isSelected()) {
                 // Removing the currently selected route? Select the default before we remove it.
                 selectDefaultRouteStatic();
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             }
             if (!found) {
                 sStatic.mCategories.remove(removingCat);
@@ -1364,11 +1126,7 @@ public class MediaRouter {
      *
      * @see #addUserRoute(UserRouteInfo)
      * @see #removeUserRoute(UserRouteInfo)
-<<<<<<< HEAD
-     * @see #createRouteCategory(CharSequence)
-=======
      * @see #createRouteCategory(CharSequence, boolean)
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
      */
     public UserRouteInfo createUserRoute(RouteCategory category) {
         return new UserRouteInfo(category);
@@ -1396,8 +1154,6 @@ public class MediaRouter {
         return new RouteCategory(nameResId, ROUTE_TYPE_USER, isGroupable);
     }
 
-<<<<<<< HEAD
-=======
     /**
      * Rebinds the media router to handle routes that belong to the specified user.
      * Requires the interact across users permission to access the routes of another user.
@@ -1415,7 +1171,6 @@ public class MediaRouter {
         sStatic.rebindAsUser(userId);
     }
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     static void updateRoute(final RouteInfo info) {
         dispatchRouteChanged(info);
     }
@@ -1437,12 +1192,6 @@ public class MediaRouter {
     }
 
     static void dispatchRouteChanged(RouteInfo info) {
-<<<<<<< HEAD
-        for (CallbackInfo cbi : sStatic.mCallbacks) {
-            if (cbi.filterRouteEvent(info)) {
-                cbi.cb.onRouteChanged(cbi.router, info);
-            }
-=======
         dispatchRouteChanged(info, info.mSupportedTypes);
     }
 
@@ -1471,7 +1220,6 @@ public class MediaRouter {
                 }
                 cbi.cb.onRouteRemoved(cbi.router, info);
             }
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
     }
 
@@ -1542,53 +1290,6 @@ public class MediaRouter {
         }
     }
 
-<<<<<<< HEAD
-    static void updateWifiDisplayStatus(WifiDisplayStatus newStatus) {
-        final WifiDisplayStatus oldStatus = sStatic.mLastKnownWifiDisplayStatus;
-
-        // TODO Naive implementation. Make this smarter later.
-        boolean wantScan = false;
-        boolean blockScan = false;
-        WifiDisplay[] oldDisplays = oldStatus != null ?
-                oldStatus.getDisplays() : WifiDisplay.EMPTY_ARRAY;
-        WifiDisplay[] newDisplays;
-        WifiDisplay activeDisplay;
-
-        if (newStatus.getFeatureState() == WifiDisplayStatus.FEATURE_STATE_ON) {
-            newDisplays = newStatus.getDisplays();
-            activeDisplay = newStatus.getActiveDisplay();
-        } else {
-            newDisplays = WifiDisplay.EMPTY_ARRAY;
-            activeDisplay = null;
-        }
-
-        for (int i = 0; i < newDisplays.length; i++) {
-            final WifiDisplay d = newDisplays[i];
-            if (d.isRemembered()) {
-                RouteInfo route = findWifiDisplayRoute(d);
-                if (route == null) {
-                    route = makeWifiDisplayRoute(d, newStatus);
-                    addRouteStatic(route);
-                    wantScan = true;
-                } else {
-                    updateWifiDisplayRoute(route, d, newStatus);
-                }
-                if (d.equals(activeDisplay)) {
-                    selectRouteStatic(route.getSupportedTypes(), route);
-
-                    // Don't scan if we're already connected to a wifi display,
-                    // the scanning process can cause a hiccup with some configurations.
-                    blockScan = true;
-                }
-            }
-        }
-        for (int i = 0; i < oldDisplays.length; i++) {
-            final WifiDisplay d = oldDisplays[i];
-            if (d.isRemembered()) {
-                final WifiDisplay newDisplay = findMatchingDisplay(d, newDisplays);
-                if (newDisplay == null || !newDisplay.isRemembered()) {
-                    removeRoute(findWifiDisplayRoute(d));
-=======
     static void updateWifiDisplayStatus(WifiDisplayStatus status) {
         WifiDisplay[] displays;
         WifiDisplay activeDisplay;
@@ -1641,23 +1342,10 @@ public class MediaRouter {
                 WifiDisplay d = findWifiDisplay(displays, route.mDeviceAddress);
                 if (d == null || !shouldShowWifiDisplay(d, activeDisplay)) {
                     removeRouteStatic(route);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 }
             }
         }
 
-<<<<<<< HEAD
-        if (wantScan && !blockScan) {
-            sStatic.mDisplayService.scanWifiDisplays();
-        }
-
-        sStatic.mLastKnownWifiDisplayStatus = newStatus;
-    }
-
-    static int getWifiDisplayStatusCode(WifiDisplay d, WifiDisplayStatus wfdStatus) {
-        int newStatus = RouteInfo.STATUS_NONE;
-
-=======
         // Remember the current active wifi display address so that we can infer disconnections.
         // TODO: This hack will go away once all of this is moved into the media router service.
         sStatic.mPreviousActiveWifiDisplayAddress = activeDisplayAddress;
@@ -1669,7 +1357,6 @@ public class MediaRouter {
 
     static int getWifiDisplayStatusCode(WifiDisplay d, WifiDisplayStatus wfdStatus) {
         int newStatus;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         if (wfdStatus.getScanState() == WifiDisplayStatus.SCAN_STATE_SCANNING) {
             newStatus = RouteInfo.STATUS_SCANNING;
         } else if (d.isAvailable()) {
@@ -1683,11 +1370,7 @@ public class MediaRouter {
             final int activeState = wfdStatus.getActiveDisplayState();
             switch (activeState) {
                 case WifiDisplayStatus.DISPLAY_STATE_CONNECTED:
-<<<<<<< HEAD
-                    newStatus = RouteInfo.STATUS_NONE;
-=======
                     newStatus = RouteInfo.STATUS_CONNECTED;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                     break;
                 case WifiDisplayStatus.DISPLAY_STATE_CONNECTING:
                     newStatus = RouteInfo.STATUS_CONNECTING;
@@ -1708,41 +1391,23 @@ public class MediaRouter {
     static RouteInfo makeWifiDisplayRoute(WifiDisplay display, WifiDisplayStatus wfdStatus) {
         final RouteInfo newRoute = new RouteInfo(sStatic.mSystemCategory);
         newRoute.mDeviceAddress = display.getDeviceAddress();
-<<<<<<< HEAD
-        newRoute.mSupportedTypes = ROUTE_TYPE_LIVE_AUDIO | ROUTE_TYPE_LIVE_VIDEO;
-        newRoute.mVolumeHandling = RouteInfo.PLAYBACK_VOLUME_FIXED;
-        newRoute.mPlaybackType = RouteInfo.PLAYBACK_TYPE_REMOTE;
-
-        newRoute.setStatusCode(getWifiDisplayStatusCode(display, wfdStatus));
-=======
         newRoute.mSupportedTypes = ROUTE_TYPE_LIVE_AUDIO | ROUTE_TYPE_LIVE_VIDEO
                 | ROUTE_TYPE_REMOTE_DISPLAY;
         newRoute.mVolumeHandling = RouteInfo.PLAYBACK_VOLUME_FIXED;
         newRoute.mPlaybackType = RouteInfo.PLAYBACK_TYPE_REMOTE;
 
         newRoute.setRealStatusCode(getWifiDisplayStatusCode(display, wfdStatus));
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         newRoute.mEnabled = isWifiDisplayEnabled(display, wfdStatus);
         newRoute.mName = display.getFriendlyDisplayName();
         newRoute.mDescription = sStatic.mResources.getText(
                 com.android.internal.R.string.wireless_display_route_description);
-<<<<<<< HEAD
-
-        newRoute.mPresentationDisplay = choosePresentationDisplayForRoute(newRoute,
-                sStatic.getAllPresentationDisplays());
-=======
         newRoute.updatePresentationDisplay();
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         return newRoute;
     }
 
     private static void updateWifiDisplayRoute(
-<<<<<<< HEAD
-            RouteInfo route, WifiDisplay display, WifiDisplayStatus wfdStatus) {
-=======
             RouteInfo route, WifiDisplay display, WifiDisplayStatus wfdStatus,
             boolean disconnected) {
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         boolean changed = false;
         final String newName = display.getFriendlyDisplayName();
         if (!route.getName().equals(newName)) {
@@ -1754,30 +1419,12 @@ public class MediaRouter {
         changed |= route.mEnabled != enabled;
         route.mEnabled = enabled;
 
-<<<<<<< HEAD
-        changed |= route.setStatusCode(getWifiDisplayStatusCode(display, wfdStatus));
-=======
         changed |= route.setRealStatusCode(getWifiDisplayStatusCode(display, wfdStatus));
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
         if (changed) {
             dispatchRouteChanged(route);
         }
 
-<<<<<<< HEAD
-        if (!enabled && route == sStatic.mSelectedRoute) {
-            // Oops, no longer available. Reselect the default.
-            final RouteInfo defaultRoute = sStatic.mDefaultAudioVideo;
-            selectRouteStatic(defaultRoute.getSupportedTypes(), defaultRoute);
-        }
-    }
-
-    private static WifiDisplay findMatchingDisplay(WifiDisplay d, WifiDisplay[] displays) {
-        for (int i = 0; i < displays.length; i++) {
-            final WifiDisplay other = displays[i];
-            if (d.hasSameAddress(other)) {
-                return other;
-=======
         if ((!enabled || disconnected) && route.isSelected()) {
             // Oops, no longer available. Reselect the default.
             selectDefaultRouteStatic();
@@ -1789,7 +1436,6 @@ public class MediaRouter {
             final WifiDisplay d = displays[i];
             if (d.getDeviceAddress().equals(deviceAddress)) {
                 return d;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             }
         }
         return null;
@@ -1806,30 +1452,6 @@ public class MediaRouter {
         return null;
     }
 
-<<<<<<< HEAD
-    private static Display choosePresentationDisplayForRoute(RouteInfo route, Display[] displays) {
-        if ((route.mSupportedTypes & ROUTE_TYPE_LIVE_VIDEO) != 0) {
-            if (route.mDeviceAddress != null) {
-                // Find the indicated Wifi display by its address.
-                for (Display display : displays) {
-                    if (display.getType() == Display.TYPE_WIFI
-                            && route.mDeviceAddress.equals(display.getAddress())) {
-                        return display;
-                    }
-                }
-                return null;
-            }
-
-            if (route == sStatic.mDefaultAudioVideo && displays.length > 0) {
-                // Choose the first presentation display from the list.
-                return displays[0];
-            }
-        }
-        return null;
-    }
-
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     /**
      * Information about a media route.
      */
@@ -1850,18 +1472,11 @@ public class MediaRouter {
         int mPlaybackStream = AudioManager.STREAM_MUSIC;
         VolumeCallbackInfo mVcb;
         Display mPresentationDisplay;
-<<<<<<< HEAD
-=======
         int mPresentationDisplayId = -1;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
         String mDeviceAddress;
         boolean mEnabled = true;
 
-<<<<<<< HEAD
-        // A predetermined connection status that can override mStatus
-        private int mStatusCode;
-=======
         // An id by which the route is known to the media router service.
         // Null if this route only exists as an artifact within this process.
         String mGlobalRouteId;
@@ -1869,7 +1484,6 @@ public class MediaRouter {
         // A predetermined connection status that can override mStatus
         private int mRealStatusCode;
         private int mResolvedStatusCode;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
         /** @hide */ public static final int STATUS_NONE = 0;
         /** @hide */ public static final int STATUS_SCANNING = 1;
@@ -1877,31 +1491,20 @@ public class MediaRouter {
         /** @hide */ public static final int STATUS_AVAILABLE = 3;
         /** @hide */ public static final int STATUS_NOT_AVAILABLE = 4;
         /** @hide */ public static final int STATUS_IN_USE = 5;
-<<<<<<< HEAD
-=======
         /** @hide */ public static final int STATUS_CONNECTED = 6;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
         private Object mTag;
 
         /**
          * The default playback type, "local", indicating the presentation of the media is happening
          * on the same device (e.g. a phone, a tablet) as where it is controlled from.
-<<<<<<< HEAD
-         * @see #setPlaybackType(int)
-=======
          * @see #getPlaybackType()
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
          */
         public final static int PLAYBACK_TYPE_LOCAL = 0;
         /**
          * A playback type indicating the presentation of the media is happening on
          * a different device (i.e. the remote device) than where it is controlled from.
-<<<<<<< HEAD
-         * @see #setPlaybackType(int)
-=======
          * @see #getPlaybackType()
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
          */
         public final static int PLAYBACK_TYPE_REMOTE = 1;
         /**
@@ -1909,20 +1512,13 @@ public class MediaRouter {
          * controlled from this object. An example of fixed playback volume is a remote player,
          * playing over HDMI where the user prefers to control the volume on the HDMI sink, rather
          * than attenuate at the source.
-<<<<<<< HEAD
-         * @see #setVolumeHandling(int)
-=======
          * @see #getVolumeHandling()
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
          */
         public final static int PLAYBACK_VOLUME_FIXED = 0;
         /**
          * Playback information indicating the playback volume is variable and can be controlled
          * from this object.
-<<<<<<< HEAD
-=======
          * @see #getVolumeHandling()
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
          */
         public final static int PLAYBACK_VOLUME_VARIABLE = 1;
 
@@ -1991,33 +1587,6 @@ public class MediaRouter {
          * Set this route's status by predetermined status code. If the caller
          * should dispatch a route changed event this call will return true;
          */
-<<<<<<< HEAD
-        boolean setStatusCode(int statusCode) {
-            if (statusCode != mStatusCode) {
-                mStatusCode = statusCode;
-                int resId = 0;
-                switch (statusCode) {
-                    case STATUS_SCANNING:
-                        resId = com.android.internal.R.string.media_route_status_scanning;
-                        break;
-                    case STATUS_CONNECTING:
-                        resId = com.android.internal.R.string.media_route_status_connecting;
-                        break;
-                    case STATUS_AVAILABLE:
-                        resId = com.android.internal.R.string.media_route_status_available;
-                        break;
-                    case STATUS_NOT_AVAILABLE:
-                        resId = com.android.internal.R.string.media_route_status_not_available;
-                        break;
-                    case STATUS_IN_USE:
-                        resId = com.android.internal.R.string.media_route_status_in_use;
-                        break;
-                }
-                mStatus = resId != 0 ? sStatic.mResources.getText(resId) : null;
-                return true;
-            }
-            return false;
-=======
         boolean setRealStatusCode(int statusCode) {
             if (mRealStatusCode != statusCode) {
                 mRealStatusCode = statusCode;
@@ -2076,18 +1645,13 @@ public class MediaRouter {
             }
             mStatus = resId != 0 ? sStatic.mResources.getText(resId) : null;
             return true;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
 
         /**
          * @hide
          */
         public int getStatusCode() {
-<<<<<<< HEAD
-            return mStatusCode;
-=======
             return mResolvedStatusCode;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
 
         /**
@@ -2097,14 +1661,11 @@ public class MediaRouter {
             return mSupportedTypes;
         }
 
-<<<<<<< HEAD
-=======
         /** @hide */
         public boolean matchesTypes(int types) {
             return (mSupportedTypes & types) != 0;
         }
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         /**
          * @return The group that this route belongs to.
          */
@@ -2203,13 +1764,7 @@ public class MediaRouter {
                     Log.e(TAG, "Error setting local stream volume", e);
                 }
             } else {
-<<<<<<< HEAD
-                Log.e(TAG, getClass().getSimpleName() + ".requestSetVolume(): " +
-                        "Non-local volume playback on system route? " +
-                        "Could not request volume change.");
-=======
                 sStatic.requestSetVolume(this, volume);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             }
         }
 
@@ -2228,13 +1783,7 @@ public class MediaRouter {
                     Log.e(TAG, "Error setting local stream volume", e);
                 }
             } else {
-<<<<<<< HEAD
-                Log.e(TAG, getClass().getSimpleName() + ".requestChangeVolume(): " +
-                        "Non-local volume playback on system route? " +
-                        "Could not request volume change.");
-=======
                 sStatic.requestUpdateVolume(this, direction);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             }
         }
 
@@ -2296,8 +1845,6 @@ public class MediaRouter {
             return mPresentationDisplay;
         }
 
-<<<<<<< HEAD
-=======
         boolean updatePresentationDisplay() {
             Display display = choosePresentationDisplay();
             if (mPresentationDisplay != display) {
@@ -2347,7 +1894,6 @@ public class MediaRouter {
             return mDeviceAddress;
         }
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         /**
          * Returns true if this route is enabled and may be selected.
          *
@@ -2364,9 +1910,6 @@ public class MediaRouter {
          * @return True if this route is in the process of connecting.
          */
         public boolean isConnecting() {
-<<<<<<< HEAD
-            return mStatusCode == STATUS_CONNECTING;
-=======
             return mResolvedStatusCode == STATUS_CONNECTING;
         }
 
@@ -2383,7 +1926,6 @@ public class MediaRouter {
         /** @hide */
         public void select() {
             selectRouteStatic(mSupportedTypes, this, true);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
 
         void setStatusInt(CharSequence status) {
@@ -2397,10 +1939,7 @@ public class MediaRouter {
         }
 
         final IRemoteVolumeObserver.Stub mRemoteVolObserver = new IRemoteVolumeObserver.Stub() {
-<<<<<<< HEAD
-=======
             @Override
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             public void dispatchRemoteVolumeUpdate(final int direction, final int value) {
                 sStatic.mHandler.post(new Runnable() {
                     @Override
@@ -2429,11 +1968,7 @@ public class MediaRouter {
                     ", status=" + getStatus() +
                     ", category=" + getCategory() +
                     ", supportedTypes=" + supportedTypes +
-<<<<<<< HEAD
-                    ", presentationDisplay=" + mPresentationDisplay + "}";
-=======
                     ", presentationDisplay=" + mPresentationDisplay + " }";
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
     }
 
@@ -2689,10 +2224,7 @@ public class MediaRouter {
             mVolumeHandling = PLAYBACK_VOLUME_FIXED;
         }
 
-<<<<<<< HEAD
-=======
         @Override
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         CharSequence getName(Resources res) {
             if (mUpdateName) updateName();
             return super.getName(res);
@@ -2893,11 +2425,7 @@ public class MediaRouter {
             final int count = mRoutes.size();
             if (count == 0) {
                 // Don't keep empty groups in the router.
-<<<<<<< HEAD
-                MediaRouter.removeRoute(this);
-=======
                 MediaRouter.removeRouteStatic(this);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 return;
             }
 
@@ -3052,10 +2580,7 @@ public class MediaRouter {
             return mIsSystem;
         }
 
-<<<<<<< HEAD
-=======
         @Override
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         public String toString() {
             return "RouteCategory{ name=" + mName + " types=" + typesToString(mTypes) +
                     " groupable=" + mGroupable + " }";
@@ -3076,17 +2601,12 @@ public class MediaRouter {
         }
 
         public boolean filterRouteEvent(RouteInfo route) {
-<<<<<<< HEAD
-            return (flags & CALLBACK_FLAG_UNFILTERED_EVENTS) != 0
-                    || (type & route.mSupportedTypes) != 0;
-=======
             return filterRouteEvent(route.mSupportedTypes);
         }
 
         public boolean filterRouteEvent(int supportedTypes) {
             return (flags & CALLBACK_FLAG_UNFILTERED_EVENTS) != 0
                     || (type & supportedTypes) != 0;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
     }
 

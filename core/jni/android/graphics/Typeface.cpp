@@ -34,8 +34,6 @@ static SkTypeface* Typeface_create(JNIEnv* env, jobject, jstring name,
     if (NULL != name) {
         AutoJavaStringToUTF8    str(env, name);
         face = SkTypeface::CreateFromName(str.c_str(), style);
-<<<<<<< HEAD
-=======
         // Try to find the closest matching font, using the standard heuristic
         if (NULL == face) {
             face = SkTypeface::CreateFromName(str.c_str(), (SkTypeface::Style)(style ^ SkTypeface::kItalic));
@@ -43,7 +41,6 @@ static SkTypeface* Typeface_create(JNIEnv* env, jobject, jstring name,
         for (int i = 0; NULL == face && i < 4; i++) {
             face = SkTypeface::CreateFromName(str.c_str(), (SkTypeface::Style)i);
         }
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     // return the default font at the best style if no exact match exists
@@ -55,10 +52,6 @@ static SkTypeface* Typeface_create(JNIEnv* env, jobject, jstring name,
 
 static SkTypeface* Typeface_createFromTypeface(JNIEnv* env, jobject, SkTypeface* family, int style) {
     SkTypeface* face = SkTypeface::CreateFromTypeface(family, (SkTypeface::Style)style);
-<<<<<<< HEAD
-    // return the default font at the best style if the requested style does not
-    // exist in the provided family
-=======
     // Try to find the closest matching font, using the standard heuristic
     if (NULL == face) {
         face = SkTypeface::CreateFromTypeface(family, (SkTypeface::Style)(style ^ SkTypeface::kItalic));
@@ -66,7 +59,6 @@ static SkTypeface* Typeface_createFromTypeface(JNIEnv* env, jobject, SkTypeface*
     for (int i = 0; NULL == face && i < 4; i++) {
         face = SkTypeface::CreateFromTypeface(family, (SkTypeface::Style)i);
     }
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     if (NULL == face) {
         face = SkTypeface::CreateFromName(NULL, (SkTypeface::Style)style);
     }

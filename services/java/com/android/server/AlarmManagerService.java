@@ -385,12 +385,6 @@ class AlarmManagerService extends IAlarmManager.Stub {
             for (int i = 0; i < N; i++) {
                 Alarm a = batch.get(i);
                 long whenElapsed = convertToElapsed(a.when, a.type);
-<<<<<<< HEAD
-                long maxElapsed = (a.whenElapsed == a.maxWhen)
-                        ? whenElapsed
-                                : maxTriggerTime(nowElapsed, whenElapsed, a.repeatInterval);
-                setImplLocked(a.type, a.when, whenElapsed, maxElapsed,
-=======
                 final long maxElapsed;
                 if (a.whenElapsed == a.maxWhen) {
                     // Exact
@@ -404,7 +398,6 @@ class AlarmManagerService extends IAlarmManager.Stub {
                             : maxTriggerTime(nowElapsed, whenElapsed, a.repeatInterval);
                 }
                 setImplLocked(a.type, a.when, whenElapsed, a.windowLength, maxElapsed,
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                         a.repeatInterval, a.operation, batch.standalone, doValidate, a.workSource);
             }
         }
@@ -572,24 +565,11 @@ class AlarmManagerService extends IAlarmManager.Stub {
                         + " tElapsed=" + triggerElapsed + " maxElapsed=" + maxElapsed
                         + " interval=" + interval + " standalone=" + isStandalone);
             }
-<<<<<<< HEAD
-            setImplLocked(type, triggerAtTime, triggerElapsed, maxElapsed,
-=======
             setImplLocked(type, triggerAtTime, triggerElapsed, windowLength, maxElapsed,
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                     interval, operation, isStandalone, true, workSource);
         }
     }
 
-<<<<<<< HEAD
-    private void setImplLocked(int type, long when, long whenElapsed, long maxWhen, long interval,
-            PendingIntent operation, boolean isStandalone, boolean doValidate,
-            WorkSource workSource) {
-        Alarm a = new Alarm(type, when, whenElapsed, maxWhen, interval, operation, workSource);
-        removeLocked(operation);
-
-        boolean reschedule;
-=======
     private void setImplLocked(int type, long when, long whenElapsed, long windowLength,
             long maxWhen, long interval, PendingIntent operation, boolean isStandalone,
             boolean doValidate, WorkSource workSource) {
@@ -597,23 +577,14 @@ class AlarmManagerService extends IAlarmManager.Stub {
                 operation, workSource);
         removeLocked(operation);
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         int whichBatch = (isStandalone) ? -1 : attemptCoalesceLocked(whenElapsed, maxWhen);
         if (whichBatch < 0) {
             Batch batch = new Batch(a);
             batch.standalone = isStandalone;
-<<<<<<< HEAD
-            reschedule = addBatchLocked(mAlarmBatches, batch);
-        } else {
-            Batch batch = mAlarmBatches.get(whichBatch);
-            reschedule = batch.add(a);
-            if (reschedule) {
-=======
             addBatchLocked(mAlarmBatches, batch);
         } else {
             Batch batch = mAlarmBatches.get(whichBatch);
             if (batch.add(a)) {
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 // The start time of this batch advanced, so batch ordering may
                 // have just been broken.  Move it to where it now belongs.
                 mAlarmBatches.remove(whichBatch);
@@ -629,20 +600,10 @@ class AlarmManagerService extends IAlarmManager.Stub {
                         + " interval=" + interval + " op=" + operation
                         + " standalone=" + isStandalone);
                 rebatchAllAlarmsLocked(false);
-<<<<<<< HEAD
-                reschedule = true;
-            }
-        }
-
-        if (reschedule) {
-            rescheduleKernelAlarmsLocked();
-        }
-=======
             }
         }
 
         rescheduleKernelAlarmsLocked();
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     private void logBatchesLocked() {
@@ -1090,11 +1051,7 @@ class AlarmManagerService extends IAlarmManager.Stub {
                     // Also schedule its next recurrence
                     final long delta = alarm.count * alarm.repeatInterval;
                     final long nextElapsed = alarm.whenElapsed + delta;
-<<<<<<< HEAD
-                    setImplLocked(alarm.type, alarm.when + delta, nextElapsed,
-=======
                     setImplLocked(alarm.type, alarm.when + delta, nextElapsed, alarm.windowLength,
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                             maxTriggerTime(nowELAPSED, nextElapsed, alarm.repeatInterval),
                             alarm.repeatInterval, alarm.operation, batch.standalone, true,
                             alarm.workSource);
@@ -1125,29 +1082,19 @@ class AlarmManagerService extends IAlarmManager.Stub {
         public int type;
         public int count;
         public long when;
-<<<<<<< HEAD
-=======
         public long windowLength;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         public long whenElapsed;    // 'when' in the elapsed time base
         public long maxWhen;        // also in the elapsed time base
         public long repeatInterval;
         public PendingIntent operation;
         public WorkSource workSource;
         
-<<<<<<< HEAD
-        public Alarm(int _type, long _when, long _whenElapsed, long _maxWhen,
-=======
         public Alarm(int _type, long _when, long _whenElapsed, long _windowLength, long _maxWhen,
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 long _interval, PendingIntent _op, WorkSource _ws) {
             type = _type;
             when = _when;
             whenElapsed = _whenElapsed;
-<<<<<<< HEAD
-=======
             windowLength = _windowLength;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             maxWhen = _maxWhen;
             repeatInterval = _interval;
             operation = _op;
@@ -1172,10 +1119,7 @@ class AlarmManagerService extends IAlarmManager.Stub {
             pw.print(prefix); pw.print("type="); pw.print(type);
                     pw.print(" whenElapsed="); pw.print(whenElapsed);
                     pw.print(" when="); TimeUtils.formatDuration(when, now, pw);
-<<<<<<< HEAD
-=======
                     pw.print(" window="); pw.print(windowLength);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                     pw.print(" repeatInterval="); pw.print(repeatInterval);
                     pw.print(" count="); pw.println(count);
             pw.print(prefix); pw.print("operation="); pw.println(operation);

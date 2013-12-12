@@ -112,16 +112,6 @@ public class Build {
         public static final String CODENAME = getString("ro.build.version.codename");
 
         /**
-<<<<<<< HEAD
-         * The current version string that defines the slim version
-         * the device is on
-         * @hide
-         */
-        public static final String SLIM = getString("ro.slim.version");
-
-        /**
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
          * The SDK version to use when accessing resources.
          * Use the current SDK version code.  If we are a development build,
          * also allow the previous SDK version + 1.
@@ -467,8 +457,6 @@ public class Build {
          * margins correctly.</li>
          * <li> {@link android.app.ActionBar}'s window content overlay is allowed to be
          * drawn.</li>
-<<<<<<< HEAD
-=======
          * <li>The {@link android.Manifest.permission#READ_EXTERNAL_STORAGE}
          * permission is now always enforced.</li>
          * <li>Access to package-specific external storage directories belonging
@@ -476,7 +464,6 @@ public class Build {
          * {@link android.Manifest.permission#READ_EXTERNAL_STORAGE} or
          * {@link android.Manifest.permission#WRITE_EXTERNAL_STORAGE}
          * permissions.</li>
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
          * </ul>
          */
         public static final int KITKAT = 19;

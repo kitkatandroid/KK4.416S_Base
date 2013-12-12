@@ -25,17 +25,11 @@ import android.app.ActivityManager.StackBoxInfo;
 import android.graphics.Rect;
 import android.graphics.Region;
 import android.os.Debug;
-<<<<<<< HEAD
-import android.util.Slog;
-import android.view.Display;
-import android.view.DisplayInfo;
-=======
 import android.util.EventLog;
 import android.util.Slog;
 import android.view.Display;
 import android.view.DisplayInfo;
 import com.android.server.EventLogTags;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -105,12 +99,6 @@ class DisplayContent {
     /** True when the home StackBox is at the top of mStackBoxes, false otherwise. */
     private TaskStack mHomeStack = null;
 
-<<<<<<< HEAD
-    /** Sorted most recent at top, oldest at [0]. */
-    ArrayList<TaskStack> mStackHistory = new ArrayList<TaskStack>();
-
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     /** Detect user tapping outside of current focused stack bounds .*/
     StackTapPointerEventListener mTapDetector;
 
@@ -118,11 +106,7 @@ class DisplayContent {
     Region mTouchExcludeRegion = new Region();
 
     /** Save allocating when retrieving tasks */
-<<<<<<< HEAD
-    ArrayList<Task> mTmpTasks = new ArrayList<Task>();
-=======
     private ArrayList<Task> mTaskHistory = new ArrayList<Task>();
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
     /** Save allocating when calculating rects */
     Rect mTmpRect = new Rect();
@@ -175,15 +159,6 @@ class DisplayContent {
         return mStackBoxes.get(0).mStack != mHomeStack;
     }
 
-<<<<<<< HEAD
-    void moveStack(TaskStack stack, boolean toTop) {
-        mStackHistory.remove(stack);
-        mStackHistory.add(toTop ? mStackHistory.size() : 0, stack);
-        mService.moveStackWindowsLocked(stack);
-    }
-
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     public boolean isPrivate() {
         return (mDisplay.getFlags() & Display.FLAG_PRIVATE) != 0;
     }
@@ -193,16 +168,6 @@ class DisplayContent {
      * @return All the Tasks, in order, on this display.
      */
     ArrayList<Task> getTasks() {
-<<<<<<< HEAD
-        mTmpTasks.clear();
-        final int numStacks = mStackHistory.size();
-        for (int stackNdx = 0; stackNdx < numStacks; ++stackNdx) {
-            mTmpTasks.addAll(mStackHistory.get(stackNdx).getTasks());
-        }
-        if (WindowManagerService.DEBUG_LAYERS) Slog.i(TAG, "getTasks: mStackHistory=" +
-                mStackHistory);
-        return mTmpTasks;
-=======
         return mTaskHistory;
     }
 
@@ -233,7 +198,6 @@ class DisplayContent {
 
     void removeTask(Task task) {
         mTaskHistory.remove(task);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     TaskStack getHomeStack() {
@@ -256,16 +220,9 @@ class DisplayContent {
 
     /** @return The number of tokens in all of the Tasks on this display. */
     int numTokens() {
-<<<<<<< HEAD
-        getTasks();
-        int count = 0;
-        for (int taskNdx = mTmpTasks.size() - 1; taskNdx >= 0; --taskNdx) {
-            count += mTmpTasks.get(taskNdx).mAppTokens.size();
-=======
         int count = 0;
         for (int taskNdx = mTaskHistory.size() - 1; taskNdx >= 0; --taskNdx) {
             count += mTaskHistory.get(taskNdx).mAppTokens.size();
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
         return count;
     }
@@ -314,11 +271,8 @@ class DisplayContent {
         if (newStack != null) {
             layoutNeeded = true;
         }
-<<<<<<< HEAD
-=======
         EventLog.writeEvent(EventLogTags.WM_STACK_CREATED, stackId, relativeStackBoxId, position,
                 (int)(weight * 100 + 0.5));
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         return newStack;
     }
 
@@ -387,10 +341,7 @@ class DisplayContent {
     boolean moveHomeStackBox(boolean toTop) {
         if (DEBUG_STACK) Slog.d(TAG, "moveHomeStackBox: toTop=" + toTop + " Callers=" +
                 Debug.getCallers(4));
-<<<<<<< HEAD
-=======
         EventLog.writeEvent(EventLogTags.WM_HOME_STACK_MOVED, toTop ? 1 : 0);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         switch (mStackBoxes.size()) {
             case 0: throw new RuntimeException("moveHomeStackBox: No home StackBox!");
             case 1: return false; // Only the home StackBox exists.
@@ -535,13 +486,8 @@ class DisplayContent {
             pw.println();
             pw.println("  Application tokens in Z order:");
             getTasks();
-<<<<<<< HEAD
-            for (int taskNdx = mTmpTasks.size() - 1; taskNdx >= 0; --taskNdx) {
-                AppTokenList tokens = mTmpTasks.get(taskNdx).mAppTokens;
-=======
             for (int taskNdx = mTaskHistory.size() - 1; taskNdx >= 0; --taskNdx) {
                 AppTokenList tokens = mTaskHistory.get(taskNdx).mAppTokens;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 for (int tokenNdx = tokens.size() - 1; tokenNdx >= 0; --tokenNdx) {
                     final AppWindowToken wtoken = tokens.get(tokenNdx);
                     pw.print("  App #"); pw.print(ndx--);

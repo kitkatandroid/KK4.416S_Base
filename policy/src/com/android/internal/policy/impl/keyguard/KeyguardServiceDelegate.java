@@ -40,8 +40,6 @@ public class KeyguardServiceDelegate {
     private KeyguardState mKeyguardState = new KeyguardState();
 
     /* package */ static final class KeyguardState {
-<<<<<<< HEAD
-=======
         KeyguardState() {
             // Assume keyguard is showing and secure until we know for sure. This is here in
             // the event something checks before the service is actually started.
@@ -50,7 +48,6 @@ public class KeyguardServiceDelegate {
             showingAndNotHidden = true;
             secure = true;
         }
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         boolean showing;
         boolean showingAndNotHidden;
         boolean inputRestricted;
@@ -266,15 +263,6 @@ public class KeyguardServiceDelegate {
         }
     }
 
-<<<<<<< HEAD
-    public void showCustomIntent(Intent intent) {
-        if (mKeyguardService != null) {
-            mKeyguardService.showCustomIntent(intent);
-        }
-    }
-
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     public void setCurrentUser(int newUserId) {
         if (mKeyguardService != null) {
             mKeyguardService.setCurrentUser(newUserId);

@@ -23,12 +23,9 @@ import android.os.Message;
 import android.os.SystemClock;
 import android.os.SystemProperties;
 import android.util.Log;
-<<<<<<< HEAD
-=======
 import android.util.TimeUtils;
 
 import java.io.PrintWriter;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
 /**
  * Coordinates the timing of animations, input and drawing.
@@ -262,8 +259,6 @@ public final class Choreographer {
         return delayMillis <= frameDelay ? 0 : delayMillis - frameDelay;
     }
 
-<<<<<<< HEAD
-=======
     void dump(String prefix, PrintWriter writer) {
         String innerPrefix = prefix + "  ";
         writer.print(prefix); writer.println("Choreographer:");
@@ -273,7 +268,6 @@ public final class Choreographer {
                 writer.println(TimeUtils.formatUptime(mLastFrameTimeNanos / 1000000));
     }
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     /**
      * Posts a callback to run on the next frame.
      * <p>

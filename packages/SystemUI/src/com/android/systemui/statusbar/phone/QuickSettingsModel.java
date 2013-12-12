@@ -27,12 +27,8 @@ import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.graphics.drawable.Drawable;
-<<<<<<< HEAD
-import android.hardware.display.WifiDisplayStatus;
-=======
 import android.media.MediaRouter;
 import android.media.MediaRouter.RouteInfo;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import android.net.ConnectivityManager;
 import android.os.Handler;
 import android.os.UserHandle;
@@ -62,10 +58,6 @@ class QuickSettingsModel implements BluetoothStateChangeCallback,
         BrightnessStateChangeCallback,
         RotationLockControllerCallback,
         LocationSettingsChangeCallback {
-<<<<<<< HEAD
-
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     // Sett InputMethoManagerService
     private static final String TAG_TRY_SUPPRESSING_IME_SWITCHER = "TrySuppressingImeSwitcher";
 
@@ -207,8 +199,6 @@ class QuickSettingsModel implements BluetoothStateChangeCallback,
         }
     }
 
-<<<<<<< HEAD
-=======
     /** Callback for changes to remote display routes. */
     private class RemoteDisplayRouteCallback extends MediaRouter.SimpleCallback {
         @Override
@@ -233,7 +223,6 @@ class QuickSettingsModel implements BluetoothStateChangeCallback,
         }
     }
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     private final Context mContext;
     private final Handler mHandler;
     private final CurrentUserTracker mUserTracker;
@@ -241,12 +230,9 @@ class QuickSettingsModel implements BluetoothStateChangeCallback,
     private final BugreportObserver mBugreportObserver;
     private final BrightnessObserver mBrightnessObserver;
 
-<<<<<<< HEAD
-=======
     private final MediaRouter mMediaRouter;
     private final RemoteDisplayRouteCallback mRemoteDisplayRouteCallback;
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     private final boolean mHasMobileData;
 
     private QuickSettingsTileView mUserTile;
@@ -269,15 +255,9 @@ class QuickSettingsModel implements BluetoothStateChangeCallback,
     private RefreshCallback mWifiCallback;
     private WifiState mWifiState = new WifiState();
 
-<<<<<<< HEAD
-    private QuickSettingsTileView mWifiDisplayTile;
-    private RefreshCallback mWifiDisplayCallback;
-    private State mWifiDisplayState = new State();
-=======
     private QuickSettingsTileView mRemoteDisplayTile;
     private RefreshCallback mRemoteDisplayCallback;
     private State mRemoteDisplayState = new State();
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
     private QuickSettingsTileView mRSSITile;
     private RefreshCallback mRSSICallback;
@@ -325,14 +305,6 @@ class QuickSettingsModel implements BluetoothStateChangeCallback,
         mContext = context;
         mHandler = new Handler();
         mUserTracker = new CurrentUserTracker(mContext) {
-<<<<<<< HEAD
-            public void onUserSwitched(int newUserId) {
-                mBrightnessObserver.startObserving();
-                onRotationLockChanged();
-                onBrightnessLevelChanged();
-                onNextAlarmChanged();
-                onBugreportChanged();
-=======
             @Override
             public void onUserSwitched(int newUserId) {
                 mBrightnessObserver.startObserving();
@@ -341,7 +313,6 @@ class QuickSettingsModel implements BluetoothStateChangeCallback,
                 onNextAlarmChanged();
                 onBugreportChanged();
                 rebindMediaRouterAsCurrentUser();
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             }
         };
 
@@ -352,14 +323,11 @@ class QuickSettingsModel implements BluetoothStateChangeCallback,
         mBrightnessObserver = new BrightnessObserver(mHandler);
         mBrightnessObserver.startObserving();
 
-<<<<<<< HEAD
-=======
         mMediaRouter = (MediaRouter)context.getSystemService(Context.MEDIA_ROUTER_SERVICE);
         rebindMediaRouterAsCurrentUser();
 
         mRemoteDisplayRouteCallback = new RemoteDisplayRouteCallback();
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         ConnectivityManager cm = (ConnectivityManager)
                 context.getSystemService(Context.CONNECTIVITY_SERVICE);
         mHasMobileData = cm.isNetworkSupported(ConnectivityManager.TYPE_MOBILE);
@@ -639,13 +607,7 @@ class QuickSettingsModel implements BluetoothStateChangeCallback,
         mBatteryCallback.refreshView(mBatteryTile, mBatteryState);
     }
     void refreshBatteryTile() {
-<<<<<<< HEAD
-        if (mBatteryCallback != null) {
-            mBatteryCallback.refreshView(mBatteryTile, mBatteryState);
-        }
-=======
         mBatteryCallback.refreshView(mBatteryTile, mBatteryState);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     // Location
@@ -693,26 +655,6 @@ class QuickSettingsModel implements BluetoothStateChangeCallback,
         mBugreportCallback.refreshView(mBugreportTile, mBugreportState);
     }
 
-<<<<<<< HEAD
-    // Wifi Display
-    void addWifiDisplayTile(QuickSettingsTileView view, RefreshCallback cb) {
-        mWifiDisplayTile = view;
-        mWifiDisplayCallback = cb;
-    }
-    public void onWifiDisplayStateChanged(WifiDisplayStatus status) {
-        mWifiDisplayState.enabled =
-                (status.getFeatureState() == WifiDisplayStatus.FEATURE_STATE_ON);
-        if (status.getActiveDisplay() != null) {
-            mWifiDisplayState.label = status.getActiveDisplay().getFriendlyDisplayName();
-            mWifiDisplayState.iconId = R.drawable.ic_qs_remote_display_connected;
-        } else {
-            mWifiDisplayState.label = mContext.getString(
-                    R.string.quick_settings_wifi_display_no_connection_label);
-            mWifiDisplayState.iconId = R.drawable.ic_qs_remote_display;
-        }
-        mWifiDisplayCallback.refreshView(mWifiDisplayTile, mWifiDisplayState);
-
-=======
     // Remote Display
     void addRemoteDisplayTile(QuickSettingsTileView view, RefreshCallback cb) {
         mRemoteDisplayTile = view;
@@ -765,7 +707,6 @@ class QuickSettingsModel implements BluetoothStateChangeCallback,
             mRemoteDisplayState.iconId = R.drawable.ic_qs_cast_available;
         }
         mRemoteDisplayCallback.refreshView(mRemoteDisplayTile, mRemoteDisplayState);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     // IME

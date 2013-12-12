@@ -18,17 +18,9 @@ package com.android.systemui.settings;
 
 import android.app.Dialog;
 import android.content.Context;
-<<<<<<< HEAD
-import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.View;
-=======
-import android.content.res.Resources;
-import android.os.Bundle;
-import android.os.Handler;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -45,13 +37,6 @@ public class BrightnessDialog extends Dialog implements
     protected Handler mHandler = new Handler();
 
     private BrightnessController mBrightnessController;
-<<<<<<< HEAD
-    private ToggleSlider mSlider;
-    private View mSetupButtonPlaceholder;
-    private View mSetupButtonDivider;
-    private ImageView mSetupButton;
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     private final int mBrightnessDialogLongTimeout;
     private final int mBrightnessDialogShortTimeout;
 
@@ -90,48 +75,17 @@ public class BrightnessDialog extends Dialog implements
 
         setContentView(R.layout.quick_settings_brightness_dialog);
         setCanceledOnTouchOutside(true);
-<<<<<<< HEAD
-
-        mSlider = (ToggleSlider) findViewById(R.id.brightness_slider);
-        mSetupButtonPlaceholder = findViewById(R.id.brightness_setup_button_placeholder);
-        mSetupButtonDivider = findViewById(R.id.brightness_setup_button_divider);
-        mSetupButton = (ImageView) findViewById(R.id.brightness_setup_button);
-        mSetupButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent();
-                intent.setClassName("com.android.settings",
-                        "com.android.settings.slim.AutoBrightnessSetup");
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-                        | Intent.FLAG_ACTIVITY_SINGLE_TOP
-                        | Intent.FLAG_ACTIVITY_CLEAR_TOP
-                        | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
-                getContext().startActivity(intent);
-                dismissBrightnessDialog(0);
-            }
-        });
-    }
-
-=======
     }
 
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     @Override
     protected void onStart() {
         super.onStart();
         mBrightnessController = new BrightnessController(getContext(),
-<<<<<<< HEAD
-                (ImageView) findViewById(R.id.brightness_icon), mSlider);
-        dismissBrightnessDialog(mBrightnessDialogLongTimeout);
-        mBrightnessController.addStateChangedCallback(this);
-        updateSetupButtonVisibility();
-=======
                 (ImageView) findViewById(R.id.brightness_icon),
                 (ToggleSlider) findViewById(R.id.brightness_slider));
         dismissBrightnessDialog(mBrightnessDialogLongTimeout);
         mBrightnessController.addStateChangedCallback(this);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     @Override
@@ -143,17 +97,6 @@ public class BrightnessDialog extends Dialog implements
 
     public void onBrightnessLevelChanged() {
         dismissBrightnessDialog(mBrightnessDialogShortTimeout);
-<<<<<<< HEAD
-        updateSetupButtonVisibility();
-    }
-
-    private void updateSetupButtonVisibility() {
-        boolean isAuto = mSlider.isChecked();
-        mSetupButtonPlaceholder.setVisibility(isAuto ? View.GONE : View.VISIBLE);
-        mSetupButtonDivider.setVisibility(isAuto ? View.VISIBLE : View.GONE);
-        mSetupButton.setVisibility(isAuto ? View.VISIBLE : View.GONE);
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     private void dismissBrightnessDialog(int timeout) {

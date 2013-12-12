@@ -209,11 +209,7 @@ public class MultiSelectListPreference extends DialogPreference {
     @Override
     protected Object onGetDefaultValue(TypedArray a, int index) {
         final CharSequence[] defaultValues = a.getTextArray(index);
-<<<<<<< HEAD
-        final int valueCount = defaultValues != null ? defaultValues.length : 0;
-=======
         final int valueCount = defaultValues.length;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         final Set<String> result = new HashSet<String>();
         
         for (int i = 0; i < valueCount; i++) {

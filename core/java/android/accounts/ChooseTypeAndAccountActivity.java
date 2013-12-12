@@ -267,13 +267,6 @@ public class ChooseTypeAndAccountActivity extends Activity
             outState.putParcelableArray(KEY_INSTANCE_STATE_EXISTING_ACCOUNTS, mExistingAccounts);
         }
         if (mSelectedItemIndex != SELECTED_ITEM_NONE) {
-<<<<<<< HEAD
-            if (mAccounts == null) {
-                final AccountManager accountManager = AccountManager.get(this);
-                mAccounts = getAcceptableAccountChoices(accountManager);
-            }
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             if (mSelectedItemIndex == mAccounts.size()) {
                 outState.putBoolean(KEY_INSTANCE_STATE_SELECTED_ADD_ACCOUNT, true);
             } else {
@@ -315,13 +308,6 @@ public class ChooseTypeAndAccountActivity extends Activity
         mPendingRequest = REQUEST_NULL;
 
         if (resultCode == RESULT_CANCELED) {
-<<<<<<< HEAD
-            if (mAccounts == null) {
-                final AccountManager accountManager = AccountManager.get(this);
-                mAccounts = getAcceptableAccountChoices(accountManager);
-            }
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             // if canceling out of addAccount and the original state caused us to skip this,
             // finish this activity
             if (mAccounts.isEmpty()) {

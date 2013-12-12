@@ -1153,11 +1153,7 @@
          href="{@docRoot}guide/topics/manifest/uses-sdk-element.html#target">{@code
          targetSdkVersion}</a> is 4 or higher.-->
     <permission android:name="android.permission.READ_EXTERNAL_STORAGE"
-<<<<<<< HEAD
-        android:permissionGroup="android.permission-group.SYSTEM_TOOLS"
-=======
         android:permissionGroup="android.permission-group.STORAGE"
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         android:label="@string/permlab_sdcardRead"
         android:description="@string/permdesc_sdcardRead"
         android:protectionLevel="normal" />
@@ -1996,8 +1992,6 @@
         android:description="@string/permdesc_bindWallpaper"
         android:protectionLevel="signature|system" />
 
-<<<<<<< HEAD
-=======
     <!-- Must be required by a {@link com.android.media.remotedisplay.RemoteDisplayProvider},
          to ensure that only the system can bind to it.
          @hide -->
@@ -2006,7 +2000,6 @@
         android:description="@string/permdesc_bindRemoteDisplay"
         android:protectionLevel="signature" />
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     <!-- Must be required by device administration receiver, to ensure that only the
          system can interact with it. -->
     <permission android:name="android.permission.BIND_DEVICE_ADMIN"
@@ -2204,20 +2197,8 @@
         android:description="@string/permdesc_broadcastPackageRemoved"
         android:protectionLevel="signature" />
 
-<<<<<<< HEAD
-    <!-- Allows an application to intercept and rewrite outgoing SMS
-         @hide -->
-    <permission android:name="android.permission.INTERCEPT_SMS"
-        android:permissionGroup="android.permission-group.MESSAGES"
-        android:label="@string/permlab_interceptSmsSent"
-        android:description="@string/permdesc_interceptSmsSent"
-        android:protectionLevel="signature" />
-
-    <!-- Allows an application to broadcast an SMS receipt notification -->
-=======
     <!-- Allows an application to broadcast an SMS receipt notification.
     <p>Not for use by third-party applications. -->
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     <permission android:name="android.permission.BROADCAST_SMS"
         android:permissionGroup="android.permission-group.MESSAGES"
         android:label="@string/permlab_broadcastSmsReceived"
@@ -2708,8 +2689,6 @@
         <service android:name="android.hardware.location.GeofenceHardwareService"
             android:permission="android.permission.LOCATION_HARDWARE"
             android:exported="false" />
-<<<<<<< HEAD
-=======
 
         <service android:name="com.android.internal.backup.LocalTransportService"
                 android:permission="android.permission.CONFIRM_FULL_BACKUP"
@@ -2719,7 +2698,6 @@
             </intent-filter>
         </service>
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     </application>
 
 </manifest>

@@ -59,10 +59,6 @@ public final class Looper {
 
     final MessageQueue mQueue;
     final Thread mThread;
-<<<<<<< HEAD
-    volatile boolean mRun;
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
     private Printer mLogging;
 
@@ -190,10 +186,6 @@ public final class Looper {
 
     private Looper(boolean quitAllowed) {
         mQueue = new MessageQueue(quitAllowed);
-<<<<<<< HEAD
-        mRun = true;
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         mThread = Thread.currentThread();
     }
 
@@ -306,30 +298,6 @@ public final class Looper {
     }
 
     public void dump(Printer pw, String prefix) {
-<<<<<<< HEAD
-        pw = PrefixPrinter.create(pw, prefix);
-        pw.println(this.toString());
-        pw.println("mRun=" + mRun);
-        pw.println("mThread=" + mThread);
-        pw.println("mQueue=" + ((mQueue != null) ? mQueue : "(null"));
-        if (mQueue != null) {
-            synchronized (mQueue) {
-                long now = SystemClock.uptimeMillis();
-                Message msg = mQueue.mMessages;
-                int n = 0;
-                while (msg != null) {
-                    pw.println("  Message " + n + ": " + msg.toString(now));
-                    n++;
-                    msg = msg.next;
-                }
-                pw.println("(Total messages: " + n + ")");
-            }
-        }
-    }
-
-    public String toString() {
-        return "Looper{" + Integer.toHexString(System.identityHashCode(this)) + "}";
-=======
         pw.println(prefix + toString());
         mQueue.dump(pw, prefix + "  ");
     }
@@ -337,6 +305,5 @@ public final class Looper {
     public String toString() {
         return "Looper (" + mThread.getName() + ", tid " + mThread.getId()
                 + ") {" + Integer.toHexString(System.identityHashCode(this)) + "}";
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 }

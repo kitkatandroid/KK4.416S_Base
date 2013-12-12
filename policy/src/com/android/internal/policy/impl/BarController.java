@@ -37,14 +37,9 @@ public class BarController {
     private static final boolean DEBUG = false;
 
     private static final int TRANSIENT_BAR_NONE = 0;
-<<<<<<< HEAD
-    private static final int TRANSIENT_BAR_SHOWING = 1;
-    private static final int TRANSIENT_BAR_HIDING = 2;
-=======
     private static final int TRANSIENT_BAR_SHOW_REQUESTED = 1;
     private static final int TRANSIENT_BAR_SHOWING = 2;
     private static final int TRANSIENT_BAR_HIDING = 3;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
     private static final int TRANSLUCENT_ANIMATION_DELAY_MS = 1000;
 
@@ -79,19 +74,9 @@ public class BarController {
         mWin = win;
     }
 
-<<<<<<< HEAD
-    public boolean isHidden() {
-        return mState == StatusBarManager.WINDOW_STATE_HIDDEN;
-    }
-
-    public void showTransient() {
-        if (mWin != null) {
-            setTransientBarState(TRANSIENT_BAR_SHOWING);
-=======
     public void showTransient() {
         if (mWin != null) {
             setTransientBarState(TRANSIENT_BAR_SHOW_REQUESTED);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
     }
 
@@ -99,13 +84,10 @@ public class BarController {
         return mTransientBarState == TRANSIENT_BAR_SHOWING;
     }
 
-<<<<<<< HEAD
-=======
     public boolean isTransientShowRequested() {
         return mTransientBarState == TRANSIENT_BAR_SHOW_REQUESTED;
     }
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     public boolean wasRecentlyTranslucent() {
         return (SystemClock.uptimeMillis() - mLastTranslucent) < TRANSLUCENT_ANIMATION_DELAY_MS;
     }
@@ -148,13 +130,8 @@ public class BarController {
         final boolean wasAnim = mWin.isAnimatingLw();
         final boolean change = show ? mWin.showLw(true) : mWin.hideLw(true);
         final int state = computeStateLw(wasVis, wasAnim, mWin, change);
-<<<<<<< HEAD
-        updateStateLw(state);
-        return change;
-=======
         final boolean stateChanged = updateStateLw(state);
         return change || stateChanged;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     private int computeStateLw(boolean wasVis, boolean wasAnim, WindowState win, boolean change) {
@@ -163,11 +140,8 @@ public class BarController {
             final boolean anim = win.isAnimatingLw();
             if (mState == StatusBarManager.WINDOW_STATE_HIDING && !change && !vis) {
                 return StatusBarManager.WINDOW_STATE_HIDDEN;
-<<<<<<< HEAD
-=======
             } else if (mState == StatusBarManager.WINDOW_STATE_HIDDEN && vis) {
                 return StatusBarManager.WINDOW_STATE_SHOWING;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             } else if (change) {
                 if (wasVis && vis && !wasAnim && anim) {
                     return StatusBarManager.WINDOW_STATE_HIDING;
@@ -179,11 +153,7 @@ public class BarController {
         return mState;
     }
 
-<<<<<<< HEAD
-    private void updateStateLw(final int state) {
-=======
     private boolean updateStateLw(final int state) {
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         if (state != mState) {
             mState = state;
             if (DEBUG) Slog.d(mTag, "mState: " + StatusBarManager.windowStateToString(state));
@@ -202,13 +172,9 @@ public class BarController {
                     }
                 }
             });
-<<<<<<< HEAD
-        }
-=======
             return true;
         }
         return false;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     public boolean checkHiddenLw() {
@@ -233,12 +199,9 @@ public class BarController {
         if (mTransientBarState == TRANSIENT_BAR_SHOWING) {
             if (DEBUG) Slog.d(mTag, "Not showing transient bar, already shown");
             return false;
-<<<<<<< HEAD
-=======
         } else if (mTransientBarState == TRANSIENT_BAR_SHOW_REQUESTED) {
             if (DEBUG) Slog.d(mTag, "Not showing transient bar, already requested");
             return false;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         } else if (mWin == null) {
             if (DEBUG) Slog.d(mTag, "Not showing transient bar, bar doesn't exist");
             return false;
@@ -252,20 +215,13 @@ public class BarController {
 
     public int updateVisibilityLw(boolean transientAllowed, int oldVis, int vis) {
         if (mWin == null) return vis;
-<<<<<<< HEAD
-        if (mTransientBarState == TRANSIENT_BAR_SHOWING) { // transient bar requested
-=======
         if (isTransientShowing() || isTransientShowRequested()) { // transient bar requested
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             if (transientAllowed) {
                 vis |= mTransientFlag;
                 if ((oldVis & mTransientFlag) == 0) {
                     vis |= mUnhideFlag;  // tell sysui we're ready to unhide
                 }
-<<<<<<< HEAD
-=======
                 setTransientBarState(TRANSIENT_BAR_SHOWING);  // request accepted
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             } else {
                 setTransientBarState(TRANSIENT_BAR_NONE);  // request denied
             }
@@ -303,10 +259,7 @@ public class BarController {
     private static String transientBarStateToString(int state) {
         if (state == TRANSIENT_BAR_HIDING) return "TRANSIENT_BAR_HIDING";
         if (state == TRANSIENT_BAR_SHOWING) return "TRANSIENT_BAR_SHOWING";
-<<<<<<< HEAD
-=======
         if (state == TRANSIENT_BAR_SHOW_REQUESTED) return "TRANSIENT_BAR_SHOW_REQUESTED";
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         if (state == TRANSIENT_BAR_NONE) return "TRANSIENT_BAR_NONE";
         throw new IllegalArgumentException("Unknown state " + state);
     }

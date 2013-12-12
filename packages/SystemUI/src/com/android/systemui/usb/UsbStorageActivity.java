@@ -186,11 +186,7 @@ public class UsbStorageActivity extends Activity
         super.onPause();
 
         unregisterReceiver(mUsbStateReceiver);
-<<<<<<< HEAD
-        if (mStorageManager != null && mStorageListener != null) {
-=======
         if (mStorageManager == null && mStorageListener != null) {
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             mStorageManager.unregisterListener(mStorageListener);
         }
     }

@@ -77,10 +77,6 @@ import android.os.ServiceManager;
 import android.os.SystemClock;
 import android.os.UserHandle;
 import android.provider.Settings;
-<<<<<<< HEAD
-import android.provider.Settings.SettingNotFoundException;
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import android.text.TextUtils;
 import android.text.style.SuggestionSpan;
 import android.util.AtomicFile;
@@ -313,12 +309,9 @@ public class InputMethodManagerService extends IInputMethodManager.Stub
             mShortcutInputMethodsAndSubtypes =
                 new HashMap<InputMethodInfo, ArrayList<InputMethodSubtype>>();
 
-<<<<<<< HEAD
-=======
     // Was the keyguard locked when this client became current?
     private boolean mCurClientInKeyguard;
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     /**
      * Set to true if our ServiceConnection is currently actively bound to
      * a service (whether or not we have gotten its IBinder back yet).
@@ -395,16 +388,10 @@ public class InputMethodManagerService extends IInputMethodManager.Stub
     private Locale mLastSystemLocale;
     private final MyPackageMonitor mMyPackageMonitor = new MyPackageMonitor();
     private final IPackageManager mIPackageManager;
-<<<<<<< HEAD
-    private boolean mInputBoundToKeyguard;
-
-    class SettingsObserver extends ContentObserver {
-=======
 
     class SettingsObserver extends ContentObserver {
         String mLastEnabled = "";
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         SettingsObserver(Handler handler) {
             super(handler);
             ContentResolver resolver = mContext.getContentResolver();
@@ -414,15 +401,6 @@ public class InputMethodManagerService extends IInputMethodManager.Stub
                     Settings.Secure.ENABLED_INPUT_METHODS), false, this);
             resolver.registerContentObserver(Settings.Secure.getUriFor(
                     Settings.Secure.SELECTED_INPUT_METHOD_SUBTYPE), false, this);
-<<<<<<< HEAD
-            resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.STATUS_BAR_IME_SWITCHER),
-                    false, this, UserHandle.USER_ALL);
-        }
-
-        @Override public void onChange(boolean selfChange) {
-            updateFromSettingsLocked(true);
-=======
         }
 
         @Override public void onChange(boolean selfChange) {
@@ -435,7 +413,6 @@ public class InputMethodManagerService extends IInputMethodManager.Stub
                 }
                 updateFromSettingsLocked(enabledChanged);
             }
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
     }
 
@@ -862,11 +839,8 @@ public class InputMethodManagerService extends IInputMethodManager.Stub
                 mStatusBar = statusBar;
                 statusBar.setIconVisibility("ime", false);
                 updateImeWindowStatusLocked();
-<<<<<<< HEAD
-=======
                 mShowOngoingImeSwitcherForPhones = mRes.getBoolean(
                         com.android.internal.R.bool.show_ongoing_ime_switcher);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 if (mShowOngoingImeSwitcherForPhones) {
                     mWindowManagerService.setOnHardKeyboardStatusChangeListener(
                             mHardKeyboardListener);
@@ -902,15 +876,6 @@ public class InputMethodManagerService extends IInputMethodManager.Stub
         final boolean hardKeyShown = haveHardKeyboard
                 && conf.hardKeyboardHidden
                         != Configuration.HARDKEYBOARDHIDDEN_YES;
-<<<<<<< HEAD
-        final boolean isScreenLocked =
-                mKeyguardManager != null && mKeyguardManager.isKeyguardLocked();
-        final boolean isScreenSecurelyLocked =
-                isScreenLocked && mKeyguardManager.isKeyguardSecure();
-        final boolean inputShown = mInputShown && (!isScreenLocked || mInputBoundToKeyguard);
-        mImeWindowVis = (!isScreenSecurelyLocked && (inputShown || hardKeyShown)) ?
-                (InputMethodService.IME_ACTIVE | InputMethodService.IME_VISIBLE) : 0;
-=======
 
         final boolean isScreenLocked = isKeyguardLocked();
         final boolean inputActive = !isScreenLocked && (mInputShown || hardKeyShown);
@@ -919,7 +884,6 @@ public class InputMethodManagerService extends IInputMethodManager.Stub
         final boolean inputVisible = inputActive && !hardKeyShown;
         mImeWindowVis = (inputActive ? InputMethodService.IME_ACTIVE : 0)
                 | (inputVisible ? InputMethodService.IME_VISIBLE : 0);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         updateImeWindowStatusLocked();
     }
 
@@ -1170,29 +1134,14 @@ public class InputMethodManagerService extends IInputMethodManager.Stub
             return mNoBinding;
         }
 
-<<<<<<< HEAD
-        if (mCurClient == null) {
-            mInputBoundToKeyguard = mKeyguardManager != null && mKeyguardManager.isKeyguardLocked();
-            if (DEBUG) {
-                Slog.v(TAG, "New bind. keyguard = " +  mInputBoundToKeyguard);
-            }
-        }
-
-        if (mCurClient != cs) {
-=======
         if (mCurClient != cs) {
             // Was the keyguard locked when switching over to the new client?
             mCurClientInKeyguard = isKeyguardLocked();
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             // If the client is changing, we need to switch over to the new
             // one.
             unbindCurrentClientLocked();
             if (DEBUG) Slog.v(TAG, "switching to client: client = "
-<<<<<<< HEAD
-                    + cs.client.asBinder());
-=======
                     + cs.client.asBinder() + " keyguard=" + mCurClientInKeyguard);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
             // If the screen is on, inform the new client it is active
             if (mScreenOn) {
@@ -1544,13 +1493,10 @@ public class InputMethodManagerService extends IInputMethodManager.Stub
         }
     }
 
-<<<<<<< HEAD
-=======
     private boolean isKeyguardLocked() {
         return mKeyguardManager != null && mKeyguardManager.isKeyguardLocked();
     }
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     // Caution! This method is called in this class. Handle multi-user carefully
     @SuppressWarnings("deprecation")
     @Override
@@ -1562,16 +1508,11 @@ public class InputMethodManagerService extends IInputMethodManager.Stub
                 Slog.w(TAG, "Ignoring setImeWindowStatus of uid " + uid + " token: " + token);
                 return;
             }
-<<<<<<< HEAD
-
-            synchronized (mMethodMap) {
-=======
             synchronized (mMethodMap) {
                 // apply policy for binder calls
                 if (vis != 0 && isKeyguardLocked() && !mCurClientInKeyguard) {
                     vis = 0;
                 }
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 mImeWindowVis = vis;
                 mBackDisposition = backDisposition;
                 if (mStatusBar != null) {
@@ -1712,18 +1653,6 @@ public class InputMethodManagerService extends IInputMethodManager.Stub
             mCurMethodId = null;
             unbindCurrentMethodLocked(true, false);
         }
-<<<<<<< HEAD
-        // code to disable the IME switcher with config_show_IMESwitcher set = false
-        try {
-            mShowOngoingImeSwitcherForPhones =
-                Settings.System.getIntForUser(mContext.getContentResolver(),
-                Settings.System.STATUS_BAR_IME_SWITCHER, UserHandle.USER_CURRENT) == 1;
-        } catch (SettingNotFoundException e) {
-            mShowOngoingImeSwitcherForPhones = mRes.getBoolean(
-                com.android.internal.R.bool.config_show_IMESwitcher);
-        }
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     /* package */ void setInputMethodLocked(String id, int subtypeId) {

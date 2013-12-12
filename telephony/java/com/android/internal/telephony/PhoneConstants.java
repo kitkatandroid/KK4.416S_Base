@@ -86,8 +86,6 @@ public class PhoneConstants {
     public static final String REASON_LINK_PROPERTIES_CHANGED = "linkPropertiesChanged";
 
     /**
-<<<<<<< HEAD
-=======
      * Return codes for supplyPinReturnResult and
      * supplyPukReturnResult APIs
      */
@@ -96,7 +94,6 @@ public class PhoneConstants {
     public static final int PIN_GENERAL_FAILURE = 2;
 
     /**
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
      * Return codes for <code>enableApnType()</code>
      */
     public static final int APN_ALREADY_ACTIVE     = 0;

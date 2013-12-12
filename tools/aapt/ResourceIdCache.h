@@ -7,11 +7,7 @@
 #define RESOURCE_ID_CACHE_H
 
 namespace android {
-<<<<<<< HEAD
-class String16;
-=======
 class android::String16;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
 class ResourceIdCache {
 public:

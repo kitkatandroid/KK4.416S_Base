@@ -335,8 +335,6 @@ include the action bar on devices running Android 2.1 or higher."
           </li>
         </ul>
       </li>
-<<<<<<< HEAD
-=======
 
       <li class="nav-section">
         <div class="nav-section-header">
@@ -361,7 +359,6 @@ include the action bar on devices running Android 2.1 or higher."
         </ul>
       </li>
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     </ul>
   </li>
   <!-- End multimedia -->
@@ -972,8 +969,6 @@ include the action bar on devices running Android 2.1 or higher."
         </ul>
       </li>
 
-<<<<<<< HEAD
-=======
       <li class="nav-section">
         <div class="nav-section-header">
           <a href="<?cs var:toroot ?>training/system-ui/index.html"
@@ -1002,7 +997,6 @@ include the action bar on devices running Android 2.1 or higher."
         </ul>
       </li>
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     </ul>
   </li>
   <!-- End best UX and UI -->

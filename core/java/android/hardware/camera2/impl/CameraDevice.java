@@ -19,43 +19,24 @@ package android.hardware.camera2.impl;
 import static android.hardware.camera2.CameraAccessException.CAMERA_IN_USE;
 
 import android.hardware.camera2.CameraAccessException;
-<<<<<<< HEAD
-import android.hardware.camera2.CameraMetadata;
-import android.hardware.camera2.CameraCharacteristics;
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import android.hardware.camera2.CaptureRequest;
 import android.hardware.camera2.CaptureResult;
 import android.hardware.camera2.ICameraDeviceCallbacks;
 import android.hardware.camera2.ICameraDeviceUser;
 import android.hardware.camera2.utils.CameraBinderDecorator;
 import android.hardware.camera2.utils.CameraRuntimeException;
-<<<<<<< HEAD
-import android.os.IBinder;
-import android.os.RemoteException;
-import android.os.Handler;
-import android.os.Looper;
-=======
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
 import android.os.RemoteException;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.Surface;
 
 import java.util.ArrayList;
-<<<<<<< HEAD
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Stack;
-=======
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
 /**
  * HAL2.1+ implementation of CameraDevice. Use CameraManager#open to instantiate
@@ -65,11 +46,8 @@ public class CameraDevice implements android.hardware.camera2.CameraDevice {
     private final String TAG;
     private final boolean DEBUG;
 
-<<<<<<< HEAD
-=======
     private static final int REQUEST_ID_NONE = -1;
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     // TODO: guard every function with if (!mRemoteDevice) check (if it was closed)
     private ICameraDeviceUser mRemoteDevice;
 
@@ -84,12 +62,8 @@ public class CameraDevice implements android.hardware.camera2.CameraDevice {
     private final SparseArray<CaptureListenerHolder> mCaptureListenerMap =
             new SparseArray<CaptureListenerHolder>();
 
-<<<<<<< HEAD
-    private final Stack<Integer> mRepeatingRequestIdStack = new Stack<Integer>();
-=======
     private int mRepeatingRequestId = REQUEST_ID_NONE;
     private final ArrayList<Integer> mRepeatingRequestIdDeletedList = new ArrayList<Integer>();
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     // Map stream IDs to Surfaces
     private final SparseArray<Surface> mConfiguredOutputs = new SparseArray<Surface>();
 
@@ -212,11 +186,7 @@ public class CameraDevice implements android.hardware.camera2.CameraDevice {
             stopRepeating();
 
             try {
-<<<<<<< HEAD
-                mRemoteDevice.waitUntilIdle();
-=======
                 waitUntilIdle();
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
                 // TODO: mRemoteDevice.beginConfigure
                 // Delete all streams first (to free up HW resources)
@@ -309,13 +279,10 @@ public class CameraDevice implements android.hardware.camera2.CameraDevice {
             checkIfCameraClosed();
             int requestId;
 
-<<<<<<< HEAD
-=======
             if (repeating) {
                 stopRepeating();
             }
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             try {
                 requestId = mRemoteDevice.submitRequest(request, repeating);
             } catch (CameraRuntimeException e) {
@@ -330,11 +297,7 @@ public class CameraDevice implements android.hardware.camera2.CameraDevice {
             }
 
             if (repeating) {
-<<<<<<< HEAD
-                mRepeatingRequestIdStack.add(requestId);
-=======
                 mRepeatingRequestId = requestId;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             }
 
             if (mIdle) {
@@ -368,10 +331,6 @@ public class CameraDevice implements android.hardware.camera2.CameraDevice {
 
         synchronized (mLock) {
             checkIfCameraClosed();
-<<<<<<< HEAD
-            while (!mRepeatingRequestIdStack.isEmpty()) {
-                int requestId = mRepeatingRequestIdStack.pop();
-=======
             if (mRepeatingRequestId != REQUEST_ID_NONE) {
 
                 int requestId = mRepeatingRequestId;
@@ -379,7 +338,6 @@ public class CameraDevice implements android.hardware.camera2.CameraDevice {
 
                 // Queue for deletion after in-flight requests finish
                 mRepeatingRequestIdDeletedList.add(requestId);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
                 try {
                     mRemoteDevice.cancelRequest(requestId);
@@ -398,11 +356,7 @@ public class CameraDevice implements android.hardware.camera2.CameraDevice {
 
         synchronized (mLock) {
             checkIfCameraClosed();
-<<<<<<< HEAD
-            if (!mRepeatingRequestIdStack.isEmpty()) {
-=======
             if (mRepeatingRequestId != REQUEST_ID_NONE) {
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 throw new IllegalStateException("Active repeating request ongoing");
             }
 
@@ -414,13 +368,10 @@ public class CameraDevice implements android.hardware.camera2.CameraDevice {
                 // impossible
                 return;
             }
-<<<<<<< HEAD
-=======
 
             mRepeatingRequestId = REQUEST_ID_NONE;
             mRepeatingRequestIdDeletedList.clear();
             mCaptureListenerMap.clear();
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
     }
 
@@ -626,12 +577,9 @@ public class CameraDevice implements android.hardware.camera2.CameraDevice {
             }
             final CaptureListenerHolder holder;
 
-<<<<<<< HEAD
-=======
             Boolean quirkPartial = result.get(CaptureResult.QUIRKS_PARTIAL_RESULT);
             boolean quirkIsPartialResult = (quirkPartial != null && quirkPartial);
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             synchronized (mLock) {
                 // TODO: move this whole map into this class to make it more testable,
                 //        exposing the methods necessary like subscribeToRequest, unsubscribe..
@@ -640,15 +588,6 @@ public class CameraDevice implements android.hardware.camera2.CameraDevice {
                 holder = CameraDevice.this.mCaptureListenerMap.get(requestId);
 
                 // Clean up listener once we no longer expect to see it.
-<<<<<<< HEAD
-
-                // TODO: how to handle repeating listeners?
-                // we probably want cancelRequest to return # of times it already enqueued and
-                // keep a counter.
-                if (holder != null && !holder.isRepeating()) {
-                    CameraDevice.this.mCaptureListenerMap.remove(requestId);
-                }
-=======
                 if (holder != null && !holder.isRepeating() && !quirkIsPartialResult) {
                     CameraDevice.this.mCaptureListenerMap.remove(requestId);
                 }
@@ -671,7 +610,6 @@ public class CameraDevice implements android.hardware.camera2.CameraDevice {
                     }
                 }
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             }
 
             // Check if we have a listener for this
@@ -684,10 +622,6 @@ public class CameraDevice implements android.hardware.camera2.CameraDevice {
             final CaptureRequest request = holder.getRequest();
             final CaptureResult resultAsCapture = new CaptureResult(result, request, requestId);
 
-<<<<<<< HEAD
-            holder.getHandler().post(
-                new Runnable() {
-=======
             Runnable resultDispatch = null;
 
             // Either send a partial result or the final capture completed result
@@ -707,7 +641,6 @@ public class CameraDevice implements android.hardware.camera2.CameraDevice {
             } else {
                 // Final capture result
                 resultDispatch = new Runnable() {
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                     @Override
                     public void run() {
                         if (!CameraDevice.this.isClosed()){
@@ -717,14 +650,10 @@ public class CameraDevice implements android.hardware.camera2.CameraDevice {
                                 resultAsCapture);
                         }
                     }
-<<<<<<< HEAD
-                });
-=======
                 };
             }
 
             holder.getHandler().post(resultDispatch);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
 
     }

@@ -244,11 +244,7 @@ public class NinePatchDrawable extends Drawable {
         } else {
             padding.set(mPadding);
         }
-<<<<<<< HEAD
-        return true;
-=======
         return (padding.left | padding.top | padding.right | padding.bottom) != 0;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     /**

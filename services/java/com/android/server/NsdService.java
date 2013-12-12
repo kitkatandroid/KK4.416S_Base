@@ -483,12 +483,6 @@ public class NsdService extends INsdManager.Stub {
                         clientInfo.mResolvedService.setPort(Integer.parseInt(cooked[4]));
 
                         stopResolveService(id);
-<<<<<<< HEAD
-                        if (!getAddrInfo(id, cooked[3])) {
-                            clientInfo.mChannel.sendMessage(NsdManager.RESOLVE_SERVICE_FAILED,
-                                    NsdManager.FAILURE_INTERNAL_ERROR, clientId);
-                            removeRequestMap(clientId, id, clientInfo);
-=======
                         removeRequestMap(clientId, id, clientInfo);
 
                         int id2 = getUniqueId();
@@ -497,7 +491,6 @@ public class NsdService extends INsdManager.Stub {
                         } else {
                             clientInfo.mChannel.sendMessage(NsdManager.RESOLVE_SERVICE_FAILED,
                                     NsdManager.FAILURE_INTERNAL_ERROR, clientId);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                             clientInfo.mResolvedService = null;
                         }
                         break;

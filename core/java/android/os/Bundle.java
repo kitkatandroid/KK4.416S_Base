@@ -35,18 +35,12 @@ public final class Bundle implements Parcelable, Cloneable {
     public static final Bundle EMPTY;
 
     static final int BUNDLE_MAGIC = 0x4C444E42; // 'B' 'N' 'D' 'L'
-<<<<<<< HEAD
-=======
     static final Parcel EMPTY_PARCEL;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
     static {
         EMPTY = new Bundle();
         EMPTY.mMap = ArrayMap.EMPTY;
-<<<<<<< HEAD
-=======
         EMPTY_PARCEL = Parcel.obtain();
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     // Invariant - exactly one of mMap / mParcelledData will be null
@@ -123,11 +117,6 @@ public final class Bundle implements Parcelable, Cloneable {
      */
     public Bundle(Bundle b) {
         if (b.mParcelledData != null) {
-<<<<<<< HEAD
-            mParcelledData = Parcel.obtain();
-            mParcelledData.appendFrom(b.mParcelledData, 0, b.mParcelledData.dataSize());
-            mParcelledData.setDataPosition(0);
-=======
             if (b.mParcelledData == EMPTY_PARCEL) {
                 mParcelledData = EMPTY_PARCEL;
             } else {
@@ -135,7 +124,6 @@ public final class Bundle implements Parcelable, Cloneable {
                 mParcelledData.appendFrom(b.mParcelledData, 0, b.mParcelledData.dataSize());
                 mParcelledData.setDataPosition(0);
             }
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         } else {
             mParcelledData = null;
         }
@@ -234,8 +222,6 @@ public final class Bundle implements Parcelable, Cloneable {
             return;
         }
 
-<<<<<<< HEAD
-=======
         if (mParcelledData == EMPTY_PARCEL) {
             if (DEBUG) Log.d(TAG, "unparcel " + Integer.toHexString(System.identityHashCode(this))
                     + ": empty");
@@ -248,7 +234,6 @@ public final class Bundle implements Parcelable, Cloneable {
             return;
         }
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         int N = mParcelledData.readInt();
         if (DEBUG) Log.d(TAG, "unparcel " + Integer.toHexString(System.identityHashCode(this))
                 + ": reading " + N + " maps");
@@ -1685,13 +1670,6 @@ public final class Bundle implements Parcelable, Cloneable {
         final boolean oldAllowFds = parcel.pushAllowFds(mAllowFds);
         try {
             if (mParcelledData != null) {
-<<<<<<< HEAD
-                int length = mParcelledData.dataSize();
-                parcel.writeInt(length);
-                parcel.writeInt(BUNDLE_MAGIC);
-                parcel.appendFrom(mParcelledData, 0, length);
-            } else {
-=======
                 if (mParcelledData == EMPTY_PARCEL) {
                     parcel.writeInt(0);
                 } else {
@@ -1706,7 +1684,6 @@ public final class Bundle implements Parcelable, Cloneable {
                     parcel.writeInt(0);
                     return;
                 }
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 int lengthPos = parcel.dataPosition();
                 parcel.writeInt(-1); // dummy, will hold length
                 parcel.writeInt(BUNDLE_MAGIC);
@@ -1740,8 +1717,6 @@ public final class Bundle implements Parcelable, Cloneable {
     }
 
     void readFromParcelInner(Parcel parcel, int length) {
-<<<<<<< HEAD
-=======
         if (length == 0) {
             // Empty Bundle or end of data.
             mParcelledData = EMPTY_PARCEL;
@@ -1749,7 +1724,6 @@ public final class Bundle implements Parcelable, Cloneable {
             mFdsKnown = true;
             return;
         }
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         int magic = parcel.readInt();
         if (magic != BUNDLE_MAGIC) {
             //noinspection ThrowableInstanceNeverThrown
@@ -1776,17 +1750,12 @@ public final class Bundle implements Parcelable, Cloneable {
     @Override
     public synchronized String toString() {
         if (mParcelledData != null) {
-<<<<<<< HEAD
-            return "Bundle[mParcelledData.dataSize=" +
-                    mParcelledData.dataSize() + "]";
-=======
             if (mParcelledData == EMPTY_PARCEL) {
                 return "Bundle[EMPTY_PARCEL]";
             } else {
                 return "Bundle[mParcelledData.dataSize=" +
                         mParcelledData.dataSize() + "]";
             }
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
         return "Bundle[" + mMap.toString() + "]";
     }

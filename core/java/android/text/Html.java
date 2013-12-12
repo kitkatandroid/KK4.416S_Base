@@ -391,8 +391,6 @@ public class Html {
                 out.append("&gt;");
             } else if (c == '&') {
                 out.append("&amp;");
-<<<<<<< HEAD
-=======
             } else if (c >= 0xD800 && c <= 0xDFFF) {
                 if (c < 0xDC00 && i + 1 < end) {
                     char d = text.charAt(i + 1);
@@ -402,7 +400,6 @@ public class Html {
                         out.append("&#").append(codepoint).append(";");
                     }
                 }
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             } else if (c > 0x7E || c < ' ') {
                 out.append("&#").append((int) c).append(";");
             } else if (c == ' ') {

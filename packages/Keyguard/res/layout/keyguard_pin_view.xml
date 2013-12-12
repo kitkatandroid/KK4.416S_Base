@@ -187,25 +187,11 @@
            android:layout_weight="1"
            android:orientation="horizontal"
            >
-<<<<<<< HEAD
-           <ImageButton
-               android:id="@+id/key_random"
-               style="@style/Widget.Button.NumPadKey"
-               android:layout_width="0px"
-               android:layout_height="match_parent"
-               android:layout_weight="1"
-               android:paddingRight="30dp"
-               android:src="@drawable/sym_keyboard_random_holo"
-               android:contentDescription="@string/keyboardview_keycode_random"
-               android:visibility="invisible"
-                />
-=======
            <Space
                android:layout_width="0px"
                android:layout_height="match_parent"
                android:layout_weight="1"
                />
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
            <view class="com.android.keyguard.NumPadKey"
                android:id="@+id/key0"
                style="@style/Widget.Button.NumPadKey"

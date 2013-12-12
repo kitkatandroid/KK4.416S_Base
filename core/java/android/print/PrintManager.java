@@ -16,11 +16,8 @@
 
 package android.print;
 
-<<<<<<< HEAD
-=======
 import android.app.Activity;
 import android.app.Application.ActivityLifecycleCallbacks;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import android.content.Context;
 import android.content.IntentSender;
 import android.content.IntentSender.SendIntentException;
@@ -58,8 +55,6 @@ import java.util.Map;
  * PrintManager printManager =
  *         (PrintManager) context.getSystemService(Context.PRINT_SERVICE);
  * </pre>
-<<<<<<< HEAD
-=======
  * 
  * <h3>Print mechanics</h3>
  * <p>
@@ -103,7 +98,6 @@ import java.util.Map;
  *
  * @see PrintJob
  * @see PrintJobInfo
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
  */
 public final class PrintManager {
 
@@ -341,13 +335,6 @@ public final class PrintManager {
     /**
      * Creates a print job for printing a {@link PrintDocumentAdapter} with
      * default print attributes.
-<<<<<<< HEAD
-     * 
-     * @param printJobName A name for the new print job.
-     * @param documentAdapter An adapter that emits the document to print.
-     * @param attributes The default print job attributes.
-     * @return The created print job on success or null on failure.
-=======
      * <p>
      * Calling this method brings the print UI allowing the user to customize
      * the print job and returns a {@link PrintJob} object without waiting for the
@@ -381,18 +368,10 @@ public final class PrintManager {
      * @throws IllegalArgumentException If the print job name is empty or the
      * document adapter is null.
      *
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
      * @see PrintJob
      */
     public PrintJob print(String printJobName, PrintDocumentAdapter documentAdapter,
             PrintAttributes attributes) {
-<<<<<<< HEAD
-        if (TextUtils.isEmpty(printJobName)) {
-            throw new IllegalArgumentException("priintJobName cannot be empty");
-        }
-        PrintDocumentAdapterDelegate delegate = new PrintDocumentAdapterDelegate(documentAdapter,
-                mContext.getMainLooper());
-=======
         if (!(mContext instanceof Activity)) {
             throw new IllegalStateException("Can print only from an activity");
         }
@@ -404,7 +383,6 @@ public final class PrintManager {
         }
         PrintDocumentAdapterDelegate delegate = new PrintDocumentAdapterDelegate(
                 (Activity) mContext, documentAdapter);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         try {
             Bundle result = mService.print(printJobName, delegate,
                     attributes, mContext.getPackageName(), mAppId, mUserId);
@@ -470,24 +448,13 @@ public final class PrintManager {
         return new PrinterDiscoverySession(mService, mContext, mUserId);
     }
 
-<<<<<<< HEAD
-    private static final class PrintDocumentAdapterDelegate extends IPrintDocumentAdapter.Stub {
-=======
     private static final class PrintDocumentAdapterDelegate extends IPrintDocumentAdapter.Stub
             implements ActivityLifecycleCallbacks {
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
         private final Object mLock = new Object();
 
         private CancellationSignal mLayoutOrWriteCancellation;
 
-<<<<<<< HEAD
-        private PrintDocumentAdapter mDocumentAdapter; // Strong reference OK -
-                                                       // cleared in finish()
-
-        private Handler mHandler; // Strong reference OK - cleared in finish()
-
-=======
         private Activity mActivity; // Strong reference OK - cleared in finish()
 
         private PrintDocumentAdapter mDocumentAdapter; // Strong reference OK - cleared in finish
@@ -496,7 +463,6 @@ public final class PrintManager {
 
         private IPrintDocumentAdapterObserver mObserver; // Strong reference OK - cleared in finish
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         private LayoutSpec mLastLayoutSpec;
 
         private WriteSpec mLastWriteSpec;
@@ -507,11 +473,6 @@ public final class PrintManager {
         private boolean mFinishRequested;
         private boolean mFinished;
 
-<<<<<<< HEAD
-        public PrintDocumentAdapterDelegate(PrintDocumentAdapter documentAdapter, Looper looper) {
-            mDocumentAdapter = documentAdapter;
-            mHandler = new MyHandler(looper);
-=======
         private boolean mDestroyed;
 
         public PrintDocumentAdapterDelegate(Activity activity,
@@ -538,19 +499,13 @@ public final class PrintManager {
                     Log.e(LOG_TAG, "Error announcing destroyed state", re);
                 }
             }
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
 
         @Override
         public void start() {
             synchronized (mLock) {
-<<<<<<< HEAD
-                // Started or finished - nothing to do.
-                if (mStartReqeusted || mFinishRequested) {
-=======
                 // Started called or finish called or destroyed - nothing to do.
                 if (mStartReqeusted || mFinishRequested || mDestroyed) {
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                     return;
                 }
 
@@ -563,34 +518,6 @@ public final class PrintManager {
         @Override
         public void layout(PrintAttributes oldAttributes, PrintAttributes newAttributes,
                 ILayoutResultCallback callback, Bundle metadata, int sequence) {
-<<<<<<< HEAD
-            synchronized (mLock) {
-                // Start not called or finish called - nothing to do.
-                if (!mStartReqeusted || mFinishRequested) {
-                    return;
-                }
-
-                // Layout cancels write and overrides layout.
-                if (mLastWriteSpec != null) {
-                    IoUtils.closeQuietly(mLastWriteSpec.fd);
-                    mLastWriteSpec = null;
-                }
-
-                mLastLayoutSpec = new LayoutSpec();
-                mLastLayoutSpec.callback = callback;
-                mLastLayoutSpec.oldAttributes = oldAttributes;
-                mLastLayoutSpec.newAttributes = newAttributes;
-                mLastLayoutSpec.metadata = metadata;
-                mLastLayoutSpec.sequence = sequence;
-
-                // Cancel the previous cancellable operation.When the
-                // cancellation completes we will do the pending work.
-                if (cancelPreviousCancellableOperationLocked()) {
-                    return;
-                }
-
-                doPendingWorkLocked();
-=======
             final boolean destroyed;
             synchronized (mLock) {
                 destroyed = mDestroyed;
@@ -624,40 +551,12 @@ public final class PrintManager {
                 } catch (RemoteException re) {
                     Log.i(LOG_TAG, "Error notifying for cancelled layout", re);
                 }
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             }
         }
 
         @Override
         public void write(PageRange[] pages, ParcelFileDescriptor fd,
                 IWriteResultCallback callback, int sequence) {
-<<<<<<< HEAD
-            synchronized (mLock) {
-                // Start not called or finish called - nothing to do.
-                if (!mStartReqeusted || mFinishRequested) {
-                    return;
-                }
-
-                // Write cancels previous writes.
-                if (mLastWriteSpec != null) {
-                    IoUtils.closeQuietly(mLastWriteSpec.fd);
-                    mLastWriteSpec = null;
-                }
-
-                mLastWriteSpec = new WriteSpec();
-                mLastWriteSpec.callback = callback;
-                mLastWriteSpec.pages = pages;
-                mLastWriteSpec.fd = fd;
-                mLastWriteSpec.sequence = sequence;
-
-                // Cancel the previous cancellable operation.When the
-                // cancellation completes we will do the pending work.
-                if (cancelPreviousCancellableOperationLocked()) {
-                    return;
-                }
-
-                doPendingWorkLocked();
-=======
             final boolean destroyed;
             synchronized (mLock) {
                 destroyed = mDestroyed;
@@ -690,20 +589,14 @@ public final class PrintManager {
                 } catch (RemoteException re) {
                     Log.i(LOG_TAG, "Error notifying for cancelled write", re);
                 }
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             }
         }
 
         @Override
         public void finish() {
             synchronized (mLock) {
-<<<<<<< HEAD
-                // Start not called or finish called - nothing to do.
-                if (!mStartReqeusted || mFinishRequested) {
-=======
                 // Start not called or finish called or destroyed - nothing to do.
                 if (!mStartReqeusted || mFinishRequested || mDestroyed) {
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                     return;
                 }
 
@@ -722,8 +615,6 @@ public final class PrintManager {
             }
         }
 
-<<<<<<< HEAD
-=======
         @Override
         public void cancel() {
             // Start not called or finish called or destroyed - nothing to do.
@@ -795,18 +686,10 @@ public final class PrintManager {
             }
         }
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         private boolean isFinished() {
             return mDocumentAdapter == null;
         }
 
-<<<<<<< HEAD
-        private void doFinish() {
-            mDocumentAdapter = null;
-            mHandler = null;
-            synchronized (mLock) {
-                mLayoutOrWriteCancellation = null;
-=======
         private void clearLocked() {
             mActivity = null;
             mDocumentAdapter = null;
@@ -816,7 +699,6 @@ public final class PrintManager {
             if (mLastWriteSpec != null) {
                 IoUtils.closeQuietly(mLastWriteSpec.fd);
                 mLastWriteSpec = null;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             }
         }
 
@@ -877,13 +759,6 @@ public final class PrintManager {
                 }
                 switch (message.what) {
                     case MSG_START: {
-<<<<<<< HEAD
-                        mDocumentAdapter.onStart();
-                    }
-                        break;
-
-                    case MSG_LAYOUT: {
-=======
                         final PrintDocumentAdapter adapter;
                         synchronized (mLock) {
                             adapter = mDocumentAdapter;
@@ -895,75 +770,41 @@ public final class PrintManager {
 
                     case MSG_LAYOUT: {
                         final PrintDocumentAdapter adapter;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                         final CancellationSignal cancellation;
                         final LayoutSpec layoutSpec;
 
                         synchronized (mLock) {
-<<<<<<< HEAD
-=======
                             adapter = mDocumentAdapter;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                             layoutSpec = mLastLayoutSpec;
                             mLastLayoutSpec = null;
                             cancellation = new CancellationSignal();
                             mLayoutOrWriteCancellation = cancellation;
                         }
 
-<<<<<<< HEAD
-                        if (layoutSpec != null) {
-                            if (DEBUG) {
-                                Log.i(LOG_TAG, "Performing layout");
-                            }
-                            mDocumentAdapter.onLayout(layoutSpec.oldAttributes,
-=======
                         if (layoutSpec != null && adapter != null) {
                             if (DEBUG) {
                                 Log.i(LOG_TAG, "Performing layout");
                             }
                             adapter.onLayout(layoutSpec.oldAttributes,
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                                     layoutSpec.newAttributes, cancellation,
                                     new MyLayoutResultCallback(layoutSpec.callback,
                                             layoutSpec.sequence), layoutSpec.metadata);
                         }
-<<<<<<< HEAD
-                    }
-                        break;
-
-                    case MSG_WRITE: {
-=======
                     } break;
 
                     case MSG_WRITE: {
                         final PrintDocumentAdapter adapter;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                         final CancellationSignal cancellation;
                         final WriteSpec writeSpec;
 
                         synchronized (mLock) {
-<<<<<<< HEAD
-=======
                             adapter = mDocumentAdapter;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                             writeSpec = mLastWriteSpec;
                             mLastWriteSpec = null;
                             cancellation = new CancellationSignal();
                             mLayoutOrWriteCancellation = cancellation;
                         }
 
-<<<<<<< HEAD
-                        if (writeSpec != null) {
-                            if (DEBUG) {
-                                Log.i(LOG_TAG, "Performing write");
-                            }
-                            mDocumentAdapter.onWrite(writeSpec.pages, writeSpec.fd,
-                                    cancellation, new MyWriteResultCallback(writeSpec.callback,
-                                            writeSpec.fd, writeSpec.sequence));
-                        }
-                    }
-                        break;
-=======
                         if (writeSpec != null && adapter != null) {
                             if (DEBUG) {
                                 Log.i(LOG_TAG, "Performing write");
@@ -973,18 +814,11 @@ public final class PrintManager {
                                             writeSpec.fd, writeSpec.sequence));
                         }
                     } break;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
                     case MSG_FINISH: {
                         if (DEBUG) {
                             Log.i(LOG_TAG, "Performing finish");
                         }
-<<<<<<< HEAD
-                        mDocumentAdapter.onFinish();
-                        doFinish();
-                    }
-                        break;
-=======
                         final PrintDocumentAdapter adapter;
                         final Activity activity;
                         synchronized (mLock) {
@@ -1000,7 +834,6 @@ public final class PrintManager {
                                     PrintDocumentAdapterDelegate.this);
                         }
                     } break;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
                     default: {
                         throw new IllegalArgumentException("Unknown message: "
@@ -1027,14 +860,11 @@ public final class PrintManager {
                 }
                 final ILayoutResultCallback callback;
                 synchronized (mLock) {
-<<<<<<< HEAD
-=======
                     if (mDestroyed) {
                         Log.e(LOG_TAG, "PrintDocumentAdapter is destroyed. Did you "
                                 + "finish the printing activity before print completion?");
                         return;
                     }
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                     callback = mCallback;
                     clearLocked();
                 }
@@ -1051,14 +881,11 @@ public final class PrintManager {
             public void onLayoutFailed(CharSequence error) {
                 final ILayoutResultCallback callback;
                 synchronized (mLock) {
-<<<<<<< HEAD
-=======
                     if (mDestroyed) {
                         Log.e(LOG_TAG, "PrintDocumentAdapter is destroyed. Did you "
                                 + "finish the printing activity before print completion?");
                         return;
                     }
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                     callback = mCallback;
                     clearLocked();
                 }
@@ -1074,14 +901,11 @@ public final class PrintManager {
             @Override
             public void onLayoutCancelled() {
                 synchronized (mLock) {
-<<<<<<< HEAD
-=======
                     if (mDestroyed) {
                         Log.e(LOG_TAG, "PrintDocumentAdapter is destroyed. Did you "
                                 + "finish the printing activity before print completion?");
                         return;
                     }
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                     clearLocked();
                 }
             }
@@ -1109,14 +933,11 @@ public final class PrintManager {
             public void onWriteFinished(PageRange[] pages) {
                 final IWriteResultCallback callback;
                 synchronized (mLock) {
-<<<<<<< HEAD
-=======
                     if (mDestroyed) {
                         Log.e(LOG_TAG, "PrintDocumentAdapter is destroyed. Did you "
                                 + "finish the printing activity before print completion?");
                         return;
                     }
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                     callback = mCallback;
                     clearLocked();
                 }
@@ -1139,14 +960,11 @@ public final class PrintManager {
             public void onWriteFailed(CharSequence error) {
                 final IWriteResultCallback callback;
                 synchronized (mLock) {
-<<<<<<< HEAD
-=======
                     if (mDestroyed) {
                         Log.e(LOG_TAG, "PrintDocumentAdapter is destroyed. Did you "
                                 + "finish the printing activity before print completion?");
                         return;
                     }
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                     callback = mCallback;
                     clearLocked();
                 }
@@ -1162,14 +980,11 @@ public final class PrintManager {
             @Override
             public void onWriteCancelled() {
                 synchronized (mLock) {
-<<<<<<< HEAD
-=======
                     if (mDestroyed) {
                         Log.e(LOG_TAG, "PrintDocumentAdapter is destroyed. Did you "
                                 + "finish the printing activity before print completion?");
                         return;
                     }
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                     clearLocked();
                 }
             }

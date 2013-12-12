@@ -16,25 +16,9 @@
 ** limitations under the License.
 */
 -->
-<<<<<<< HEAD
-
-<merge xmlns:android="http://schemas.android.com/apk/res/android">
-    <LinearLayout
-        android:id="@+id/keyguard_glow_pad_container"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center" >
-
-        <include layout="@layout/keyguard_glow_pad_view" />
-
-    </LinearLayout>
-
-</merge>
-=======
 <merge xmlns:android="http://schemas.android.com/apk/res/android">
     <include layout="@layout/keyguard_glow_pad_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center" />
 </merge>
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1

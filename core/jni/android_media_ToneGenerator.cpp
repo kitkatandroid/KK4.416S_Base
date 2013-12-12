@@ -44,11 +44,7 @@ static jboolean android_media_ToneGenerator_startTone(JNIEnv *env, jobject thiz,
     ToneGenerator *lpToneGen = (ToneGenerator *)env->GetIntField(thiz,
             fields.context);
     if (lpToneGen == NULL) {
-<<<<<<< HEAD
-        ALOGE("lpToneGen is NULL");
-=======
         jniThrowRuntimeException(env, "Method called after release()");
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         return false;
     }
 
@@ -63,11 +59,7 @@ static void android_media_ToneGenerator_stopTone(JNIEnv *env, jobject thiz) {
 
     ALOGV("ToneGenerator lpToneGen: %x", (unsigned int)lpToneGen);
     if (lpToneGen == NULL) {
-<<<<<<< HEAD
-        ALOGE("lpToneGen is NULL");
-=======
         jniThrowRuntimeException(env, "Method called after release()");
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         return;
     }
     lpToneGen->stopTone();
@@ -105,13 +97,8 @@ static void android_media_ToneGenerator_native_setup(JNIEnv *env, jobject thiz,
 
     if (!lpToneGen->isInited()) {
         ALOGE("ToneGenerator init failed");
-<<<<<<< HEAD
-        if (lpToneGen)
-            delete lpToneGen;
-=======
         jniThrowRuntimeException(env, "Init failed");
         delete lpToneGen;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         return;
     }
 

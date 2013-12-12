@@ -1,60 +1,6 @@
 ndk=true
 page.template=sdk
 
-<<<<<<< HEAD
-ndk.mac64.legacy_download=android-ndk-r9-darwin-x86_64-legacy-toolchains.tar.bz2
-ndk.mac64.legacy_bytes=271922968
-ndk.mac64.legacy_checksum=251c21defcf90a2f0e8283bab90ed861
-
-ndk.mac64_download=android-ndk-r9-darwin-x86_64.tar.bz2
-ndk.mac64_bytes=454408117
-ndk.mac64_checksum=ff27c8b9efc8260d9f883dc42d08f651
-
-
-ndk.mac32.legacy_download=android-ndk-r9-darwin-x86-legacy-toolchains.tar.bz2
-ndk.mac32.legacy_bytes=264053696
-ndk.mac32.legacy_checksum=9fd7f76a1f1f59386a34b019dcd20976
-
-ndk.mac32_download=android-ndk-r9-darwin-x86.tar.bz2
-ndk.mac32_bytes=446858202
-ndk.mac32_checksum=781da0e6bb5b072512e67b879b56a74c
-
-
-ndk.linux64.legacy_download=android-ndk-r9-linux-x86_64-legacy-toolchains.tar.bz2
-ndk.linux64.legacy_bytes=244427866
-ndk.linux64.legacy_checksum=3976a8237d75526b8a0f275375dd68b5
-
-ndk.linux64_download=android-ndk-r9-linux-x86_64.tar.bz2
-ndk.linux64_bytes=425113267
-ndk.linux64_checksum=0ccfd9960526e61d1527155fa6f84ac0
-
-
-ndk.linux32.legacy_download=android-ndk-r9-linux-x86-legacy-toolchains.tar.bz2
-ndk.linux32.legacy_bytes=241172797
-ndk.linux32.legacy_checksum=957c415de9d7c7ce1c2377ec4d3d60f1
-
-ndk.linux32_download=android-ndk-r9-linux-x86.tar.bz2
-ndk.linux32_bytes=419862465
-ndk.linux32_checksum=beadafdc187461c057d513c40f0ac33b
-
-
-ndk.win64.legacy_download=android-ndk-r9-windows-x86_64-legacy-toolchains.zip
-ndk.win64.legacy_bytes=312340413
-ndk.win64.legacy_checksum=707d1eaa6f5d427ad439c764c8bd68d2
-
-ndk.win64_download=android-ndk-r9-windows-x86_64.zip
-ndk.win64_bytes=514321606
-ndk.win64_checksum=96c725d16ace7fd487bf1bc1427af3a0
-
-
-ndk.win32.legacy_download=android-ndk-r9-windows-x86-legacy-toolchains.zip
-ndk.win32.legacy_bytes=292738221
-ndk.win32.legacy_checksum=ae3756d3773ec068fb653ff6fa411e35
-
-ndk.win32_download=android-ndk-r9-windows-x86.zip
-ndk.win32_bytes=485200055
-ndk.win32_checksum=8895aec43f5141212c8dac6e9f07d5a8
-=======
 ndk.mac64.legacy_download=android-ndk-r9b-darwin-x86_64-legacy-toolchains.tar.bz2
 ndk.mac64.legacy_bytes=122378495
 ndk.mac64.legacy_checksum=19c696a5b690b040409c68b21e9fcf46
@@ -107,7 +53,6 @@ ndk.win32.legacy_checksum=00c8373b53ad9475f1bab1de4219b877
 ndk.win32_download=android-ndk-r9b-windows-x86.zip
 ndk.win32_bytes=455928388
 ndk.win32_checksum=cfb9402ea08a1554186e85ed28cb4593
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
 
 page.title=Android NDK
@@ -353,8 +298,6 @@ $('#Downloads').after($('#download-table'));
   <p>
     <a href="#" onclick="return toggleContent(this)"> <img
       src="{@docRoot}assets/images/triangle-opened.png" class="toggle-content-img" alt=""
-<<<<<<< HEAD
-=======
     >Android NDK, Revision 9b</a> <em>(October 2013)</em>
   </p>
   <div class="toggle-content-toggleme">
@@ -514,7 +457,6 @@ LOCAL_LDFLAGS += -fopenmp
   <p>
     <a href="#" onclick="return toggleContent(this)"> <img
       src="{@docRoot}assets/images/triangle-closed.png" class="toggle-content-img" alt=""
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     >Android NDK, Revision 9</a> <em>(July 2013)</em>
   </p>
   <div class="toggle-content-toggleme">
@@ -658,11 +600,7 @@ LOCAL_LDFLAGS += -fopenmp
           <li>Fixed the Clang 3.2 {@code -integrated-as} option.</li>
           <li>Fixed the Clang 3.2 ARM EHABI compact model {@code pr1} and {@code pr2} handler data.
             </li>
-<<<<<<< HEAD
-          <li>Added clang {@code -mllvm -arm-enable-ehabi} option to fix the following clang error:
-=======
           <li>Added Clang {@code -mllvm -arm-enable-ehabi} option to fix the following Clang error:
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             <pre>clang: for the -arm-enable-ehabi option: may only occur zero or one times!</pre>
             </li>
           <li>Fixed build failure when there is no {@code uses-sdk} element in application

@@ -1,16 +1,4 @@
 page.title=Samples
-<<<<<<< HEAD
-@jd:body
-
-
-<div id="samples">
-<p>Some kind of sample sorting will appear here.</p>
-</div>
-
-
-<script>
-</script>
-=======
 page.tags="samples","examples","code"
 
 @jd:body
@@ -55,4 +43,3 @@ page.tags="samples","examples","code"
     and Android Studio. Project downloads for Eclipse will be available soon!
 </p>
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1

@@ -1003,8 +1003,6 @@ public class SlidingChallengeLayout extends ViewGroup implements ChallengeLayout
         }
     }
 
-<<<<<<< HEAD
-=======
     @Override
     protected boolean onRequestFocusInDescendants(int direction, Rect previouslyFocusedRect) {
         // Focus security fileds before widgets.
@@ -1015,7 +1013,6 @@ public class SlidingChallengeLayout extends ViewGroup implements ChallengeLayout
         return super.onRequestFocusInDescendants(direction, previouslyFocusedRect);
     }
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     public void computeScroll() {
         super.computeScroll();
 

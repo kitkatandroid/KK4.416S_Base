@@ -16,20 +16,8 @@
 
 package com.android.keyguard;
 
-<<<<<<< HEAD
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.res.Resources;
-import android.database.ContentObserver;
-import android.os.Handler;
-import android.os.Looper;
-import android.provider.Settings;
-=======
 import android.content.Context;
 import android.content.res.Resources;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.util.AttributeSet;
@@ -63,14 +51,10 @@ public class KeyguardStatusView extends GridLayout {
 
         @Override
         void onKeyguardVisibilityChanged(boolean showing) {
-<<<<<<< HEAD
-            // Do nothing
-=======
             if (showing) {
                 if (DEBUG) Slog.v(TAG, "refresh statusview showing:" + showing);
                 refresh();
             }
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         };
 
         @Override
@@ -84,23 +68,6 @@ public class KeyguardStatusView extends GridLayout {
         };
     };
 
-<<<<<<< HEAD
-    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            refresh();
-        }
-    };
-
-    private ContentObserver mContentObserver = new ContentObserver(new Handler()) {
-        @Override
-        public void onChange(boolean selfChange) {
-            refresh();
-        }
-    };
-
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     public KeyguardStatusView(Context context) {
         this(context, null, 0);
     }
@@ -131,28 +98,6 @@ public class KeyguardStatusView extends GridLayout {
     }
 
     protected void refresh() {
-<<<<<<< HEAD
-        Resources res = mContext.getResources();
-        Locale locale = Locale.getDefault();
-        final String dateFormat = DateFormat.getBestDateTimePattern(locale,
-                res.getString(R.string.abbrev_wday_month_day_no_year));
-
-        mDateView.setFormat24Hour(dateFormat);
-        mDateView.setFormat12Hour(dateFormat);
-
-        // 12-hour clock.
-        // CLDR insists on adding an AM/PM indicator even though it wasn't in the skeleton
-        // format.  The following code removes the AM/PM indicator if we didn't want it.
-        final String clock12skel = res.getString(R.string.clock_12hr_format);
-        String clock12hr = DateFormat.getBestDateTimePattern(locale, clock12skel);
-        clock12hr = clock12skel.contains("a") ? clock12hr : clock12hr.replaceAll("a", "").trim();
-        mClockView.setFormat12Hour(clock12hr);
-
-        // 24-hour clock
-        final String clock24skel = res.getString(R.string.clock_24hr_format);
-        final String clock24hr = DateFormat.getBestDateTimePattern(locale, clock24skel);
-        mClockView.setFormat24Hour(clock24hr);
-=======
         Patterns.update(mContext);
 
         mDateView.setFormat24Hour(Patterns.dateView);
@@ -160,7 +105,6 @@ public class KeyguardStatusView extends GridLayout {
 
         mClockView.setFormat12Hour(Patterns.clockView12);
         mClockView.setFormat24Hour(Patterns.clockView24);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
         refreshAlarmStatus();
     }
@@ -180,36 +124,18 @@ public class KeyguardStatusView extends GridLayout {
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
         KeyguardUpdateMonitor.getInstance(mContext).registerCallback(mInfoCallback);
-<<<<<<< HEAD
-
-        IntentFilter f = new IntentFilter();
-        f.addAction(Intent.ACTION_LOCALE_CHANGED);
-        mContext.registerReceiver(mBroadcastReceiver, f);
-
-        mContext.getContentResolver().registerContentObserver(
-                Settings.System.getUriFor(Settings.System.TIME_12_24), false, mContentObserver);
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
         KeyguardUpdateMonitor.getInstance(mContext).removeCallback(mInfoCallback);
-<<<<<<< HEAD
-
-        mContext.unregisterReceiver(mBroadcastReceiver);
-        mContext.getContentResolver().unregisterContentObserver(mContentObserver);
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     public int getAppWidgetId() {
         return LockPatternUtils.ID_DEFAULT_STATUS_WIDGET;
     }
 
-<<<<<<< HEAD
-=======
     // DateFormat.getBestDateTimePattern is extremely expensive, and refresh is called often.
     // This is an optimization to ensure we only recompute the patterns when the inputs change.
     private static final class Patterns {
@@ -241,5 +167,4 @@ public class KeyguardStatusView extends GridLayout {
             cacheKey = key;
         }
     }
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 }

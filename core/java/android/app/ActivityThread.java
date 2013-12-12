@@ -534,23 +534,10 @@ public final class ActivityThread {
     private native void dumpGraphicsInfo(FileDescriptor fd);
 
     private class ApplicationThread extends ApplicationThreadNative {
-<<<<<<< HEAD
-        private static final String HEAP_FULL_COLUMN
-                = "%13s %8s %8s %8s %8s %8s %8s %8s %8s %8s %8s";
-        private static final String HEAP_COLUMN
-                = "%13s %8s %8s %8s %8s %8s %8s %8s";
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         private static final String ONE_COUNT_COLUMN = "%21s %8d";
         private static final String TWO_COUNT_COLUMNS = "%21s %8d %21s %8d";
         private static final String DB_INFO_FORMAT = "  %8s %8s %14s %14s  %s";
 
-<<<<<<< HEAD
-        // Formatting for checkin service - update version if row format changes
-        private static final int ACTIVITY_THREAD_CHECKIN_VERSION = 3;
-
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         private int mLastProcessState = -1;
 
         private void updatePendingConfiguration(Configuration config) {
@@ -564,11 +551,7 @@ public final class ActivityThread {
 
         public final void schedulePauseActivity(IBinder token, boolean finished,
                 boolean userLeaving, int configChanges) {
-<<<<<<< HEAD
-            queueOrSendMessage(
-=======
             sendMessage(
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                     finished ? H.PAUSE_ACTIVITY_FINISHING : H.PAUSE_ACTIVITY,
                     token,
                     (userLeaving ? 1 : 0),
@@ -577,52 +560,32 @@ public final class ActivityThread {
 
         public final void scheduleStopActivity(IBinder token, boolean showWindow,
                 int configChanges) {
-<<<<<<< HEAD
-           queueOrSendMessage(
-=======
            sendMessage(
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 showWindow ? H.STOP_ACTIVITY_SHOW : H.STOP_ACTIVITY_HIDE,
                 token, 0, configChanges);
         }
 
         public final void scheduleWindowVisibility(IBinder token, boolean showWindow) {
-<<<<<<< HEAD
-            queueOrSendMessage(
-=======
             sendMessage(
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 showWindow ? H.SHOW_WINDOW : H.HIDE_WINDOW,
                 token);
         }
 
         public final void scheduleSleeping(IBinder token, boolean sleeping) {
-<<<<<<< HEAD
-            queueOrSendMessage(H.SLEEPING, token, sleeping ? 1 : 0);
-=======
             sendMessage(H.SLEEPING, token, sleeping ? 1 : 0);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
 
         public final void scheduleResumeActivity(IBinder token, int processState,
                 boolean isForward) {
             updateProcessState(processState, false);
-<<<<<<< HEAD
-            queueOrSendMessage(H.RESUME_ACTIVITY, token, isForward ? 1 : 0);
-=======
             sendMessage(H.RESUME_ACTIVITY, token, isForward ? 1 : 0);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
 
         public final void scheduleSendResult(IBinder token, List<ResultInfo> results) {
             ResultData res = new ResultData();
             res.token = token;
             res.results = results;
-<<<<<<< HEAD
-            queueOrSendMessage(H.SEND_RESULT, res);
-=======
             sendMessage(H.SEND_RESULT, res);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
 
         // we use token to identify this activity without having to send the
@@ -656,11 +619,7 @@ public final class ActivityThread {
 
             updatePendingConfiguration(curConfig);
 
-<<<<<<< HEAD
-            queueOrSendMessage(H.LAUNCH_ACTIVITY, r);
-=======
             sendMessage(H.LAUNCH_ACTIVITY, r);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
 
         public final void scheduleRelaunchActivity(IBinder token,
@@ -675,20 +634,12 @@ public final class ActivityThread {
             data.intents = intents;
             data.token = token;
 
-<<<<<<< HEAD
-            queueOrSendMessage(H.NEW_INTENT, data);
-=======
             sendMessage(H.NEW_INTENT, data);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
 
         public final void scheduleDestroyActivity(IBinder token, boolean finishing,
                 int configChanges) {
-<<<<<<< HEAD
-            queueOrSendMessage(H.DESTROY_ACTIVITY, token, finishing ? 1 : 0,
-=======
             sendMessage(H.DESTROY_ACTIVITY, token, finishing ? 1 : 0,
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                     configChanges);
         }
 
@@ -700,11 +651,7 @@ public final class ActivityThread {
                     sync, false, mAppThread.asBinder(), sendingUser);
             r.info = info;
             r.compatInfo = compatInfo;
-<<<<<<< HEAD
-            queueOrSendMessage(H.RECEIVER, r);
-=======
             sendMessage(H.RECEIVER, r);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
 
         public final void scheduleCreateBackupAgent(ApplicationInfo app,
@@ -714,11 +661,7 @@ public final class ActivityThread {
             d.compatInfo = compatInfo;
             d.backupMode = backupMode;
 
-<<<<<<< HEAD
-            queueOrSendMessage(H.CREATE_BACKUP_AGENT, d);
-=======
             sendMessage(H.CREATE_BACKUP_AGENT, d);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
 
         public final void scheduleDestroyBackupAgent(ApplicationInfo app,
@@ -727,11 +670,7 @@ public final class ActivityThread {
             d.appInfo = app;
             d.compatInfo = compatInfo;
 
-<<<<<<< HEAD
-            queueOrSendMessage(H.DESTROY_BACKUP_AGENT, d);
-=======
             sendMessage(H.DESTROY_BACKUP_AGENT, d);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
 
         public final void scheduleCreateService(IBinder token,
@@ -742,11 +681,7 @@ public final class ActivityThread {
             s.info = info;
             s.compatInfo = compatInfo;
 
-<<<<<<< HEAD
-            queueOrSendMessage(H.CREATE_SERVICE, s);
-=======
             sendMessage(H.CREATE_SERVICE, s);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
 
         public final void scheduleBindService(IBinder token, Intent intent,
@@ -760,11 +695,7 @@ public final class ActivityThread {
             if (DEBUG_SERVICE)
                 Slog.v(TAG, "scheduleBindService token=" + token + " intent=" + intent + " uid="
                         + Binder.getCallingUid() + " pid=" + Binder.getCallingPid());
-<<<<<<< HEAD
-            queueOrSendMessage(H.BIND_SERVICE, s);
-=======
             sendMessage(H.BIND_SERVICE, s);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
 
         public final void scheduleUnbindService(IBinder token, Intent intent) {
@@ -772,11 +703,7 @@ public final class ActivityThread {
             s.token = token;
             s.intent = intent;
 
-<<<<<<< HEAD
-            queueOrSendMessage(H.UNBIND_SERVICE, s);
-=======
             sendMessage(H.UNBIND_SERVICE, s);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
 
         public final void scheduleServiceArgs(IBinder token, boolean taskRemoved, int startId,
@@ -788,19 +715,11 @@ public final class ActivityThread {
             s.flags = flags;
             s.args = args;
 
-<<<<<<< HEAD
-            queueOrSendMessage(H.SERVICE_ARGS, s);
-        }
-
-        public final void scheduleStopService(IBinder token) {
-            queueOrSendMessage(H.STOP_SERVICE, token);
-=======
             sendMessage(H.SERVICE_ARGS, s);
         }
 
         public final void scheduleStopService(IBinder token) {
             sendMessage(H.STOP_SERVICE, token);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
 
         public final void bindApplication(String processName,
@@ -837,21 +756,6 @@ public final class ActivityThread {
             data.initProfileFile = profileFile;
             data.initProfileFd = profileFd;
             data.initAutoStopProfiler = false;
-<<<<<<< HEAD
-            queueOrSendMessage(H.BIND_APPLICATION, data);
-        }
-
-        public final void scheduleExit() {
-            queueOrSendMessage(H.EXIT_APPLICATION, null);
-        }
-
-        public final void scheduleSuicide() {
-            queueOrSendMessage(H.SUICIDE, null);
-        }
-
-        public void requestThumbnail(IBinder token) {
-            queueOrSendMessage(H.REQUEST_THUMBNAIL, token);
-=======
             sendMessage(H.BIND_APPLICATION, data);
         }
 
@@ -865,16 +769,11 @@ public final class ActivityThread {
 
         public void requestThumbnail(IBinder token) {
             sendMessage(H.REQUEST_THUMBNAIL, token);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
 
         public void scheduleConfigurationChanged(Configuration config) {
             updatePendingConfiguration(config);
-<<<<<<< HEAD
-            queueOrSendMessage(H.CONFIGURATION_CHANGED, config);
-=======
             sendMessage(H.CONFIGURATION_CHANGED, config);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
 
         public void updateTimeZone() {
@@ -901,11 +800,7 @@ public final class ActivityThread {
                 data.fd = ParcelFileDescriptor.dup(fd);
                 data.token = servicetoken;
                 data.args = args;
-<<<<<<< HEAD
-                queueOrSendMessage(H.DUMP_SERVICE, data);
-=======
                 sendMessage(H.DUMP_SERVICE, data, 0, 0, true /*async*/);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             } catch (IOException e) {
                 Slog.w(TAG, "dumpService failed", e);
             }
@@ -923,19 +818,11 @@ public final class ActivityThread {
         }
 
         public void scheduleLowMemory() {
-<<<<<<< HEAD
-            queueOrSendMessage(H.LOW_MEMORY, null);
-        }
-
-        public void scheduleActivityConfigurationChanged(IBinder token) {
-            queueOrSendMessage(H.ACTIVITY_CONFIGURATION_CHANGED, token);
-=======
             sendMessage(H.LOW_MEMORY, null);
         }
 
         public void scheduleActivityConfigurationChanged(IBinder token) {
             sendMessage(H.ACTIVITY_CONFIGURATION_CHANGED, token);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
 
         public void profilerControl(boolean start, String path, ParcelFileDescriptor fd,
@@ -943,22 +830,14 @@ public final class ActivityThread {
             ProfilerControlData pcd = new ProfilerControlData();
             pcd.path = path;
             pcd.fd = fd;
-<<<<<<< HEAD
-            queueOrSendMessage(H.PROFILER_CONTROL, pcd, start ? 1 : 0, profileType);
-=======
             sendMessage(H.PROFILER_CONTROL, pcd, start ? 1 : 0, profileType);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
 
         public void dumpHeap(boolean managed, String path, ParcelFileDescriptor fd) {
             DumpHeapData dhd = new DumpHeapData();
             dhd.path = path;
             dhd.fd = fd;
-<<<<<<< HEAD
-            queueOrSendMessage(H.DUMP_HEAP, dhd, managed ? 1 : 0);
-=======
             sendMessage(H.DUMP_HEAP, dhd, managed ? 1 : 0, 0, true /*async*/);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
 
         public void setSchedulingGroup(int group) {
@@ -974,19 +853,11 @@ public final class ActivityThread {
         }
 
         public void dispatchPackageBroadcast(int cmd, String[] packages) {
-<<<<<<< HEAD
-            queueOrSendMessage(H.DISPATCH_PACKAGE_BROADCAST, packages, cmd);
-        }
-
-        public void scheduleCrash(String msg) {
-            queueOrSendMessage(H.SCHEDULE_CRASH, msg);
-=======
             sendMessage(H.DISPATCH_PACKAGE_BROADCAST, packages, cmd);
         }
 
         public void scheduleCrash(String msg) {
             sendMessage(H.SCHEDULE_CRASH, msg);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
 
         public void dumpActivity(FileDescriptor fd, IBinder activitytoken,
@@ -997,11 +868,7 @@ public final class ActivityThread {
                 data.token = activitytoken;
                 data.prefix = prefix;
                 data.args = args;
-<<<<<<< HEAD
-                queueOrSendMessage(H.DUMP_ACTIVITY, data);
-=======
                 sendMessage(H.DUMP_ACTIVITY, data, 0, 0, true /*async*/);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             } catch (IOException e) {
                 Slog.w(TAG, "dumpActivity failed", e);
             }
@@ -1014,11 +881,7 @@ public final class ActivityThread {
                 data.fd = ParcelFileDescriptor.dup(fd);
                 data.token = providertoken;
                 data.args = args;
-<<<<<<< HEAD
-                queueOrSendMessage(H.DUMP_PROVIDER, data);
-=======
                 sendMessage(H.DUMP_PROVIDER, data, 0, 0, true /*async*/);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             } catch (IOException e) {
                 Slog.w(TAG, "dumpProvider failed", e);
             }
@@ -1059,84 +922,6 @@ public final class ActivityThread {
             long openSslSocketCount = Debug.countInstancesOfClass(OpenSSLSocketImpl.class);
             SQLiteDebug.PagerStats stats = SQLiteDebug.getDatabaseInfo();
 
-<<<<<<< HEAD
-            // For checkin, we print one long comma-separated list of values
-            if (checkin) {
-                // NOTE: if you change anything significant below, also consider changing
-                // ACTIVITY_THREAD_CHECKIN_VERSION.
-                String processName = (mBoundApplication != null)
-                        ? mBoundApplication.processName : "unknown";
-
-                // Header
-                pw.print(ACTIVITY_THREAD_CHECKIN_VERSION); pw.print(',');
-                pw.print(Process.myPid()); pw.print(',');
-                pw.print(processName); pw.print(',');
-
-                // Heap info - max
-                pw.print(nativeMax); pw.print(',');
-                pw.print(dalvikMax); pw.print(',');
-                pw.print("N/A,");
-                pw.print(nativeMax + dalvikMax); pw.print(',');
-
-                // Heap info - allocated
-                pw.print(nativeAllocated); pw.print(',');
-                pw.print(dalvikAllocated); pw.print(',');
-                pw.print("N/A,");
-                pw.print(nativeAllocated + dalvikAllocated); pw.print(',');
-
-                // Heap info - free
-                pw.print(nativeFree); pw.print(',');
-                pw.print(dalvikFree); pw.print(',');
-                pw.print("N/A,");
-                pw.print(nativeFree + dalvikFree); pw.print(',');
-
-                // Heap info - proportional set size
-                pw.print(memInfo.nativePss); pw.print(',');
-                pw.print(memInfo.dalvikPss); pw.print(',');
-                pw.print(memInfo.otherPss); pw.print(',');
-                pw.print(memInfo.getTotalPss()); pw.print(',');
-
-                // Heap info - swappable set size
-                pw.print(memInfo.nativeSwappablePss); pw.print(',');
-                pw.print(memInfo.dalvikSwappablePss); pw.print(',');
-                pw.print(memInfo.otherSwappablePss); pw.print(',');
-                pw.print(memInfo.getTotalSwappablePss()); pw.print(',');
-
-                // Heap info - shared dirty
-                pw.print(memInfo.nativeSharedDirty); pw.print(',');
-                pw.print(memInfo.dalvikSharedDirty); pw.print(',');
-                pw.print(memInfo.otherSharedDirty); pw.print(',');
-                pw.print(memInfo.getTotalSharedDirty()); pw.print(',');
-
-                // Heap info - shared clean
-                pw.print(memInfo.nativeSharedClean); pw.print(',');
-                pw.print(memInfo.dalvikSharedClean); pw.print(',');
-                pw.print(memInfo.otherSharedClean); pw.print(',');
-                pw.print(memInfo.getTotalSharedClean()); pw.print(',');
-
-                // Heap info - private Dirty
-                pw.print(memInfo.nativePrivateDirty); pw.print(',');
-                pw.print(memInfo.dalvikPrivateDirty); pw.print(',');
-                pw.print(memInfo.otherPrivateDirty); pw.print(',');
-                pw.print(memInfo.getTotalPrivateDirty()); pw.print(',');
-
-                // Heap info - private Clean
-                pw.print(memInfo.nativePrivateClean); pw.print(',');
-                pw.print(memInfo.dalvikPrivateClean); pw.print(',');
-                pw.print(memInfo.otherPrivateClean); pw.print(',');
-                pw.print(memInfo.getTotalPrivateClean()); pw.print(',');
-
-                // Heap info - other areas
-                for (int i=0; i<Debug.MemoryInfo.NUM_OTHER_STATS; i++) {
-                    pw.print(Debug.MemoryInfo.getOtherLabel(i)); pw.print(',');
-                    pw.print(memInfo.getOtherPss(i)); pw.print(',');
-                    pw.print(memInfo.getOtherSwappablePss(i)); pw.print(',');
-                    pw.print(memInfo.getOtherSharedDirty(i)); pw.print(',');
-                    pw.print(memInfo.getOtherSharedClean(i)); pw.print(',');
-                    pw.print(memInfo.getOtherPrivateDirty(i)); pw.print(',');
-                    pw.print(memInfo.getOtherPrivateClean(i)); pw.print(',');
-                }
-=======
             dumpMemInfoTable(pw, memInfo, checkin, dumpFullInfo, dumpDalvik, Process.myPid(),
                     (mBoundApplication != null) ? mBoundApplication.processName : "unknown",
                     nativeMax, nativeAllocated, nativeFree,
@@ -1145,7 +930,6 @@ public final class ActivityThread {
             if (checkin) {
                 // NOTE: if you change anything significant below, also consider changing
                 // ACTIVITY_THREAD_CHECKIN_VERSION.
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
                 // Object counts
                 pw.print(viewInstanceCount); pw.print(',');
@@ -1180,131 +964,6 @@ public final class ActivityThread {
                 return;
             }
 
-<<<<<<< HEAD
-            // otherwise, show human-readable format
-            if (dumpFullInfo) {
-                printRow(pw, HEAP_FULL_COLUMN, "", "Pss", "Pss", "Shared", "Private",
-                        "Shared", "Private", "Swapped", "Heap", "Heap", "Heap");
-                printRow(pw, HEAP_FULL_COLUMN, "", "Total", "Clean", "Dirty", "Dirty",
-                        "Clean", "Clean", "Dirty", "Size", "Alloc", "Free");
-                printRow(pw, HEAP_FULL_COLUMN, "", "------", "------", "------", "------",
-                        "------", "------", "------", "------", "------", "------");
-                printRow(pw, HEAP_FULL_COLUMN, "Native Heap", memInfo.nativePss,
-                        memInfo.nativeSwappablePss, memInfo.nativeSharedDirty,
-                        memInfo.nativePrivateDirty, memInfo.nativeSharedClean,
-                        memInfo.nativePrivateClean, memInfo.nativeSwappedOut,
-                        nativeMax, nativeAllocated, nativeFree);
-                printRow(pw, HEAP_FULL_COLUMN, "Dalvik Heap", memInfo.dalvikPss,
-                        memInfo.dalvikSwappablePss, memInfo.dalvikSharedDirty,
-                        memInfo.dalvikPrivateDirty, memInfo.dalvikSharedClean,
-                        memInfo.dalvikPrivateClean, memInfo.dalvikSwappedOut,
-                        dalvikMax, dalvikAllocated, dalvikFree);
-            } else {
-                printRow(pw, HEAP_COLUMN, "", "Pss", "Private",
-                        "Private", "Swapped", "Heap", "Heap", "Heap");
-                printRow(pw, HEAP_COLUMN, "", "Total", "Dirty",
-                        "Clean", "Dirty", "Size", "Alloc", "Free");
-                printRow(pw, HEAP_COLUMN, "", "------", "------", "------",
-                        "------", "------", "------", "------", "------");
-                printRow(pw, HEAP_COLUMN, "Native Heap", memInfo.nativePss,
-                        memInfo.nativePrivateDirty,
-                        memInfo.nativePrivateClean, memInfo.nativeSwappedOut,
-                        nativeMax, nativeAllocated, nativeFree);
-                printRow(pw, HEAP_COLUMN, "Dalvik Heap", memInfo.dalvikPss,
-                        memInfo.dalvikPrivateDirty,
-                        memInfo.dalvikPrivateClean, memInfo.dalvikSwappedOut,
-                        dalvikMax, dalvikAllocated, dalvikFree);
-            }
-
-            int otherPss = memInfo.otherPss;
-            int otherSwappablePss = memInfo.otherSwappablePss;
-            int otherSharedDirty = memInfo.otherSharedDirty;
-            int otherPrivateDirty = memInfo.otherPrivateDirty;
-            int otherSharedClean = memInfo.otherSharedClean;
-            int otherPrivateClean = memInfo.otherPrivateClean;
-            int otherSwappedOut = memInfo.otherSwappedOut;
-
-            for (int i=0; i<Debug.MemoryInfo.NUM_OTHER_STATS; i++) {
-                final int myPss = memInfo.getOtherPss(i);
-                final int mySwappablePss = memInfo.getOtherSwappablePss(i);
-                final int mySharedDirty = memInfo.getOtherSharedDirty(i);
-                final int myPrivateDirty = memInfo.getOtherPrivateDirty(i);
-                final int mySharedClean = memInfo.getOtherSharedClean(i);
-                final int myPrivateClean = memInfo.getOtherPrivateClean(i);
-                final int mySwappedOut = memInfo.getOtherSwappedOut(i);
-                if (myPss != 0 || mySharedDirty != 0 || myPrivateDirty != 0
-                        || mySharedClean != 0 || myPrivateClean != 0 || mySwappedOut != 0) {
-                    if (dumpFullInfo) {
-                        printRow(pw, HEAP_FULL_COLUMN, Debug.MemoryInfo.getOtherLabel(i),
-                                myPss, mySwappablePss, mySharedDirty, myPrivateDirty,
-                                mySharedClean, myPrivateClean, mySwappedOut, "", "", "");
-                    } else {
-                        printRow(pw, HEAP_COLUMN, Debug.MemoryInfo.getOtherLabel(i),
-                                myPss, myPrivateDirty,
-                                myPrivateClean, mySwappedOut, "", "", "");
-                    }
-                    otherPss -= myPss;
-                    otherSwappablePss -= mySwappablePss;
-                    otherSharedDirty -= mySharedDirty;
-                    otherPrivateDirty -= myPrivateDirty;
-                    otherSharedClean -= mySharedClean;
-                    otherPrivateClean -= myPrivateClean;
-                    otherSwappedOut -= mySwappedOut;
-                }
-            }
-
-            if (dumpFullInfo) {
-                printRow(pw, HEAP_FULL_COLUMN, "Unknown", otherPss, otherSwappablePss,
-                        otherSharedDirty, otherPrivateDirty, otherSharedClean, otherPrivateClean,
-                        otherSwappedOut, "", "", "");
-                printRow(pw, HEAP_FULL_COLUMN, "TOTAL", memInfo.getTotalPss(),
-                        memInfo.getTotalSwappablePss(),
-                        memInfo.getTotalSharedDirty(), memInfo.getTotalPrivateDirty(),
-                        memInfo.getTotalSharedClean(), memInfo.getTotalPrivateClean(),
-                        memInfo.getTotalSwappedOut(), nativeMax+dalvikMax,
-                        nativeAllocated+dalvikAllocated, nativeFree+dalvikFree);
-            } else {
-                printRow(pw, HEAP_COLUMN, "Unknown", otherPss,
-                        otherPrivateDirty, otherPrivateClean, otherSwappedOut,
-                        "", "", "");
-                printRow(pw, HEAP_COLUMN, "TOTAL", memInfo.getTotalPss(),
-                        memInfo.getTotalPrivateDirty(),
-                        memInfo.getTotalPrivateClean(),
-                        memInfo.getTotalSwappedOut(),
-                        nativeMax+dalvikMax,
-                        nativeAllocated+dalvikAllocated, nativeFree+dalvikFree);
-            }
-
-            if (dumpDalvik) {
-                pw.println(" ");
-                pw.println(" Dalvik Details");
-
-                for (int i=Debug.MemoryInfo.NUM_OTHER_STATS;
-                     i<Debug.MemoryInfo.NUM_OTHER_STATS + Debug.MemoryInfo.NUM_DVK_STATS; i++) {
-                    final int myPss = memInfo.getOtherPss(i);
-                    final int mySwappablePss = memInfo.getOtherSwappablePss(i);
-                    final int mySharedDirty = memInfo.getOtherSharedDirty(i);
-                    final int myPrivateDirty = memInfo.getOtherPrivateDirty(i);
-                    final int mySharedClean = memInfo.getOtherSharedClean(i);
-                    final int myPrivateClean = memInfo.getOtherPrivateClean(i);
-                    final int mySwappedOut = memInfo.getOtherSwappedOut(i);
-                    if (myPss != 0 || mySharedDirty != 0 || myPrivateDirty != 0
-                            || mySharedClean != 0 || myPrivateClean != 0) {
-                        if (dumpFullInfo) {
-                            printRow(pw, HEAP_FULL_COLUMN, Debug.MemoryInfo.getOtherLabel(i),
-                                    myPss, mySwappablePss, mySharedDirty, myPrivateDirty,
-                                    mySharedClean, myPrivateClean, mySwappedOut, "", "", "");
-                        } else {
-                            printRow(pw, HEAP_COLUMN, Debug.MemoryInfo.getOtherLabel(i),
-                                    myPss, myPrivateDirty,
-                                    myPrivateClean, mySwappedOut, "", "", "");
-                        }
-                    }
-                }
-            }
-
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             pw.println(" ");
             pw.println(" Objects");
             printRow(pw, TWO_COUNT_COLUMNS, "Views:", viewInstanceCount, "ViewRootImpl:",
@@ -1369,11 +1028,7 @@ public final class ActivityThread {
 
         @Override
         public void unstableProviderDied(IBinder provider) {
-<<<<<<< HEAD
-            queueOrSendMessage(H.UNSTABLE_PROVIDER_DIED, provider);
-=======
             sendMessage(H.UNSTABLE_PROVIDER_DIED, provider);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
 
         @Override
@@ -1383,40 +1038,17 @@ public final class ActivityThread {
             cmd.activityToken = activityToken;
             cmd.requestToken = requestToken;
             cmd.requestType = requestType;
-<<<<<<< HEAD
-            queueOrSendMessage(H.REQUEST_ASSIST_CONTEXT_EXTRAS, cmd);
-        }
-
-        private void printRow(PrintWriter pw, String format, Object...objs) {
-            pw.println(String.format(format, objs));
-        }
-
-        public void setCoreSettings(Bundle coreSettings) {
-            queueOrSendMessage(H.SET_CORE_SETTINGS, coreSettings);
-=======
             sendMessage(H.REQUEST_ASSIST_CONTEXT_EXTRAS, cmd);
         }
 
         public void setCoreSettings(Bundle coreSettings) {
             sendMessage(H.SET_CORE_SETTINGS, coreSettings);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
 
         public void updatePackageCompatibilityInfo(String pkg, CompatibilityInfo info) {
             UpdateCompatibilityData ucd = new UpdateCompatibilityData();
             ucd.pkg = pkg;
             ucd.info = info;
-<<<<<<< HEAD
-            queueOrSendMessage(H.UPDATE_PACKAGE_COMPATIBILITY_INFO, ucd);
-        }
-
-        public void scheduleTrimMemory(int level) {
-            queueOrSendMessage(H.TRIM_MEMORY, null, level);
-        }
-
-        public void scheduleTranslucentConversionComplete(IBinder token, boolean drawComplete) {
-            queueOrSendMessage(H.TRANSLUCENT_CONVERSION_COMPLETE, token, drawComplete ? 1 : 0);
-=======
             sendMessage(H.UPDATE_PACKAGE_COMPATIBILITY_INFO, ucd);
         }
 
@@ -1426,7 +1058,6 @@ public final class ActivityThread {
 
         public void scheduleTranslucentConversionComplete(IBinder token, boolean drawComplete) {
             sendMessage(H.TRANSLUCENT_CONVERSION_COMPLETE, token, drawComplete ? 1 : 0);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
 
         public void setProcessState(int state) {
@@ -1449,11 +1080,7 @@ public final class ActivityThread {
 
         @Override
         public void scheduleInstallProvider(ProviderInfo provider) {
-<<<<<<< HEAD
-            queueOrSendMessage(H.INSTALL_PROVIDER, provider);
-=======
             sendMessage(H.INSTALL_PROVIDER, provider);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
     }
 
@@ -2131,8 +1758,6 @@ public final class ActivityThread {
         }
     }
 
-<<<<<<< HEAD
-=======
     private static final String HEAP_FULL_COLUMN
             = "%13s %8s %8s %8s %8s %8s %8s %8s %8s %8s %8s";
     private static final String HEAP_COLUMN
@@ -2350,7 +1975,6 @@ public final class ActivityThread {
         }
     }
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     public void registerOnActivityPausedListener(Activity activity,
             OnActivityPausedListener listener) {
         synchronized (mOnPauseListeners) {
@@ -2425,30 +2049,6 @@ public final class ActivityThread {
         mAppThread.scheduleSendResult(token, list);
     }
 
-<<<<<<< HEAD
-    // if the thread hasn't started yet, we don't have the handler, so just
-    // save the messages until we're ready.
-    private void queueOrSendMessage(int what, Object obj) {
-        queueOrSendMessage(what, obj, 0, 0);
-    }
-
-    private void queueOrSendMessage(int what, Object obj, int arg1) {
-        queueOrSendMessage(what, obj, arg1, 0);
-    }
-
-    private void queueOrSendMessage(int what, Object obj, int arg1, int arg2) {
-        synchronized (this) {
-            if (DEBUG_MESSAGES) Slog.v(
-                TAG, "SCHEDULE " + what + " " + mH.codeToString(what)
-                + ": " + arg1 + " / " + obj);
-            Message msg = Message.obtain();
-            msg.what = what;
-            msg.obj = obj;
-            msg.arg1 = arg1;
-            msg.arg2 = arg2;
-            mH.sendMessage(msg);
-        }
-=======
     private void sendMessage(int what, Object obj) {
         sendMessage(what, obj, 0, 0, false);
     }
@@ -2474,7 +2074,6 @@ public final class ActivityThread {
             msg.setAsynchronous(true);
         }
         mH.sendMessage(msg);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     final void scheduleContextCleanup(ContextImpl context, String who,
@@ -2483,11 +2082,7 @@ public final class ActivityThread {
         cci.context = context;
         cci.who = who;
         cci.what = what;
-<<<<<<< HEAD
-        queueOrSendMessage(H.CLEAN_UP_CONTEXT, cci);
-=======
         sendMessage(H.CLEAN_UP_CONTEXT, cci);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     private Activity performLaunchActivity(ActivityClientRecord r, Intent customIntent) {
@@ -4016,11 +3611,7 @@ public final class ActivityThread {
                     target.onlyLocalRequest = true;
                 }
                 mRelaunchingActivities.add(target);
-<<<<<<< HEAD
-                queueOrSendMessage(H.RELAUNCH_ACTIVITY, target);
-=======
                 sendMessage(H.RELAUNCH_ACTIVITY, target);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             }
 
             if (fromServer) {
@@ -5328,11 +4919,7 @@ public final class ActivityThread {
                                 mPendingConfiguration.isOtherSeqNewer(newConfig)) {
                             mPendingConfiguration = newConfig;
                             
-<<<<<<< HEAD
-                            queueOrSendMessage(H.CONFIGURATION_CHANGED, newConfig);
-=======
                             sendMessage(H.CONFIGURATION_CHANGED, newConfig);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                         }
                     }
                 }

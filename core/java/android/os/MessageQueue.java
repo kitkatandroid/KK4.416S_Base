@@ -18,10 +18,7 @@ package android.os;
 
 import android.util.AndroidRuntimeException;
 import android.util.Log;
-<<<<<<< HEAD
-=======
 import android.util.Printer;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
 import java.util.ArrayList;
 
@@ -256,10 +253,7 @@ public final class MessageQueue {
         synchronized (this) {
             final int token = mNextBarrierToken++;
             final Message msg = Message.obtain();
-<<<<<<< HEAD
-=======
             msg.when = when;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             msg.arg1 = token;
 
             Message prev = null;
@@ -401,14 +395,6 @@ public final class MessageQueue {
 
     boolean isIdling() {
         synchronized (this) {
-<<<<<<< HEAD
-            // If the loop is quitting then it must not be idling.
-            // We can assume mPtr != 0 when mQuitting is false.
-            return !mQuitting && nativeIsIdling(mPtr);
-        }
-    }
-
-=======
             return isIdlingLocked();
         }
     }
@@ -419,7 +405,6 @@ public final class MessageQueue {
         return !mQuitting && nativeIsIdling(mPtr);
      }
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     void removeMessages(Handler h, int what, Object object) {
         if (h == null) {
             return;
@@ -558,8 +543,6 @@ public final class MessageQueue {
             }
         }
     }
-<<<<<<< HEAD
-=======
 
     void dump(Printer pw, String prefix) {
         synchronized (this) {
@@ -573,5 +556,4 @@ public final class MessageQueue {
                     + ", quitting=" + mQuitting + ")");
         }
     }
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 }

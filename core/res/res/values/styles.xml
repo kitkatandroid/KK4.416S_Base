@@ -1438,11 +1438,7 @@ please see styles_device_defaults.xml.
 
     <style name="TextAppearance.Holo.DialogWindowTitle">
         <item name="android:textSize">22sp</item>
-<<<<<<< HEAD
-        <item name="android:textColor">@android:color/default_dialog_text_holo_dark</item>
-=======
         <item name="android:textColor">@android:color/holo_blue_light</item>
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     </style>
 
     <style name="TextAppearance.Holo.CalendarViewWeekDayView" parent="TextAppearance.Small.CalendarViewWeekDayView">
@@ -1541,11 +1537,7 @@ please see styles_device_defaults.xml.
 
     <style name="TextAppearance.Holo.Light.DialogWindowTitle">
         <item name="android:textSize">22sp</item>
-<<<<<<< HEAD
-        <item name="android:textColor">@android:color/default_dialog_text_holo_light</item>
-=======
         <item name="android:textColor">@android:color/holo_blue_light</item>
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     </style>
 
     <style name="TextAppearance.Holo.Light.CalendarViewWeekDayView" parent="TextAppearance.Small.CalendarViewWeekDayView">
@@ -1773,11 +1765,7 @@ please see styles_device_defaults.xml.
         <item name="android:indeterminateDrawable">@android:drawable/scrubber_progress_horizontal_holo_dark</item>
         <item name="android:minHeight">13dip</item>
         <item name="android:maxHeight">13dip</item>
-<<<<<<< HEAD
-        <item name="android:thumb">@android:drawable/scrubber_control_selector_holo_dark</item>
-=======
         <item name="android:thumb">@android:drawable/scrubber_control_selector_holo</item>
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         <item name="android:thumbOffset">16dip</item>
         <item name="android:focusable">true</item>
         <item name="android:paddingStart">16dip</item>
@@ -2183,10 +2171,6 @@ please see styles_device_defaults.xml.
     <style name="Widget.Holo.Light.SeekBar" parent="Widget.Holo.SeekBar">
         <item name="android:progressDrawable">@android:drawable/scrubber_progress_horizontal_holo_light</item>
         <item name="android:indeterminateDrawable">@android:drawable/scrubber_progress_horizontal_holo_light</item>
-<<<<<<< HEAD
-        <item name="android:thumb">@android:drawable/scrubber_control_selector_holo_light</item>
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     </style>
 
     <style name="Widget.Holo.Light.RatingBar" parent="Widget.RatingBar">
@@ -2408,11 +2392,7 @@ please see styles_device_defaults.xml.
         <item name="bottomBright">@android:drawable/dialog_bottom_holo_dark</item>
         <item name="bottomMedium">@android:drawable/dialog_bottom_holo_dark</item>
         <item name="centerMedium">@android:drawable/dialog_middle_holo_dark</item>
-<<<<<<< HEAD
-        <item name="layout">@android:layout/alert_dialog_holo_dark</item>
-=======
         <item name="layout">@android:layout/alert_dialog_holo</item>
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         <item name="listLayout">@android:layout/select_dialog_holo</item>
         <item name="progressLayout">@android:layout/progress_dialog_holo</item>
         <item name="horizontalProgressLayout">@android:layout/alert_dialog_progress_holo</item>
@@ -2432,10 +2412,6 @@ please see styles_device_defaults.xml.
         <item name="bottomBright">@android:drawable/dialog_bottom_holo_light</item>
         <item name="bottomMedium">@android:drawable/dialog_bottom_holo_light</item>
         <item name="centerMedium">@android:drawable/dialog_middle_holo_light</item>
-<<<<<<< HEAD
-        <item name="layout">@android:layout/alert_dialog_holo_light</item>
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     </style>
 
     <!-- Window title -->

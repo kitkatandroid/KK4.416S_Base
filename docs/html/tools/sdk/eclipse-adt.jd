@@ -57,8 +57,6 @@ href="http://tools.android.com/knownissues">http://tools.android.com/knownissues
 <div class="toggle-content opened">
   <p><a href="#" onclick="return toggleContent(this)">
     <img src="{@docRoot}assets/images/triangle-opened.png" class="toggle-content-img"
-<<<<<<< HEAD
-=======
       alt=""/>ADT 22.3.0</a> <em>(October 2013)</em>
   </p>
 
@@ -96,7 +94,6 @@ href="http://tools.android.com/knownissues">http://tools.android.com/knownissues
 <div class="toggle-content closed">
   <p><a href="#" onclick="return toggleContent(this)">
     <img src="{@docRoot}assets/images/triangle-closed.png" class="toggle-content-img"
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
       alt=""/>ADT 22.2.1</a> <em>(September 2013)</em>
   </p>
 

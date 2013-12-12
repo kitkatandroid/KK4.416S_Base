@@ -1922,13 +1922,9 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
         private PopupWindow mActionModePopup;
         private Runnable mShowActionModePopup;
 
-<<<<<<< HEAD
-        // View added at runtime to IME windows to cover the navigation bar
-=======
         // View added at runtime to draw under the status bar area
         private View mStatusGuard;
         // View added at runtime to draw under the navigation bar area
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         private View mNavigationGuard;
 
         public DecorView(Context context, int featureId) {
@@ -2490,9 +2486,6 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
         @Override
         protected boolean fitSystemWindows(Rect insets) {
             mFrameOffsets.set(insets);
-<<<<<<< HEAD
-
-=======
             updateStatusGuard(insets);
             updateNavigationGuard(insets);
             if (getForeground() != null) {
@@ -2551,7 +2544,6 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
         }
 
         private void updateNavigationGuard(Rect insets) {
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             // IMEs lay out below the nav bar, but the content view must not (for back compat)
             if (getAttributes().type == WindowManager.LayoutParams.TYPE_INPUT_METHOD) {
                 // prevent the content view from including the nav bar height
@@ -2577,14 +2569,6 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
                     mNavigationGuard.setLayoutParams(lp);
                 }
             }
-<<<<<<< HEAD
-
-            if (getForeground() != null) {
-                drawableChanged();
-            }
-            return super.fitSystemWindows(insets);
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
 
         private void drawableChanged() {
@@ -2763,10 +2747,7 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
             }
 
             public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-<<<<<<< HEAD
-=======
                 requestFitSystemWindows();
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 return mWrapped.onPrepareActionMode(mode, menu);
             }
 
@@ -2793,10 +2774,7 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
                     }
                 }
                 mActionMode = null;
-<<<<<<< HEAD
-=======
                 requestFitSystemWindows();
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             }
         }
     }

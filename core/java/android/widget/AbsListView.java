@@ -595,10 +595,6 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
     Runnable mPositionScrollAfterLayout;
     private int mMinimumVelocity;
     private int mMaximumVelocity;
-<<<<<<< HEAD
-    private int mDecacheThreshold;
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     private float mVelocityScale = 1.0f;
 
     final boolean[] mIsScrap = new boolean[1];
@@ -835,10 +831,6 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
         mTouchSlop = configuration.getScaledTouchSlop();
         mMinimumVelocity = configuration.getScaledMinimumFlingVelocity();
         mMaximumVelocity = configuration.getScaledMaximumFlingVelocity();
-<<<<<<< HEAD
-        mDecacheThreshold = mMaximumVelocity / 2;
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         mOverscrollDistance = configuration.getScaledOverscrollDistance();
         mOverflingDistance = configuration.getScaledOverflingDistance();
 
@@ -4088,11 +4080,7 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
                     // Keep the fling alive a little longer
                     postDelayed(this, FLYWHEEL_TIMEOUT);
                 } else {
-<<<<<<< HEAD
-                    endFling(false); // Don't disable the scrolling cache right after it was enabled
-=======
                     endFling();
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                     mTouchMode = TOUCH_MODE_SCROLL;
                     reportScrollStateChange(OnScrollListener.SCROLL_STATE_TOUCH_SCROLL);
                 }
@@ -4106,14 +4094,6 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
         }
 
         void start(int initialVelocity) {
-<<<<<<< HEAD
-            if (Math.abs(initialVelocity) > mDecacheThreshold) {
-                // For long flings, scrolling cache causes stutter, so don't use it
-                clearScrollingCache();
-            }
-
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             int initialY = initialVelocity < 0 ? Integer.MAX_VALUE : 0;
             mLastFlingY = initialY;
             mScroller.setInterpolator(null);
@@ -4186,25 +4166,13 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
         }
 
         void endFling() {
-<<<<<<< HEAD
-            endFling(true);
-        }
-
-        void endFling(boolean clearCache) {
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             mTouchMode = TOUCH_MODE_REST;
 
             removeCallbacks(this);
             removeCallbacks(mCheckFlywheel);
 
             reportScrollStateChange(OnScrollListener.SCROLL_STATE_IDLE);
-<<<<<<< HEAD
-            if (clearCache)
-                clearScrollingCache();
-=======
             clearScrollingCache();
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             mScroller.abortAnimation();
 
             if (mFlingStrictSpan != null) {
@@ -6718,8 +6686,6 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
 
             scrap.dispatchStartTemporaryDetach();
 
-<<<<<<< HEAD
-=======
             // The the accessibility state of the view may change while temporary
             // detached and we do not allow detached views to fire accessibility
             // events. So we are announcing that the subtree changed giving a chance
@@ -6727,7 +6693,6 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
             notifyViewAccessibilityStateChangedIfNeeded(
                     AccessibilityEvent.CONTENT_CHANGE_TYPE_SUBTREE);
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             // Don't scrap views that have transient state.
             final boolean scrapHasTransientState = scrap.hasTransientState();
             if (scrapHasTransientState) {

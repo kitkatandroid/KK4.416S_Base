@@ -56,10 +56,7 @@ import android.text.Selection;
 import android.text.SpanWatcher;
 import android.text.Spannable;
 import android.text.SpannableString;
-<<<<<<< HEAD
-=======
 import android.text.SpannableStringBuilder;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import android.text.Spanned;
 import android.text.SpannedString;
 import android.text.StaticLayout;
@@ -3498,23 +3495,7 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
             ss.selEnd = end;
 
             if (mText instanceof Spanned) {
-<<<<<<< HEAD
-                /*
-                 * Calling setText() strips off any ChangeWatchers;
-                 * strip them now to avoid leaking references.
-                 * But do it to a copy so that if there are any
-                 * further changes to the text of this view, it
-                 * won't get into an inconsistent state.
-                 */
-
-                Spannable sp = new SpannableString(mText);
-
-                for (ChangeWatcher cw : sp.getSpans(0, sp.length(), ChangeWatcher.class)) {
-                    sp.removeSpan(cw);
-                }
-=======
                 Spannable sp = new SpannableStringBuilder(mText);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
                 if (mEditor != null) {
                     removeMisspelledSpans(sp);

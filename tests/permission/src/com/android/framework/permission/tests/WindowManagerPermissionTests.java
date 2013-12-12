@@ -93,11 +93,7 @@ public class WindowManagerPermissionTests extends TestCase {
         }
         
         try {
-<<<<<<< HEAD
-            mWm.addAppToken(0, null, 0, 0, 0, false, false, 0);
-=======
             mWm.addAppToken(0, null, 0, 0, 0, false, false, 0, 0);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             fail("IWindowManager.addAppToken did not throw SecurityException as"
                     + " expected");
         } catch (SecurityException e) {

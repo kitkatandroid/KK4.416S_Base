@@ -2087,13 +2087,4 @@
   <public type="style" name="Theme.DeviceDefault.NoActionBar.TranslucentDecor" id="0x010301e3" />
   <public type="style" name="Theme.DeviceDefault.Light.NoActionBar.TranslucentDecor" id="0x010301e4" />
 
-<<<<<<< HEAD
-  <!-- CTS tests reference these resources, but fail because we added
-       new ones, changing the order, and Google didn't declare these
-       as public resources. This fixes it for the 4.4_r1 CTS release. -->
-  <public type="bool" name="config_useFixedVolume" id="0x1110056" />
-  <public type="array" name="networkAttributes" id="0x107000b" />
-
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 </resources>

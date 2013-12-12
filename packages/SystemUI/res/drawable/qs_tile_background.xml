@@ -18,16 +18,9 @@
 -->
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_pressed="true">
-<<<<<<< HEAD
-	<color android:color="@color/qs_background_pressed_color" />
-    </item>
-    <item>
-        <color android:color="@color/qs_background_color" />
-=======
 	<color android:color="#212121" />
     </item>
     <item>
         <color android:color="#161616" />
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     </item>
 </selector>

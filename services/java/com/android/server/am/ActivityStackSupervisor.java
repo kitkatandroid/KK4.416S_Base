@@ -905,12 +905,8 @@ public final class ActivityStackSupervisor {
         if (idx < 0) {
             app.activities.add(r);
         }
-<<<<<<< HEAD
-        mService.updateLruProcessLocked(app, true, true);
-=======
         mService.updateLruProcessLocked(app, true, null);
         mService.updateOomAdjLocked();
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
         final ActivityStack stack = r.task.stack;
         try {
@@ -1056,9 +1052,6 @@ public final class ActivityStackSupervisor {
 
         if (app != null && app.thread != null) {
             try {
-<<<<<<< HEAD
-                app.addPackage(r.info.packageName, mService.mProcessStats);
-=======
                 if ((r.info.flags&ActivityInfo.FLAG_MULTIPROCESS) == 0
                         || !"android".equals(r.info.packageName)) {
                     // Don't add this if it is a platform component that is marked
@@ -1067,7 +1060,6 @@ public final class ActivityStackSupervisor {
                     // separate apk in the process.
                     app.addPackage(r.info.packageName, mService.mProcessStats);
                 }
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 realStartActivityLocked(r, app, andResume, checkConfig);
                 return;
             } catch (RemoteException e) {
@@ -1270,27 +1262,16 @@ public final class ActivityStackSupervisor {
         final TaskRecord task = r.task;
         if (r.isApplicationActivity() || (task != null && task.isApplicationTask())) {
             if (task != null) {
-<<<<<<< HEAD
-                if (mFocusedStack != task.stack) {
-                    if (DEBUG_FOCUS || DEBUG_STACK) Slog.d(TAG,
-                            "adjustStackFocus: Setting focused stack to r=" + r + " task=" + task);
-                    mFocusedStack = task.stack;
-=======
                 final ActivityStack taskStack = task.stack;
                 if (mFocusedStack != taskStack) {
                     if (DEBUG_FOCUS || DEBUG_STACK) Slog.d(TAG,
                             "adjustStackFocus: Setting focused stack to r=" + r + " task=" + task);
                     mFocusedStack = taskStack.isHomeStack() ? null : taskStack;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 } else {
                     if (DEBUG_FOCUS || DEBUG_STACK) Slog.d(TAG,
                         "adjustStackFocus: Focused stack already=" + mFocusedStack);
                 }
-<<<<<<< HEAD
-                return mFocusedStack;
-=======
                 return taskStack;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             }
 
             if (mFocusedStack != null) {
@@ -1310,13 +1291,8 @@ public final class ActivityStackSupervisor {
             }
 
             // Time to create the first app stack for this user.
-<<<<<<< HEAD
-            int stackId = mService.createStack(-1, HOME_STACK_ID,
-                StackBox.TASK_STACK_GOES_OVER, 1.0f);
-=======
             int stackId =
                     mService.createStack(-1, HOME_STACK_ID, StackBox.TASK_STACK_GOES_OVER, 1.0f);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             if (DEBUG_FOCUS || DEBUG_STACK) Slog.d(TAG, "adjustStackFocus: New stack r=" + r +
                     " stackId=" + stackId);
             mFocusedStack = getStack(stackId);
@@ -1341,12 +1317,8 @@ public final class ActivityStackSupervisor {
             if (DEBUG_FOCUS || DEBUG_STACK) Slog.d(TAG,
                     "setFocusedStack: Setting focused stack to r=" + r + " task=" + r.task +
                     " Callers=" + Debug.getCallers(3));
-<<<<<<< HEAD
-            mFocusedStack = r.task.stack;
-=======
             final ActivityStack taskStack = r.task.stack;
             mFocusedStack = taskStack.isHomeStack() ? null : taskStack;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             if (mStackState != STACK_STATE_HOME_IN_BACK) {
                 if (DEBUG_STACK) Slog.d(TAG, "setFocusedStack: mStackState old=" +
                         stackStateToString(mStackState) + " new=" +
@@ -1414,32 +1386,22 @@ public final class ActivityStackSupervisor {
             launchFlags |= Intent.FLAG_ACTIVITY_NEW_TASK;
         }
 
-<<<<<<< HEAD
-=======
         ActivityInfo newTaskInfo = null;
         Intent newTaskIntent = null;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         final ActivityStack sourceStack;
         if (sourceRecord != null) {
             if (sourceRecord.finishing) {
                 // If the source is finishing, we can't further count it as our source.  This
                 // is because the task it is associated with may now be empty and on its way out,
                 // so we don't want to blindly throw it in to that task.  Instead we will take
-<<<<<<< HEAD
-                // the NEW_TASK flow and try to find a task for it.
-=======
                 // the NEW_TASK flow and try to find a task for it. But save the task information
                 // so it can be used when creating the new task.
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 if ((launchFlags&Intent.FLAG_ACTIVITY_NEW_TASK) == 0) {
                     Slog.w(TAG, "startActivity called from finishing " + sourceRecord
                             + "; forcing " + "Intent.FLAG_ACTIVITY_NEW_TASK for: " + intent);
                     launchFlags |= Intent.FLAG_ACTIVITY_NEW_TASK;
-<<<<<<< HEAD
-=======
                     newTaskInfo = sourceRecord.info;
                     newTaskIntent = sourceRecord.task.intent;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 }
                 sourceRecord = null;
                 sourceStack = null;
@@ -1515,20 +1477,13 @@ public final class ActivityStackSupervisor {
                             // We really do want to push this one into the
                             // user's face, right now.
                             movedHome = true;
-<<<<<<< HEAD
-=======
                             targetStack.moveTaskToFrontLocked(intentActivity.task, r, options);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                             if ((launchFlags &
                                     (FLAG_ACTIVITY_NEW_TASK | FLAG_ACTIVITY_TASK_ON_HOME))
                                     == (FLAG_ACTIVITY_NEW_TASK | FLAG_ACTIVITY_TASK_ON_HOME)) {
                                 // Caller wants to appear on home activity.
                                 intentActivity.task.mOnTopOfHome = true;
                             }
-<<<<<<< HEAD
-                            targetStack.moveTaskToFrontLocked(intentActivity.task, r, options);
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                             options = null;
                         }
                     }
@@ -1718,15 +1673,10 @@ public final class ActivityStackSupervisor {
             targetStack = adjustStackFocus(r);
             moveHomeStack(targetStack.isHomeStack());
             if (reuseTask == null) {
-<<<<<<< HEAD
-                r.setTask(targetStack.createTaskRecord(getNextTaskId(), r.info, intent, true),
-                        null, true);
-=======
                 r.setTask(targetStack.createTaskRecord(getNextTaskId(),
                         newTaskInfo != null ? newTaskInfo : r.info,
                         newTaskIntent != null ? newTaskIntent : intent,
                         true), null, true);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 if (DEBUG_TASKS) Slog.v(TAG, "Starting new activity " + r + " in new task " +
                         r.task);
             } else {
@@ -2434,14 +2384,6 @@ public final class ActivityStackSupervisor {
     }
 
     public void dump(PrintWriter pw, String prefix) {
-<<<<<<< HEAD
-        pw.print(prefix); pw.print("mDismissKeyguardOnNextActivity:");
-                pw.println(mDismissKeyguardOnNextActivity);
-        pw.print(prefix); pw.print("mStackState="); pw.println(stackStateToString(mStackState));
-        pw.print(prefix); pw.println("mSleepTimeout: " + mSleepTimeout);
-        pw.print(prefix); pw.println("mCurTaskId: " + mCurTaskId);
-        pw.print(prefix); pw.println("mUserStackInFront: " + mUserStackInFront);
-=======
         pw.print(prefix); pw.print("mDismissKeyguardOnNextActivity=");
                 pw.println(mDismissKeyguardOnNextActivity);
         pw.print(prefix); pw.print("mFocusedStack=" + mFocusedStack);
@@ -2449,7 +2391,6 @@ public final class ActivityStackSupervisor {
         pw.print(prefix); pw.println("mSleepTimeout=" + mSleepTimeout);
         pw.print(prefix); pw.println("mCurTaskId=" + mCurTaskId);
         pw.print(prefix); pw.println("mUserStackInFront=" + mUserStackInFront);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     ArrayList<ActivityRecord> getDumpActivitiesLocked(String name) {

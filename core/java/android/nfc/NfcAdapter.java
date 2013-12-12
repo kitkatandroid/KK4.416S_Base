@@ -49,11 +49,8 @@ import android.util.Log;
  * <h3>Developer Guides</h3>
  * <p>For more information about using NFC, read the
  * <a href="{@docRoot}guide/topics/nfc/index.html">Near Field Communication</a> developer guide.</p>
-<<<<<<< HEAD
-=======
  * <p>To perform basic file sharing between devices, read
  * <a href="{@docRoot}training/beam-files/index.html">Sharing Files with NFC</a>.
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
  * </div>
  */
 public final class NfcAdapter {
@@ -314,17 +311,12 @@ public final class NfcAdapter {
     final Context mContext;
 
     /**
-<<<<<<< HEAD
-     * A callback to be invoked when the system has found a tag in
-     * reader mode.
-=======
      * A callback to be invoked when the system finds a tag while the foreground activity is
      * operating in reader mode.
      * <p>Register your {@code ReaderCallback} implementation with {@link
      * NfcAdapter#enableReaderMode} and disable it with {@link
      * NfcAdapter#disableReaderMode}.
      * @see NfcAdapter#enableReaderMode
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
      */
     public interface ReaderCallback {
         public void onTagDiscovered(Tag tag);

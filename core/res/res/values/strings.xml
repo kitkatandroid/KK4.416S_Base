@@ -97,8 +97,6 @@
          the SIM card. -->
     <string name="needPuk">Your SIM card is PUK-locked. Type the PUK code to unlock it.</string>
     <string name="needPuk2">Type PUK2 to unblock SIM card.</string>
-<<<<<<< HEAD
-=======
     <!-- Displayed when user attempts to change SIM PIN1 without enabling PIN1. -->
     <string name="enablePin">Unsuccessful, enable SIM/RUIM Lock.</string>
     <!-- Displayed when a SIM PIN/PUK is entered incorrectly. -->
@@ -106,7 +104,6 @@
         <item quantity="one">You have <xliff:g id="number">%d</xliff:g> remaining attempt before SIM is locked.</item>
         <item quantity="other">You have <xliff:g id="number">%d</xliff:g> remaining attempts before SIM is locked.</item>
     </plurals>
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     <!-- Title for the dialog used to display the user's IMEI number [CHAR LIMIT=10] -->
     <string name="imei">IMEI</string>
 
@@ -1055,15 +1052,12 @@
         interface of a wallpaper. Should never be needed for normal apps.</string>
 
     <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
-<<<<<<< HEAD
-=======
     <string name="permlab_bindRemoteDisplay">bind to a remote display</string>
     <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
     <string name="permdesc_bindRemoteDisplay">Allows the holder to bind to the top-level
         interface of a remote display. Should never be needed for normal apps.</string>
 
     <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     <string name="permlab_bindRemoteViews">bind to a widget service</string>
     <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
     <string name="permdesc_bindRemoteViews">Allows the holder to bind to the top-level
@@ -3785,11 +3779,6 @@
     <string name="progress_unmounting" product="nosdcard">Unmounting USB storage\u2026</string>
     <!-- Text for progress dialog while unmounting SD card [CHAR LIMIT=NONE] -->
     <string name="progress_unmounting" product="default">Unmounting SD card\u2026</string>
-<<<<<<< HEAD
-    <!-- Text for progress dialog while formatting SD card [CHAR LIMIT=NONE] -->
-    <string name="progress_nomediapresent" product="default">No removable media present\u2026</string>
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     <!-- Text for progress dialog while erasing USB storage volume [CHAR LIMIT=NONE] -->
     <string name="progress_erasing" product="nosdcard">Erasing USB storage\u2026</string>
     <!-- Text for progress dialog while erasing SD card [CHAR LIMIT=NONE] -->
@@ -3918,12 +3907,9 @@
     <!-- Description of the shwoing of a popup window with activities to choose from. [CHAR LIMIT=NONE] -->
     <string name="activitychooserview_choose_application">Choose an app</string>
 
-<<<<<<< HEAD
-=======
     <!-- Error message if the share target app cannto be launched. [CHAR LIMIT=NONE] -->
     <string name="activitychooserview_choose_application_error">Couldn\'t launch <xliff:g id="application_name" example="Acme">%s</xliff:g></string>
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     <!-- ShareActionProvider - accessibility support -->
     <!-- Description of the choose target button in a ShareActionProvider (share UI). [CHAR LIMIT=NONE] -->
     <string name="shareactionprovider_share_with">Share with</string>
@@ -4110,14 +4096,6 @@
     <!-- Description of a wireless display route. [CHAR LIMIT=50] -->
     <string name="wireless_display_route_description">Wireless display</string>
 
-<<<<<<< HEAD
-    <!-- "Done" button for MediaRouter chooser dialog when grouping routes. [CHAR LIMIT=NONE] -->
-    <string name="media_route_chooser_grouping_done">Done</string>
-
-    <!-- Content description of a MediaRouteButton for accessibility support -->
-    <string name="media_route_button_content_description">Media output</string>
-
-=======
     <!-- Content description of a MediaRouteButton for accessibility support -->
     <string name="media_route_button_content_description">Media output</string>
 
@@ -4136,7 +4114,6 @@
     <!-- Button to disconnect from a media route.  [CHAR LIMIT=30] -->
     <string name="media_route_controller_disconnect">Disconnect</string>
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     <!-- Status message for remote routes attempting to scan/determine availability -->
     <string name="media_route_status_scanning">Scanning...</string>
 
@@ -4169,12 +4146,6 @@
     <!-- Title text to append when the display is secure.  [CHAR LIMIT=30] -->
     <string name="display_manager_overlay_display_secure_suffix">, secure</string>
 
-<<<<<<< HEAD
-    <!-- Title of the notification to indicate an active wifi display connection.  [CHAR LIMIT=50] -->
-    <string name="wifi_display_notification_title">Wireless display is connected</string>
-    <!-- Message of the notification to indicate an active wifi display connection.  [CHAR LIMIT=80] -->
-    <string name="wifi_display_notification_message">This screen is showing on another device</string>
-=======
     <!-- Title of the notification to indicate the process of connecting to a wifi display.  [CHAR LIMIT=50] -->
     <string name="wifi_display_notification_connecting_title">Casting screen</string>
     <!-- Message of the notification to indicate the process of connecting to a wifi display.  [CHAR LIMIT=80] -->
@@ -4183,7 +4154,6 @@
     <string name="wifi_display_notification_connected_title">Casting screen</string>
     <!-- Message of the notification to indicate an active wifi display connection.  [CHAR LIMIT=80] -->
     <string name="wifi_display_notification_connected_message">Connected to <xliff:g id="name">%1$s</xliff:g></string>
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     <!-- Label of a button to disconnect an active wifi display connection.  [CHAR LIMIT=25] -->
     <string name="wifi_display_notification_disconnect">Disconnect</string>
 

@@ -63,12 +63,9 @@
           <li><a href="<?cs var:toroot ?>guide/topics/providers/contacts-provider.html">
               <span class="en">Contacts Provider</span>
             </a></li>
-<<<<<<< HEAD
-=======
           <li><a href="<?cs var:toroot ?>guide/topics/providers/document-provider.html">
               <span class="en">Storage Access Framework</span>
             </a></li>
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         </ul>
       </li>
       <li><a href="<?cs var:toroot ?>guide/components/intents-filters.html">
@@ -411,10 +408,7 @@
         <ul>
           <li><a href="<?cs var:toroot ?>guide/topics/connectivity/nfc/nfc.html">NFC Basics</a></li>
           <li><a href="<?cs var:toroot ?>guide/topics/connectivity/nfc/advanced-nfc.html">Advanced NFC</a></li>
-<<<<<<< HEAD
-=======
           <li><a href="<?cs var:toroot ?>guide/topics/connectivity/nfc/hce.html">Host-based Card Emulation</a></li>
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         </ul>
       </li>
       <li><a href="<?cs var:toroot?>guide/topics/connectivity/wifip2p.html">
@@ -505,12 +499,9 @@
       <li><a href="<?cs var:toroot ?>guide/webapps/webview.html">
             <span class="en">Building Web Apps in WebView</span>
           </a></li>
-<<<<<<< HEAD
-=======
       <li><a href="<?cs var:toroot ?>guide/webapps/migrating.html">
             <span class="en">Migrating to WebView in Android 4.4</span>
           </a></li>
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
       <li><a href="<?cs var:toroot ?>guide/webapps/debugging.html">
             <span class="en">Debugging Web Apps</span>
           </a></li>

@@ -19,10 +19,6 @@ package com.android.keyguard;
 import android.content.Context;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.Color;
-<<<<<<< HEAD
-import android.graphics.Paint;
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.os.Handler;
@@ -44,11 +40,7 @@ public class CameraWidgetFrame extends KeyguardWidgetFrame implements View.OnCli
     private static final String TAG = CameraWidgetFrame.class.getSimpleName();
     private static final boolean DEBUG = KeyguardHostView.DEBUG;
     private static final int WIDGET_ANIMATION_DURATION = 250; // ms
-<<<<<<< HEAD
-    private static final int WIDGET_WAIT_DURATION = 650; // ms
-=======
     private static final int WIDGET_WAIT_DURATION = 400; // ms
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     private static final int RECOVERY_DELAY = 1000; // ms
 
     interface Callbacks {
@@ -75,10 +67,7 @@ public class CameraWidgetFrame extends KeyguardWidgetFrame implements View.OnCli
     private FixedSizeFrameLayout mPreview;
     private View mFullscreenPreview;
     private View mFakeNavBar;
-<<<<<<< HEAD
-=======
     private boolean mUseFastTransition;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
     private final Runnable mTransitionToCameraRunnable = new Runnable() {
         @Override
@@ -254,20 +243,12 @@ public class CameraWidgetFrame extends KeyguardWidgetFrame implements View.OnCli
         final float pvTransX = pvWidth < thisWidth ? (thisWidth - pvWidth) / 2 : 0;
         final float pvTransY = pvHeight < thisHeight ? (thisHeight - pvHeight) / 2 : 0;
 
-<<<<<<< HEAD
-        mPreview.setPivotX(0);
-        mPreview.setPivotY(0);
-        mPreview.setScaleX(pvScale);
-        mPreview.setScaleY(pvScale);
-        mPreview.setTranslationX(pvTransX);
-=======
         final boolean isRtl = mPreview.getLayoutDirection() == LAYOUT_DIRECTION_RTL;
         mPreview.setPivotX(isRtl ? mPreview.width : 0);
         mPreview.setPivotY(0);
         mPreview.setScaleX(pvScale);
         mPreview.setScaleY(pvScale);
         mPreview.setTranslationX((isRtl ? -1 : 1) * pvTransX);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         mPreview.setTranslationY(pvTransY);
 
         mRenderedSize.set(width, height);
@@ -437,12 +418,8 @@ public class CameraWidgetFrame extends KeyguardWidgetFrame implements View.OnCli
     private void rescheduleTransitionToCamera() {
         if (DEBUG) Log.d(TAG, "rescheduleTransitionToCamera at " + SystemClock.uptimeMillis());
         mHandler.removeCallbacks(mTransitionToCameraRunnable);
-<<<<<<< HEAD
-        mHandler.postDelayed(mTransitionToCameraRunnable, WIDGET_WAIT_DURATION);
-=======
         final long duration = mUseFastTransition ? 0 : WIDGET_WAIT_DURATION;
         mHandler.postDelayed(mTransitionToCameraRunnable, duration);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     private void cancelTransitionToCamera() {
@@ -537,11 +514,8 @@ public class CameraWidgetFrame extends KeyguardWidgetFrame implements View.OnCli
         if (DEBUG) Log.d(TAG, "setInsets: " + insets);
         mInsets.set(insets);
     }
-<<<<<<< HEAD
-=======
 
     public void setUseFastTransition(boolean useFastTransition) {
         mUseFastTransition = useFastTransition;
     }
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 }

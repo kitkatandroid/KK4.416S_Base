@@ -137,8 +137,6 @@ final class RemotePrintDocumentAdapter {
             Log.e(LOG_TAG, "Error calling finish()", re);
         }
     }
-<<<<<<< HEAD
-=======
 
     public void cancel() {
         if (DEBUG) {
@@ -150,5 +148,4 @@ final class RemotePrintDocumentAdapter {
             Log.e(LOG_TAG, "Error calling cancel()", re);
         }
     }
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 }

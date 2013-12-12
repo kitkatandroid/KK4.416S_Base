@@ -17,48 +17,14 @@
 */
 -->
 
-<<<<<<< HEAD
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/carrier_wifi"
-    android:layout_width="match_parent"
-    android:layout_height="@dimen/carrier_label_height"
-    android:orientation="horizontal"
-=======
 <TextView
     xmlns:android="http://schemas.android.com/apk/res/android"    
     android:id="@+id/carrier_label"
     android:textAppearance="@style/TextAppearance.StatusBar.Expanded.Network"
     android:layout_height="@dimen/carrier_label_height"
     android:layout_width="match_parent"
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     android:layout_gravity="bottom"
     android:layout_marginBottom="@dimen/close_handle_height"
     android:gravity="center"
     android:visibility="invisible"
-<<<<<<< HEAD
-    >
-    <TextView
-        android:id="@+id/carrier_label"
-        android:textAppearance="@style/TextAppearance.StatusBar.Expanded.Network"
-        android:layout_height="match_parent"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        />
-    <RelativeLayout
-        android:id="@+id/wifi_view"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1" >
-        <TextView
-            android:id="@+id/wifi_text"
-            android:textAppearance="@style/TextAppearance.StatusBar.Expanded.Network"
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"
-            android:gravity="center"
-            />
-    </RelativeLayout>
-</LinearLayout>
-=======
     />
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1

@@ -37,14 +37,8 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-<<<<<<< HEAD
-import android.graphics.drawable.LevelListDrawable;
-import android.hardware.display.DisplayManager;
-import android.hardware.display.WifiDisplayStatus;
-=======
 import android.hardware.display.DisplayManager;
 import android.media.MediaRouter;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.Handler;
@@ -67,10 +61,7 @@ import android.view.WindowManagerGlobal;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-<<<<<<< HEAD
-=======
 import com.android.internal.app.MediaRouteDialogPresenter;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import com.android.systemui.R;
 import com.android.systemui.statusbar.phone.QuickSettingsModel.ActivityState;
 import com.android.systemui.statusbar.phone.QuickSettingsModel.BluetoothState;
@@ -101,13 +92,7 @@ class QuickSettings {
     private QuickSettingsModel mModel;
     private ViewGroup mContainerView;
 
-<<<<<<< HEAD
-    private DisplayManager mDisplayManager;
     private DevicePolicyManager mDevicePolicyManager;
-    private WifiDisplayStatus mWifiDisplayStatus;
-=======
-    private DevicePolicyManager mDevicePolicyManager;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     private PhoneStatusBar mStatusBarService;
     private BluetoothState mBluetoothState;
     private BluetoothAdapter mBluetoothAdapter;
@@ -131,19 +116,11 @@ class QuickSettings {
             new ArrayList<QuickSettingsTileView>();
 
     public QuickSettings(Context context, QuickSettingsContainerView container) {
-<<<<<<< HEAD
-        mDisplayManager = (DisplayManager) context.getSystemService(Context.DISPLAY_SERVICE);
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         mDevicePolicyManager
             = (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
         mContext = context;
         mContainerView = container;
         mModel = new QuickSettingsModel(context);
-<<<<<<< HEAD
-        mWifiDisplayStatus = new WifiDisplayStatus();
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         mBluetoothState = new QuickSettingsModel.BluetoothState();
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
@@ -190,10 +167,6 @@ class QuickSettings {
         mLocationController = locationController;
 
         setupQuickSettings();
-<<<<<<< HEAD
-        updateWifiDisplayStatus();
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         updateResources();
         applyLocationEnabledStatus();
 
@@ -336,13 +309,6 @@ class QuickSettings {
                 collapsePanels();
                 final UserManager um = UserManager.get(mContext);
                 if (um.getUsers(true).size() > 1) {
-<<<<<<< HEAD
-                    try {
-                        WindowManagerGlobal.getWindowManagerService().lockNow(null);
-                    } catch (RemoteException e) {
-                        Log.e(TAG, "Couldn't show user switcher", e);
-                    }
-=======
                     // Since keyguard and systemui were merged into the same process to save
                     // memory, they share the same Looper and graphics context.  As a result,
                     // there's no way to allow concurrent animation while keyguard inflates.
@@ -356,7 +322,6 @@ class QuickSettings {
                             }
                         }
                     }, 400); // TODO: ideally this would be tied to the collapse of the panel
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 } else {
                     Intent intent = ContactsContract.QuickContact.composeQuickContactsIntent(
                             mContext, v, ContactsContract.Profile.CONTENT_URI,
@@ -484,11 +449,7 @@ class QuickSettings {
                     RSSIState rssiState = (RSSIState) state;
                     ImageView iv = (ImageView) view.findViewById(R.id.rssi_image);
                     ImageView iov = (ImageView) view.findViewById(R.id.rssi_overlay_image);
-<<<<<<< HEAD
-                    TextView tv = (TextView) view.findViewById(R.id.text);
-=======
                     TextView tv = (TextView) view.findViewById(R.id.rssi_textview);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                     // Force refresh
                     iv.setImageDrawable(null);
                     iv.setImageResource(rssiState.signalIconId);
@@ -672,10 +633,6 @@ class QuickSettings {
                     return true; // Consume click
                 }} );
         }
-<<<<<<< HEAD
-        mModel.addLocationTile(locationTile,
-                new QuickSettingsModel.BasicRefreshCallback(locationTile));
-=======
         mModel.addLocationTile(locationTile, new QuickSettingsModel.RefreshCallback() {
             @Override
             public void refreshView(QuickSettingsTileView unused, State state) {
@@ -689,7 +646,6 @@ class QuickSettings {
                 locationTile.setText(state.label);
             }
         });
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         parent.addView(locationTile);
     }
 
@@ -715,22 +671,6 @@ class QuickSettings {
         });
         parent.addView(alarmTile);
 
-<<<<<<< HEAD
-        // Wifi Display
-        QuickSettingsBasicTile wifiDisplayTile
-                = new QuickSettingsBasicTile(mContext);
-        wifiDisplayTile.setImageResource(R.drawable.ic_qs_remote_display);
-        wifiDisplayTile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startSettingsActivity(android.provider.Settings.ACTION_WIFI_DISPLAY_SETTINGS);
-            }
-        });
-        mModel.addWifiDisplayTile(wifiDisplayTile,
-                new QuickSettingsModel.BasicRefreshCallback(wifiDisplayTile)
-                        .setShowWhenEnabled(true));
-        parent.addView(wifiDisplayTile);
-=======
         // Remote Display
         QuickSettingsBasicTile remoteDisplayTile
                 = new QuickSettingsBasicTile(mContext);
@@ -758,7 +698,6 @@ class QuickSettings {
                 new QuickSettingsModel.BasicRefreshCallback(remoteDisplayTile)
                         .setShowWhenEnabled(true));
         parent.addView(remoteDisplayTile);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
         if (SHOW_IME_TILE || DEBUG_GONE_TILES) {
             // IME
@@ -893,18 +832,6 @@ class QuickSettings {
         dialog.show();
     }
 
-<<<<<<< HEAD
-    private void updateWifiDisplayStatus() {
-        mWifiDisplayStatus = mDisplayManager.getWifiDisplayStatus();
-        applyWifiDisplayStatus();
-    }
-
-    private void applyWifiDisplayStatus() {
-        mModel.onWifiDisplayStateChanged(mWifiDisplayStatus);
-    }
-
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     private void applyBluetoothStatus() {
         mModel.onBluetoothStateChange(mBluetoothState);
     }
@@ -928,16 +855,7 @@ class QuickSettings {
         @Override
         public void onReceive(Context context, Intent intent) {
             final String action = intent.getAction();
-<<<<<<< HEAD
-            if (DisplayManager.ACTION_WIFI_DISPLAY_STATUS_CHANGED.equals(action)) {
-                WifiDisplayStatus status = (WifiDisplayStatus)intent.getParcelableExtra(
-                        DisplayManager.EXTRA_WIFI_DISPLAY_STATUS);
-                mWifiDisplayStatus = status;
-                applyWifiDisplayStatus();
-            } else if (BluetoothAdapter.ACTION_STATE_CHANGED.equals(action)) {
-=======
             if (BluetoothAdapter.ACTION_STATE_CHANGED.equals(action)) {
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 int state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE,
                         BluetoothAdapter.ERROR);
                 mBluetoothState.enabled = (state == BluetoothAdapter.STATE_ON);

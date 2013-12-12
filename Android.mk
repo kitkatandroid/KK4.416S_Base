@@ -165,10 +165,7 @@ LOCAL_SRC_FILES += \
 	core/java/android/print/ILayoutResultCallback.aidl \
 	core/java/android/print/IPrinterDiscoveryObserver.aidl \
 	core/java/android/print/IPrintDocumentAdapter.aidl \
-<<<<<<< HEAD
-=======
 	core/java/android/print/IPrintDocumentAdapterObserver.aidl \
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 	core/java/android/print/IPrintJobStateChangeListener.aidl \
 	core/java/android/print/IPrintManager.aidl \
 	core/java/android/print/IPrintSpooler.aidl \
@@ -254,20 +251,14 @@ LOCAL_SRC_FILES += \
 	media/java/android/media/IAudioService.aidl \
 	media/java/android/media/IAudioFocusDispatcher.aidl \
 	media/java/android/media/IAudioRoutesObserver.aidl \
-<<<<<<< HEAD
-=======
 	media/java/android/media/IMediaRouterClient.aidl \
 	media/java/android/media/IMediaRouterService.aidl \
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 	media/java/android/media/IMediaScannerListener.aidl \
 	media/java/android/media/IMediaScannerService.aidl \
 	media/java/android/media/IRemoteControlClient.aidl \
 	media/java/android/media/IRemoteControlDisplay.aidl \
-<<<<<<< HEAD
-=======
 	media/java/android/media/IRemoteDisplayCallback.aidl \
 	media/java/android/media/IRemoteDisplayProvider.aidl \
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 	media/java/android/media/IRemoteVolumeObserver.aidl \
 	media/java/android/media/IRingtonePlayer.aidl \
 	telephony/java/com/android/internal/telephony/IPhoneStateListener.aidl \
@@ -551,21 +542,12 @@ framework_docs_LOCAL_ADDITIONAL_JAVA_DIR:= \
 framework_docs_LOCAL_ADDITIONAL_DEPENDENCIES := \
     frameworks/base/docs/knowntags.txt
 
-<<<<<<< HEAD
-sample_dir := development/samples
-=======
 sample_dir := development/samples/browseable
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 new_sample_dir := developers/samples/android
 
 # Whitelist of valid groups, used for default TOC grouping. Each sample must
 # belong to one (and only one) group. Assign samples to groups by setting
 # a sample.group var to one of these groups in the sample's _index.jd.
-<<<<<<< HEAD
-sample_groups := -samplegroup Input \
-                 -samplegroup Sensors \
-                 -samplegroup Connectivity
-=======
 sample_groups := -samplegroup Background \
                  -samplegroup Connectivity \
                  -samplegroup Content \
@@ -575,25 +557,12 @@ sample_groups := -samplegroup Background \
                  -samplegroup Testing \
                  -samplegroup UI \
                  -samplegroup Views
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
 # the list here should match the list of samples included in the sdk samples package
 # (see development/build/sdk.atree)
 # remove htmlified samples for now -- samples are still available through the SDK
 web_docs_sample_code_flags := \
 		-hdf android.hasSamples 1 \
-<<<<<<< HEAD
-		-samplecode $(new_sample_dir)/input/gestures/BasicGestureDetect/BasicGestureDetect \
- 		            samples/BasicGestureDetect/ "Basic Gestures" \
-		-samplecode $(sample_dir)/AccelerometerPlay \
- 		            samples/AccelerometerPlay "Accelerometer Play" \
-		-samplecode $(sample_dir)/ActionBarCompat \
- 		            samples/ActionBarCompat "Action Bar Compatibility" \
- 		-samplecode $(sample_dir)/BluetoothHDP \
- 		            samples/BluetoothHDP "Bluetooth HDP Demo" \
- 		-samplecode $(sample_dir)/BluetoothLeGatt \
- 		            samples/BluetoothLeGatt "Bluetooth HDP Demo"
-=======
 		-samplecode $(sample_dir)/BasicAccessibility \
  		            samples/BasicAccessibility "" \
 		-samplecode $(sample_dir)/HorizontalPaging \
@@ -656,7 +625,6 @@ web_docs_sample_code_flags := \
  		            samples/StorageClient "" 
 #		-samplecode $(sample_dir)/StorageProvider \
 # 		            samples/StorageProvider "" 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 #       -samplecode $(sample_dir)/AndroidBeamDemo \
 # 		            samples/AndroidBeamDemo "Android Beam Demo" \
 # 		-samplecode $(sample_dir)/ApiDemos \
@@ -875,15 +843,9 @@ LOCAL_MODULE := online-sdk
 LOCAL_DROIDDOC_OPTIONS:= \
 		$(framework_docs_LOCAL_DROIDDOC_OPTIONS) \
 		-toroot / \
-<<<<<<< HEAD
-		-hdf android.whichdoc online
-#		$(sample_groups) \
-#		$(web_docs_sample_code_flags)
-=======
 		-hdf android.whichdoc online \
 		$(sample_groups) \
 		$(web_docs_sample_code_flags)
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
 LOCAL_DROIDDOC_CUSTOM_TEMPLATE_DIR:=build/tools/droiddoc/templates-sdk
 

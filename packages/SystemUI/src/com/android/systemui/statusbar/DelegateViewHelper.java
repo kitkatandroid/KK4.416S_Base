@@ -23,11 +23,6 @@ import android.view.View;
 
 import com.android.systemui.R;
 
-<<<<<<< HEAD
-import java.util.List;
-
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 public class DelegateViewHelper {
     private View mDelegateView;
     private View mSourceView;
@@ -124,19 +119,11 @@ public class DelegateViewHelper {
      *
      * @param views
      */
-<<<<<<< HEAD
-    public void setInitialTouchRegion(List<View> views) {
-        RectF bounds = new RectF();
-        int p[] = new int[2];
-        for (int i = 0; i < views.size(); i++) {
-            View view = views.get(i);
-=======
     public void setInitialTouchRegion(View ... views) {
         RectF bounds = new RectF();
         int p[] = new int[2];
         for (int i = 0; i < views.length; i++) {
             View view = views[i];
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             if (view == null) continue;
             view.getLocationOnScreen(p);
             if (i == 0) {
@@ -159,8 +146,4 @@ public class DelegateViewHelper {
     public void setDisabled(boolean disabled) {
         mDisabled = disabled;
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1

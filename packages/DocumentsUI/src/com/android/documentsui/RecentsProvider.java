@@ -16,42 +16,26 @@
 
 package com.android.documentsui;
 
-<<<<<<< HEAD
-=======
 import static com.android.documentsui.model.DocumentInfo.getCursorString;
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import android.content.ContentProvider;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
-<<<<<<< HEAD
-import android.content.UriMatcher;
-=======
 import android.content.Intent;
 import android.content.UriMatcher;
 import android.content.pm.ResolveInfo;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
-<<<<<<< HEAD
-=======
 import android.os.Bundle;
 import android.provider.DocumentsContract;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import android.provider.DocumentsContract.Document;
 import android.provider.DocumentsContract.Root;
 import android.text.format.DateUtils;
 import android.util.Log;
 
-<<<<<<< HEAD
-public class RecentsProvider extends ContentProvider {
-    private static final String TAG = "RecentsProvider";
-
-    public static final long MAX_HISTORY_IN_MILLIS = 45 * DateUtils.DAY_IN_MILLIS;
-=======
 import com.android.documentsui.model.DocumentStack;
 import com.android.documentsui.model.DurableUtils;
 import com.android.internal.util.Predicate;
@@ -66,7 +50,6 @@ public class RecentsProvider extends ContentProvider {
     private static final String TAG = "RecentsProvider";
 
     private static final long MAX_HISTORY_IN_MILLIS = 45 * DateUtils.DAY_IN_MILLIS;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
     private static final String AUTHORITY = "com.android.documentsui.recents";
 
@@ -76,12 +59,9 @@ public class RecentsProvider extends ContentProvider {
     private static final int URI_STATE = 2;
     private static final int URI_RESUME = 3;
 
-<<<<<<< HEAD
-=======
     public static final String METHOD_PURGE = "purge";
     public static final String METHOD_PURGE_PACKAGE = "purgePackage";
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     static {
         sMatcher.addURI(AUTHORITY, "recent", URI_RECENT);
         // state/authority/rootId/docId
@@ -270,8 +250,6 @@ public class RecentsProvider extends ContentProvider {
     public int delete(Uri uri, String selection, String[] selectionArgs) {
         throw new UnsupportedOperationException("Unsupported Uri " + uri);
     }
-<<<<<<< HEAD
-=======
 
     @Override
     public Bundle call(String method, String arg, Bundle extras) {
@@ -384,5 +362,4 @@ public class RecentsProvider extends ContentProvider {
             IoUtils.closeQuietly(cursor);
         }
     }
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 }

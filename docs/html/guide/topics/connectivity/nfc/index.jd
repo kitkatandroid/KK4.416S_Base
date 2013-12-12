@@ -14,8 +14,6 @@ page.title=Near Field Communication
   framework APIs are based around a <a href="http://www.nfc-forum.org/">NFC Forum</a> standard
   called NDEF (NFC Data Exchange Format).</p>
 
-<<<<<<< HEAD
-=======
 <p>Android-powered devices with NFC simultaneously support three main modes of operation:</p>
 
 <ol>
@@ -28,7 +26,6 @@ card. The emulated NFC card can then be accessed by an external NFC reader,
 such as an NFC point-of-sale terminal.</li>
 </ol>
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
   <dl>
     <dt><strong><a href="{@docRoot}guide/topics/connectivity/nfc/nfc.html">NFC Basics</a></strong></dt>
     <dd>This document describes how Android handles discovered NFC tags and how it notifies
@@ -44,10 +41,6 @@ NFC feature set of Android.</dd>
     bytes using your own protocol stack. In these cases, Android provides support to detect
     certain tag technologies and to open communication with the tag using your own protocol
     stack.</dd>
-<<<<<<< HEAD
-  </dl>
-</p>
-=======
 
     <dt><strong><a href="{@docRoot}guide/topics/connectivity/nfc/hce.html">Host-based Card Emulation</a></strong></dt>
     <dd>This document describes how Android devices can perform as NFC cards without using
@@ -55,4 +48,3 @@ NFC feature set of Android.</dd>
     the NFC reader.</dd>
   </dl>
 </p>
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1

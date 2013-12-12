@@ -16,14 +16,7 @@
 
 package android.app;
 
-<<<<<<< HEAD
-import com.android.internal.app.MediaRouteChooserDialogFragment;
-
 import android.content.Context;
-import android.content.ContextWrapper;
-=======
-import android.content.Context;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import android.media.MediaRouter;
 import android.media.MediaRouter.RouteInfo;
 import android.util.Log;
@@ -34,24 +27,6 @@ import android.view.ViewGroup;
 
 import java.lang.ref.WeakReference;
 
-<<<<<<< HEAD
-public class MediaRouteActionProvider extends ActionProvider {
-    private static final String TAG = "MediaRouteActionProvider";
-
-    private Context mContext;
-    private MediaRouter mRouter;
-    private MenuItem mMenuItem;
-    private MediaRouteButton mView;
-    private int mRouteTypes;
-    private View.OnClickListener mExtendedSettingsListener;
-    private RouterCallback mCallback;
-
-    public MediaRouteActionProvider(Context context) {
-        super(context);
-        mContext = context;
-        mRouter = (MediaRouter) context.getSystemService(Context.MEDIA_ROUTER_SERVICE);
-        mCallback = new RouterCallback(this);
-=======
 /**
  * The media route action provider displays a {@link MediaRouteButton media route button}
  * in the application's {@link ActionBar} to allow the user to select routes and
@@ -84,7 +59,6 @@ public class MediaRouteActionProvider extends ActionProvider {
         mContext = context;
         mRouter = (MediaRouter) context.getSystemService(Context.MEDIA_ROUTER_SERVICE);
         mCallback = new MediaRouterCallback(this);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
         // Start with live audio by default.
         // TODO Update this when new route types are added; segment by API level
@@ -92,19 +66,6 @@ public class MediaRouteActionProvider extends ActionProvider {
         setRouteTypes(MediaRouter.ROUTE_TYPE_LIVE_AUDIO);
     }
 
-<<<<<<< HEAD
-    public void setRouteTypes(int types) {
-        if (mRouteTypes == types) return;
-        if (mRouteTypes != 0) {
-            mRouter.removeCallback(mCallback);
-        }
-        mRouteTypes = types;
-        if (types != 0) {
-            mRouter.addCallback(types, mCallback);
-        }
-        if (mView != null) {
-            mView.setRouteTypes(mRouteTypes);
-=======
     /**
      * Sets the types of routes that will be shown in the media route chooser dialog
      * launched by this button.
@@ -140,40 +101,22 @@ public class MediaRouteActionProvider extends ActionProvider {
         mExtendedSettingsListener = listener;
         if (mButton != null) {
             mButton.setExtendedSettingsClickListener(listener);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
     }
 
     @Override
-<<<<<<< HEAD
-=======
     @SuppressWarnings("deprecation")
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     public View onCreateActionView() {
         throw new UnsupportedOperationException("Use onCreateActionView(MenuItem) instead.");
     }
 
     @Override
     public View onCreateActionView(MenuItem item) {
-<<<<<<< HEAD
-        if (mMenuItem != null || mView != null) {
-=======
         if (mButton != null) {
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             Log.e(TAG, "onCreateActionView: this ActionProvider is already associated " +
                     "with a menu item. Don't reuse MediaRouteActionProvider instances! " +
                     "Abandoning the old one...");
         }
-<<<<<<< HEAD
-        mMenuItem = item;
-        mView = new MediaRouteButton(mContext);
-        mView.setCheatSheetEnabled(true);
-        mView.setRouteTypes(mRouteTypes);
-        mView.setExtendedSettingsClickListener(mExtendedSettingsListener);
-        mView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.MATCH_PARENT));
-        return mView;
-=======
 
         mButton = new MediaRouteButton(mContext);
         mButton.setCheatSheetEnabled(true);
@@ -183,54 +126,14 @@ public class MediaRouteActionProvider extends ActionProvider {
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.MATCH_PARENT));
         return mButton;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     @Override
     public boolean onPerformDefaultAction() {
-<<<<<<< HEAD
-        final FragmentManager fm = getActivity().getFragmentManager();
-        // See if one is already attached to this activity.
-        MediaRouteChooserDialogFragment dialogFragment =
-                (MediaRouteChooserDialogFragment) fm.findFragmentByTag(
-                MediaRouteChooserDialogFragment.FRAGMENT_TAG);
-        if (dialogFragment != null) {
-            Log.w(TAG, "onPerformDefaultAction(): Chooser dialog already showing!");
-            return false;
-        }
-
-        dialogFragment = new MediaRouteChooserDialogFragment();
-        dialogFragment.setExtendedSettingsClickListener(mExtendedSettingsListener);
-        dialogFragment.setRouteTypes(mRouteTypes);
-        dialogFragment.show(fm, MediaRouteChooserDialogFragment.FRAGMENT_TAG);
-        return true;
-    }
-
-    private Activity getActivity() {
-        // Gross way of unwrapping the Activity so we can get the FragmentManager
-        Context context = mContext;
-        while (context instanceof ContextWrapper && !(context instanceof Activity)) {
-            context = ((ContextWrapper) context).getBaseContext();
-        }
-        if (!(context instanceof Activity)) {
-            throw new IllegalStateException("The MediaRouteActionProvider's Context " +
-                    "is not an Activity.");
-        }
-
-        return (Activity) context;
-    }
-
-    public void setExtendedSettingsClickListener(View.OnClickListener listener) {
-        mExtendedSettingsListener = listener;
-        if (mView != null) {
-            mView.setExtendedSettingsClickListener(listener);
-        }
-=======
         if (mButton != null) {
             return mButton.showDialogInternal();
         }
         return false;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     @Override
@@ -240,16 +143,6 @@ public class MediaRouteActionProvider extends ActionProvider {
 
     @Override
     public boolean isVisible() {
-<<<<<<< HEAD
-        return mRouter.getRouteCount() > 1;
-    }
-
-    private static class RouterCallback extends MediaRouter.SimpleCallback {
-        private WeakReference<MediaRouteActionProvider> mAp;
-
-        RouterCallback(MediaRouteActionProvider ap) {
-            mAp = new WeakReference<MediaRouteActionProvider>(ap);
-=======
         return mRouter.isRouteAvailable(mRouteTypes,
                 MediaRouter.AVAILABILITY_FLAG_IGNORE_DEFAULT_ROUTE);
     }
@@ -263,35 +156,15 @@ public class MediaRouteActionProvider extends ActionProvider {
 
         public MediaRouterCallback(MediaRouteActionProvider provider) {
             mProviderWeak = new WeakReference<MediaRouteActionProvider>(provider);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
 
         @Override
         public void onRouteAdded(MediaRouter router, RouteInfo info) {
-<<<<<<< HEAD
-            final MediaRouteActionProvider ap = mAp.get();
-            if (ap == null) {
-                router.removeCallback(this);
-                return;
-            }
-
-            ap.refreshVisibility();
-=======
             refreshRoute(router);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
 
         @Override
         public void onRouteRemoved(MediaRouter router, RouteInfo info) {
-<<<<<<< HEAD
-            final MediaRouteActionProvider ap = mAp.get();
-            if (ap == null) {
-                router.removeCallback(this);
-                return;
-            }
-
-            ap.refreshVisibility();
-=======
             refreshRoute(router);
         }
 
@@ -307,7 +180,6 @@ public class MediaRouteActionProvider extends ActionProvider {
             } else {
                 router.removeCallback(this);
             }
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
     }
 }

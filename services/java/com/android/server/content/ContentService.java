@@ -660,11 +660,7 @@ public final class ContentService extends IContentService.Stub {
         int userId = UserHandle.getCallingUserId();
         long identityToken = clearCallingIdentity();
         try {
-<<<<<<< HEAD
-            return getSyncManager().getSyncStorageEngine().getCurrentSyncs(userId);
-=======
             return getSyncManager().getSyncStorageEngine().getCurrentSyncsCopy(userId);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         } finally {
             restoreCallingIdentity(identityToken);
         }

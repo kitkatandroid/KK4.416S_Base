@@ -38,24 +38,16 @@ import android.os.ParcelFileDescriptor;
  * </li>
  * <li>
  * After every call to {@link #onLayout(PrintAttributes, PrintAttributes,
-<<<<<<< HEAD
- * CancellationSignal, LayoutResultCallback, Bundle)}, you may get a call to
- * {@link #onWrite(PageRange[], ParcelFileDescriptor, CancellationSignal, WriteResultCallback)}
- * asking you to write a PDF file with the content for specific pages.
-=======
  * CancellationSignal, LayoutResultCallback, Bundle)}, you <strong>may</strong> get
  * a call to {@link #onWrite(PageRange[], ParcelFileDescriptor, CancellationSignal,
  * WriteResultCallback)} asking you to write a PDF file with the content for
  * specific pages.
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
  * </li>
  * <li>
  * Finally, you will receive a call to {@link #onFinish()}. You can use this
  * callback to release resources allocated in {@link #onStart()}.
  * </li>
  * </ul>
-<<<<<<< HEAD
-=======
  * <p>
  * The {@link #onStart()} callback is always the first call you will receive and
  * is useful for doing one time setup or resource allocation before printing. You
@@ -86,7 +78,6 @@ import android.os.ParcelFileDescriptor;
  * is useful for doing one time cleanup or resource deallocation after printing.
  * You will not receive a subsequent call here.
  * </p>
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
  * </p>
  * <h3>Implementation</h3>
  * <p>
@@ -94,15 +85,11 @@ import android.os.ParcelFileDescriptor;
  * of the work on an arbitrary thread. For example, if the printed content
  * does not depend on the UI state, i.e. on what is shown on the screen, then
  * you can offload the entire work on a dedicated thread, thus making your
-<<<<<<< HEAD
- * application interactive while the print work is being performed.
-=======
  * application interactive while the print work is being performed. Note that
  * while your activity is covered by the system print UI and a user cannot
  * interact with it, doing the printing work on the main application thread
  * may affect the performance of your other application components as they
  * are also executed on that thread.
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
  * </p>
  * <p>
  * You can also do work on different threads, for example if you print UI
@@ -112,11 +99,7 @@ import android.os.ParcelFileDescriptor;
  * This will ensure that the UI does not change while you are laying out the
  * printed content. Then you can handle {@link #onWrite(PageRange[], ParcelFileDescriptor,
  * CancellationSignal, WriteResultCallback)} and {@link #onFinish()} on another
-<<<<<<< HEAD
- * thread. This will ensure that the UI is frozen for the minimal amount of
-=======
  * thread. This will ensure that the main thread is busy for a minimal amount of
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
  * time. Also this assumes that you will generate the printed content in
  * {@link #onLayout(PrintAttributes, PrintAttributes, CancellationSignal,
  * LayoutResultCallback, Bundle)} which is not mandatory. If you use multiple
@@ -128,15 +111,12 @@ public abstract class PrintDocumentAdapter {
     /**
      * Extra: mapped to a boolean value that is <code>true</code> if
      * the current layout is for a print preview, <code>false</code> otherwise.
-<<<<<<< HEAD
-=======
      * This extra is provided in the {@link Bundle} argument of the {@link
      * #onLayout(PrintAttributes, PrintAttributes, CancellationSignal,
      * LayoutResultCallback, Bundle)} callback.
      *
      * @see #onLayout(PrintAttributes, PrintAttributes, CancellationSignal,
      * LayoutResultCallback, Bundle)
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
      */
     public static final String EXTRA_PRINT_PREVIEW = "EXTRA_PRINT_PREVIEW";
 
@@ -156,12 +136,6 @@ public abstract class PrintDocumentAdapter {
      * After you are done laying out, you <strong>must</strong> invoke: {@link
      * LayoutResultCallback#onLayoutFinished(PrintDocumentInfo, boolean)} with
      * the last argument <code>true</code> or <code>false</code> depending on
-<<<<<<< HEAD
-     * whether the layout changed the content or not, respectively; and {@link
-     * LayoutResultCallback#onLayoutFailed(CharSequence)}, if an error occurred.
-     * Note that you must call one of the methods of the given callback.
-     * </p>
-=======
      * whether the layout changed the content or not, respectively; or {@link
      * LayoutResultCallback#onLayoutFailed(CharSequence)}, if an error occurred;
      * or {@link LayoutResultCallback#onLayoutCancelled()} if layout was
@@ -191,18 +165,12 @@ public abstract class PrintDocumentAdapter {
      *     }
      * });
      * </pre>
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
      * <p>
      * <strong>Note:</strong> If the content is large and a layout will be
      * performed, it is a good practice to schedule the work on a dedicated
      * thread and register an observer in the provided {@link
      * CancellationSignal} upon invocation of which you should stop the
-<<<<<<< HEAD
-     * layout. The cancellation callback will not be made on the main
-     * thread.
-=======
      * layout.
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
      * </p>
      *
      * @param oldAttributes The old print attributes.
@@ -225,13 +193,6 @@ public abstract class PrintDocumentAdapter {
      * on the main thread.
      *<p>
      * After you are done writing, you should close the file descriptor and
-<<<<<<< HEAD
-     * invoke {@link WriteResultCallback #onWriteFinished(PageRange[]), if writing
-     * completed successfully; or {@link WriteResultCallback#onWriteFailed(
-     * CharSequence)}, if an error occurred. Note that you must call one of
-     * the methods of the given callback.
-     * </p>
-=======
      * invoke {@link WriteResultCallback#onWriteFinished(PageRange[])}, if writing
      * completed successfully; or {@link WriteResultCallback#onWriteFailed(
      * CharSequence)}, if an error occurred; or {@link WriteResultCallback#onWriteCancelled()},
@@ -262,17 +223,11 @@ public abstract class PrintDocumentAdapter {
      *     }
      * });
      * </pre>
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
      * <p>
      * <strong>Note:</strong> If the printed content is large, it is a good
      * practice to schedule writing it on a dedicated thread and register an
      * observer in the provided {@link CancellationSignal} upon invocation of
-<<<<<<< HEAD
-     * which you should stop writing. The cancellation callback will not be
-     * made on the main thread.
-=======
      * which you should stop writing.
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
      * </p>
      *
      * @param pages The pages whose content to print - non-overlapping in ascending order.
@@ -312,12 +267,8 @@ public abstract class PrintDocumentAdapter {
         /**
          * Notifies that all the data was written.
          *
-<<<<<<< HEAD
-         * @param pages The pages that were written. Cannot be null or empty.
-=======
          * @param pages The pages that were written. Cannot be <code>null</code>
          * or empty.
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
          */
         public void onWriteFinished(PageRange[] pages) {
             /* do nothing - stub */
@@ -326,12 +277,8 @@ public abstract class PrintDocumentAdapter {
         /**
          * Notifies that an error occurred while writing the data.
          *
-<<<<<<< HEAD
-         * @param error Error message. May be null if error is unknown.
-=======
          * @param error The <strong>localized</strong> error message.
          * shown to the user. May be <code>null</code> if error is unknown.
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
          */
         public void onWriteFailed(CharSequence error) {
             /* do nothing - stub */
@@ -362,11 +309,7 @@ public abstract class PrintDocumentAdapter {
         /**
          * Notifies that the layout finished and whether the content changed.
          *
-<<<<<<< HEAD
-         * @param info An info object describing the document. Cannot be null.
-=======
          * @param info An info object describing the document. Cannot be <code>null</code>.
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
          * @param changed Whether the layout changed.
          *
          * @see PrintDocumentInfo
@@ -378,12 +321,8 @@ public abstract class PrintDocumentAdapter {
         /**
          * Notifies that an error occurred while laying out the document.
          *
-<<<<<<< HEAD
-         * @param error Error message. May be null if error is unknown.
-=======
          * @param error The <strong>localized</strong> error message.
          * shown to the user. May be <code>null</code> if error is unknown.
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
          */
         public void onLayoutFailed(CharSequence error) {
             /* do nothing - stub */

@@ -16,12 +16,6 @@
 
 package com.android.documentsui;
 
-<<<<<<< HEAD
-import com.android.internal.annotations.GuardedBy;
-import com.android.internal.util.Preconditions;
-import com.google.android.collect.Maps;
-
-=======
 import android.os.AsyncTask;
 
 import com.android.internal.annotations.GuardedBy;
@@ -31,7 +25,6 @@ import com.google.android.collect.Maps;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import java.util.HashMap;
 import java.util.concurrent.Executor;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -41,11 +34,7 @@ public class ProviderExecutor extends Thread implements Executor {
     @GuardedBy("sExecutors")
     private static HashMap<String, ProviderExecutor> sExecutors = Maps.newHashMap();
 
-<<<<<<< HEAD
-    public static Executor forAuthority(String authority) {
-=======
     public static ProviderExecutor forAuthority(String authority) {
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         synchronized (sExecutors) {
             ProviderExecutor executor = sExecutors.get(authority);
             if (executor == null) {
@@ -58,12 +47,6 @@ public class ProviderExecutor extends Thread implements Executor {
         }
     }
 
-<<<<<<< HEAD
-    private final LinkedBlockingQueue<Runnable> mQueue = new LinkedBlockingQueue<Runnable>();
-
-    @Override
-    public void execute(Runnable command) {
-=======
     public interface Preemptable {
         void preempt();
     }
@@ -112,7 +95,6 @@ public class ProviderExecutor extends Thread implements Executor {
     @Override
     public void execute(Runnable command) {
         preempt();
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         Preconditions.checkNotNull(command);
         mQueue.add(command);
     }

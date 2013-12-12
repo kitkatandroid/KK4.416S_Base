@@ -56,9 +56,6 @@ import java.util.Vector;
  * can load images from various sources (such as resources or content
  * providers), takes care of computing its measurement from the video so that
  * it can be used in any layout manager, and provides various display options
-<<<<<<< HEAD
- * such as scaling and tinting.
-=======
  * such as scaling and tinting.<p>
  *
  * <em>Note: VideoView does not retain its full state when going into the
@@ -70,7 +67,6 @@ import java.util.Vector;
  * {@link android.app.Activity#onRestoreInstanceState}.<p>
  * Also note that the audio session id (from {@link #getAudioSessionId}) may
  * change from its previously returned value when the VideoView is restored.
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
  */
 public class VideoView extends SurfaceView
         implements MediaPlayerControl, SubtitleController.Anchor {

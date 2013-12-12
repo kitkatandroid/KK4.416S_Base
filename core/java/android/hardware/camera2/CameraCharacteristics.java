@@ -334,8 +334,6 @@ public final class CameraCharacteristics extends CameraMetadata {
 
     /**
      * <p>
-<<<<<<< HEAD
-=======
      * If set to 1, the HAL will always split result
      * metadata for a single capture into multiple buffers,
      * returned using multiple process_capture_result calls.
@@ -357,7 +355,6 @@ public final class CameraCharacteristics extends CameraMetadata {
 
     /**
      * <p>
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
      * How many output streams can be allocated at
      * the same time for each type of stream
      * </p>

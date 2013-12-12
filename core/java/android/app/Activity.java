@@ -58,10 +58,7 @@ import android.text.method.TextKeyListener;
 import android.util.AttributeSet;
 import android.util.EventLog;
 import android.util.Log;
-<<<<<<< HEAD
-=======
 import android.util.PrintWriterPrinter;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import android.util.Slog;
 import android.util.SparseArray;
 import android.view.ActionMode;
@@ -718,10 +715,6 @@ public class Activity extends ContextThemeWrapper
     /*package*/ boolean mVisibleFromServer = false;
     /*package*/ boolean mVisibleFromClient = true;
     /*package*/ ActionBarImpl mActionBar = null;
-<<<<<<< HEAD
-    private boolean mActionBarShowHideAnimationEnabled;
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     private boolean mEnableDefaultActionBarUp;
 
     private CharSequence mTitle;
@@ -1120,12 +1113,7 @@ public class Activity extends ContextThemeWrapper
     protected void onPostResume() {
         final Window win = getWindow();
         if (win != null) win.makeActive();
-<<<<<<< HEAD
-        mActionBarShowHideAnimationEnabled = true;
-        updateActionBarShowHideAnimation();
-=======
         if (mActionBar != null) mActionBar.setShowHideAnimationEnabled(true);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         mCalled = true;
     }
 
@@ -1397,12 +1385,7 @@ public class Activity extends ContextThemeWrapper
      */
     protected void onStop() {
         if (DEBUG_LIFECYCLE) Slog.v(TAG, "onStop " + this);
-<<<<<<< HEAD
-        mActionBarShowHideAnimationEnabled = false;
-        updateActionBarShowHideAnimation();
-=======
         if (mActionBar != null) mActionBar.setShowHideAnimationEnabled(false);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         getApplication().dispatchActivityStopped(this);
         mTranslucentCallback = null;
         mCalled = true;
@@ -1931,20 +1914,8 @@ public class Activity extends ContextThemeWrapper
 
         mWindow.setDefaultIcon(mActivityInfo.getIconResource());
         mWindow.setDefaultLogo(mActivityInfo.getLogoResource());
-<<<<<<< HEAD
-        updateActionBarShowHideAnimation();
-    }
-
-    private void updateActionBarShowHideAnimation() {
-        if (mActionBar != null) {
-            mActionBar.setShowHideAnimationEnabled(mActionBarShowHideAnimationEnabled);
-        }
-    }
-
-=======
     }
     
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     /**
      * Set the activity content from a layout resource.  The resource will be
      * inflated, adding all top-level views to the activity.
@@ -4876,42 +4847,13 @@ public class Activity extends ContextThemeWrapper
                 writer.println(mChangingConfigurations);
         writer.print(innerPrefix); writer.print("mCurrentConfig=");
                 writer.println(mCurrentConfig);
-<<<<<<< HEAD
-=======
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         if (mLoaderManager != null) {
             writer.print(prefix); writer.print("Loader Manager ");
                     writer.print(Integer.toHexString(System.identityHashCode(mLoaderManager)));
                     writer.println(":");
             mLoaderManager.dump(prefix + "  ", fd, writer, args);
         }
-<<<<<<< HEAD
-        mFragments.dump(prefix, fd, writer, args);
-        writer.print(prefix); writer.println("View Hierarchy:");
-        dumpViewHierarchy(prefix + "  ", writer, getWindow().getDecorView());
-    }
-
-    private void dumpViewHierarchy(String prefix, PrintWriter writer, View view) {
-        writer.print(prefix);
-        if (view == null) {
-            writer.println("null");
-            return;
-        }
-        writer.println(view.toString());
-        if (!(view instanceof ViewGroup)) {
-            return;
-        }
-        ViewGroup grp = (ViewGroup)view;
-        final int N = grp.getChildCount();
-        if (N <= 0) {
-            return;
-        }
-        prefix = prefix + "  ";
-        for (int i=0; i<N; i++) {
-            dumpViewHierarchy(prefix, writer, grp.getChildAt(i));
-        }
-=======
 
         mFragments.dump(prefix, fd, writer, args);
 
@@ -4922,7 +4864,6 @@ public class Activity extends ContextThemeWrapper
         }
 
         mHandler.getLooper().dump(new PrintWriterPrinter(writer), prefix);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     /**

@@ -29,10 +29,7 @@ import android.content.res.TypedArray;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-<<<<<<< HEAD
-=======
 import android.text.TextUtils;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import android.text.TextUtils.TruncateAt;
 import android.util.IntProperty;
 import android.util.MathUtils;
@@ -180,12 +177,9 @@ class FastScroller {
      */
     private int mState;
 
-<<<<<<< HEAD
-=======
     /** Whether the preview image is visible. */
     private boolean mShowingPreview;
 
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     private BaseAdapter mListAdapter;
     private SectionIndexer mSectionIndexer;
 
@@ -779,11 +773,8 @@ class FastScroller {
         mDecorAnimation = new AnimatorSet();
         mDecorAnimation.playTogether(fadeOut, slideOut);
         mDecorAnimation.start();
-<<<<<<< HEAD
-=======
 
         mShowingPreview = false;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     /**
@@ -805,11 +796,8 @@ class FastScroller {
         mDecorAnimation = new AnimatorSet();
         mDecorAnimation.playTogether(fadeIn, fadeOut, slideIn);
         mDecorAnimation.start();
-<<<<<<< HEAD
-=======
 
         mShowingPreview = false;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     /**
@@ -829,11 +817,8 @@ class FastScroller {
         mDecorAnimation = new AnimatorSet();
         mDecorAnimation.playTogether(fadeIn, slideIn);
         mDecorAnimation.start();
-<<<<<<< HEAD
-=======
 
         mShowingPreview = true;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     private void postAutoHide() {
@@ -1007,16 +992,10 @@ class FastScroller {
         if (mCurrentSection != sectionIndex) {
             mCurrentSection = sectionIndex;
 
-<<<<<<< HEAD
-            if (transitionPreviewLayout(sectionIndex)) {
-                transitionToDragging();
-            } else {
-=======
             final boolean hasPreview = transitionPreviewLayout(sectionIndex);
             if (!mShowingPreview && hasPreview) {
                 transitionToDragging();
             } else if (mShowingPreview && !hasPreview) {
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 transitionToVisible();
             }
         }
@@ -1104,11 +1083,7 @@ class FastScroller {
 
         mPreviewAnimation.start();
 
-<<<<<<< HEAD
-        return (text != null && text.length() > 0);
-=======
         return !TextUtils.isEmpty(text);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     /**
@@ -1220,9 +1195,6 @@ class FastScroller {
                     / positionsInSection;
         }
 
-<<<<<<< HEAD
-        return (section + posWithinSection) / sectionCount;
-=======
         float result = (section + posWithinSection) / sectionCount;
 
         // Fake out the scroll bar for the last item. Since the section indexer
@@ -1236,7 +1208,6 @@ class FastScroller {
         }
 
         return result;
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     /**

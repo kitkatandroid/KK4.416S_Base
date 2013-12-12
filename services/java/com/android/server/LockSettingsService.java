@@ -154,19 +154,11 @@ public class LockSettingsService extends ILockSettings.Stub {
     }
 
     private final void checkWritePermission(int userId) {
-<<<<<<< HEAD
-        mContext.checkCallingOrSelfPermission(PERMISSION);
-    }
-
-    private final void checkPasswordReadPermission(int userId) {
-        mContext.checkCallingOrSelfPermission(PERMISSION);
-=======
         mContext.enforceCallingOrSelfPermission(PERMISSION, "LockSettingsWrite");
     }
 
     private final void checkPasswordReadPermission(int userId) {
         mContext.enforceCallingOrSelfPermission(PERMISSION, "LockSettingsRead");
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     private final void checkReadPermission(String requestedKey, int userId) {
@@ -227,40 +219,6 @@ public class LockSettingsService extends ILockSettings.Stub {
         return readFromDb(key, defaultValue, userId);
     }
 
-<<<<<<< HEAD
-
-    @Override
-    public byte getLockPatternSize(int userId) {
-        try {
-            long size = getLong(Settings.Secure.LOCK_PATTERN_SIZE, -1, userId);
-            if (size > 0 && size < 128) {
-                return (byte) size;
-            }
-        } catch (RemoteException re) {
-            //Any invalid size handled below
-        }
-        return LockPatternUtils.PATTERN_SIZE_DEFAULT;
-    }
-
-    private boolean isDefaultSize(int userId) {
-        return getLockPatternSize(userId) == LockPatternUtils.PATTERN_SIZE_DEFAULT;
-    }
-
-    private String getLockPatternFilename(int userId) {
-        return getLockPatternFilename(userId, isDefaultSize(userId));
-    }
-
-    private String getLockPatternFilename(int userId, boolean defaultSize) {
-        String dataSystemDirectory =
-                android.os.Environment.getDataDirectory().getAbsolutePath() +
-                SYSTEM_DIRECTORY;
-        String patternFile = (defaultSize ? "" : "cm_") + LOCK_PATTERN_FILE;
-        if (userId == 0) {
-            // Leave it in the same place for user 0
-            return dataSystemDirectory + patternFile;
-        } else {
-            return  new File(Environment.getUserSystemDirectory(userId), patternFile)
-=======
     private String getLockPatternFilename(int userId) {
         String dataSystemDirectory =
                 android.os.Environment.getDataDirectory().getAbsolutePath() +
@@ -270,7 +228,6 @@ public class LockSettingsService extends ILockSettings.Stub {
             return dataSystemDirectory + LOCK_PATTERN_FILE;
         } else {
             return  new File(Environment.getUserSystemDirectory(userId), LOCK_PATTERN_FILE)
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                     .getAbsolutePath();
         }
     }
@@ -322,18 +279,9 @@ public class LockSettingsService extends ILockSettings.Stub {
 
         maybeUpdateKeystore(pattern, userId);
 
-<<<<<<< HEAD
-        final byte[] hash = mLockPatternUtils.patternToHash(
-                mLockPatternUtils.stringToPattern(pattern));
-
-        boolean defaultSize = isDefaultSize(userId);
-        writeFile(getLockPatternFilename(userId,  defaultSize), hash);
-        writeFile(getLockPatternFilename(userId, !defaultSize), null);
-=======
         final byte[] hash = LockPatternUtils.patternToHash(
                 LockPatternUtils.stringToPattern(pattern));
         writeFile(getLockPatternFilename(userId), hash);
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     @Override
@@ -358,13 +306,8 @@ public class LockSettingsService extends ILockSettings.Stub {
                 return true;
             }
             // Compare the hash from the file with the entered pattern's hash
-<<<<<<< HEAD
-            final byte[] hash = mLockPatternUtils.patternToHash(
-                    mLockPatternUtils.stringToPattern(pattern));
-=======
             final byte[] hash = LockPatternUtils.patternToHash(
                     LockPatternUtils.stringToPattern(pattern));
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             final boolean matched = Arrays.equals(stored, hash);
             if (matched && !TextUtils.isEmpty(pattern)) {
                 maybeUpdateKeystore(pattern, userId);

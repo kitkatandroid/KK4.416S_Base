@@ -45,8 +45,6 @@ import java.util.Map;
 
 /**
  * This class is used to specify meta information of an input method.
-<<<<<<< HEAD
-=======
  *
  * <p>It should be defined in an XML resource file with an {@code &lt;input-method>} element.
  * For more information, see the guide to
@@ -58,7 +56,6 @@ import java.util.Map;
  * @attr ref android.R.styleable#InputMethod_settingsActivity
  * @attr ref android.R.styleable#InputMethod_isDefault
  * @attr ref android.R.styleable#InputMethod_supportsSwitchingToNextInputMethod
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
  */
 public final class InputMethodInfo implements Parcelable {
     static final String TAG = "InputMethodInfo";

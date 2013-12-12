@@ -81,11 +81,7 @@ public class IWindowManagerImpl implements IWindowManager {
 
     @Override
     public void addAppToken(int arg0, IApplicationToken arg1, int arg2, int arg3, int arg4,
-<<<<<<< HEAD
-            boolean arg5, boolean arg6, int arg7)
-=======
             boolean arg5, boolean arg6, int arg7, int arg8)
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             throws RemoteException {
         // TODO Auto-generated method stub
 
@@ -502,27 +498,4 @@ public class IWindowManagerImpl implements IWindowManager {
     @Override
     public void setTouchExplorationEnabled(boolean enabled) {
     }
-<<<<<<< HEAD
-
-    /* @hide */
-    @Override
-    public void showCustomIntentOnKeyguard(Intent intent) {
-    }
-
-    /* @hide */
-    @Override
-    public boolean expandedDesktopHidesNavigationBar() {
-    }
-
-    /* @hide */
-    @Override
-    public boolean expandedDesktopHidesStatusBar() {
-    }
-
-    /* @hide */
-    @Override
-    public int getCurrentNavigationBarSize() {
-    }
-=======
->>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 }
