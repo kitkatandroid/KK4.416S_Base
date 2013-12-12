@@ -77,8 +77,15 @@ import com.android.internal.policy.PolicyManager;
 import com.android.internal.view.BaseSurfaceHolder;
 import com.android.internal.view.RootViewSurfaceTaker;
 
+<<<<<<< HEAD
 import java.io.IOException;
 import java.io.OutputStream;
+=======
+import java.io.FileDescriptor;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -3391,6 +3398,7 @@ public final class ViewRootImpl implements ViewParent,
         public final void deliver(QueuedInputEvent q) {
             if ((q.mFlags & QueuedInputEvent.FLAG_FINISHED) != 0) {
                 forward(q);
+<<<<<<< HEAD
             } else if (mView == null || !mAdded) {
                 Slog.w(TAG, "Dropping event due to root view being removed: " + q.mEvent);
                 finish(q, false);
@@ -3401,6 +3409,9 @@ public final class ViewRootImpl implements ViewParent,
                 // then drop this event.  This could be an event that came back from the previous
                 // stage but the window has lost focus in the meantime.
                 Slog.w(TAG, "Dropping event due to no window focus: " + q.mEvent);
+=======
+            } else if (shouldDropInputEvent(q)) {
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 finish(q, false);
             } else {
                 apply(q, onProcess(q));
@@ -3458,6 +3469,31 @@ public final class ViewRootImpl implements ViewParent,
                 finishInputEvent(q);
             }
         }
+<<<<<<< HEAD
+=======
+
+        protected boolean shouldDropInputEvent(QueuedInputEvent q) {
+            if (mView == null || !mAdded) {
+                Slog.w(TAG, "Dropping event due to root view being removed: " + q.mEvent);
+                return true;
+            } else if (!mAttachInfo.mHasWindowFocus &&
+                  !q.mEvent.isFromSource(InputDevice.SOURCE_CLASS_POINTER) &&
+                  !isTerminalInputEvent(q.mEvent)) {
+                // If this is a focused event and the window doesn't currently have input focus,
+                // then drop this event.  This could be an event that came back from the previous
+                // stage but the window has lost focus in the meantime.
+                Slog.w(TAG, "Dropping event due to no window focus: " + q.mEvent);
+                return true;
+            }
+            return false;
+        }
+
+        void dump(String prefix, PrintWriter writer) {
+            if (mNext != null) {
+                mNext.dump(prefix, writer);
+            }
+        }
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     /**
@@ -3595,6 +3631,19 @@ public final class ViewRootImpl implements ViewParent,
             mQueueLength -= 1;
             Trace.traceCounter(Trace.TRACE_TAG_INPUT, mTraceCounter, mQueueLength);
         }
+<<<<<<< HEAD
+=======
+
+        @Override
+        void dump(String prefix, PrintWriter writer) {
+            writer.print(prefix);
+            writer.print(getClass().getName());
+            writer.print(": mQueueLength=");
+            writer.println(mQueueLength);
+
+            super.dump(prefix, writer);
+        }
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     /**
@@ -3828,6 +3877,13 @@ public final class ViewRootImpl implements ViewParent,
                 return FINISH_HANDLED;
             }
 
+<<<<<<< HEAD
+=======
+            if (shouldDropInputEvent(q)) {
+                return FINISH_NOT_HANDLED;
+            }
+
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             // If the Control modifier is held, try to interpret the key as a shortcut.
             if (event.getAction() == KeyEvent.ACTION_DOWN
                     && event.isCtrlPressed()
@@ -3836,12 +3892,24 @@ public final class ViewRootImpl implements ViewParent,
                 if (mView.dispatchKeyShortcutEvent(event)) {
                     return FINISH_HANDLED;
                 }
+<<<<<<< HEAD
+=======
+                if (shouldDropInputEvent(q)) {
+                    return FINISH_NOT_HANDLED;
+                }
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             }
 
             // Apply the fallback event policy.
             if (mFallbackEventHandler.dispatchKeyEvent(event)) {
                 return FINISH_HANDLED;
             }
+<<<<<<< HEAD
+=======
+            if (shouldDropInputEvent(q)) {
+                return FINISH_NOT_HANDLED;
+            }
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
             // Handle automatic focus changes.
             if (event.getAction() == KeyEvent.ACTION_DOWN) {
@@ -5201,6 +5269,56 @@ public final class ViewRootImpl implements ViewParent,
         mView.debug();
     }
 
+<<<<<<< HEAD
+=======
+    public void dump(String prefix, FileDescriptor fd, PrintWriter writer, String[] args) {
+        String innerPrefix = prefix + "  ";
+        writer.print(prefix); writer.println("ViewRoot:");
+        writer.print(innerPrefix); writer.print("mAdded="); writer.print(mAdded);
+                writer.print(" mRemoved="); writer.println(mRemoved);
+        writer.print(innerPrefix); writer.print("mConsumeBatchedInputScheduled=");
+                writer.println(mConsumeBatchedInputScheduled);
+        writer.print(innerPrefix); writer.print("mPendingInputEventCount=");
+                writer.println(mPendingInputEventCount);
+        writer.print(innerPrefix); writer.print("mProcessInputEventsScheduled=");
+                writer.println(mProcessInputEventsScheduled);
+        writer.print(innerPrefix); writer.print("mTraversalScheduled=");
+                writer.print(mTraversalScheduled);
+        if (mTraversalScheduled) {
+            writer.print(" (barrier="); writer.print(mTraversalBarrier); writer.println(")");
+        } else {
+            writer.println();
+        }
+        mFirstInputStage.dump(innerPrefix, writer);
+
+        mChoreographer.dump(prefix, writer);
+
+        writer.print(prefix); writer.println("View Hierarchy:");
+        dumpViewHierarchy(innerPrefix, writer, mView);
+    }
+
+    private void dumpViewHierarchy(String prefix, PrintWriter writer, View view) {
+        writer.print(prefix);
+        if (view == null) {
+            writer.println("null");
+            return;
+        }
+        writer.println(view.toString());
+        if (!(view instanceof ViewGroup)) {
+            return;
+        }
+        ViewGroup grp = (ViewGroup)view;
+        final int N = grp.getChildCount();
+        if (N <= 0) {
+            return;
+        }
+        prefix = prefix + "  ";
+        for (int i=0; i<N; i++) {
+            dumpViewHierarchy(prefix, writer, grp.getChildAt(i));
+        }
+    }
+
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     public void dumpGfxInfo(int[] info) {
         info[0] = info[1] = 0;
         if (mView != null) {
@@ -5570,7 +5688,17 @@ public final class ViewRootImpl implements ViewParent,
         if (mConsumeBatchedInputScheduled) {
             mConsumeBatchedInputScheduled = false;
             if (mInputEventReceiver != null) {
+<<<<<<< HEAD
                 mInputEventReceiver.consumeBatchedInputEvents(frameTimeNanos);
+=======
+                if (mInputEventReceiver.consumeBatchedInputEvents(frameTimeNanos)) {
+                    // If we consumed a batch here, we want to go ahead and schedule the
+                    // consumption of batched input events on the next frame. Otherwise, we would
+                    // wait until we have more input events pending and might get starved by other
+                    // things occurring in the process.
+                    scheduleConsumeBatchedInput();
+                }
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             }
             doProcessInputEvents();
         }

@@ -2540,7 +2540,11 @@ public class AccessibilityNodeInfo implements Parcelable {
 
     /**
      * Class with information if a node is a range. Use
+<<<<<<< HEAD
      * {@link RangeInfo#obtain(int, float, float, float) to get an instance.
+=======
+     * {@link RangeInfo#obtain(int, float, float, float)} to get an instance.
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
      */
     public static final class RangeInfo {
         private static final int MAX_POOL_SIZE = 10;

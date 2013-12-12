@@ -55,6 +55,7 @@ public class CommandQueue extends IStatusBar.Stub {
     private static final int MSG_TOGGLE_RECENT_APPS         = 13 << MSG_SHIFT;
     private static final int MSG_PRELOAD_RECENT_APPS        = 14 << MSG_SHIFT;
     private static final int MSG_CANCEL_PRELOAD_RECENT_APPS = 15 << MSG_SHIFT;
+<<<<<<< HEAD
     private static final int MSG_SET_NAVIGATION_ICON_HINTS  = 16 << MSG_SHIFT;
     private static final int MSG_SET_WINDOW_STATE           = 17 << MSG_SHIFT;
     private static final int MSG_SET_AUTOROTATE_STATUS      = 18 << MSG_SHIFT;
@@ -63,6 +64,9 @@ public class CommandQueue extends IStatusBar.Stub {
     private static final int MSG_TOGGLE_SCREENSHOT          = 21 << MSG_SHIFT;
     private static final int MSG_TOGGLE_LAST_APP            = 22 << MSG_SHIFT;
     private static final int MSG_TOGGLE_KILL_APP            = 23 << MSG_SHIFT;
+=======
+    private static final int MSG_SET_WINDOW_STATE           = 16 << MSG_SHIFT;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
     public static final int FLAG_EXCLUDE_NONE = 0;
     public static final int FLAG_EXCLUDE_SEARCH_PANEL = 1 << 0;
@@ -94,7 +98,11 @@ public class CommandQueue extends IStatusBar.Stub {
         public void disable(int state);
         public void animateExpandNotificationsPanel();
         public void animateCollapsePanels(int flags);
+<<<<<<< HEAD
         public void animateExpandSettingsPanel(boolean flip);
+=======
+        public void animateExpandSettingsPanel();
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         public void setSystemUiVisibility(int vis, int mask);
         public void topAppWindowChanged(boolean visible);
         public void setImeWindowStatus(IBinder token, int vis, int backDisposition);
@@ -104,6 +112,7 @@ public class CommandQueue extends IStatusBar.Stub {
         public void showSearchPanel();
         public void hideSearchPanel();
         public void cancelPreloadRecentApps();
+<<<<<<< HEAD
         public void setNavigationIconHints(int hints);
         public void setWindowState(int window, int state);
         public void setAutoRotate(boolean enabled);
@@ -112,6 +121,9 @@ public class CommandQueue extends IStatusBar.Stub {
         public void toggleScreenshot();
         public void toggleLastApp();
         public void toggleKillApp();
+=======
+        public void setWindowState(int window, int state);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     public CommandQueue(Callbacks callbacks, StatusBarIconList list) {
@@ -180,7 +192,11 @@ public class CommandQueue extends IStatusBar.Stub {
         }
     }
 
+<<<<<<< HEAD
     public void animateExpandSettingsPanel(boolean flip) {
+=======
+    public void animateExpandSettingsPanel() {
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         synchronized (mList) {
             mHandler.removeMessages(MSG_EXPAND_SETTINGS);
             mHandler.sendEmptyMessage(MSG_EXPAND_SETTINGS);
@@ -239,6 +255,7 @@ public class CommandQueue extends IStatusBar.Stub {
         }
     }
 
+<<<<<<< HEAD
     public void setNavigationIconHints(int hints) {
         synchronized (mList) {
             mHandler.removeMessages(MSG_SET_NAVIGATION_ICON_HINTS);
@@ -246,6 +263,8 @@ public class CommandQueue extends IStatusBar.Stub {
         }
     }
 
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     public void setWindowState(int window, int state) {
         synchronized (mList) {
             // don't coalesce these
@@ -253,6 +272,7 @@ public class CommandQueue extends IStatusBar.Stub {
         }
     }
 
+<<<<<<< HEAD
     public void setAutoRotate(boolean enabled) {
         synchronized (mList) {
             mHandler.removeMessages(MSG_SET_AUTOROTATE_STATUS);
@@ -296,6 +316,8 @@ public class CommandQueue extends IStatusBar.Stub {
         }
     }
 
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     private final class H extends Handler {
         public void handleMessage(Message msg) {
             final int what = msg.what & MSG_MASK;
@@ -350,7 +372,11 @@ public class CommandQueue extends IStatusBar.Stub {
                     mCallbacks.animateCollapsePanels(0);
                     break;
                 case MSG_EXPAND_SETTINGS:
+<<<<<<< HEAD
                     mCallbacks.animateExpandSettingsPanel(true);
+=======
+                    mCallbacks.animateExpandSettingsPanel();
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                     break;
                 case MSG_SET_SYSTEMUI_VISIBILITY:
                     mCallbacks.setSystemUiVisibility(msg.arg1, msg.arg2);
@@ -373,6 +399,7 @@ public class CommandQueue extends IStatusBar.Stub {
                 case MSG_CANCEL_PRELOAD_RECENT_APPS:
                     mCallbacks.cancelPreloadRecentApps();
                     break;
+<<<<<<< HEAD
                 case MSG_SET_NAVIGATION_ICON_HINTS:
                     mCallbacks.setNavigationIconHints(msg.arg1);
                     break;
@@ -397,6 +424,11 @@ public class CommandQueue extends IStatusBar.Stub {
                 case MSG_TOGGLE_KILL_APP:
                     mCallbacks.toggleKillApp();
                     break;
+=======
+                case MSG_SET_WINDOW_STATE:
+                    mCallbacks.setWindowState(msg.arg1, msg.arg2);
+                    break;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             }
         }
     }

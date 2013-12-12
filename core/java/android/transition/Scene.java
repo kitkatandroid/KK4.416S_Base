@@ -36,6 +36,7 @@ public final class Scene {
     private ViewGroup mSceneRoot;
     private ViewGroup mLayout; // alternative to layoutId
     Runnable mEnterAction, mExitAction;
+<<<<<<< HEAD
     private static ThreadLocal<SparseArray<Scene>> sScenes = new ThreadLocal<SparseArray<Scene>>();
 
     /**
@@ -44,12 +45,23 @@ public final class Scene {
      * that same Scene will be returned. This caching of layoutId-based scenes enables
      * sharing of common scenes between those created in code and those referenced
      * by {@link TransitionManager} XML resource files.
+=======
+
+    /**
+     * Returns a Scene described by the resource file associated with the given
+     * <code>layoutId</code> parameter. If such a Scene has already been created for
+     * the given <code>sceneRoot</code>, that same Scene will be returned.
+     * This caching of layoutId-based scenes enables sharing of common scenes
+     * between those created in code and those referenced by {@link TransitionManager}
+     * XML resource files.
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
      *
      * @param sceneRoot The root of the hierarchy in which scene changes
      * and transitions will take place.
      * @param layoutId The id of a standard layout resource file.
      * @param context The context used in the process of inflating
      * the layout resource.
+<<<<<<< HEAD
      * @return
      */
     public static Scene getSceneForLayout(ViewGroup sceneRoot, int layoutId, Context context) {
@@ -57,6 +69,16 @@ public final class Scene {
         if (scenes == null) {
             scenes = new SparseArray<Scene>();
             sScenes.set(scenes);
+=======
+     * @return The scene for the given root and layout id
+     */
+    public static Scene getSceneForLayout(ViewGroup sceneRoot, int layoutId, Context context) {
+        SparseArray<Scene> scenes = (SparseArray<Scene>) sceneRoot.getTag(
+                com.android.internal.R.id.scene_layoutid_cache);
+        if (scenes == null) {
+            scenes = new SparseArray<Scene>();
+            sceneRoot.setTagInternal(com.android.internal.R.id.scene_layoutid_cache, scenes);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
         Scene scene = scenes.get(layoutId);
         if (scene != null) {

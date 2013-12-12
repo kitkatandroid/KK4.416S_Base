@@ -301,6 +301,11 @@ public class ZygoteInit {
                         count++;
                     } catch (ClassNotFoundException e) {
                         Log.w(TAG, "Class not found for preloading: " + line);
+<<<<<<< HEAD
+=======
+                    } catch (UnsatisfiedLinkError e) {
+                        Log.w(TAG, "Problem preloading " + line + ": " + e);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                     } catch (Throwable t) {
                         Log.e(TAG, "Error preloading " + line + ".", t);
                         if (t instanceof Error) {

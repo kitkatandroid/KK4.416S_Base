@@ -79,6 +79,11 @@ public class FusedPrintersProvider extends Loader<List<PrinterInfo>> {
 
     private PrinterId mTrackedPrinter;
 
+<<<<<<< HEAD
+=======
+    private boolean mPrintersUpdatedBefore;
+
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     public FusedPrintersProvider(Context context) {
         super(context);
         mPersistenceManager = new PersistenceManager(context);
@@ -88,6 +93,7 @@ public class FusedPrintersProvider extends Loader<List<PrinterInfo>> {
         mPersistenceManager.addPrinterAndWritePrinterHistory(printer);
     }
 
+<<<<<<< HEAD
     private void computeAndDeliverResult(Map<PrinterId, PrinterInfo> discoveredPrinters) {
         List<PrinterInfo> printers = new ArrayList<PrinterInfo>();
 
@@ -95,6 +101,16 @@ public class FusedPrintersProvider extends Loader<List<PrinterInfo>> {
         final int favoritePrinterCount = mFavoritePrinters.size();
         for (int i = 0; i < favoritePrinterCount; i++) {
             PrinterInfo favoritePrinter = mFavoritePrinters.get(i);
+=======
+    private void computeAndDeliverResult(ArrayMap<PrinterId, PrinterInfo> discoveredPrinters,
+            ArrayMap<PrinterId, PrinterInfo> favoritePrinters) {
+        List<PrinterInfo> printers = new ArrayList<PrinterInfo>();
+
+        // Add the updated favorite printers.
+        final int favoritePrinterCount = favoritePrinters.size();
+        for (int i = 0; i < favoritePrinterCount; i++) {
+            PrinterInfo favoritePrinter = favoritePrinters.valueAt(i);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             PrinterInfo updatedPrinter = discoveredPrinters.remove(
                     favoritePrinter.getId());
             if (updatedPrinter != null) {
@@ -123,8 +139,16 @@ public class FusedPrintersProvider extends Loader<List<PrinterInfo>> {
         mPrinters.addAll(printers);
 
         if (isStarted()) {
+<<<<<<< HEAD
             // Deliver the printers.
             deliverResult(printers);
+=======
+            // If stated deliver the new printers.
+            deliverResult(printers);
+        } else {
+            // Otherwise, take a note for the change.
+            onContentChanged();
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
     }
 
@@ -165,6 +189,11 @@ public class FusedPrintersProvider extends Loader<List<PrinterInfo>> {
                     .getSystemService(Context.PRINT_SERVICE);
             mDiscoverySession = printManager.createPrinterDiscoverySession();
             mPersistenceManager.readPrinterHistory();
+<<<<<<< HEAD
+=======
+        } else if (mPersistenceManager.isHistoryChanged()) {
+            mPersistenceManager.readPrinterHistory();
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
         if (mPersistenceManager.isReadHistoryCompleted()
                 && !mDiscoverySession.isPrinterDiscoveryStarted()) {
@@ -176,7 +205,11 @@ public class FusedPrintersProvider extends Loader<List<PrinterInfo>> {
                                 + mDiscoverySession.getPrinters().size()
                                 + " " + FusedPrintersProvider.this.hashCode());
                     }
+<<<<<<< HEAD
                     updatePrinters(mDiscoverySession.getPrinters());
+=======
+                    updatePrinters(mDiscoverySession.getPrinters(), mFavoritePrinters);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 }
             });
             final int favoriteCount = mFavoritePrinters.size();
@@ -187,15 +220,30 @@ public class FusedPrintersProvider extends Loader<List<PrinterInfo>> {
             mDiscoverySession.startPrinterDisovery(printerIds);
             List<PrinterInfo> printers = mDiscoverySession.getPrinters();
             if (!printers.isEmpty()) {
+<<<<<<< HEAD
                 updatePrinters(printers);
+=======
+                updatePrinters(printers, mFavoritePrinters);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             }
         }
     }
 
+<<<<<<< HEAD
     private void updatePrinters(List<PrinterInfo> printers) {
         if (mPrinters.equals(printers)) {
             return;
         }
+=======
+    private void updatePrinters(List<PrinterInfo> printers, List<PrinterInfo> favoritePrinters) {
+        if (mPrintersUpdatedBefore && mPrinters.equals(printers)
+                && mFavoritePrinters.equals(favoritePrinters)) {
+            return;
+        }
+
+        mPrintersUpdatedBefore = true;
+
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         ArrayMap<PrinterId, PrinterInfo> printersMap =
                 new ArrayMap<PrinterId, PrinterInfo>();
         final int printerCount = printers.size();
@@ -203,7 +251,20 @@ public class FusedPrintersProvider extends Loader<List<PrinterInfo>> {
             PrinterInfo printer = printers.get(i);
             printersMap.put(printer.getId(), printer);
         }
+<<<<<<< HEAD
         computeAndDeliverResult(printersMap);
+=======
+
+        ArrayMap<PrinterId, PrinterInfo> favoritePrintersMap =
+                new ArrayMap<PrinterId, PrinterInfo>();
+        final int favoritePrinterCount = favoritePrinters.size();
+        for (int i = 0; i < favoritePrinterCount; i++) {
+            PrinterInfo favoritePrinter = favoritePrinters.get(i);
+            favoritePrintersMap.put(favoritePrinter.getId(), favoritePrinter);
+        }
+
+        computeAndDeliverResult(printersMap, favoritePrintersMap);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     @Override
@@ -264,6 +325,45 @@ public class FusedPrintersProvider extends Loader<List<PrinterInfo>> {
         }
     }
 
+<<<<<<< HEAD
+=======
+    public boolean isFavoritePrinter(PrinterId printerId) {
+        final int printerCount = mFavoritePrinters.size();
+        for (int i = 0; i < printerCount; i++) {
+            PrinterInfo favoritePritner = mFavoritePrinters.get(i);
+            if (favoritePritner.getId().equals(printerId)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void forgetFavoritePrinter(PrinterId printerId) {
+        List<PrinterInfo> newFavoritePrinters = null;
+
+        // Remove the printer from the favorites.
+        final int favoritePrinterCount = mFavoritePrinters.size();
+        for (int i = 0; i < favoritePrinterCount; i++) {
+            PrinterInfo favoritePrinter = mFavoritePrinters.get(i);
+            if (favoritePrinter.getId().equals(printerId)) {
+                newFavoritePrinters = new ArrayList<PrinterInfo>();
+                newFavoritePrinters.addAll(mPrinters);
+                newFavoritePrinters.remove(i);
+                break;
+            }
+        }
+
+        // If we removed a favorite printer, we have work to do.
+        if (newFavoritePrinters != null) {
+            // Remove the printer from history and persist the latter.
+            mPersistenceManager.removeHistoricalPrinterAndWritePrinterHistory(printerId);
+
+            // Recompute and deliver the printers.
+            updatePrinters(mDiscoverySession.getPrinters(), newFavoritePrinters);
+        }
+    }
+
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     private final class PersistenceManager {
         private static final String PERSIST_FILE_NAME = "printer_history.xml";
 
@@ -281,13 +381,22 @@ public class FusedPrintersProvider extends Loader<List<PrinterInfo>> {
 
         private final AtomicFile mStatePersistFile;
 
+<<<<<<< HEAD
         private List<PrinterInfo> mHistoricalPrinters;
+=======
+        private List<PrinterInfo> mHistoricalPrinters = new ArrayList<PrinterInfo>();
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
         private boolean mReadHistoryCompleted;
         private boolean mReadHistoryInProgress;
 
         private ReadTask mReadTask;
 
+<<<<<<< HEAD
+=======
+        private volatile long mLastReadHistoryTimestamp;
+
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         private PersistenceManager(Context context) {
             mStatePersistFile = new AtomicFile(new File(context.getFilesDir(),
                     PERSIST_FILE_NAME));
@@ -327,6 +436,30 @@ public class FusedPrintersProvider extends Loader<List<PrinterInfo>> {
                     new ArrayList<PrinterInfo>(mHistoricalPrinters));
         }
 
+<<<<<<< HEAD
+=======
+        @SuppressWarnings("unchecked")
+        public void removeHistoricalPrinterAndWritePrinterHistory(PrinterId printerId) {
+            boolean writeHistory = false;
+            final int printerCount = mHistoricalPrinters.size();
+            for (int i = printerCount - 1; i >= 0; i--) {
+                PrinterInfo historicalPrinter = mHistoricalPrinters.get(i);
+                if (historicalPrinter.getId().equals(printerId)) {
+                    mHistoricalPrinters.remove(i);
+                    writeHistory = true;
+                }
+            }
+            if (writeHistory) {
+                new WriteTask().executeOnExecutor(AsyncTask.SERIAL_EXECUTOR,
+                        new ArrayList<PrinterInfo>(mHistoricalPrinters));
+            }
+        }
+
+        public boolean isHistoryChanged() {
+            return mLastReadHistoryTimestamp != mStatePersistFile.getBaseFile().lastModified();
+        }
+
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         private List<PrinterInfo> computeFavoritePrinters(List<PrinterInfo> printers) {
             Map<PrinterId, PrinterRecord> recordMap =
                     new ArrayMap<PrinterId, PrinterRecord>();
@@ -423,11 +556,18 @@ public class FusedPrintersProvider extends Loader<List<PrinterInfo>> {
                 mReadHistoryInProgress = false;
                 mReadHistoryCompleted = true;
 
+<<<<<<< HEAD
                 // Deliver the favorites.
                 Map<PrinterId, PrinterInfo> discoveredPrinters = Collections.emptyMap();
                 computeAndDeliverResult(discoveredPrinters);
 
                 // Start loading the available printers.
+=======
+                // Deliver the printers.
+                updatePrinters(mDiscoverySession.getPrinters(), mHistoricalPrinters);
+
+                // Loading the available printers if needed.
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 loadInternal();
 
                 // We are done.
@@ -450,6 +590,11 @@ public class FusedPrintersProvider extends Loader<List<PrinterInfo>> {
                     XmlPullParser parser = Xml.newPullParser();
                     parser.setInput(in, null);
                     parseState(parser, printers);
+<<<<<<< HEAD
+=======
+                    // Take a note which version of the history was read.
+                    mLastReadHistoryTimestamp = mStatePersistFile.getBaseFile().lastModified();
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                     return printers;
                 } catch (IllegalStateException ise) {
                     Slog.w(LOG_TAG, "Failed parsing ", ise);

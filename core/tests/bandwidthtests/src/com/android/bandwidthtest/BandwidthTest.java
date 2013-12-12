@@ -36,8 +36,11 @@ import com.android.bandwidthtest.util.BandwidthTestUtil;
 import com.android.bandwidthtest.util.ConnectionUtil;
 
 import java.io.File;
+<<<<<<< HEAD
 import java.util.HashMap;
 import java.util.Map;
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
 /**
  * Test that downloads files from a test server and reports the bandwidth metrics collected.
@@ -131,8 +134,13 @@ public class BandwidthTest extends InstrumentationTestCase {
         results.putString("device_id", mDeviceId);
         results.putString("timestamp", ts);
         results.putInt("size", FILE_SIZE);
+<<<<<<< HEAD
         AddStatsToResults(PROF_LABEL, prof_stats, results);
         AddStatsToResults(PROC_LABEL, proc_stats, results);
+=======
+        addStatsToResults(PROF_LABEL, prof_stats, results, mUid);
+        addStatsToResults(PROC_LABEL, proc_stats, results, mUid);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         getInstrumentation().sendStatus(INSTRUMENTATION_IN_PROGRESS, results);
 
         // Clean up.
@@ -185,8 +193,13 @@ public class BandwidthTest extends InstrumentationTestCase {
         results.putString("device_id", mDeviceId);
         results.putString("timestamp", ts);
         results.putInt("size", FILE_SIZE);
+<<<<<<< HEAD
         AddStatsToResults(PROF_LABEL, prof_stats, results);
         AddStatsToResults(PROC_LABEL, proc_stats, results);
+=======
+        addStatsToResults(PROF_LABEL, prof_stats, results, mUid);
+        addStatsToResults(PROC_LABEL, proc_stats, results, mUid);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         getInstrumentation().sendStatus(INSTRUMENTATION_IN_PROGRESS, results);
 
         // Clean up.
@@ -242,8 +255,14 @@ public class BandwidthTest extends InstrumentationTestCase {
         results.putString("device_id", mDeviceId);
         results.putString("timestamp", ts);
         results.putInt("size", FILE_SIZE);
+<<<<<<< HEAD
         AddStatsToResults(PROF_LABEL, prof_stats, results);
         AddStatsToResults(PROC_LABEL, proc_stats, results);
+=======
+        addStatsToResults(PROF_LABEL, prof_stats, results, mUid);
+        // remember to use download manager uid for proc stats
+        addStatsToResults(PROC_LABEL, proc_stats, results, downloadManagerUid);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         getInstrumentation().sendStatus(INSTRUMENTATION_IN_PROGRESS, results);
 
         // Clean up.
@@ -302,20 +321,31 @@ public class BandwidthTest extends InstrumentationTestCase {
      * @param label to attach to this given stats.
      * @param stats {@link NetworkStats} to add.
      * @param results {@link Bundle} to be added to.
+<<<<<<< HEAD
      */
     public void AddStatsToResults(String label, NetworkStats stats, Bundle results){
+=======
+     * @param uid for which to report the results.
+     */
+    public void addStatsToResults(String label, NetworkStats stats, Bundle results, int uid){
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         if (results == null || results.isEmpty()) {
             Log.e(LOG_TAG, "Empty bundle provided.");
             return;
         }
+<<<<<<< HEAD
         // Merge stats across all sets.
         Map<Integer, Entry> totalStats = new HashMap<Integer, Entry>();
+=======
+        Entry totalStats = null;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         for (int i = 0; i < stats.size(); ++i) {
             Entry statsEntry = stats.getValues(i, null);
             // We are only interested in the all inclusive stats.
             if (statsEntry.tag != 0) {
                 continue;
             }
+<<<<<<< HEAD
             Entry mapEntry = null;
             if (totalStats.containsKey(statsEntry.uid)) {
                 mapEntry = totalStats.get(statsEntry.uid);
@@ -342,6 +372,23 @@ public class BandwidthTest extends InstrumentationTestCase {
             results.putLong(label + "tx", entry.txBytes);
             results.putLong(label + "rx", entry.rxBytes);
         }
+=======
+            // skip stats for other uids
+            if (statsEntry.uid != uid) {
+                continue;
+            }
+            if (totalStats == null || statsEntry.set == NetworkStats.SET_ALL) {
+                totalStats = statsEntry;
+            } else {
+                totalStats.rxBytes += statsEntry.rxBytes;
+                totalStats.txBytes += statsEntry.txBytes;
+            }
+        }
+        // Output merged stats to bundle.
+        results.putInt(label + "uid", totalStats.uid);
+        results.putLong(label + "tx", totalStats.txBytes);
+        results.putLong(label + "rx", totalStats.rxBytes);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     /**

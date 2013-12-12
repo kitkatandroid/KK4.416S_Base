@@ -96,6 +96,7 @@ class="play no-shadow no-transform" style="margin:0 0 0 40px;max-height:250px;he
 href="{@docRoot}google/play-services/maps.html" class="button">Read more</a></p>
                 </div>            
               </li>
+<<<<<<< HEAD
                <li class="item carousel-home">
                    <div class="col-8">
                      <img
@@ -108,6 +109,8 @@ href="{@docRoot}google/play/billing/v2/billing_subscriptions.html#trials">Read
 more</a></p>
                    </div>                
                 </li>
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
            </ul>
        </div>
    </div>
@@ -134,6 +137,7 @@ more</a></p>
               <h4>The Beautiful Design Summer 2013 Collection</h4>
               <p>See the apps chosen by the Android Design team for their masterfully crafted design details...</p>
               </a></li>
+<<<<<<< HEAD
             <li><a href="//android-developers.blogspot.com/2013/06/google-play-developer-8-step-checkup.html">
               <div class="feed-image" style="background:url('//4.bp.blogspot.com/-LeK74UYY1eM/UbD8L-2DpFI/AAAAAAAACZA/YMjwndr-ZgM/s400/DoctorDroidV2.png') no-repeat 0 0;background-size:130px;background-position:8px -4px;"></div>
               <h4>Google Play Developer 8-Step Checkup</h4>
@@ -143,6 +147,17 @@ more</a></p>
               <div class="feed-image" style="background:url('//4.bp.blogspot.com/-VmHMT66JjxU/UZZdfPUaJsI/AAAAAAAACQc/kDx5-Ep5YRo/s1600/framed_designed-tablets.png') no-repeat 0 0;background-size:180px"></div>
               <h4>New Ways to Optimize Your Business in Google Play</h4>
               <p>Many of you have invested in making great tablet experiences for your users, and we want to ensure that that work pays off...</p>
+=======
+            <li><a href="//android-developers.blogspot.com/2013/10/new-developer-features-in-google-play.html">
+              <div class="feed-image" style="background:url('//3.bp.blogspot.com/-k33rf398Lqw/UlRUMQQRUNI/AAAAAAAAClM/pSwz2YgQpmY/s1600/gps-play_games_logo.png') no-repeat 0 0;background-size:130px;background-position:8px -4px;"></div>
+              <h4>New Features in Google Play Games</h4>
+              <p>Three new features that make it easier to understand what players are doing in your game and help you manage game features...</p>
+            </a></li>
+            <li><a href="//android-developers.blogspot.com/2013/05/new-ways-to-optimize-your-business-in.html">
+              <div class="feed-image" style="background:url('//3.bp.blogspot.com/-_8WvpdTVGsE/UkxxxrVoNNI/AAAAAAAACj8/FrQyA-BO11c/s1600/gp-referral-ga.png') no-repeat 0 0;background-size:180px"></div>
+              <h4>Linking Google Analytics with Google Play</h4>
+              <p>Understanding your users easier through a new integration between Google Analytics and the Google Play Developer Console...</p>
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
               </a></li>
           </ul>
                                 <!-- FEATURED DOCS -->

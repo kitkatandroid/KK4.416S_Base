@@ -16,13 +16,24 @@
 
 package android.print;
 
+<<<<<<< HEAD
+=======
+import android.os.Bundle;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.Arrays;
 
 /**
+<<<<<<< HEAD
  * This class represents the description of a print job.
+=======
+ * This class represents the description of a print job. The print job
+ * state includes properties such as its id, print attributes used for
+ * generating the content, and so on. Note that the print jobs state may
+ * change over time and this class represents a snapshot of this state.
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
  */
 public final class PrintJobInfo implements Parcelable {
 
@@ -93,7 +104,11 @@ public final class PrintJobInfo implements Parcelable {
     public static final int STATE_BLOCKED = 4;
 
     /**
+<<<<<<< HEAD
      * Print job state: The print job was successfully printed.
+=======
+     * Print job state: The print job is successfully printed.
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
      * This is a terminal state.
      * <p>
      * Next valid states: None
@@ -103,15 +118,24 @@ public final class PrintJobInfo implements Parcelable {
 
     /**
      * Print job state: The print job was printing but printing failed.
+<<<<<<< HEAD
      * This is a terminal state.
      * <p>
      * Next valid states: None
+=======
+     * <p>
+     * Next valid states: {@link #STATE_CANCELED}, {@link #STATE_STARTED}
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
      * </p>
      */
     public static final int STATE_FAILED = 6;
 
     /**
+<<<<<<< HEAD
      * Print job state: The print job was canceled.
+=======
+     * Print job state: The print job is canceled.
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
      * This is a terminal state.
      * <p>
      * Next valid states: None
@@ -158,6 +182,12 @@ public final class PrintJobInfo implements Parcelable {
     /** Information about the printed document. */
     private PrintDocumentInfo mDocumentInfo;
 
+<<<<<<< HEAD
+=======
+    /** Advanced printer specific options. */
+    private Bundle mAdvancedOptions;
+
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     /** Whether we are trying to cancel this print job. */
     private boolean mCanceling;
 
@@ -182,6 +212,10 @@ public final class PrintJobInfo implements Parcelable {
         mAttributes = other.mAttributes;
         mDocumentInfo = other.mDocumentInfo;
         mCanceling = other.mCanceling;
+<<<<<<< HEAD
+=======
+        mAdvancedOptions = other.mAdvancedOptions;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     private PrintJobInfo(Parcel parcel) {
@@ -195,13 +229,19 @@ public final class PrintJobInfo implements Parcelable {
         mCreationTime = parcel.readLong();
         mCopies = parcel.readInt();
         mStateReason = parcel.readString();
+<<<<<<< HEAD
         if (parcel.readInt() == 1) {
             Parcelable[] parcelables = parcel.readParcelableArray(null);
+=======
+        Parcelable[] parcelables = parcel.readParcelableArray(null);
+        if (parcelables != null) {
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             mPageRanges = new PageRange[parcelables.length];
             for (int i = 0; i < parcelables.length; i++) {
                 mPageRanges[i] = (PageRange) parcelables[i];
             }
         }
+<<<<<<< HEAD
         if (parcel.readInt() == 1) {
             mAttributes = PrintAttributes.CREATOR.createFromParcel(parcel);
         }
@@ -209,6 +249,12 @@ public final class PrintJobInfo implements Parcelable {
             mDocumentInfo = PrintDocumentInfo.CREATOR.createFromParcel(parcel);
         }
         mCanceling = (parcel.readInt() == 1);
+=======
+        mAttributes = (PrintAttributes) parcel.readParcelable(null);
+        mDocumentInfo = (PrintDocumentInfo) parcel.readParcelable(null);
+        mCanceling = (parcel.readInt() == 1);
+        mAdvancedOptions = parcel.readBundle();
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     /**
@@ -297,6 +343,17 @@ public final class PrintJobInfo implements Parcelable {
      * Gets the current job state.
      *
      * @return The job state.
+<<<<<<< HEAD
+=======
+     *
+     * @see #STATE_CREATED
+     * @see #STATE_QUEUED
+     * @see #STATE_STARTED
+     * @see #STATE_COMPLETED
+     * @see #STATE_BLOCKED
+     * @see #STATE_FAILED
+     * @see #STATE_CANCELED
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
      */
     public int getState() {
         return mState;
@@ -511,6 +568,74 @@ public final class PrintJobInfo implements Parcelable {
         mCanceling = cancelling;
     }
 
+<<<<<<< HEAD
+=======
+    /**
+     * Gets whether this job has a given advanced (printer specific) print
+     * option.
+     *
+     * @param key The option key.
+     * @return Whether the option is present.
+     *
+     * @hide
+     */
+    public boolean hasAdvancedOption(String key) {
+        return mAdvancedOptions != null && mAdvancedOptions.containsKey(key);
+    }
+
+    /**
+     * Gets the value of an advanced (printer specific) print option.
+     *
+     * @param key The option key.
+     * @return The option value.
+     *
+     * @hide
+     */
+    public String getAdvancedStringOption(String key) {
+        if (mAdvancedOptions != null) {
+            return mAdvancedOptions.getString(key);
+        }
+        return null;
+    }
+
+    /**
+     * Gets the value of an advanced (printer specific) print option.
+     *
+     * @param key The option key.
+     * @return The option value.
+     *
+     * @hide
+     */
+    public int getAdvancedIntOption(String key) {
+        if (mAdvancedOptions != null) {
+            return mAdvancedOptions.getInt(key);
+        }
+        return 0;
+    }
+
+    /**
+     * Gets the advanced options.
+     *
+     * @return The advanced options.
+     *
+     * @hide
+     */
+    public Bundle getAdvancedOptions() {
+        return mAdvancedOptions;
+    }
+
+    /**
+     * Sets the advanced options.
+     *
+     * @param options The advanced options.
+     *
+     * @hide
+     */
+    public void setAdvancedOptions(Bundle options) {
+        mAdvancedOptions = options;
+    }
+
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     @Override
     public int describeContents() {
         return 0;
@@ -528,6 +653,7 @@ public final class PrintJobInfo implements Parcelable {
         parcel.writeLong(mCreationTime);
         parcel.writeInt(mCopies);
         parcel.writeString(mStateReason);
+<<<<<<< HEAD
         if (mPageRanges != null) {
             parcel.writeInt(1);
             parcel.writeParcelableArray(mPageRanges, flags);
@@ -547,6 +673,13 @@ public final class PrintJobInfo implements Parcelable {
             parcel.writeInt(0);
         }
         parcel.writeInt(mCanceling ? 1 : 0);
+=======
+        parcel.writeParcelableArray(mPageRanges, flags);
+        parcel.writeParcelable(mAttributes, flags);
+        parcel.writeParcelable(mDocumentInfo, 0);
+        parcel.writeInt(mCanceling ? 1 : 0);
+        parcel.writeBundle(mAdvancedOptions);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     @Override
@@ -567,6 +700,10 @@ public final class PrintJobInfo implements Parcelable {
         builder.append(", cancelling: " + mCanceling);
         builder.append(", pages: " + (mPageRanges != null
                 ? Arrays.toString(mPageRanges) : null));
+<<<<<<< HEAD
+=======
+        builder.append(", hasAdvancedOptions: " + (mAdvancedOptions != null));
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         builder.append("}");
         return builder.toString();
     }
@@ -611,7 +748,11 @@ public final class PrintJobInfo implements Parcelable {
          * Constructor.
          *
          * @param prototype Prototype to use as a starting point.
+<<<<<<< HEAD
          * Can be null.
+=======
+         * Can be <code>null</code>.
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
          */
         public Builder(PrintJobInfo prototype) {
             mPrototype = (prototype != null)
@@ -653,7 +794,14 @@ public final class PrintJobInfo implements Parcelable {
          * @param value The option value.
          */
         public void putAdvancedOption(String key, String value) {
+<<<<<<< HEAD
 
+=======
+            if (mPrototype.mAdvancedOptions == null) {
+                mPrototype.mAdvancedOptions = new Bundle();
+            }
+            mPrototype.mAdvancedOptions.putString(key, value);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
 
         /**
@@ -663,7 +811,14 @@ public final class PrintJobInfo implements Parcelable {
          * @param value The option value.
          */
         public void putAdvancedOption(String key, int value) {
+<<<<<<< HEAD
 
+=======
+            if (mPrototype.mAdvancedOptions == null) {
+                mPrototype.mAdvancedOptions = new Bundle();
+            }
+            mPrototype.mAdvancedOptions.putInt(key, value);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
 
         /**

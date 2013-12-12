@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 page.title=Setup Google Play Services SDK
+=======
+page.title=Set Up Google Play Services SDK
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 @jd:body
 
     
@@ -81,6 +85,22 @@ both phones and tablets.</p>
 -keep class * extends java.util.ListResourceBundle {
     protected Object[][] getContents();
 }
+<<<<<<< HEAD
+=======
+
+-keep public class com.google.android.gms.common.internal.safeparcel.SafeParcelable {
+    public static final *** NULL;
+}
+
+-keepnames &#64;com.google.android.gms.common.annotation.KeepName class *
+-keepclassmembernames class * {
+    &#64;ccom.google.android.gms.common.annotation.KeepName *;
+}
+
+-keepnames class * implements android.os.Parcelable {
+    public static final ** CREATOR;
+}
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 </pre>
 </ol>
 

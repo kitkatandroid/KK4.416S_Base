@@ -188,8 +188,13 @@ appropriate place to store cached images if they are accessed more frequently, f
 image gallery application.</p>
 
 <p>The sample code of this class uses a {@code DiskLruCache} implementation that is pulled from the 
+<<<<<<< HEAD
 <a href="https://android.googlesource.com/platform/libcore/+/master/luni/src/main/java/libcore/io/DiskLruCache.java">Android source</a>. Here’s updated example code that adds a disk cache in addition
 to the existing memory cache:</p>
+=======
+<a href="https://android.googlesource.com/platform/libcore/+/jb-mr2-release/luni/src/main/java/libcore/io/DiskLruCache.java">Android source</a>.
+Here’s updated example code that adds a disk cache in addition to the existing memory cache:</p>
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
 <pre>
 private DiskLruCache mDiskLruCache;
@@ -346,6 +351,10 @@ class RetainFragment extends Fragment {
         RetainFragment fragment = (RetainFragment) fm.findFragmentByTag(TAG);
         if (fragment == null) {
             fragment = new RetainFragment();
+<<<<<<< HEAD
+=======
+            fm.beginTransaction().add(fragment, TAG).commit();
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
         return fragment;
     }

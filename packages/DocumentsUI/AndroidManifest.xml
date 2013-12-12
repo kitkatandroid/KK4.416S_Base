@@ -50,6 +50,17 @@
             android:authorities="com.android.documentsui.recents"
             android:exported="false" />
 
+<<<<<<< HEAD
+=======
+        <receiver android:name=".PackageReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_FULLY_REMOVED" />
+                <action android:name="android.intent.action.PACKAGE_DATA_CLEARED" />
+                <data android:scheme="package" />
+            </intent-filter>
+        </receiver>
+
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         <!-- TODO: remove when we have real clients -->
         <activity android:name=".TestActivity" android:enabled="false">
             <intent-filter>

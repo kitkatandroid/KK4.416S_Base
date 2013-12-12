@@ -16,6 +16,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+<<<<<<< HEAD
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:gravity="center">
@@ -24,6 +25,17 @@
         android:layout_width="@dimen/qs_tile_icon_size"
         android:layout_height="@dimen/qs_tile_icon_size"
         android:layout_gravity="center_horizontal"
+=======
+    android:layout_height="match_parent"
+    android:layout_gravity="top">
+    <FrameLayout
+        android:id="@+id/rssi_images"
+        android:layout_marginTop="@dimen/qs_tile_margin_above_icon"
+        android:layout_marginBottom="@dimen/qs_tile_margin_below_icon"
+        android:layout_width="@dimen/qs_tile_icon_size"
+        android:layout_height="@dimen/qs_tile_icon_size"
+        android:layout_gravity="top|center_horizontal"
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         android:layout_centerHorizontal="true"
         >
         <ImageView
@@ -44,14 +56,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_qs_signal_in"
+<<<<<<< HEAD
             android:layout_toRightOf="@id/image"
             android:layout_alignBottom="@id/image"
+=======
+            android:layout_toRightOf="@id/rssi_images"
+            android:layout_alignBottom="@id/rssi_images"
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             />
     <ImageView
             android:id="@+id/activity_out"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_qs_signal_out"
+<<<<<<< HEAD
             android:layout_toRightOf="@id/image"
             android:layout_alignBottom="@id/image"
             />
@@ -69,3 +87,21 @@
         android:textAllCaps="@bool/quick_settings_rssi_tile_capitalization"
         />
 </RelativeLayout>
+=======
+            android:layout_toRightOf="@id/rssi_images"
+            android:layout_alignBottom="@id/rssi_images"
+            />
+    <TextView
+        style="@style/TextAppearance.QuickSettings.TileView"
+        android:id="@+id/rssi_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|center_horizontal"
+        android:gravity="top|center_horizontal"
+        android:text="@string/quick_settings_rssi_label"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/rssi_images"
+        android:textAllCaps="@bool/quick_settings_rssi_tile_capitalization"
+        />
+</RelativeLayout>
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1

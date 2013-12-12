@@ -1076,6 +1076,7 @@ void OpenGLRenderer::composeLayer(sp<Snapshot> current, sp<Snapshot> previous) {
         }
     } else if (!rect.isEmpty()) {
         dirtyLayer(rect.left, rect.top, rect.right, rect.bottom);
+<<<<<<< HEAD
 
         save(0);
         // the layer contains screen buffer content that shouldn't be alpha modulated
@@ -1083,6 +1084,9 @@ void OpenGLRenderer::composeLayer(sp<Snapshot> current, sp<Snapshot> previous) {
         mSnapshot->alpha = 1.0f;
         composeLayerRect(layer, rect, true);
         restore();
+=======
+        composeLayerRect(layer, rect, true);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     dirtyClip();

@@ -75,6 +75,7 @@ class IInputMethodSessionWrapper extends IInputMethodSession.Stub
     @Override
     public void executeMessage(Message msg) {
         if (mInputMethodSession == null) {
+<<<<<<< HEAD
             // The session has been finished. Args needs to be recycled
             // for cases below.
             switch (msg.what) {
@@ -84,6 +85,9 @@ class IInputMethodSessionWrapper extends IInputMethodSession.Stub
                     args.recycle();
                 }
             }
+=======
+            // The session has been finished.
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             return;
         }
 

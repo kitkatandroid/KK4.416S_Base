@@ -32,17 +32,28 @@
         android:id="@+id/carrier_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+<<<<<<< HEAD
         android:singleLine="true"
         android:ellipsize="marquee"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="@dimen/kg_status_line_font_size"
         android:textColor="?android:attr/textColorSecondary"
         android:textAllCaps="@bool/kg_use_all_caps" />
+=======
+        android:ellipsize="marquee"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="@dimen/kg_status_line_font_size"
+        android:textColor="?android:attr/textColorSecondary" />
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+<<<<<<< HEAD
         android:layout_marginTop="-10dip"
+=======
+        android:layout_marginTop="@dimen/eca_overlap"
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         style="?android:attr/buttonBarStyle"
         android:orientation="horizontal"
         android:gravity="center"
@@ -66,12 +77,18 @@
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+<<<<<<< HEAD
             android:drawableLeft="@drawable/lockscreen_forgot_password_button"
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             style="?android:attr/buttonBarButtonStyle"
             android:textSize="@dimen/kg_status_line_font_size"
             android:textColor="?android:attr/textColorSecondary"
             android:textAppearance="?android:attr/textAppearanceMedium"
+<<<<<<< HEAD
             android:drawablePadding="8dip"
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             android:visibility="gone"
             android:textAllCaps="@bool/kg_use_all_caps" />
     </LinearLayout>

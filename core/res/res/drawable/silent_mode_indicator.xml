@@ -16,5 +16,9 @@
 
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_selected="false" android:drawable="@android:color/transparent" />
+<<<<<<< HEAD
     <item android:state_selected="true"  android:drawable="@drawable/tab_selected_holo_dark" />
+=======
+    <item android:state_selected="true"  android:drawable="@drawable/tab_selected_holo" />
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 </selector>

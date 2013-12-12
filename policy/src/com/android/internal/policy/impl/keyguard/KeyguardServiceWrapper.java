@@ -16,7 +16,10 @@
 
 package com.android.internal.policy.impl.keyguard;
 
+<<<<<<< HEAD
 import android.content.Intent;
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
@@ -189,6 +192,7 @@ public class KeyguardServiceWrapper implements IKeyguardService {
         }
     }
 
+<<<<<<< HEAD
     public void showCustomIntent(Intent intent) {
         try {
             mService.showCustomIntent(intent);
@@ -197,6 +201,8 @@ public class KeyguardServiceWrapper implements IKeyguardService {
         }
     }
 
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     public void showAssistant() {
         // Not used by PhoneWindowManager
     }
@@ -214,4 +220,8 @@ public class KeyguardServiceWrapper implements IKeyguardService {
         return mService.asBinder();
     }
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1

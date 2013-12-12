@@ -36,15 +36,22 @@ import android.net.LinkProperties;
 import android.net.NetworkInfo;
 import android.net.NetworkUtils;
 import android.net.RouteInfo;
+<<<<<<< HEAD
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.Binder;
 import android.os.IBinder;
+=======
+import android.os.Binder;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import android.os.INetworkManagementService;
 import android.os.Looper;
 import android.os.Message;
 import android.os.RemoteException;
+<<<<<<< HEAD
 import android.os.ServiceManager;
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.util.Log;
@@ -127,11 +134,14 @@ public class Tethering extends INetworkManagementEventObserver.Stub {
     private static final String DNS_DEFAULT_SERVER1 = "8.8.8.8";
     private static final String DNS_DEFAULT_SERVER2 = "8.8.4.4";
 
+<<<<<<< HEAD
     private static final String ACTION_TURN_WIFI_AP_OFF =
                 "com.android.server.ACTION_TURN_WIFI_AP_OFF";
 
     private static NotificationBroadcastReciever mNotificationBroadcastReceiver = null;
 
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     private StateMachine mTetherMasterSM;
 
     private Notification mTetheredNotification;
@@ -481,6 +491,7 @@ public class Tethering extends INetworkManagementEventObserver.Stub {
                 tethered_notification_message);
 
         if (mTetheredNotification == null) {
+<<<<<<< HEAD
             Notification.Builder builder = new Notification.Builder(mContext)
                     .setSmallIcon(icon)
                     .setContentTitle(title)
@@ -506,6 +517,17 @@ public class Tethering extends INetworkManagementEventObserver.Stub {
             mTetheredNotification.defaults &= ~Notification.DEFAULT_SOUND;
             mTetheredNotification.flags = Notification.FLAG_ONGOING_EVENT;
         }
+=======
+            mTetheredNotification = new Notification();
+            mTetheredNotification.when = 0;
+        }
+        mTetheredNotification.icon = icon;
+        mTetheredNotification.defaults &= ~Notification.DEFAULT_SOUND;
+        mTetheredNotification.flags = Notification.FLAG_ONGOING_EVENT;
+        mTetheredNotification.tickerText = title;
+        mTetheredNotification.setLatestEventInfo(mContext, title, message, pi);
+
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         notificationManager.notifyAsUser(null, mTetheredNotification.icon,
                 mTetheredNotification, UserHandle.ALL);
     }
@@ -514,10 +536,13 @@ public class Tethering extends INetworkManagementEventObserver.Stub {
         NotificationManager notificationManager =
             (NotificationManager)mContext.getSystemService(Context.NOTIFICATION_SERVICE);
         if (notificationManager != null && mTetheredNotification != null) {
+<<<<<<< HEAD
             if (mNotificationBroadcastReceiver != null) {
                 mContext.unregisterReceiver(mNotificationBroadcastReceiver);
                 mNotificationBroadcastReceiver = null;
             }
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             notificationManager.cancelAsUser(null, mTetheredNotification.icon,
                     UserHandle.ALL);
             mTetheredNotification = null;
@@ -543,7 +568,11 @@ public class Tethering extends INetworkManagementEventObserver.Stub {
                 if (networkInfo != null &&
                         networkInfo.getDetailedState() != NetworkInfo.DetailedState.FAILED) {
                     if (VDBG) Log.d(TAG, "Tethering got CONNECTIVITY_ACTION");
+<<<<<<< HEAD
                     mTetherMasterSM.sendMessage(TetherMasterSM.CMD_UPSTREAM_CHANGED, networkInfo);
+=======
+                    mTetherMasterSM.sendMessage(TetherMasterSM.CMD_UPSTREAM_CHANGED);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 }
             } else if (action.equals(Intent.ACTION_CONFIGURATION_CHANGED)) {
                 updateConfiguration();
@@ -757,8 +786,13 @@ public class Tethering extends INetworkManagementEventObserver.Stub {
     //      CONNECTIVITY_ACTION. Only to accomodate interface
     //      switch during HO.
     //      @see bug/4455071
+<<<<<<< HEAD
     public void handleTetherIfaceChange(NetworkInfo info) {
         mTetherMasterSM.sendMessage(TetherMasterSM.CMD_UPSTREAM_CHANGED, info);
+=======
+    public void handleTetherIfaceChange() {
+        mTetherMasterSM.sendMessage(TetherMasterSM.CMD_UPSTREAM_CHANGED);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     class TetherInterfaceSM extends StateMachine {
@@ -1139,6 +1173,7 @@ public class Tethering extends INetworkManagementEventObserver.Stub {
 
     }
 
+<<<<<<< HEAD
     private class NotificationBroadcastReciever extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -1162,6 +1197,8 @@ public class Tethering extends INetworkManagementEventObserver.Stub {
         }
     }
 
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     class TetherMasterSM extends StateMachine {
         // an interface SM has requested Tethering
         static final int CMD_TETHER_MODE_REQUESTED   = 1;
@@ -1326,6 +1363,7 @@ public class Tethering extends INetworkManagementEventObserver.Stub {
                 return true;
             }
 
+<<<<<<< HEAD
             protected void addUpstreamV6Interface(String iface) {
                 IBinder b = ServiceManager.getService(Context.NETWORKMANAGEMENT_SERVICE);
                 INetworkManagementService service = INetworkManagementService.Stub.asInterface(b);
@@ -1375,6 +1413,9 @@ public class Tethering extends INetworkManagementEventObserver.Stub {
             protected void chooseUpstreamType(boolean tryCell) {
                 IBinder b = ServiceManager.getService(Context.CONNECTIVITY_SERVICE);
                 IConnectivityManager cm = IConnectivityManager.Stub.asInterface(b);
+=======
+            protected void chooseUpstreamType(boolean tryCell) {
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 int upType = ConnectivityManager.TYPE_NONE;
                 String iface = null;
 
@@ -1390,6 +1431,7 @@ public class Tethering extends INetworkManagementEventObserver.Stub {
 
                     for (Integer netType : mUpstreamIfaceTypes) {
                         NetworkInfo info = null;
+<<<<<<< HEAD
                         LinkProperties props = null;
                         boolean isV6Connected = false;
                         try {
@@ -1404,6 +1446,13 @@ public class Tethering extends INetworkManagementEventObserver.Stub {
                             if (isV6Connected) {
                                 addUpstreamV6Interface(props.getInterfaceName());
                             }
+=======
+                        try {
+                            info = mConnService.getNetworkInfo(netType.intValue());
+                        } catch (RemoteException e) { }
+                        if ((info != null) && info.isConnected()) {
+                            upType = netType.intValue();
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                             break;
                         }
                     }
@@ -1575,6 +1624,7 @@ public class Tethering extends INetworkManagementEventObserver.Stub {
                         break;
                     case CMD_UPSTREAM_CHANGED:
                         // need to try DUN immediately if Wifi goes down
+<<<<<<< HEAD
                         NetworkInfo info = (NetworkInfo) message.obj;
                         mTryCell = !WAIT_FOR_NETWORK_TO_SETTLE;
                         chooseUpstreamType(mTryCell);
@@ -1588,6 +1638,10 @@ public class Tethering extends INetworkManagementEventObserver.Stub {
                                 Log.e(TAG, "Exception querying ConnectivityManager", e);
                             }
                         }
+=======
+                        mTryCell = !WAIT_FOR_NETWORK_TO_SETTLE;
+                        chooseUpstreamType(mTryCell);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                         mTryCell = !mTryCell;
                         break;
                     case CMD_CELL_CONNECTION_RENEW:

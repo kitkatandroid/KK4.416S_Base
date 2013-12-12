@@ -701,6 +701,16 @@ final class WindowState implements WindowManagerPolicy.WindowState {
         return mAppToken != null ? mAppToken.appToken : null;
     }
 
+<<<<<<< HEAD
+=======
+    boolean setInsetsChanged() {
+        mOverscanInsetsChanged |= !mLastOverscanInsets.equals(mOverscanInsets);
+        mContentInsetsChanged |= !mLastContentInsets.equals(mContentInsets);
+        mVisibleInsetsChanged |= !mLastVisibleInsets.equals(mVisibleInsets);
+        return mOverscanInsetsChanged || mContentInsetsChanged || mVisibleInsetsChanged;
+    }
+
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     public int getDisplayId() {
         return mDisplayContent.getDisplayId();
     }

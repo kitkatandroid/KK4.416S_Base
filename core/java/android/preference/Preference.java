@@ -1069,11 +1069,19 @@ public class Preference implements Comparable<Preference> {
      * @return 0 if the same; less than 0 if this Preference sorts ahead of <var>another</var>;
      *          greater than 0 if this Preference sorts after <var>another</var>.
      */
+<<<<<<< HEAD
     public int compareTo(Preference another) {
         if (mOrder != DEFAULT_ORDER
                 || (mOrder == DEFAULT_ORDER && another.mOrder != DEFAULT_ORDER)) {
             // Do order comparison
             return mOrder - another.mOrder; 
+=======
+    @Override
+    public int compareTo(Preference another) {
+        if (mOrder != another.mOrder) {
+            // Do order comparison
+            return mOrder - another.mOrder;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         } else if (mTitle == another.mTitle) {
             // If titles are null or share same object comparison
             return 0;
@@ -1334,6 +1342,7 @@ public class Preference implements Comparable<Preference> {
         mDefaultValue = defaultValue;
     }
     
+<<<<<<< HEAD
     /**
      * Returns whether the preference can be found in persistent storage
      * @hide
@@ -1346,6 +1355,12 @@ public class Preference implements Comparable<Preference> {
         // By now, we know if we are persistent.
         final boolean shouldPersist = shouldPersist();
         if (!shouldPersist || !isPersisted()) {
+=======
+    private void dispatchSetInitialValue() {
+        // By now, we know if we are persistent.
+        final boolean shouldPersist = shouldPersist();
+        if (!shouldPersist || !getSharedPreferences().contains(mKey)) {
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             if (mDefaultValue != null) {
                 onSetInitialValue(false, mDefaultValue);
             }

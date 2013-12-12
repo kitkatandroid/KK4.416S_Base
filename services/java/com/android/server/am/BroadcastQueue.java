@@ -27,6 +27,10 @@ import android.content.ComponentName;
 import android.content.IIntentReceiver;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+<<<<<<< HEAD
+=======
+import android.content.pm.PackageInfo;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
@@ -220,7 +224,12 @@ public final class BroadcastQueue {
         r.curApp = app;
         app.curReceiver = r;
         app.forceProcessStateUpTo(ActivityManager.PROCESS_STATE_RECEIVER);
+<<<<<<< HEAD
         mService.updateLruProcessLocked(app, true, false);
+=======
+        mService.updateLruProcessLocked(app, false, null);
+        mService.updateOomAdjLocked();
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
         // Tell the application to launch this receiver.
         r.intent.setComponent(r.curComponent);
@@ -813,6 +822,29 @@ public final class BroadcastQueue {
                         + " to " + r.curApp + ": process crashing");
                 skip = true;
             }
+<<<<<<< HEAD
+=======
+            if (!skip) {
+                boolean isAvailable = false;
+                try {
+                    isAvailable = AppGlobals.getPackageManager().isPackageAvailable(
+                            info.activityInfo.packageName,
+                            UserHandle.getUserId(info.activityInfo.applicationInfo.uid));
+                } catch (Exception e) {
+                    // all such failures mean we skip this receiver
+                    Slog.w(TAG, "Exception getting recipient info for "
+                            + info.activityInfo.packageName, e);
+                }
+                if (!isAvailable) {
+                    if (DEBUG_BROADCAST) {
+                        Slog.v(TAG, "Skipping delivery to " + info.activityInfo.packageName
+                                + " / " + info.activityInfo.applicationInfo.uid
+                                + " : package no longer available");
+                    }
+                    skip = true;
+                }
+            }
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
             if (skip) {
                 if (DEBUG_BROADCAST)  Slog.v(TAG,

@@ -58,9 +58,23 @@ public class Watchdog extends Thread {
     // Set this to true to have the watchdog record kernel thread stacks when it fires
     static final boolean RECORD_KERNEL_THREADS = true;
 
+<<<<<<< HEAD
     static final int TIME_TO_WAIT = DB ? 5*1000 : 30*1000;
 
     static final String[] NATIVE_STACKS_OF_INTEREST = new String[] {
+=======
+    static final long DEFAULT_TIMEOUT = DB ? 10*1000 : 60*1000;
+    static final long CHECK_INTERVAL = DEFAULT_TIMEOUT / 2;
+
+    // These are temporally ordered: larger values as lateness increases
+    static final int COMPLETED = 0;
+    static final int WAITING = 1;
+    static final int WAITED_HALF = 2;
+    static final int OVERDUE = 3;
+
+    // Which native processes to dump into dropbox's stack traces
+    public static final String[] NATIVE_STACKS_OF_INTEREST = new String[] {
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         "/system/bin/mediaserver",
         "/system/bin/sdcard",
         "/system/bin/surfaceflinger"
@@ -87,6 +101,7 @@ public class Watchdog extends Thread {
     public final class HandlerChecker implements Runnable {
         private final Handler mHandler;
         private final String mName;
+<<<<<<< HEAD
         private final ArrayList<Monitor> mMonitors = new ArrayList<Monitor>();
         private boolean mCompleted;
         private Monitor mCurrentMonitor;
@@ -94,6 +109,19 @@ public class Watchdog extends Thread {
         HandlerChecker(Handler handler, String name) {
             mHandler = handler;
             mName = name;
+=======
+        private final long mWaitMax;
+        private final ArrayList<Monitor> mMonitors = new ArrayList<Monitor>();
+        private boolean mCompleted;
+        private Monitor mCurrentMonitor;
+        private long mStartTime;
+
+        HandlerChecker(Handler handler, String name, long waitMaxMillis) {
+            mHandler = handler;
+            mName = name;
+            mWaitMax = waitMaxMillis;
+            mCompleted = true;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
 
         public void addMonitor(Monitor monitor) {
@@ -111,6 +139,7 @@ public class Watchdog extends Thread {
                 mCompleted = true;
                 return;
             }
+<<<<<<< HEAD
             mCompleted = false;
             mCurrentMonitor = null;
             mHandler.postAtFrontOfQueue(this);
@@ -118,6 +147,36 @@ public class Watchdog extends Thread {
 
         public boolean isCompletedLocked() {
             return mCompleted;
+=======
+
+            if (!mCompleted) {
+                // we already have a check in flight, so no need
+                return;
+            }
+
+            mCompleted = false;
+            mCurrentMonitor = null;
+            mStartTime = SystemClock.uptimeMillis();
+            mHandler.postAtFrontOfQueue(this);
+        }
+
+        public boolean isOverdueLocked() {
+            return (!mCompleted) && (SystemClock.uptimeMillis() > mStartTime + mWaitMax);
+        }
+
+        public int getCompletionStateLocked() {
+            if (mCompleted) {
+                return COMPLETED;
+            } else {
+                long latency = SystemClock.uptimeMillis() - mStartTime;
+                if (latency < mWaitMax/2) {
+                    return WAITING;
+                } else if (latency < mWaitMax) {
+                    return WAITED_HALF;
+                }
+            }
+            return OVERDUE;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
 
         public Thread getThread() {
@@ -186,16 +245,31 @@ public class Watchdog extends Thread {
 
         // The shared foreground thread is the main checker.  It is where we
         // will also dispatch monitor checks and do other work.
+<<<<<<< HEAD
         mMonitorChecker = new HandlerChecker(FgThread.getHandler(), "foreground thread");
+=======
+        mMonitorChecker = new HandlerChecker(FgThread.getHandler(),
+                "foreground thread", DEFAULT_TIMEOUT);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         mHandlerCheckers.add(mMonitorChecker);
         // Add checker for main thread.  We only do a quick check since there
         // can be UI running on the thread.
         mHandlerCheckers.add(new HandlerChecker(new Handler(Looper.getMainLooper()),
+<<<<<<< HEAD
                 "main thread"));
         // Add checker for shared UI thread.
         mHandlerCheckers.add(new HandlerChecker(UiThread.getHandler(), "ui thread"));
         // And also check IO thread.
         mHandlerCheckers.add(new HandlerChecker(IoThread.getHandler(), "i/o thread"));
+=======
+                "main thread", DEFAULT_TIMEOUT));
+        // Add checker for shared UI thread.
+        mHandlerCheckers.add(new HandlerChecker(UiThread.getHandler(),
+                "ui thread", DEFAULT_TIMEOUT));
+        // And also check IO thread.
+        mHandlerCheckers.add(new HandlerChecker(IoThread.getHandler(),
+                "i/o thread", DEFAULT_TIMEOUT));
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     public void init(Context context, BatteryService battery,
@@ -242,11 +316,22 @@ public class Watchdog extends Thread {
     }
 
     public void addThread(Handler thread, String name) {
+<<<<<<< HEAD
+=======
+        addThread(thread, name, DEFAULT_TIMEOUT);
+    }
+
+    public void addThread(Handler thread, String name, long timeoutMillis) {
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         synchronized (this) {
             if (isAlive()) {
                 throw new RuntimeException("Threads can't be added once the Watchdog is running");
             }
+<<<<<<< HEAD
             mHandlerCheckers.add(new HandlerChecker(thread, name));
+=======
+            mHandlerCheckers.add(new HandlerChecker(thread, name, timeoutMillis));
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
     }
 
@@ -259,6 +344,7 @@ public class Watchdog extends Thread {
         pms.reboot(false, reason, false);
     }
 
+<<<<<<< HEAD
     private boolean haveAllCheckersCompletedLocked() {
         for (int i=0; i<mHandlerCheckers.size(); i++) {
             HandlerChecker hc = mHandlerCheckers.get(i);
@@ -267,13 +353,26 @@ public class Watchdog extends Thread {
             }
         }
         return true;
+=======
+    private int evaluateCheckerCompletionLocked() {
+        int state = COMPLETED;
+        for (int i=0; i<mHandlerCheckers.size(); i++) {
+            HandlerChecker hc = mHandlerCheckers.get(i);
+            state = Math.max(state, hc.getCompletionStateLocked());
+        }
+        return state;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     private ArrayList<HandlerChecker> getBlockedCheckersLocked() {
         ArrayList<HandlerChecker> checkers = new ArrayList<HandlerChecker>();
         for (int i=0; i<mHandlerCheckers.size(); i++) {
             HandlerChecker hc = mHandlerCheckers.get(i);
+<<<<<<< HEAD
             if (!hc.isCompletedLocked()) {
+=======
+            if (hc.isOverdueLocked()) {
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 checkers.add(hc);
             }
         }
@@ -299,6 +398,7 @@ public class Watchdog extends Thread {
             final String subject;
             final boolean allowRestart;
             synchronized (this) {
+<<<<<<< HEAD
                 long timeout = TIME_TO_WAIT;
                 if (!waitedHalf) {
                     // If we are not at the half-point of waiting, perform a
@@ -307,6 +407,14 @@ public class Watchdog extends Thread {
                         HandlerChecker hc = mHandlerCheckers.get(i);
                         hc.scheduleCheckLocked();
                     }
+=======
+                long timeout = CHECK_INTERVAL;
+                // Make sure we (re)spin the checkers that have become idle within
+                // this wait-and-check interval
+                for (int i=0; i<mHandlerCheckers.size(); i++) {
+                    HandlerChecker hc = mHandlerCheckers.get(i);
+                    hc.scheduleCheckLocked();
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 }
 
                 // NOTE: We use uptimeMillis() here because we do not want to increment the time we
@@ -320,6 +428,7 @@ public class Watchdog extends Thread {
                     } catch (InterruptedException e) {
                         Log.wtf(TAG, e);
                     }
+<<<<<<< HEAD
                     timeout = TIME_TO_WAIT - (SystemClock.uptimeMillis() - start);
                 }
 
@@ -340,6 +449,33 @@ public class Watchdog extends Thread {
                     continue;
                 }
 
+=======
+                    timeout = CHECK_INTERVAL - (SystemClock.uptimeMillis() - start);
+                }
+
+                final int waitState = evaluateCheckerCompletionLocked();
+                if (waitState == COMPLETED) {
+                    // The monitors have returned; reset
+                    waitedHalf = false;
+                    continue;
+                } else if (waitState == WAITING) {
+                    // still waiting but within their configured intervals; back off and recheck
+                    continue;
+                } else if (waitState == WAITED_HALF) {
+                    if (!waitedHalf) {
+                        // We've waited half the deadlock-detection interval.  Pull a stack
+                        // trace and wait another half.
+                        ArrayList<Integer> pids = new ArrayList<Integer>();
+                        pids.add(Process.myPid());
+                        ActivityManagerService.dumpStackTraces(true, pids, null, null,
+                                NATIVE_STACKS_OF_INTEREST);
+                        waitedHalf = true;
+                    }
+                    continue;
+                }
+
+                // something is overdue!
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 blockedCheckers = getBlockedCheckersLocked();
                 subject = describeCheckersLocked(blockedCheckers);
                 allowRestart = mAllowRestart;
@@ -377,6 +513,7 @@ public class Watchdog extends Thread {
                 Slog.e(TAG, e.getMessage());
             }
 
+<<<<<<< HEAD
             String tracesPath = SystemProperties.get("dalvik.vm.stack-trace-file", null);
             if (tracesPath != null && tracesPath.length() != 0) {
                 File traceRenameFile = new File(tracesPath);
@@ -392,6 +529,8 @@ public class Watchdog extends Thread {
 
             final File newFd = new File(tracesPath);
 
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             // Try to add the error to the dropbox, but assuming that the ActivityManager
             // itself may be deadlocked.  (which has happened, causing this statement to
             // deadlock and the watchdog as a whole to be ineffective)
@@ -399,7 +538,11 @@ public class Watchdog extends Thread {
                     public void run() {
                         mActivity.addErrorToDropBox(
                                 "watchdog", null, "system_server", null, null,
+<<<<<<< HEAD
                                 subject, null, newFd, null);
+=======
+                                subject, null, stack, null);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                     }
                 };
             dropboxThread.start();

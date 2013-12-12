@@ -1699,7 +1699,11 @@ bool InputDispatcher::isWindowReadyForMoreInputLocked(nsecs_t currentTime,
         // up with lots of events because the application is not responding.
         // This condition ensures that ANRs are detected reliably.
         if (!connection->waitQueue.isEmpty()
+<<<<<<< HEAD
                 && currentTime >= connection->waitQueue.head->eventEntry->eventTime
+=======
+                && currentTime >= connection->waitQueue.head->deliveryTime
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                         + STREAM_AHEAD_EVENT_TIMEOUT) {
             return false;
         }

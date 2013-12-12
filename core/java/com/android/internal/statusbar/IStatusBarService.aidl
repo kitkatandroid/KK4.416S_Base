@@ -52,10 +52,13 @@ interface IStatusBarService
     void preloadRecentApps();
     void cancelPreloadRecentApps();
     void setWindowState(int window, int state);
+<<<<<<< HEAD
     void setAutoRotate(boolean enabled);
     void toggleNotificationShade();
     void toggleQSShade();
     void toggleScreenshot();
     void toggleLastApp();
     void toggleKillApp();
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 }

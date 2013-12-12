@@ -15,11 +15,19 @@
  */
 package com.android.keyguard;
 
+<<<<<<< HEAD
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.UserHandle;
 import android.provider.Settings;
+=======
+import android.animation.Animator;
+import android.animation.Animator.AnimatorListener;
+import android.animation.AnimatorListenerAdapter;
+import android.os.Handler;
+import android.os.Looper;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import android.util.Log;
 import android.view.View;
 
@@ -49,6 +57,23 @@ public class KeyguardViewStateManager implements
 
     int mChallengeTop = 0;
 
+<<<<<<< HEAD
+=======
+    private final AnimatorListener mPauseListener = new AnimatorListenerAdapter() {
+        public void onAnimationEnd(Animator animation) {
+            mKeyguardSecurityContainer.onPause();
+        }
+    };
+
+    private final AnimatorListener mResumeListener = new AnimatorListenerAdapter() {
+        public void onAnimationEnd(Animator animation) {
+            if (((View)mKeyguardSecurityContainer).isShown()) {
+                mKeyguardSecurityContainer.onResume(0);
+            }
+        }
+    };
+
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     public KeyguardViewStateManager(KeyguardHostView hostView) {
         mKeyguardHostView = hostView;
     }
@@ -105,20 +130,34 @@ public class KeyguardViewStateManager implements
     }
 
     public void fadeOutSecurity(int duration) {
+<<<<<<< HEAD
         ((View) mKeyguardSecurityContainer).animate().alpha(0f).setDuration(duration).start();
     }
 
     public void fadeInSecurity(int duration) {
         ((View) mKeyguardSecurityContainer).animate().alpha(1f).setDuration(duration).start();
+=======
+        ((View) mKeyguardSecurityContainer).animate().alpha(0f).setDuration(duration)
+                .setListener(mPauseListener);
+    }
+
+    public void fadeInSecurity(int duration) {
+        ((View) mKeyguardSecurityContainer).animate().alpha(1f).setDuration(duration)
+                .setListener(mResumeListener);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     public void onPageBeginMoving() {
         if (mChallengeLayout.isChallengeOverlapping() &&
                 mChallengeLayout instanceof SlidingChallengeLayout) {
             SlidingChallengeLayout scl = (SlidingChallengeLayout) mChallengeLayout;
+<<<<<<< HEAD
             if (!mKeyguardWidgetPager.isWarping()) {
                 scl.fadeOutChallenge();
             }
+=======
+            scl.fadeOutChallenge();
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             mPageIndexOnPageBeginMoving = mKeyguardWidgetPager.getCurrentPage();
         }
         // We use mAppWidgetToShow to show a particular widget after you add it--
@@ -140,11 +179,20 @@ public class KeyguardViewStateManager implements
     public void onPageSwitching(View newPage, int newPageIndex) {
         if (mKeyguardWidgetPager != null && mChallengeLayout instanceof SlidingChallengeLayout) {
             boolean isCameraPage = newPage instanceof CameraWidgetFrame;
+<<<<<<< HEAD
             SlidingChallengeLayout scl = (SlidingChallengeLayout) mChallengeLayout;
             scl.setChallengeInteractive(!isCameraPage);
             if (isCameraPage) {
                 scl.fadeOutChallenge();
             }
+=======
+            if (isCameraPage) {
+                CameraWidgetFrame camera = (CameraWidgetFrame) newPage;
+                camera.setUseFastTransition(mKeyguardWidgetPager.isWarping());
+            }
+            SlidingChallengeLayout scl = (SlidingChallengeLayout) mChallengeLayout;
+            scl.setChallengeInteractive(!isCameraPage);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             final int currentFlags = mKeyguardWidgetPager.getSystemUiVisibility();
             final int newFlags = isCameraPage ? (currentFlags | View.STATUS_BAR_DISABLE_SEARCH)
                     : (currentFlags & ~View.STATUS_BAR_DISABLE_SEARCH);
@@ -181,7 +229,11 @@ public class KeyguardViewStateManager implements
             boolean challengeOverlapping = mChallengeLayout.isChallengeOverlapping();
             if (challengeOverlapping && !newCurPage.isSmall()
                     && mPageListeningToSlider != newPageIndex) {
+<<<<<<< HEAD
                 newCurPage.shrinkWidget();
+=======
+                newCurPage.shrinkWidget(true);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             }
         }
 
@@ -322,18 +374,26 @@ public class KeyguardViewStateManager implements
         }
     };
 
+<<<<<<< HEAD
     public void showUsabilityHints(Context context) {
+=======
+    public void showUsabilityHints() {
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         mMainQueue.postDelayed( new Runnable() {
             @Override
             public void run() {
                 mKeyguardSecurityContainer.showUsabilityHint();
             }
         } , SCREEN_ON_RING_HINT_DELAY);
+<<<<<<< HEAD
         if (Settings.System.getIntForUser(
                 context.getContentResolver(),
                 Settings.System.LOCKSCREEN_DISABLE_HINTS,
                 SHOW_INITIAL_PAGE_HINTS ? 0 : 1,
                 UserHandle.USER_CURRENT) == 0) {
+=======
+        if (SHOW_INITIAL_PAGE_HINTS) {
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             mKeyguardWidgetPager.showInitialPageHints();
         }
         if (mHideHintsRunnable != null) {

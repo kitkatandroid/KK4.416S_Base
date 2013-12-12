@@ -62,6 +62,7 @@ final class DisplayPowerRequest {
     // visible to the user.
     public boolean blockScreenOn;
 
+<<<<<<< HEAD
     // Slim settings - override config for ElectronBeam mode
     public int electronBeamMode;
 
@@ -70,6 +71,8 @@ final class DisplayPowerRequest {
     // potentially higher CPU usage and flicker.
     public float responsitivityFactor;
 
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     public DisplayPowerRequest() {
         screenState = SCREEN_STATE_BRIGHT;
         useProximitySensor = false;
@@ -77,8 +80,11 @@ final class DisplayPowerRequest {
         screenAutoBrightnessAdjustment = 0.0f;
         useAutoBrightness = false;
         blockScreenOn = false;
+<<<<<<< HEAD
         electronBeamMode = 0;
         responsitivityFactor = 1.0f;
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     public DisplayPowerRequest(DisplayPowerRequest other) {
@@ -92,8 +98,11 @@ final class DisplayPowerRequest {
         screenAutoBrightnessAdjustment = other.screenAutoBrightnessAdjustment;
         useAutoBrightness = other.useAutoBrightness;
         blockScreenOn = other.blockScreenOn;
+<<<<<<< HEAD
         electronBeamMode = other.electronBeamMode;
         responsitivityFactor = other.responsitivityFactor;
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     @Override
@@ -109,9 +118,13 @@ final class DisplayPowerRequest {
                 && screenBrightness == other.screenBrightness
                 && screenAutoBrightnessAdjustment == other.screenAutoBrightnessAdjustment
                 && useAutoBrightness == other.useAutoBrightness
+<<<<<<< HEAD
                 && blockScreenOn == other.blockScreenOn
                 && electronBeamMode == other.electronBeamMode
                 && Math.abs(responsitivityFactor - other.responsitivityFactor) < 1E-6;
+=======
+                && blockScreenOn == other.blockScreenOn;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     @Override
@@ -126,8 +139,12 @@ final class DisplayPowerRequest {
                 + ", screenBrightness=" + screenBrightness
                 + ", screenAutoBrightnessAdjustment=" + screenAutoBrightnessAdjustment
                 + ", useAutoBrightness=" + useAutoBrightness
+<<<<<<< HEAD
                 + ", blockScreenOn=" + blockScreenOn
                 + ", electronBeamMode=" + electronBeamMode
                 + ", responsitivityFactor=" + responsitivityFactor;
+=======
+                + ", blockScreenOn=" + blockScreenOn;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 }

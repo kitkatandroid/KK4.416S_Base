@@ -21,7 +21,16 @@ import android.os.Parcelable;
 import android.text.TextUtils;
 
 /**
+<<<<<<< HEAD
  * This class represents the description of a printer.
+=======
+ * This class represents the description of a printer. Instances of
+ * this class are created by print services to report to the system
+ * the printers they manage. The information of this class has two
+ * major components, printer properties such as name, id, status,
+ * description and printer capabilities which describe the various
+ * print modes a printer supports such as media sizes, margins, etc.
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
  */
 public final class PrinterInfo implements Parcelable {
 
@@ -96,6 +105,13 @@ public final class PrinterInfo implements Parcelable {
      * Gets the printer status.
      *
      * @return The status.
+<<<<<<< HEAD
+=======
+     *
+     * @see #STATUS_BUSY
+     * @see #STATUS_IDLE
+     * @see #STATUS_UNAVAILABLE
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
      */
     public int getStatus() {
         return mStatus;
@@ -216,6 +232,11 @@ public final class PrinterInfo implements Parcelable {
          * @param printerId The printer id. Cannot be null.
          * @param name The printer name. Cannot be empty.
          * @param status The printer status. Must be a valid status.
+<<<<<<< HEAD
+=======
+         * @throws IllegalArgumentException If the printer id is null, or the
+         * printer name is empty or the status is not a valid one.
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
          */
         public Builder(PrinterId printerId, String name, int status) {
             if (printerId == null) {
@@ -259,7 +280,12 @@ public final class PrinterInfo implements Parcelable {
         }
 
         /**
+<<<<<<< HEAD
          * Sets the printer name.
+=======
+         * Sets the <strong>localized</strong> printer name which
+         * is shown to the user
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
          *
          * @param name The name.
          * @return This builder.
@@ -270,7 +296,12 @@ public final class PrinterInfo implements Parcelable {
         }
 
         /**
+<<<<<<< HEAD
          * Sets the printer description.
+=======
+         * Sets the <strong>localized</strong> printer description
+         * which is shown to the user
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
          *
          * @param description The description.
          * @return This builder.
@@ -292,12 +323,20 @@ public final class PrinterInfo implements Parcelable {
         }
 
         /**
+<<<<<<< HEAD
          * Crates a new {@link PrinterInfo}.
+=======
+         * Creates a new {@link PrinterInfo}.
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
          *
          * @return A new {@link PrinterInfo}.
          */
         public PrinterInfo build() {
+<<<<<<< HEAD
             return new PrinterInfo(mPrototype);
+=======
+            return mPrototype;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
 
         private boolean isValidStatus(int status) {

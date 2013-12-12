@@ -99,6 +99,14 @@ public abstract class KeyguardActivityLauncher {
 
     public void launchCamera(Handler worker, Runnable onSecureCameraStarted) {
         LockPatternUtils lockPatternUtils = getLockPatternUtils();
+<<<<<<< HEAD
+=======
+
+        // Workaround to avoid camera release/acquisition race when resuming face unlock
+        // after showing lockscreen camera (bug 11063890).
+        KeyguardUpdateMonitor.getInstance(getContext()).setAlternateUnlockEnabled(false);
+
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         if (lockPatternUtils.isSecure()) {
             // Launch the secure version of the camera
             if (wouldLaunchResolverActivity(SECURE_CAMERA_INTENT)) {
@@ -173,7 +181,11 @@ public abstract class KeyguardActivityLauncher {
         boolean isSecure = lockPatternUtils.isSecure();
         if (!isSecure || showsWhileLocked) {
             if (!isSecure) {
+<<<<<<< HEAD
                 getCallback().dismiss(false);
+=======
+                dismissKeyguardOnNextActivity();
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             }
             try {
                 if (DEBUG) Log.d(TAG, String.format("Starting activity for intent %s at %s",

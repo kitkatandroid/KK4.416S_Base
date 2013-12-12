@@ -26,6 +26,10 @@ import java.util.List;
 
 import android.os.Handler;
 import android.os.Looper;
+<<<<<<< HEAD
+=======
+import android.os.SystemProperties;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import android.util.ArrayMap;
 import com.android.internal.app.ProcessStats;
 import com.android.internal.os.BatteryStatsImpl;
@@ -76,7 +80,11 @@ public final class ActiveServices {
 
     // How long a service needs to be running until restarting its process
     // is no longer considered to be a relaunch of the service.
+<<<<<<< HEAD
     static final int SERVICE_RESTART_DURATION = 5*1000;
+=======
+    static final int SERVICE_RESTART_DURATION = 1*1000;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
     // How long a service needs to be running until it will start back at
     // SERVICE_RESTART_DURATION after being killed.
@@ -239,7 +247,16 @@ public final class ActiveServices {
 
     public ActiveServices(ActivityManagerService service) {
         mAm = service;
+<<<<<<< HEAD
         mMaxStartingBackground = ActivityManager.isLowRamDeviceStatic() ? 1 : 3;
+=======
+        int maxBg = 0;
+        try {
+            maxBg = Integer.parseInt(SystemProperties.get("ro.config.max_starting_bg", "0"));
+        } catch(RuntimeException e) {
+        }
+        mMaxStartingBackground = maxBg > 0 ? maxBg : ActivityManager.isLowRamDeviceStatic() ? 1 : 3;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     ServiceRecord getServiceByName(ComponentName name, int callingUser) {
@@ -301,7 +318,11 @@ public final class ActiveServices {
         ServiceRecord r = res.record;
         NeededUriGrants neededGrants = mAm.checkGrantUriPermissionFromIntentLocked(
                 callingUid, r.packageName, service, service.getFlags(), null);
+<<<<<<< HEAD
         if (unscheduleServiceRestartLocked(r)) {
+=======
+        if (unscheduleServiceRestartLocked(r, callingUid, false)) {
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             if (DEBUG_SERVICE) Slog.v(TAG, "START SERVICE WHILE RESTART PENDING: " + r);
         }
         r.lastActivity = SystemClock.uptimeMillis();
@@ -564,7 +585,11 @@ public final class ActiveServices {
                     if (r.isForeground) {
                         r.isForeground = false;
                         if (r.app != null) {
+<<<<<<< HEAD
                             mAm.updateLruProcessLocked(r.app, false, false);
+=======
+                            mAm.updateLruProcessLocked(r.app, false, null);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                             updateServiceForegroundLocked(r.app, true);
                         }
                     }
@@ -597,6 +622,45 @@ public final class ActiveServices {
         }
     }
 
+<<<<<<< HEAD
+=======
+    private boolean updateServiceClientActivitiesLocked(ProcessRecord proc,
+            ConnectionRecord modCr) {
+        if (modCr != null && modCr.binding.client != null) {
+            if (modCr.binding.client.activities.size() <= 0) {
+                // This connection is from a client without activities, so adding
+                // and removing is not interesting.
+                return false;
+            }
+        }
+
+        boolean anyClientActivities = false;
+        for (int i=proc.services.size()-1; i>=0 && !anyClientActivities; i--) {
+            ServiceRecord sr = proc.services.valueAt(i);
+            for (int conni=sr.connections.size()-1; conni>=0 && !anyClientActivities; conni--) {
+                ArrayList<ConnectionRecord> clist = sr.connections.valueAt(conni);
+                for (int cri=clist.size()-1; cri>=0; cri--) {
+                    ConnectionRecord cr = clist.get(cri);
+                    if (cr.binding.client == null || cr.binding.client == proc) {
+                        // Binding to ourself is not interesting.
+                        continue;
+                    }
+                    if (cr.binding.client.activities.size() > 0) {
+                        anyClientActivities = true;
+                        break;
+                    }
+                }
+            }
+        }
+        if (anyClientActivities != proc.hasClientActivities) {
+            proc.hasClientActivities = anyClientActivities;
+            mAm.updateLruProcessLocked(proc, anyClientActivities, null);
+            return true;
+        }
+        return false;
+    }
+
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     int bindServiceLocked(IApplicationThread caller, IBinder token,
             Intent service, String resolvedType,
             IServiceConnection connection, int flags, int userId) {
@@ -659,7 +723,11 @@ public final class ActiveServices {
         final long origId = Binder.clearCallingIdentity();
 
         try {
+<<<<<<< HEAD
             if (unscheduleServiceRestartLocked(s)) {
+=======
+            if (unscheduleServiceRestartLocked(s, callerApp.info.uid, false)) {
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 if (DEBUG_SERVICE) Slog.v(TAG, "BIND SERVICE WHILE RESTART PENDING: "
                         + s);
             }
@@ -698,6 +766,12 @@ public final class ActiveServices {
             if ((c.flags&Context.BIND_ABOVE_CLIENT) != 0) {
                 b.client.hasAboveClient = true;
             }
+<<<<<<< HEAD
+=======
+            if (s.app != null) {
+                updateServiceClientActivitiesLocked(s.app, c);
+            }
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             clist = mServiceConnections.get(binder);
             if (clist == null) {
                 clist = new ArrayList<ConnectionRecord>();
@@ -714,6 +788,10 @@ public final class ActiveServices {
 
             if (s.app != null) {
                 // This could have made the service more important.
+<<<<<<< HEAD
+=======
+                mAm.updateLruProcessLocked(s.app, s.app.hasClientActivities, b.client);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 mAm.updateOomAdjLocked(s.app);
             }
 
@@ -956,14 +1034,21 @@ public final class ActiveServices {
                     smap.mServicesByIntent.put(filter, r);
 
                     // Make sure this component isn't in the pending list.
+<<<<<<< HEAD
                     int N = mPendingServices.size();
                     for (int i=0; i<N; i++) {
+=======
+                    for (int i=mPendingServices.size()-1; i>=0; i--) {
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                         ServiceRecord pr = mPendingServices.get(i);
                         if (pr.serviceInfo.applicationInfo.uid == sInfo.applicationInfo.uid
                                 && pr.name.equals(name)) {
                             mPendingServices.remove(i);
+<<<<<<< HEAD
                             i--;
                             N--;
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                         }
                     }
                 }
@@ -1055,6 +1140,17 @@ public final class ActiveServices {
             boolean allowCancel) {
         boolean canceled = false;
 
+<<<<<<< HEAD
+=======
+        ServiceMap smap = getServiceMap(r.userId);
+        if (smap.mServicesByName.get(r.name) != r) {
+            ServiceRecord cur = smap.mServicesByName.get(r.name);
+            Slog.wtf(TAG, "Attempting to schedule restart of " + r
+                    + " when found in map: " + cur);
+            return false;
+        }
+
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         final long now = SystemClock.uptimeMillis();
 
         if ((r.serviceInfo.applicationInfo.flags
@@ -1101,6 +1197,7 @@ public final class ActiveServices {
                     r.restartCount = 1;
                     r.restartDelay = minDuration;
                 } else {
+<<<<<<< HEAD
                     if ((r.serviceInfo.applicationInfo.flags
                             &ApplicationInfo.FLAG_PERSISTENT) != 0) {
                         // Services in peristent processes will restart much more
@@ -1111,6 +1208,11 @@ public final class ActiveServices {
                         if (r.restartDelay < minDuration) {
                             r.restartDelay = minDuration;
                         }
+=======
+                    r.restartDelay *= SERVICE_RESTART_DURATION_FACTOR;
+                    if (r.restartDelay < minDuration) {
+                        r.restartDelay = minDuration;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                     }
                 }
             }
@@ -1137,7 +1239,11 @@ public final class ActiveServices {
             } while (repeat);
 
         } else {
+<<<<<<< HEAD
             // Persistent processes are immediately restrted, so there is no
+=======
+            // Persistent processes are immediately restarted, so there is no
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             // reason to hold of on restarting their services.
             r.totalRestartCount++;
             r.restartCount = 0;
@@ -1148,6 +1254,10 @@ public final class ActiveServices {
         if (!mRestartingServices.contains(r)) {
             r.createdFromFg = false;
             mRestartingServices.add(r);
+<<<<<<< HEAD
+=======
+            r.makeRestarting(mAm.mProcessStats.getMemFactorLocked(), now);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
 
         r.cancelNotification();
@@ -1170,16 +1280,56 @@ public final class ActiveServices {
         bringUpServiceLocked(r, r.intent.getIntent().getFlags(), r.createdFromFg, true);
     }
 
+<<<<<<< HEAD
     private final boolean unscheduleServiceRestartLocked(ServiceRecord r) {
         if (r.restartDelay == 0) {
             return false;
         }
         r.resetRestartCounter();
         mRestartingServices.remove(r);
+=======
+    private final boolean unscheduleServiceRestartLocked(ServiceRecord r, int callingUid,
+            boolean force) {
+        if (!force && r.restartDelay == 0) {
+            return false;
+        }
+        // Remove from the restarting list; if the service is currently on the
+        // restarting list, or the call is coming from another app, then this
+        // service has become of much more interest so we reset the restart interval.
+        boolean removed = mRestartingServices.remove(r);
+        if (removed || callingUid != r.appInfo.uid) {
+            r.resetRestartCounter();
+        }
+        if (removed) {
+            clearRestartingIfNeededLocked(r);
+        }
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         mAm.mHandler.removeCallbacks(r.restarter);
         return true;
     }
 
+<<<<<<< HEAD
+=======
+    private void clearRestartingIfNeededLocked(ServiceRecord r) {
+        if (r.restartTracker != null) {
+            // If this is the last restarting record with this tracker, then clear
+            // the tracker's restarting state.
+            boolean stillTracking = false;
+            for (int i=mRestartingServices.size()-1; i>=0; i--) {
+                if (mRestartingServices.get(i).restartTracker == r.restartTracker) {
+                    stillTracking = true;
+                    break;
+                }
+            }
+            if (!stillTracking) {
+                r.restartTracker.setRestarting(false, mAm.mProcessStats.getMemFactorLocked(),
+                        SystemClock.uptimeMillis());
+                r.restartTracker = null;
+            }
+        }
+    }
+
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     private final String bringUpServiceLocked(ServiceRecord r,
             int intentFlags, boolean execInFg, boolean whileRestarting) {
         //Slog.i(TAG, "Bring up service:");
@@ -1199,7 +1349,13 @@ public final class ActiveServices {
 
         // We are now bringing the service up, so no longer in the
         // restarting state.
+<<<<<<< HEAD
         mRestartingServices.remove(r);
+=======
+        if (mRestartingServices.remove(r)) {
+            clearRestartingIfNeededLocked(r);
+        }
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
         // Make sure this service is no longer considered delayed, we are starting it now.
         if (r.delayed) {
@@ -1316,7 +1472,12 @@ public final class ActiveServices {
 
         app.services.add(r);
         bumpServiceExecutingLocked(r, execInFg, "create");
+<<<<<<< HEAD
         mAm.updateLruProcessLocked(app, true, false);
+=======
+        mAm.updateLruProcessLocked(app, false, null);
+        mAm.updateOomAdjLocked();
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
         boolean created = false;
         try {
@@ -1338,6 +1499,10 @@ public final class ActiveServices {
         } finally {
             if (!created) {
                 app.services.remove(r);
+<<<<<<< HEAD
+=======
+                r.app = null;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 scheduleServiceRestartLocked(r, false);
             }
         }
@@ -1508,6 +1673,7 @@ public final class ActiveServices {
         smap.mServicesByName.remove(r.name);
         smap.mServicesByIntent.remove(r.intent);
         r.totalRestartCount = 0;
+<<<<<<< HEAD
         unscheduleServiceRestartLocked(r);
 
         // Also make sure it is not on the pending list.
@@ -1518,6 +1684,15 @@ public final class ActiveServices {
                 if (DEBUG_SERVICE) Slog.v(TAG, "Removed pending: " + r);
                 i--;
                 N--;
+=======
+        unscheduleServiceRestartLocked(r, 0, true);
+
+        // Also make sure it is not on the pending list.
+        for (int i=mPendingServices.size()-1; i>=0; i--) {
+            if (mPendingServices.get(i) == r) {
+                mPendingServices.remove(i);
+                if (DEBUG_SERVICE) Slog.v(TAG, "Removed pending: " + r);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             }
         }
 
@@ -1536,6 +1711,10 @@ public final class ActiveServices {
             }
             r.app.services.remove(r);
             if (r.app.thread != null) {
+<<<<<<< HEAD
+=======
+                updateServiceForegroundLocked(r.app, false);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 try {
                     bumpServiceExecutingLocked(r, false, "destroy");
                     mDestroyingServices.add(r);
@@ -1546,7 +1725,10 @@ public final class ActiveServices {
                             + r.shortName, e);
                     serviceProcessGoneLocked(r);
                 }
+<<<<<<< HEAD
                 updateServiceForegroundLocked(r.app, false);
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             } else {
                 if (DEBUG_SERVICE) Slog.v(
                     TAG, "Removed service that has no process: " + r);
@@ -1601,6 +1783,12 @@ public final class ActiveServices {
             if ((c.flags&Context.BIND_ABOVE_CLIENT) != 0) {
                 b.client.updateHasAboveClientLocked();
             }
+<<<<<<< HEAD
+=======
+            if (s.app != null) {
+                updateServiceClientActivitiesLocked(s.app, c);
+            }
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
         clist = mServiceConnections.get(binder);
         if (clist != null) {
@@ -1621,6 +1809,16 @@ public final class ActiveServices {
                     && b.intent.hasBound) {
                 try {
                     bumpServiceExecutingLocked(s, false, "unbind");
+<<<<<<< HEAD
+=======
+                    if (b.client != s.app && (c.flags&Context.BIND_WAIVE_PRIORITY) == 0
+                            && s.app.setProcState <= ActivityManager.PROCESS_STATE_RECEIVER) {
+                        // If this service's process is not already in the cached list,
+                        // then update it in the LRU list here because this may be causing
+                        // it to go down there and we want it to start out near the top.
+                        mAm.updateLruProcessLocked(s.app, false, null);
+                    }
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                     mAm.updateOomAdjLocked(s.app);
                     b.intent.hasBound = false;
                     // Assume the client doesn't want to know about a rebind;
@@ -1714,6 +1912,10 @@ public final class ActiveServices {
             long now = SystemClock.uptimeMillis();
             r.tracker.setExecuting(false, memFactor, now);
             r.tracker.setBound(false, memFactor, now);
+<<<<<<< HEAD
+=======
+            r.tracker.setStarted(false, memFactor, now);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
         serviceDoneExecutingLocked(r, true, true);
     }
@@ -1761,6 +1963,15 @@ public final class ActiveServices {
                     r.tracker = null;
                 }
             }
+<<<<<<< HEAD
+=======
+            if (finishing) {
+                if (r.app != null && !r.app.persistent) {
+                    r.app.services.remove(r);
+                }
+                r.app = null;
+            }
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
     }
 
@@ -1839,6 +2050,12 @@ public final class ActiveServices {
                 Slog.i(TAG, "  Force stopping service " + service);
                 if (service.app != null) {
                     service.app.removed = true;
+<<<<<<< HEAD
+=======
+                    if (!service.app.persistent) {
+                        service.app.services.remove(service);
+                    }
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 }
                 service.app = null;
                 service.isolatedProc = null;
@@ -1905,8 +2122,12 @@ public final class ActiveServices {
         }
     }
 
+<<<<<<< HEAD
     final void killServicesLocked(ProcessRecord app,
             boolean allowRestart) {
+=======
+    final void killServicesLocked(ProcessRecord app, boolean allowRestart) {
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         // Report disconnected services.
         if (false) {
             // XXX we are letting the client link to the service for
@@ -1935,6 +2156,7 @@ public final class ActiveServices {
             }
         }
 
+<<<<<<< HEAD
         // Clean up any connections this application has to other services.
         for (int i=app.connections.size()-1; i>=0; i--) {
             ConnectionRecord r = app.connections.valueAt(i);
@@ -1945,10 +2167,20 @@ public final class ActiveServices {
         for (int i=app.services.size()-1; i>=0; i--) {
             // Any services running in the application need to be placed
             // back in the pending list.
+=======
+        // First clear app state from services.
+        for (int i=app.services.size()-1; i>=0; i--) {
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             ServiceRecord sr = app.services.valueAt(i);
             synchronized (sr.stats.getBatteryStats()) {
                 sr.stats.stopLaunchedLocked();
             }
+<<<<<<< HEAD
+=======
+            if (sr.app != null && !sr.app.persistent) {
+                sr.app.services.remove(sr);
+            }
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             sr.app = null;
             sr.isolatedProc = null;
             sr.executeNesting = 0;
@@ -1965,8 +2197,38 @@ public final class ActiveServices {
                 b.binder = null;
                 b.requested = b.received = b.hasBound = false;
             }
+<<<<<<< HEAD
 
             if (sr.crashCount >= 2 && (sr.serviceInfo.applicationInfo.flags
+=======
+        }
+
+        // Clean up any connections this application has to other services.
+        for (int i=app.connections.size()-1; i>=0; i--) {
+            ConnectionRecord r = app.connections.valueAt(i);
+            removeConnectionLocked(r, app, null);
+        }
+        app.connections.clear();
+
+        ServiceMap smap = getServiceMap(app.userId);
+
+        // Now do remaining service cleanup.
+        for (int i=app.services.size()-1; i>=0; i--) {
+            ServiceRecord sr = app.services.valueAt(i);
+            // Sanity check: if the service listed for the app is not one
+            // we actually are maintaining, drop it.
+            if (smap.mServicesByName.get(sr.name) != sr) {
+                ServiceRecord cur = smap.mServicesByName.get(sr.name);
+                Slog.wtf(TAG, "Service " + sr + " in process " + app
+                        + " not same as in map: " + cur);
+                app.services.removeAt(i);
+                continue;
+            }
+
+            // Any services running in the application may need to be placed
+            // back in the pending list.
+            if (allowRestart && sr.crashCount >= 2 && (sr.serviceInfo.applicationInfo.flags
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                     &ApplicationInfo.FLAG_PERSISTENT) == 0) {
                 Slog.w(TAG, "Service crashed " + sr.crashCount
                         + " times, stopping: " + sr);
@@ -1999,6 +2261,26 @@ public final class ActiveServices {
 
         if (!allowRestart) {
             app.services.clear();
+<<<<<<< HEAD
+=======
+
+            // Make sure there are no more restarting services for this process.
+            for (int i=mRestartingServices.size()-1; i>=0; i--) {
+                ServiceRecord r = mRestartingServices.get(i);
+                if (r.processName.equals(app.processName) &&
+                        r.serviceInfo.applicationInfo.uid == app.info.uid) {
+                    mRestartingServices.remove(i);
+                    clearRestartingIfNeededLocked(r);
+                }
+            }
+            for (int i=mPendingServices.size()-1; i>=0; i--) {
+                ServiceRecord r = mPendingServices.get(i);
+                if (r.processName.equals(app.processName) &&
+                        r.serviceInfo.applicationInfo.uid == app.info.uid) {
+                    mPendingServices.remove(i);
+                }
+            }
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
 
         // Make sure we have no more records on the stopping list.

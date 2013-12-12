@@ -684,6 +684,7 @@ public class TelephonyManager {
         }
     }
 
+<<<<<<< HEAD
     /**
      * {@hide}
      */
@@ -695,6 +696,8 @@ public class TelephonyManager {
         //}
     //}
 
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     /** Unknown network class. {@hide} */
     public static final int NETWORK_CLASS_UNKNOWN = 0;
     /** Class of broadly defined "2G" networks. {@hide} */

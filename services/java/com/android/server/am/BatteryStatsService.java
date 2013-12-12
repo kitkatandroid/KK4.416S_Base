@@ -419,6 +419,23 @@ public final class BatteryStatsService extends IBatteryStats.Stub {
         }
     }
 
+<<<<<<< HEAD
+=======
+    public void noteWifiBatchedScanStartedFromSource(WorkSource ws, int csph) {
+        enforceCallingPermission();
+        synchronized (mStats) {
+            mStats.noteWifiBatchedScanStartedFromSourceLocked(ws, csph);
+        }
+    }
+
+    public void noteWifiBatchedScanStoppedFromSource(WorkSource ws) {
+        enforceCallingPermission();
+        synchronized (mStats) {
+            mStats.noteWifiBatchedScanStoppedFromSourceLocked(ws);
+        }
+    }
+
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     public void noteWifiMulticastEnabledFromSource(WorkSource ws) {
         enforceCallingPermission();
         synchronized (mStats) {

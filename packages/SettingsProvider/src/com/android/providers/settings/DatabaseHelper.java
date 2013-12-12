@@ -1564,6 +1564,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (upgradeVersion != currentVersion) {
             Log.w(TAG, "Got stuck trying to upgrade from version " + upgradeVersion
                     + ", must wipe the settings provider");
+<<<<<<< HEAD
             wipeDB(db, oldVersion, upgradeVersion, currentVersion);
         }
     }
@@ -1598,6 +1599,30 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         wipeDB(db, oldVersion, newVersion, oldVersion);
     }
 
+=======
+            db.execSQL("DROP TABLE IF EXISTS global");
+            db.execSQL("DROP TABLE IF EXISTS globalIndex1");
+            db.execSQL("DROP TABLE IF EXISTS system");
+            db.execSQL("DROP INDEX IF EXISTS systemIndex1");
+            db.execSQL("DROP TABLE IF EXISTS secure");
+            db.execSQL("DROP INDEX IF EXISTS secureIndex1");
+            db.execSQL("DROP TABLE IF EXISTS gservices");
+            db.execSQL("DROP INDEX IF EXISTS gservicesIndex1");
+            db.execSQL("DROP TABLE IF EXISTS bluetooth_devices");
+            db.execSQL("DROP TABLE IF EXISTS bookmarks");
+            db.execSQL("DROP INDEX IF EXISTS bookmarksIndex1");
+            db.execSQL("DROP INDEX IF EXISTS bookmarksIndex2");
+            db.execSQL("DROP TABLE IF EXISTS favorites");
+            onCreate(db);
+
+            // Added for diagnosing settings.db wipes after the fact
+            String wipeReason = oldVersion + "/" + upgradeVersion + "/" + currentVersion;
+            db.execSQL("INSERT INTO secure(name,value) values('" +
+                    "wiped_db_reason" + "','" + wipeReason + "');");
+        }
+    }
+
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     private String[] hashsetToStringArray(HashSet<String> set) {
         String[] array = new String[set.size()];
         return set.toArray(array);
@@ -1686,7 +1711,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 try {
                     LockPatternUtils lpu = new LockPatternUtils(mContext);
                     List<LockPatternView.Cell> cellPattern =
+<<<<<<< HEAD
                             lpu.stringToPattern(lockPattern);
+=======
+                            LockPatternUtils.stringToPattern(lockPattern);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                     lpu.saveLockPattern(cellPattern);
                 } catch (IllegalArgumentException e) {
                     // Don't want corrupted lock pattern to hang the reboot process
@@ -2256,6 +2285,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     R.string.def_car_undock_sound);
             loadStringSetting(stmt, Settings.Global.WIRELESS_CHARGING_STARTED_SOUND,
                     R.string.def_wireless_charging_started_sound);
+<<<<<<< HEAD
             loadIntegerSetting(stmt, Settings.Global.DOCK_AUDIO_MEDIA_ENABLED,
                     R.integer.def_dock_audio_media_enabled);
             loadBooleanSetting(stmt, Settings.Global.POWER_NOTIFICATIONS_ENABLED,
@@ -2264,6 +2294,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     R.bool.def_power_notifications_vibrate);
             loadStringSetting(stmt, Settings.Global.POWER_NOTIFICATIONS_RINGTONE,
                     R.string.def_power_notifications_ringtone);
+=======
+
+            loadIntegerSetting(stmt, Settings.Global.DOCK_AUDIO_MEDIA_ENABLED,
+                    R.integer.def_dock_audio_media_enabled);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
             loadSetting(stmt, Settings.Global.SET_INSTALL_LOCATION, 0);
             loadSetting(stmt, Settings.Global.DEFAULT_INSTALL_LOCATION,

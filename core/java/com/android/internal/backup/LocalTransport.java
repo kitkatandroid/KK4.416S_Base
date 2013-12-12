@@ -19,6 +19,10 @@ package com.android.internal.backup;
 import android.app.backup.BackupDataInput;
 import android.app.backup.BackupDataOutput;
 import android.app.backup.RestoreSet;
+<<<<<<< HEAD
+=======
+import android.content.ComponentName;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -71,6 +75,13 @@ public class LocalTransport extends IBackupTransport.Stub {
         }
     }
 
+<<<<<<< HEAD
+=======
+    public String name() {
+        return new ComponentName(mContext, this.getClass()).flattenToShortString();
+    }
+
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     public Intent configurationIntent() {
         // The local transport is not user-configurable
         return null;

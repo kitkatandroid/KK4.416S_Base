@@ -30,6 +30,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+<<<<<<< HEAD
+=======
+import android.widget.ProgressBar;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
 import com.android.documentsui.model.DocumentInfo;
 
@@ -42,6 +46,10 @@ public class SaveFragment extends Fragment {
     private DocumentInfo mReplaceTarget;
     private EditText mDisplayName;
     private Button mSave;
+<<<<<<< HEAD
+=======
+    private ProgressBar mProgress;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     private boolean mIgnoreNextEdit;
 
     private static final String EXTRA_MIME_TYPE = "mime_type";
@@ -83,6 +91,11 @@ public class SaveFragment extends Fragment {
         mSave.setOnClickListener(mSaveListener);
         mSave.setEnabled(false);
 
+<<<<<<< HEAD
+=======
+        mProgress = (ProgressBar) view.findViewById(android.R.id.progress);
+
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         return view;
     }
 
@@ -92,7 +105,10 @@ public class SaveFragment extends Fragment {
             if (mIgnoreNextEdit) {
                 mIgnoreNextEdit = false;
             } else {
+<<<<<<< HEAD
                 Log.d(TAG, "onTextChanged!");
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 mReplaceTarget = null;
             }
         }
@@ -140,4 +156,12 @@ public class SaveFragment extends Fragment {
     public void setSaveEnabled(boolean enabled) {
         mSave.setEnabled(enabled);
     }
+<<<<<<< HEAD
+=======
+
+    public void setPending(boolean pending) {
+        mSave.setVisibility(pending ? View.INVISIBLE : View.VISIBLE);
+        mProgress.setVisibility(pending ? View.VISIBLE : View.GONE);
+    }
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 }

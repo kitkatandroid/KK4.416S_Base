@@ -84,7 +84,11 @@ public final class BatteryStatsImpl extends BatteryStats {
     private static final int MAGIC = 0xBA757475; // 'BATSTATS'
 
     // Current on-disk Parcel version
+<<<<<<< HEAD
     private static final int VERSION = 66 + (USE_OLD_HISTORY ? 1000 : 0);
+=======
+    private static final int VERSION = 67 + (USE_OLD_HISTORY ? 1000 : 0);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
     // Maximum number of items we will record in the history.
     private static final int MAX_HISTORY_ITEMS = 2000;
@@ -154,6 +158,11 @@ public final class BatteryStatsImpl extends BatteryStats {
     final ArrayList<StopwatchTimer> mFullWifiLockTimers = new ArrayList<StopwatchTimer>();
     final ArrayList<StopwatchTimer> mWifiMulticastTimers = new ArrayList<StopwatchTimer>();
     final ArrayList<StopwatchTimer> mWifiScanTimers = new ArrayList<StopwatchTimer>();
+<<<<<<< HEAD
+=======
+    final SparseArray<ArrayList<StopwatchTimer>> mWifiBatchedScanTimers =
+            new SparseArray<ArrayList<StopwatchTimer>>();
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
     // Last partial timers we use for distributing CPU usage.
     final ArrayList<StopwatchTimer> mLastPartialTimers = new ArrayList<StopwatchTimer>();
@@ -2172,6 +2181,12 @@ public final class BatteryStatsImpl extends BatteryStats {
                 case TelephonyManager.NETWORK_TYPE_EHRPD:
                     bin = DATA_CONNECTION_EHRPD;
                     break;
+<<<<<<< HEAD
+=======
+                case TelephonyManager.NETWORK_TYPE_HSPAP:
+                    bin = DATA_CONNECTION_HSPAP;
+                    break;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 default:
                     bin = DATA_CONNECTION_OTHER;
                     break;
@@ -2401,6 +2416,17 @@ public final class BatteryStatsImpl extends BatteryStats {
         getUidStatsLocked(uid).noteWifiScanStoppedLocked();
     }
 
+<<<<<<< HEAD
+=======
+    public void noteWifiBatchedScanStartedLocked(int uid, int csph) {
+        getUidStatsLocked(uid).noteWifiBatchedScanStartedLocked(csph);
+    }
+
+    public void noteWifiBatchedScanStoppedLocked(int uid) {
+        getUidStatsLocked(uid).noteWifiBatchedScanStoppedLocked();
+    }
+
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     int mWifiMulticastNesting = 0;
 
     public void noteWifiMulticastEnabledLocked(int uid) {
@@ -2453,6 +2479,23 @@ public final class BatteryStatsImpl extends BatteryStats {
         }
     }
 
+<<<<<<< HEAD
+=======
+    public void noteWifiBatchedScanStartedFromSourceLocked(WorkSource ws, int csph) {
+        int N = ws.size();
+        for (int i=0; i<N; i++) {
+            noteWifiBatchedScanStartedLocked(ws.get(i), csph);
+        }
+    }
+
+    public void noteWifiBatchedScanStoppedFromSourceLocked(WorkSource ws) {
+        int N = ws.size();
+        for (int i=0; i<N; i++) {
+            noteWifiBatchedScanStoppedLocked(ws.get(i));
+        }
+    }
+
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     public void noteWifiMulticastEnabledFromSourceLocked(WorkSource ws) {
         int N = ws.size();
         for (int i=0; i<N; i++) {
@@ -2576,6 +2619,13 @@ public final class BatteryStatsImpl extends BatteryStats {
         boolean mWifiScanStarted;
         StopwatchTimer mWifiScanTimer;
 
+<<<<<<< HEAD
+=======
+        private static final int NO_BATCHED_SCAN_STARTED = -1;
+        int mWifiBatchedScanBinStarted = NO_BATCHED_SCAN_STARTED;
+        StopwatchTimer[] mWifiBatchedScanTimer;
+
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         boolean mWifiMulticastEnabled;
         StopwatchTimer mWifiMulticastTimer;
 
@@ -2626,6 +2676,10 @@ public final class BatteryStatsImpl extends BatteryStats {
                     mFullWifiLockTimers, mUnpluggables);
             mWifiScanTimer = new StopwatchTimer(Uid.this, WIFI_SCAN,
                     mWifiScanTimers, mUnpluggables);
+<<<<<<< HEAD
+=======
+            mWifiBatchedScanTimer = new StopwatchTimer[NUM_WIFI_BATCHED_SCAN_BINS];
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             mWifiMulticastTimer = new StopwatchTimer(Uid.this, WIFI_MULTICAST_ENABLED,
                     mWifiMulticastTimers, mUnpluggables);
         }
@@ -2716,6 +2770,39 @@ public final class BatteryStatsImpl extends BatteryStats {
         }
 
         @Override
+<<<<<<< HEAD
+=======
+        public void noteWifiBatchedScanStartedLocked(int csph) {
+            int bin = 0;
+            while (csph > 8 && bin < NUM_WIFI_BATCHED_SCAN_BINS) {
+                csph = csph >> 3;
+                bin++;
+            }
+
+            if (mWifiBatchedScanBinStarted == bin) return;
+
+            if (mWifiBatchedScanBinStarted != NO_BATCHED_SCAN_STARTED) {
+                mWifiBatchedScanTimer[mWifiBatchedScanBinStarted].
+                        stopRunningLocked(BatteryStatsImpl.this);
+            }
+            mWifiBatchedScanBinStarted = bin;
+            if (mWifiBatchedScanTimer[bin] == null) {
+                makeWifiBatchedScanBin(bin, null);
+            }
+            mWifiBatchedScanTimer[bin].startRunningLocked(BatteryStatsImpl.this);
+        }
+
+        @Override
+        public void noteWifiBatchedScanStoppedLocked() {
+            if (mWifiBatchedScanBinStarted != NO_BATCHED_SCAN_STARTED) {
+                mWifiBatchedScanTimer[mWifiBatchedScanBinStarted].
+                        stopRunningLocked(BatteryStatsImpl.this);
+                mWifiBatchedScanBinStarted = NO_BATCHED_SCAN_STARTED;
+            }
+        }
+
+        @Override
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         public void noteWifiMulticastEnabledLocked() {
             if (!mWifiMulticastEnabled) {
                 mWifiMulticastEnabled = true;
@@ -2851,6 +2938,18 @@ public final class BatteryStatsImpl extends BatteryStats {
         }
 
         @Override
+<<<<<<< HEAD
+=======
+        public long getWifiBatchedScanTime(int csphBin, long batteryRealtime, int which) {
+            if (csphBin < 0 || csphBin >= NUM_WIFI_BATCHED_SCAN_BINS) return 0;
+            if (mWifiBatchedScanTimer[csphBin] == null) {
+                return 0;
+            }
+            return mWifiBatchedScanTimer[csphBin].getTotalTimeLocked(batteryRealtime, which);
+        }
+
+        @Override
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         public long getWifiMulticastTime(long batteryRealtime, int which) {
             if (mWifiMulticastTimer == null) {
                 return 0;
@@ -2911,6 +3010,27 @@ public final class BatteryStatsImpl extends BatteryStats {
             return mUserActivityCounters[type].getCountLocked(which);
         }
 
+<<<<<<< HEAD
+=======
+        void makeWifiBatchedScanBin(int i, Parcel in) {
+            if (i < 0 || i >= NUM_WIFI_BATCHED_SCAN_BINS) return;
+
+            ArrayList<StopwatchTimer> collected = mWifiBatchedScanTimers.get(i);
+            if (collected == null) {
+                collected = new ArrayList<StopwatchTimer>();
+                mWifiBatchedScanTimers.put(i, collected);
+            }
+            if (in == null) {
+                mWifiBatchedScanTimer[i] = new StopwatchTimer(this, WIFI_BATCHED_SCAN, collected,
+                        mUnpluggables);
+            } else {
+                mWifiBatchedScanTimer[i] = new StopwatchTimer(this, WIFI_BATCHED_SCAN, collected,
+                        mUnpluggables, in);
+            }
+        }
+
+
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         void initUserActivityLocked() {
             mUserActivityCounters = new Counter[NUM_USER_ACTIVITY_TYPES];
             for (int i=0; i<NUM_USER_ACTIVITY_TYPES; i++) {
@@ -2971,6 +3091,17 @@ public final class BatteryStatsImpl extends BatteryStats {
                 active |= !mWifiScanTimer.reset(BatteryStatsImpl.this, false);
                 active |= mWifiScanStarted;
             }
+<<<<<<< HEAD
+=======
+            if (mWifiBatchedScanTimer != null) {
+                for (int i = 0; i < NUM_WIFI_BATCHED_SCAN_BINS; i++) {
+                    if (mWifiBatchedScanTimer[i] != null) {
+                        active |= !mWifiBatchedScanTimer[i].reset(BatteryStatsImpl.this, false);
+                    }
+                }
+                active |= (mWifiBatchedScanBinStarted != NO_BATCHED_SCAN_STARTED);
+            }
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             if (mWifiMulticastTimer != null) {
                 active |= !mWifiMulticastTimer.reset(BatteryStatsImpl.this, false);
                 active |= mWifiMulticastEnabled;
@@ -3077,6 +3208,14 @@ public final class BatteryStatsImpl extends BatteryStats {
                 if (mWifiScanTimer != null) {
                     mWifiScanTimer.detach();
                 }
+<<<<<<< HEAD
+=======
+                for (int i = 0; i < NUM_WIFI_BATCHED_SCAN_BINS; i++) {
+                    if (mWifiBatchedScanTimer[i] != null) {
+                        mWifiBatchedScanTimer[i].detach();
+                    }
+                }
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 if (mWifiMulticastTimer != null) {
                     mWifiMulticastTimer.detach();
                 }
@@ -3154,6 +3293,17 @@ public final class BatteryStatsImpl extends BatteryStats {
             } else {
                 out.writeInt(0);
             }
+<<<<<<< HEAD
+=======
+            for (int i = 0; i < NUM_WIFI_BATCHED_SCAN_BINS; i++) {
+                if (mWifiBatchedScanTimer[i] != null) {
+                    out.writeInt(1);
+                    mWifiBatchedScanTimer[i].writeToParcel(out, batteryRealtime);
+                } else {
+                    out.writeInt(0);
+                }
+            }
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             if (mWifiMulticastTimer != null) {
                 out.writeInt(1);
                 mWifiMulticastTimer.writeToParcel(out, batteryRealtime);
@@ -3263,6 +3413,17 @@ public final class BatteryStatsImpl extends BatteryStats {
             } else {
                 mWifiScanTimer = null;
             }
+<<<<<<< HEAD
+=======
+            mWifiBatchedScanBinStarted = NO_BATCHED_SCAN_STARTED;
+            for (int i = 0; i < NUM_WIFI_BATCHED_SCAN_BINS; i++) {
+                if (in.readInt() != 0) {
+                    makeWifiBatchedScanBin(i, in);
+                } else {
+                    mWifiBatchedScanTimer[i] = null;
+                }
+            }
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             mWifiMulticastEnabled = false;
             if (in.readInt() != 0) {
                 mWifiMulticastTimer = new StopwatchTimer(Uid.this, WIFI_MULTICAST_ENABLED,
@@ -5460,6 +5621,16 @@ public final class BatteryStatsImpl extends BatteryStats {
             if (in.readInt() != 0) {
                 u.mWifiScanTimer.readSummaryFromParcelLocked(in);
             }
+<<<<<<< HEAD
+=======
+            u.mWifiBatchedScanBinStarted = Uid.NO_BATCHED_SCAN_STARTED;
+            for (int i = 0; i < Uid.NUM_WIFI_BATCHED_SCAN_BINS; i++) {
+                if (in.readInt() != 0) {
+                    u.makeWifiBatchedScanBin(i, null);
+                    u.mWifiBatchedScanTimer[i].readSummaryFromParcelLocked(in);
+                }
+            }
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             u.mWifiMulticastEnabled = false;
             if (in.readInt() != 0) {
                 u.mWifiMulticastTimer.readSummaryFromParcelLocked(in);
@@ -5671,6 +5842,17 @@ public final class BatteryStatsImpl extends BatteryStats {
             } else {
                 out.writeInt(0);
             }
+<<<<<<< HEAD
+=======
+            for (int i = 0; i < Uid.NUM_WIFI_BATCHED_SCAN_BINS; i++) {
+                if (u.mWifiBatchedScanTimer[i] != null) {
+                    out.writeInt(1);
+                    u.mWifiBatchedScanTimer[i].writeSummaryFromParcelLocked(out, NOWREAL);
+                } else {
+                    out.writeInt(0);
+                }
+            }
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             if (u.mWifiMulticastTimer != null) {
                 out.writeInt(1);
                 u.mWifiMulticastTimer.writeSummaryFromParcelLocked(out, NOWREAL);
@@ -5906,6 +6088,10 @@ public final class BatteryStatsImpl extends BatteryStats {
         mWifiRunningTimers.clear();
         mFullWifiLockTimers.clear();
         mWifiScanTimers.clear();
+<<<<<<< HEAD
+=======
+        mWifiBatchedScanTimers.clear();
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         mWifiMulticastTimers.clear();
 
         sNumSpeedSteps = in.readInt();

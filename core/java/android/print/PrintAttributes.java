@@ -30,7 +30,15 @@ import com.android.internal.R;
 import java.util.Map;
 
 /**
+<<<<<<< HEAD
  * This class represents the attributes of a print job.
+=======
+ * This class represents the attributes of a print job. These attributes
+ * describe how the printed content should be laid out. For example, the
+ * print attributes may state that the content should be laid out on a
+ * letter size with 300 DPI (dots per inch) resolution, have a margin of
+ * 10 mills (thousand of an inch) on all sides, and be black and white.
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
  */
 public final class PrintAttributes implements Parcelable {
     /** Color mode: Monochrome color scheme, for example one color is used. */
@@ -277,7 +285,11 @@ public final class PrintAttributes implements Parcelable {
          * Unknown media size in portrait mode.
          * <p>
          * <strong>Note: </strong>This is for specifying orientation without media
+<<<<<<< HEAD
          * size. You should not use the dimensions reported by this class.
+=======
+         * size. You should not use the dimensions reported by this instance.
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
          * </p>
          */
         public static final MediaSize UNKNOWN_PORTRAIT =
@@ -288,7 +300,11 @@ public final class PrintAttributes implements Parcelable {
          * Unknown media size in landscape mode.
          * <p>
          * <strong>Note: </strong>This is for specifying orientation without media
+<<<<<<< HEAD
          * size. You should not use the dimensions reported by this class.
+=======
+         * size. You should not use the dimensions reported by this instance.
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
          * </p>
          */
         public static final MediaSize UNKNOWN_LANDSCAPE =
@@ -615,9 +631,13 @@ public final class PrintAttributes implements Parcelable {
         private final int mHeightMils;
 
         /**
+<<<<<<< HEAD
          * Creates a new instance. This is the preferred constructor since
          * it enables the media size label to be shown in a localized fashion
          * on a locale change.
+=======
+         * Creates a new instance.
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
          *
          * @param id The unique media size id.
          * @param packageName The name of the creating package.
@@ -625,10 +645,16 @@ public final class PrintAttributes implements Parcelable {
          * @param widthMils The width in mils (thousands of an inch).
          * @param heightMils The height in mils (thousands of an inch).
          *
+<<<<<<< HEAD
          * @throws IllegalArgumentException If the id is empty.
          * @throws IllegalArgumentException If the label is empty.
          * @throws IllegalArgumentException If the widthMils is less than or equal to zero.
          * @throws IllegalArgumentException If the heightMils is less than or equal to zero.
+=======
+         * @throws IllegalArgumentException If the id is empty or the label
+         * is empty or the widthMils is less than or equal to zero or the
+         * heightMils is less than or equal to zero.
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
          *
          * @hide
          */
@@ -667,6 +693,7 @@ public final class PrintAttributes implements Parcelable {
          *
          * @param id The unique media size id. It is unique amongst other media sizes
          *        supported by the printer.
+<<<<<<< HEAD
          * @param label The <strong>internationalized</strong> human readable label.
          * @param widthMils The width in mils (thousands of an inch).
          * @param heightMils The height in mils (thousands of an inch).
@@ -675,6 +702,15 @@ public final class PrintAttributes implements Parcelable {
          * @throws IllegalArgumentException If the label is empty.
          * @throws IllegalArgumentException If the widthMils is less than or equal to zero.
          * @throws IllegalArgumentException If the heightMils is less than or equal to zero.
+=======
+         * @param label The <strong>localized</strong> human readable label.
+         * @param widthMils The width in mils (thousands of an inch).
+         * @param heightMils The height in mils (thousands of an inch).
+         *
+         * @throws IllegalArgumentException If the id is empty or the label is empty
+         * or the widthMils is less than or equal to zero or the heightMils is less
+         * than or equal to zero.
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
          */
         public MediaSize(String id, String label, int widthMils, int heightMils) {
             if (TextUtils.isEmpty(id)) {
@@ -776,12 +812,25 @@ public final class PrintAttributes implements Parcelable {
         }
 
         /**
+<<<<<<< HEAD
          * Returns a new media size in a portrait orientation
          * which is the height is the greater dimension.
          *
          * @return New instance in landscape orientation.
          */
         public MediaSize asPortrait() {
+=======
+         * Returns a new media size instance in a portrait orientation,
+         * which is the height is the greater dimension.
+         *
+         * @return New instance in landscape orientation if this one
+         * is in landscape, otherwise this instance.
+         */
+        public MediaSize asPortrait() {
+            if (isPortrait()) {
+                return this;
+            }
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             return new MediaSize(mId, mLabel, mPackageName,
                     Math.min(mWidthMils, mHeightMils),
                     Math.max(mWidthMils, mHeightMils),
@@ -789,12 +838,25 @@ public final class PrintAttributes implements Parcelable {
         }
 
         /**
+<<<<<<< HEAD
          * Returns a new media size in a landscape orientation
          * which is the height is the lesser dimension.
          *
          * @return New instance in landscape orientation.
          */
         public MediaSize asLandscape() {
+=======
+         * Returns a new media size instance in a landscape orientation,
+         * which is the height is the lesser dimension.
+         *
+         * @return New instance in landscape orientation if this one
+         * is in portrait, otherwise this instance.
+         */
+        public MediaSize asLandscape() {
+            if (!isPortrait()) {
+                return this;
+            }
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             return new MediaSize(mId, mLabel, mPackageName,
                     Math.max(mWidthMils, mHeightMils),
                     Math.min(mWidthMils, mHeightMils),
@@ -881,8 +943,13 @@ public final class PrintAttributes implements Parcelable {
      * This class specifies a supported resolution in DPI (dots per inch).
      * Resolution defines how many points with different color can be placed
      * on one inch in horizontal or vertical direction of the target media.
+<<<<<<< HEAD
      * For example, a printer with 600DIP can produce higher quality images
      * the one with 300DPI resolution.
+=======
+     * For example, a printer with 600 DPI can produce higher quality images
+     * the one with 300 DPI resolution.
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
      */
     public static final class Resolution {
         private final String mId;
@@ -895,6 +962,7 @@ public final class PrintAttributes implements Parcelable {
          *
          * @param id The unique resolution id. It is unique amongst other resolutions
          *        supported by the printer.
+<<<<<<< HEAD
          * @param label The <strong>internationalized</strong> human readable label.
          * @param horizontalDpi The horizontal resolution in DPI (dots per inch).
          * @param verticalDpi The vertical resolution in DPI (dots per inch).
@@ -903,6 +971,15 @@ public final class PrintAttributes implements Parcelable {
          * @throws IllegalArgumentException If the label is empty.
          * @throws IllegalArgumentException If the horizontalDpi is less than or equal to zero.
          * @throws IllegalArgumentException If the verticalDpi is less than or equal to zero.
+=======
+         * @param label The <strong>localized</strong> human readable label.
+         * @param horizontalDpi The horizontal resolution in DPI (dots per inch).
+         * @param verticalDpi The vertical resolution in DPI (dots per inch).
+         *
+         * @throws IllegalArgumentException If the id is empty or the label is empty
+         * or the horizontalDpi is less than or equal to zero or the verticalDpi is
+         * less than or equal to zero.
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
          */
         public Resolution(String id, String label, int horizontalDpi, int verticalDpi) {
             if (TextUtils.isEmpty(id)) {

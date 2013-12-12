@@ -62,10 +62,13 @@ public class BluetoothController extends BroadcastReceiver {
         return mBondedDevices;
     }
 
+<<<<<<< HEAD
     public void removeStateChangedCallback(BluetoothStateChangeCallback cb) {
         mChangeCallbacks.remove(cb);
     }
 
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     @Override
     public void onReceive(Context context, Intent intent) {
         final String action = intent.getAction();

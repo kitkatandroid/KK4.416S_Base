@@ -2272,9 +2272,18 @@ public class ActivityManager {
     public static void dumpPackageStateStatic(FileDescriptor fd, String packageName) {
         FileOutputStream fout = new FileOutputStream(fd);
         PrintWriter pw = new FastPrintWriter(fout);
+<<<<<<< HEAD
         dumpService(pw, fd, Context.ACTIVITY_SERVICE, new String[] { "package", packageName });
         pw.println();
         dumpService(pw, fd, ProcessStats.SERVICE_NAME, new String[] { packageName });
+=======
+        dumpService(pw, fd, Context.ACTIVITY_SERVICE, new String[] {
+                "-a", "package", packageName });
+        pw.println();
+        dumpService(pw, fd, "meminfo", new String[] { "--local", packageName });
+        pw.println();
+        dumpService(pw, fd, ProcessStats.SERVICE_NAME, new String[] { "-a", packageName });
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         pw.println();
         dumpService(pw, fd, "usagestats", new String[] { "--packages", packageName });
         pw.println();
@@ -2296,7 +2305,11 @@ public class ActivityManager {
             pw.flush();
             tp = new TransferPipe();
             tp.setBufferPrefix("  ");
+<<<<<<< HEAD
             service.dump(tp.getWriteFd().getFileDescriptor(), args);
+=======
+            service.dumpAsync(tp.getWriteFd().getFileDescriptor(), args);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             tp.go(fd);
         } catch (Throwable e) {
             if (tp != null) {

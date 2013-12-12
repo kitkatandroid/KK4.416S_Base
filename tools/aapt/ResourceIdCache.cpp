@@ -9,7 +9,11 @@
 #include <utils/Log.h>
 #include "ResourceIdCache.h"
 #include <map>
+<<<<<<< HEAD
 using std::map;
+=======
+using namespace std;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
 
 static size_t mHits = 0;

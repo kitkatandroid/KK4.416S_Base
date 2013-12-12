@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (C) 2012 The Android Open Source Project
+=======
+ * Copyright (C) 2013 The Android Open Source Project
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +20,7 @@
 
 package com.android.internal.app;
 
+<<<<<<< HEAD
 import com.android.internal.R;
 
 import android.app.Activity;
@@ -607,10 +612,62 @@ public class MediaRouteChooserDialogFragment extends DialogFragment {
         public void onRouteVolumeChanged(MediaRouter router, RouteInfo info) {
             if (!mIgnoreCallbackVolumeChanges) {
                 updateVolume();
+=======
+import android.app.Dialog;
+import android.app.DialogFragment;
+import android.content.Context;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+
+/**
+ * Media route chooser dialog fragment.
+ * <p>
+ * Creates a {@link MediaRouteChooserDialog}.  The application may subclass
+ * this dialog fragment to customize the media route chooser dialog.
+ * </p>
+ *
+ * TODO: Move this back into the API, as in the support library media router.
+ */
+public class MediaRouteChooserDialogFragment extends DialogFragment {
+    private final String ARGUMENT_ROUTE_TYPES = "routeTypes";
+
+    private View.OnClickListener mExtendedSettingsClickListener;
+
+    /**
+     * Creates a media route chooser dialog fragment.
+     * <p>
+     * All subclasses of this class must also possess a default constructor.
+     * </p>
+     */
+    public MediaRouteChooserDialogFragment() {
+        setCancelable(true);
+        setStyle(STYLE_NORMAL, android.R.style.Theme_DeviceDefault_Dialog);
+    }
+
+    public int getRouteTypes() {
+        Bundle args = getArguments();
+        return args != null ? args.getInt(ARGUMENT_ROUTE_TYPES) : 0;
+    }
+
+    public void setRouteTypes(int types) {
+        if (types != getRouteTypes()) {
+            Bundle args = getArguments();
+            if (args == null) {
+                args = new Bundle();
+            }
+            args.putInt(ARGUMENT_ROUTE_TYPES, types);
+            setArguments(args);
+
+            MediaRouteChooserDialog dialog = (MediaRouteChooserDialog)getDialog();
+            if (dialog != null) {
+                dialog.setRouteTypes(types);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             }
         }
     }
 
+<<<<<<< HEAD
     class RouteComparator implements Comparator<RouteInfo> {
         @Override
         public int compare(RouteInfo lhs, RouteInfo rhs) {
@@ -657,11 +714,21 @@ public class MediaRouteChooserDialogFragment extends DialogFragment {
                 return true;
             } else {
                 return super.onKeyUp(keyCode, event);
+=======
+    public void setExtendedSettingsClickListener(View.OnClickListener listener) {
+        if (listener != mExtendedSettingsClickListener) {
+            mExtendedSettingsClickListener = listener;
+
+            MediaRouteChooserDialog dialog = (MediaRouteChooserDialog)getDialog();
+            if (dialog != null) {
+                dialog.setExtendedSettingsClickListener(listener);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             }
         }
     }
 
     /**
+<<<<<<< HEAD
      * Implemented by the MediaRouteButton that launched this dialog
      */
     public interface LauncherListener {
@@ -686,5 +753,23 @@ public class MediaRouteChooserDialogFragment extends DialogFragment {
             updateVolume();
         }
 
+=======
+     * Called when the chooser dialog is being created.
+     * <p>
+     * Subclasses may override this method to customize the dialog.
+     * </p>
+     */
+    public MediaRouteChooserDialog onCreateChooserDialog(
+            Context context, Bundle savedInstanceState) {
+        return new MediaRouteChooserDialog(context, getTheme());
+    }
+
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        MediaRouteChooserDialog dialog = onCreateChooserDialog(getActivity(), savedInstanceState);
+        dialog.setRouteTypes(getRouteTypes());
+        dialog.setExtendedSettingsClickListener(mExtendedSettingsClickListener);
+        return dialog;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 }

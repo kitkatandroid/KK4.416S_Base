@@ -448,6 +448,7 @@ public abstract class AbsSeekBar extends ProgressBar {
         final int max = getMax();
         progress += scale * max;
         
+<<<<<<< HEAD
         setProgress(updateTouchProgress(getProgress(), (int) progress), true);
     }
 
@@ -456,6 +457,9 @@ public abstract class AbsSeekBar extends ProgressBar {
      */
     protected int updateTouchProgress(int lastProgress, int newProgress) {
         return newProgress;
+=======
+        setProgress((int) progress, true);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     /**

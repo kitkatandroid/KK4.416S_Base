@@ -38,7 +38,11 @@ public class AnimatedImageView extends ImageView {
     }
 
     private void updateAnim() {
+<<<<<<< HEAD
         Drawable drawable = getDrawable();
+=======
+        Drawable drawable = mAttached ? getDrawable() : null;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         if (mAttached && mAnim != null) {
             mAnim.stop();
         }

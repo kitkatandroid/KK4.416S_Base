@@ -92,7 +92,13 @@ public class QuickContactBadge extends ImageView implements OnClickListener {
                 com.android.internal.R.styleable.Theme_quickContactBadgeOverlay);
         styledAttributes.recycle();
 
+<<<<<<< HEAD
         mQueryHandler = new QueryHandler(mContext.getContentResolver());
+=======
+        if (!isInEditMode()) {
+            mQueryHandler = new QueryHandler(mContext.getContentResolver());
+        }
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         setOnClickListener(this);
     }
 
@@ -199,7 +205,11 @@ public class QuickContactBadge extends ImageView implements OnClickListener {
     public void assignContactFromEmail(String emailAddress, boolean lazyLookup, Bundle extras) {
         mContactEmail = emailAddress;
         mExtras = extras;
+<<<<<<< HEAD
         if (!lazyLookup) {
+=======
+        if (!lazyLookup && mQueryHandler != null) {
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             mQueryHandler.startQuery(TOKEN_EMAIL_LOOKUP, null,
                     Uri.withAppendedPath(Email.CONTENT_LOOKUP_URI, Uri.encode(mContactEmail)),
                     EMAIL_LOOKUP_PROJECTION, null, null, null);
@@ -239,7 +249,11 @@ public class QuickContactBadge extends ImageView implements OnClickListener {
     public void assignContactFromPhone(String phoneNumber, boolean lazyLookup, Bundle extras) {
         mContactPhone = phoneNumber;
         mExtras = extras;
+<<<<<<< HEAD
         if (!lazyLookup) {
+=======
+        if (!lazyLookup && mQueryHandler != null) {
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             mQueryHandler.startQuery(TOKEN_PHONE_LOOKUP, null,
                     Uri.withAppendedPath(PhoneLookup.CONTENT_FILTER_URI, mContactPhone),
                     PHONE_LOOKUP_PROJECTION, null, null, null);
@@ -262,12 +276,20 @@ public class QuickContactBadge extends ImageView implements OnClickListener {
         if (mContactUri != null) {
             QuickContact.showQuickContact(getContext(), QuickContactBadge.this, mContactUri,
                     QuickContact.MODE_LARGE, mExcludeMimes);
+<<<<<<< HEAD
         } else if (mContactEmail != null) {
+=======
+        } else if (mContactEmail != null && mQueryHandler != null) {
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             extras.putString(EXTRA_URI_CONTENT, mContactEmail);
             mQueryHandler.startQuery(TOKEN_EMAIL_LOOKUP_AND_TRIGGER, extras,
                     Uri.withAppendedPath(Email.CONTENT_LOOKUP_URI, Uri.encode(mContactEmail)),
                     EMAIL_LOOKUP_PROJECTION, null, null, null);
+<<<<<<< HEAD
         } else if (mContactPhone != null) {
+=======
+        } else if (mContactPhone != null && mQueryHandler != null) {
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             extras.putString(EXTRA_URI_CONTENT, mContactPhone);
             mQueryHandler.startQuery(TOKEN_PHONE_LOOKUP_AND_TRIGGER, extras,
                     Uri.withAppendedPath(PhoneLookup.CONTENT_FILTER_URI, mContactPhone),

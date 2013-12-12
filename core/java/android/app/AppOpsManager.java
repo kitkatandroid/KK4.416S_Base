@@ -16,6 +16,7 @@
 
 package android.app;
 
+<<<<<<< HEAD
 import android.content.Context;
 import android.Manifest;
 import android.os.Binder;
@@ -26,6 +27,11 @@ import android.os.Process;
 import android.os.RemoteException;
 import android.util.ArrayMap;
 
+=======
+import android.os.Binder;
+import android.os.IBinder;
+import android.util.ArrayMap;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import com.android.internal.app.IAppOpsService;
 import com.android.internal.app.IAppOpsCallback;
 
@@ -33,6 +39,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+<<<<<<< HEAD
+=======
+import android.content.Context;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.Process;
+import android.os.RemoteException;
+
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 /**
  * API for interacting with "application operation" tracking.
  *
@@ -93,7 +108,11 @@ public class AppOpsManager {
 
     // when adding one of these:
     //  - increment _NUM_OP
+<<<<<<< HEAD
     //  - add rows to sOpToSwitch, sOpToString, sOpNames, sOpPerms, sPrivacyGuardOp, sOpDefaultMode
+=======
+    //  - add rows to sOpToSwitch, sOpToString, sOpNames, sOpPerms, sOpDefaultMode
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     //  - add descriptive strings to Settings/res/values/arrays.xml
     //  - add the op to the appropriate template in AppOpsState.OpsTemplate (settings app)
 
@@ -406,6 +425,7 @@ public class AppOpsManager {
     };
 
     /**
+<<<<<<< HEAD
      * Privacy Guard Ops and states need to
      * match general Ops map. Unused Ops are flagged as OP_NONE
      */
@@ -472,6 +492,8 @@ public class AppOpsManager {
     public static final int PRIVACY_GUARD_CUSTOM_PLUS   = 5;
 
     /**
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
      * This specifies the default mode for each operation.
      */
     private static int[] sOpDefaultMode = new int[] {
@@ -633,6 +655,7 @@ public class AppOpsManager {
     }
 
     /**
+<<<<<<< HEAD
      * Retrieve the permission associated privacy guard operation,
      * or OP_NONE if there is not one.
      * @hide
@@ -647,6 +670,8 @@ public class AppOpsManager {
     }
 
     /**
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
      * Retrieve the default mode for the operation.
      * @hide
      */
@@ -1214,6 +1239,7 @@ public class AppOpsManager {
     public void finishOp(int op) {
         finishOp(op, Process.myUid(), mContext.getOpPackageName());
     }
+<<<<<<< HEAD
 
     /** @hide */
     public List<Integer> getPrivacyGuardOpsForPackage(String packageName) {
@@ -1263,4 +1289,6 @@ public class AppOpsManager {
         }
         return com.android.internal.R.drawable.stat_notify_privacy_guard_off;
     }
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 }

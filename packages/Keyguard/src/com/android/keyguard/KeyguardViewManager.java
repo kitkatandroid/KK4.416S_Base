@@ -19,11 +19,14 @@ package com.android.keyguard;
 import android.app.PendingIntent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+<<<<<<< HEAD
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.TransitionDrawable;
 import android.os.*;
 import android.provider.Settings;
 import android.view.*;
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import com.android.internal.policy.IKeyguardShowCallback;
 import com.android.internal.widget.LockPatternUtils;
 
@@ -31,7 +34,10 @@ import android.app.Activity;
 import android.app.ActivityManager;
 import android.appwidget.AppWidgetManager;
 import android.content.Context;
+<<<<<<< HEAD
 import android.content.Intent;
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -67,9 +73,17 @@ import android.widget.FrameLayout;
 public class KeyguardViewManager {
     private final static boolean DEBUG = KeyguardViewMediator.DEBUG;
     private static String TAG = "KeyguardViewManager";
+<<<<<<< HEAD
     public static boolean USE_UPPER_CASE = true;
     public final static String IS_SWITCHING_USER = "is_switching_user";
 
+=======
+    public final static String IS_SWITCHING_USER = "is_switching_user";
+
+    // Delay dismissing keyguard to allow animations to complete.
+    private static final int HIDE_KEYGUARD_DELAY = 500;
+
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     // Timeout used for keypresses
     static final int DIGIT_PRESS_WAKE_MILLIS = 5000;
 
@@ -152,8 +166,12 @@ public class KeyguardViewManager {
 
     private boolean shouldEnableTranslucentDecor() {
         Resources res = mContext.getResources();
+<<<<<<< HEAD
         return res.getBoolean(R.bool.config_enableLockScreenTranslucentDecor)
             && res.getBoolean(R.bool.config_enableTranslucentDecor);
+=======
+        return res.getBoolean(R.bool.config_enableLockScreenTranslucentDecor);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     class ViewManagerHost extends FrameLayout {
@@ -194,14 +212,18 @@ public class KeyguardViewManager {
             }
         };
 
+<<<<<<< HEAD
         private TransitionDrawable mTransitionBackground = null;
 
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         public ViewManagerHost(Context context) {
             super(context);
             setBackground(mBackgroundDrawable);
         }
 
         public void setCustomBackground(Drawable d) {
+<<<<<<< HEAD
             if (!ActivityManager.isHighEndGfx()) {
                 mCustomBackground = d;
                 if (d != null) {
@@ -247,6 +269,22 @@ public class KeyguardViewManager {
 
             final int bgWidth = background.getIntrinsicWidth();
             final int bgHeight = background.getIntrinsicHeight();
+=======
+            mCustomBackground = d;
+            if (d != null) {
+                d.setColorFilter(BACKGROUND_COLOR, PorterDuff.Mode.SRC_OVER);
+            }
+            computeCustomBackgroundBounds();
+            invalidate();
+        }
+
+        private void computeCustomBackgroundBounds() {
+            if (mCustomBackground == null) return; // Nothing to do
+            if (!isLaidOut()) return; // We'll do this later
+
+            final int bgWidth = mCustomBackground.getIntrinsicWidth();
+            final int bgHeight = mCustomBackground.getIntrinsicHeight();
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             final int vWidth = getWidth();
             final int vHeight = getHeight();
 
@@ -254,16 +292,26 @@ public class KeyguardViewManager {
             final float vAspect = (float) vWidth / vHeight;
 
             if (bgAspect > vAspect) {
+<<<<<<< HEAD
                 background.setBounds(0, 0, (int) (vHeight * bgAspect), vHeight);
             } else {
                 background.setBounds(0, 0, vWidth, (int) (vWidth / bgAspect));
+=======
+                mCustomBackground.setBounds(0, 0, (int) (vHeight * bgAspect), vHeight);
+            } else {
+                mCustomBackground.setBounds(0, 0, vWidth, (int) (vWidth / bgAspect));
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             }
         }
 
         @Override
         protected void onSizeChanged(int w, int h, int oldw, int oldh) {
             super.onSizeChanged(w, h, oldw, oldh);
+<<<<<<< HEAD
             computeCustomBackgroundBounds(mCustomBackground);
+=======
+            computeCustomBackgroundBounds();
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
 
         @Override
@@ -549,9 +597,16 @@ public class KeyguardViewManager {
                             mKeyguardHost.setCustomBackground(null);
                             updateShowWallpaper(true);
                             mKeyguardHost.removeView(lastView);
+<<<<<<< HEAD
                         }
                     }
                 }, 500);
+=======
+                            mViewMediatorCallback.keyguardGone();
+                        }
+                    }
+                }, HIDE_KEYGUARD_DELAY);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             }
         }
     }
@@ -578,12 +633,15 @@ public class KeyguardViewManager {
         }
     }
 
+<<<<<<< HEAD
     public void showCustomIntent(Intent intent) {
         if (mKeyguardView != null) {
             mKeyguardView.showCustomIntent(intent);
         }
     }
 
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     public void dispatch(MotionEvent event) {
         if (mKeyguardView != null) {
             mKeyguardView.dispatch(event);

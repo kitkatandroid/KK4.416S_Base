@@ -18,6 +18,7 @@ package com.android.systemui.statusbar.phone;
 
 import android.content.Context;
 import android.content.res.Resources;
+<<<<<<< HEAD
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -29,20 +30,29 @@ import android.graphics.PorterDuff.Mode;
 import android.net.Uri;
 import android.os.UserHandle;
 import android.provider.Settings;
+=======
+import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import android.util.AttributeSet;
 import android.util.EventLog;
 import android.view.MotionEvent;
 import android.view.View;
+<<<<<<< HEAD
 import android.view.Display;
 import android.view.Surface;
 import android.view.WindowManager;
 import android.view.accessibility.AccessibilityEvent;
 import android.widget.ImageView;
+=======
+import android.view.accessibility.AccessibilityEvent;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
 import com.android.systemui.EventLogTags;
 import com.android.systemui.R;
 import com.android.systemui.statusbar.GestureRecorder;
 
+<<<<<<< HEAD
 import java.io.File;
 
 public class NotificationPanelView extends PanelView {
@@ -60,10 +70,19 @@ public class NotificationPanelView extends PanelView {
     int mHandleBarHeight;
     View mHandleView;
     ImageView mBackground;
+=======
+public class NotificationPanelView extends PanelView {
+    public static final boolean DEBUG_GESTURES = true;
+
+    Drawable mHandleBar;
+    int mHandleBarHeight;
+    View mHandleView;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     int mFingers;
     PhoneStatusBar mStatusBar;
     boolean mOkToFlip;
 
+<<<<<<< HEAD
     private float mGestureStartX;
     private float mGestureStartY;
     private float mFlipOffset;
@@ -71,6 +90,8 @@ public class NotificationPanelView extends PanelView {
     private boolean mTrackingSwipe;
     private boolean mSwipeTriggered;
 
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     public NotificationPanelView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
@@ -87,8 +108,11 @@ public class NotificationPanelView extends PanelView {
         mHandleBar = resources.getDrawable(R.drawable.status_bar_close);
         mHandleBarHeight = resources.getDimensionPixelSize(R.dimen.close_handle_height);
         mHandleView = findViewById(R.id.handle);
+<<<<<<< HEAD
         mBackground = (ImageView) findViewById(R.id.notification_wallpaper);
         setBackgroundDrawables();
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     @Override
@@ -142,6 +166,7 @@ public class NotificationPanelView extends PanelView {
                        event.getActionMasked(), (int) event.getX(), (int) event.getY());
             }
         }
+<<<<<<< HEAD
         boolean shouldRecycleEvent = false;
         if (PhoneStatusBar.SETTINGS_DRAG_SHORTCUT && mStatusBar.mHasFlipSettings) {
             boolean swipeFlipJustFinished = false;
@@ -355,4 +380,34 @@ public class NotificationPanelView extends PanelView {
         setNotificationWallpaper();
     }
 
+=======
+        if (PhoneStatusBar.SETTINGS_DRAG_SHORTCUT && mStatusBar.mHasFlipSettings) {
+            switch (event.getActionMasked()) {
+                case MotionEvent.ACTION_DOWN:
+                    mOkToFlip = getExpandedHeight() == 0;
+                    break;
+                case MotionEvent.ACTION_POINTER_DOWN:
+                    if (mOkToFlip) {
+                        float miny = event.getY(0);
+                        float maxy = miny;
+                        for (int i=1; i<event.getPointerCount(); i++) {
+                            final float y = event.getY(i);
+                            if (y < miny) miny = y;
+                            if (y > maxy) maxy = y;
+                        }
+                        if (maxy - miny < mHandleBarHeight) {
+                            if (getMeasuredHeight() < mHandleBarHeight) {
+                                mStatusBar.switchToSettings();
+                            } else {
+                                mStatusBar.flipToSettings();
+                            }
+                            mOkToFlip = false;
+                        }
+                    }
+                    break;
+            }
+        }
+        return mHandleView.dispatchTouchEvent(event);
+    }
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 }

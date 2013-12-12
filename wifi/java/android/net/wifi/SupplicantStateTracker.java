@@ -55,7 +55,11 @@ class SupplicantStateTracker extends StateMachine {
     private static final int MAX_RETRIES_ON_AUTHENTICATION_FAILURE = 2;
 
     /* Maximum retries on assoc rejection events */
+<<<<<<< HEAD
     private static final int MAX_RETRIES_ON_ASSOCIATION_REJECT = 4;
+=======
+    private static final int MAX_RETRIES_ON_ASSOCIATION_REJECT = 16;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
     /* Tracks if networks have been disabled during a connection */
     private boolean mNetworksDisabledDuringConnect = false;

@@ -23,11 +23,19 @@ import android.os.WorkSource;
 
 interface IPowerManager
 {
+<<<<<<< HEAD
     // WARNING: The first three methods must remain the first three methods because their
+=======
+    // WARNING: The first four methods must remain the first three methods because their
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     // transaction numbers must not change unless IPowerManager.cpp is also updated.
     void acquireWakeLock(IBinder lock, int flags, String tag, String packageName, in WorkSource ws);
     void acquireWakeLockWithUid(IBinder lock, int flags, String tag, String packageName, int uidtoblame);
     void releaseWakeLock(IBinder lock, int flags);
+<<<<<<< HEAD
+=======
+    void updateWakeLockUids(IBinder lock, in int[] uids);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
     void updateWakeLockWorkSource(IBinder lock, in WorkSource ws);
     boolean isWakeLockLevelSupported(int level);

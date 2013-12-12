@@ -34,6 +34,7 @@
     <color name="notification_panel_scrim_color">#B0000000</color>
     <color name="batterymeter_frame_color">#66FFFFFF</color><!-- 40% white -->
     <color name="batterymeter_charge_color">#FFFFFFFF</color>
+<<<<<<< HEAD
     <color name="batterymeter_bolt_color">#FF000000</color><!-- 100% black -->
     <color name="status_bar_clock_color">#FFFFFFFF</color>
 
@@ -54,4 +55,8 @@
     <color name="qs_background_color">#FF212121</color>
     <color name="qs_background_pressed_color">#FF161616</color>
 
+=======
+    <color name="batterymeter_bolt_color">#B2000000</color><!-- 70% black -->
+    <color name="status_bar_clock_color">#FFFFFFFF</color>
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 </resources>

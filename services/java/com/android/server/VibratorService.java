@@ -45,7 +45,10 @@ import android.view.InputDevice;
 import com.android.internal.app.IAppOpsService;
 import com.android.internal.app.IBatteryStats;
 
+<<<<<<< HEAD
 import java.util.Calendar;
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.ListIterator;
@@ -192,6 +195,7 @@ public class VibratorService extends IVibratorService.Stub
                 Binder.getCallingPid(), Binder.getCallingUid(), null);
     }
 
+<<<<<<< HEAD
     private boolean inQuietHours() {
         boolean quietHoursEnabled = Settings.System.getIntForUser(mContext.getContentResolver(),
                 Settings.System.QUIET_HOURS_ENABLED, 0, UserHandle.USER_CURRENT_OR_SELF) != 0;
@@ -220,6 +224,8 @@ public class VibratorService extends IVibratorService.Stub
         return false;
     }
 
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     public void vibrate(int uid, String packageName, long milliseconds, IBinder token) {
         if (mContext.checkCallingOrSelfPermission(android.Manifest.permission.VIBRATE)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -230,7 +236,11 @@ public class VibratorService extends IVibratorService.Stub
         // timeout of 0 or negative. This will ensure that a vibration has
         // either a timeout of > 0 or a non-null pattern.
         if (milliseconds <= 0 || (mCurrentVibration != null
+<<<<<<< HEAD
                 && mCurrentVibration.hasLongerTimeout(milliseconds)) || inQuietHours()) {
+=======
+                && mCurrentVibration.hasLongerTimeout(milliseconds))) {
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             // Ignore this vibration since the current vibration will play for
             // longer than milliseconds.
             return;
@@ -267,9 +277,12 @@ public class VibratorService extends IVibratorService.Stub
                 != PackageManager.PERMISSION_GRANTED) {
             throw new SecurityException("Requires VIBRATE permission");
         }
+<<<<<<< HEAD
         if (inQuietHours()) {
             return;
         }
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         verifyIncomingUid(uid);
         // so wakelock calls will succeed
         long identity = Binder.clearCallingIdentity();

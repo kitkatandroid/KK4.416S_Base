@@ -292,11 +292,18 @@ public abstract class AdapterView<T extends Adapter> extends ViewGroup {
      */
     public boolean performItemClick(View view, int position, long id) {
         if (mOnItemClickListener != null) {
+<<<<<<< HEAD
+=======
+            playSoundEffect(SoundEffectConstants.CLICK);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             if (view != null) {
                 view.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_CLICKED);
             }
             mOnItemClickListener.onItemClick(this, view, position, id);
+<<<<<<< HEAD
             playSoundEffect(SoundEffectConstants.CLICK);
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             return true;
         }
 

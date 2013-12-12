@@ -120,7 +120,10 @@ public class KeyguardPatternView extends LinearLayout implements KeyguardSecurit
         mLockPatternView.setSaveEnabled(false);
         mLockPatternView.setFocusable(false);
         mLockPatternView.setOnPatternListener(new UnlockPatternListener());
+<<<<<<< HEAD
         mLockPatternView.setLockPatternUtils(mLockPatternUtils);
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
         // stealth mode will be the same for the life of this screen
         mLockPatternView.setInStealthMode(!mLockPatternUtils.isVisiblePatternEnabled());
@@ -128,8 +131,11 @@ public class KeyguardPatternView extends LinearLayout implements KeyguardSecurit
         // vibrate mode will be the same for the life of this screen
         mLockPatternView.setTactileFeedbackEnabled(mLockPatternUtils.isTactileFeedbackEnabled());
 
+<<<<<<< HEAD
         mLockPatternView.setLockPatternSize(mLockPatternUtils.getLockPatternSize());
 
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         mForgotPatternButton = (Button) findViewById(R.id.forgot_password_button);
         // note: some configurations don't have an emergency call area
         if (mForgotPatternButton != null) {

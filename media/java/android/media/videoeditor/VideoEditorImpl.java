@@ -1834,6 +1834,7 @@ public class VideoEditorImpl implements VideoEditor {
             String filename = mI.getFilename();
             if (mI instanceof MediaVideoItem) {
                 MediaMetadataRetriever retriever = new MediaMetadataRetriever();
+<<<<<<< HEAD
                 Bitmap bitmap = null;
                 try {
                     retriever.setDataSource(filename);
@@ -1848,6 +1849,12 @@ public class VideoEditorImpl implements VideoEditor {
                     }
                 }
 
+=======
+                retriever.setDataSource(filename);
+                Bitmap bitmap = retriever.getFrameAtTime();
+                retriever.release();
+                retriever = null;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 if (bitmap == null) {
                     String msg = "Thumbnail extraction from " +
                                     filename + " failed";

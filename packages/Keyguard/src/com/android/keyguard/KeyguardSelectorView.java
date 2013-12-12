@@ -23,17 +23,22 @@ import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+<<<<<<< HEAD
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.InsetDrawable;
+=======
+import android.graphics.drawable.Drawable;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
+<<<<<<< HEAD
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -57,6 +62,18 @@ import com.android.internal.widget.multiwaveview.TargetDrawable;
 import java.io.File;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+=======
+import android.util.AttributeSet;
+import android.util.Log;
+import android.util.Slog;
+import android.view.View;
+import android.widget.LinearLayout;
+
+import com.android.internal.telephony.IccCardConstants.State;
+import com.android.internal.widget.LockPatternUtils;
+import com.android.internal.widget.multiwaveview.GlowPadView;
+import com.android.internal.widget.multiwaveview.GlowPadView.OnTriggerListener;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
 public class KeyguardSelectorView extends LinearLayout implements KeyguardSecurityView {
     private static final boolean DEBUG = KeyguardHostView.DEBUG;
@@ -66,7 +83,10 @@ public class KeyguardSelectorView extends LinearLayout implements KeyguardSecuri
 
     private KeyguardSecurityCallback mCallback;
     private GlowPadView mGlowPadView;
+<<<<<<< HEAD
     private KeyguardShortcuts mShortcuts;
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     private ObjectAnimator mAnim;
     private View mFadeView;
     private boolean mIsBouncing;
@@ -75,15 +95,24 @@ public class KeyguardSelectorView extends LinearLayout implements KeyguardSecuri
     private LockPatternUtils mLockPatternUtils;
     private SecurityMessageDisplay mSecurityMessageDisplay;
     private Drawable mBouncerFrame;
+<<<<<<< HEAD
     private String[] mStoredTargets;
     private int mTargetOffset;
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
     OnTriggerListener mOnTriggerListener = new OnTriggerListener() {
 
         public void onTrigger(View v, int target) {
+<<<<<<< HEAD
             if (mStoredTargets == null) {
                 final int resId = mGlowPadView.getResourceIdForTarget(target);
                 switch (resId) {
+=======
+            final int resId = mGlowPadView.getResourceIdForTarget(target);
+
+            switch (resId) {
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 case R.drawable.ic_action_assist_generic:
                     Intent assistIntent =
                             ((SearchManager) mContext.getSystemService(Context.SEARCH_SERVICE))
@@ -105,6 +134,7 @@ public class KeyguardSelectorView extends LinearLayout implements KeyguardSecuri
                 case R.drawable.ic_lockscreen_unlock:
                     mCallback.userActivity(0);
                     mCallback.dismiss(false);
+<<<<<<< HEAD
                     break;
                 }
             } else {
@@ -121,6 +151,9 @@ public class KeyguardSelectorView extends LinearLayout implements KeyguardSecuri
                         SlimActions.processAction(mContext, targetUri, false);
                     }
                 }
+=======
+                break;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             }
         }
 
@@ -139,10 +172,13 @@ public class KeyguardSelectorView extends LinearLayout implements KeyguardSecuri
 
         }
 
+<<<<<<< HEAD
         public void onTargetChange(View v, int target) {
 
         }
 
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         public void onFinishFinalAnimation() {
 
         }
@@ -177,8 +213,12 @@ public class KeyguardSelectorView extends LinearLayout implements KeyguardSecuri
         @Override
         Context getContext() {
             return mContext;
+<<<<<<< HEAD
         }
     };
+=======
+        }};
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
     public KeyguardSelectorView(Context context) {
         this(context, null);
@@ -187,12 +227,16 @@ public class KeyguardSelectorView extends LinearLayout implements KeyguardSecuri
     public KeyguardSelectorView(Context context, AttributeSet attrs) {
         super(context, attrs);
         mLockPatternUtils = new LockPatternUtils(getContext());
+<<<<<<< HEAD
         mTargetOffset = LockscreenTargetUtils.getTargetOffset(context);
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
+<<<<<<< HEAD
 
         Resources res = getResources();
 
@@ -239,6 +283,8 @@ public class KeyguardSelectorView extends LinearLayout implements KeyguardSecuri
                 R.id.keyguard_message_and_shortcuts);
         msgAndShortcutsContainer.bringToFront();
 
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         mGlowPadView = (GlowPadView) findViewById(R.id.glow_pad_view);
         mGlowPadView.setOnTriggerListener(mOnTriggerListener);
         updateTargets();
@@ -246,6 +292,7 @@ public class KeyguardSelectorView extends LinearLayout implements KeyguardSecuri
         mSecurityMessageDisplay = new KeyguardMessageArea.Helper(this);
         View bouncerFrameView = findViewById(R.id.keyguard_selector_view_frame);
         mBouncerFrame = bouncerFrameView.getBackground();
+<<<<<<< HEAD
 
         final boolean lockBeforeUnlock = Settings.Secure.getIntForUser(
                 mContext.getContentResolver(),
@@ -262,6 +309,8 @@ public class KeyguardSelectorView extends LinearLayout implements KeyguardSecuri
                 ecaContainer.bringToFront();
             }
         }
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     public void setCarrierArea(View carrierArea) {
@@ -287,10 +336,17 @@ public class KeyguardSelectorView extends LinearLayout implements KeyguardSecuri
                 || secureCameraDisabled;
         final KeyguardUpdateMonitor monitor = KeyguardUpdateMonitor.getInstance(getContext());
         boolean disabledBySimState = monitor.isSimLocked();
+<<<<<<< HEAD
         boolean cameraPresent =
                 mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA);
         boolean searchTargetPresent =
                 isTargetPresent(com.android.internal.R.drawable.ic_action_assist_generic);
+=======
+        boolean cameraTargetPresent =
+            isTargetPresent(R.drawable.ic_lockscreen_camera);
+        boolean searchTargetPresent =
+            isTargetPresent(R.drawable.ic_action_assist_generic);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
         if (cameraDisabledByAdmin) {
             Log.v(TAG, "Camera disabled by Device Policy");
@@ -305,7 +361,11 @@ public class KeyguardSelectorView extends LinearLayout implements KeyguardSecuri
         boolean searchActionAvailable =
                 ((SearchManager) mContext.getSystemService(Context.SEARCH_SERVICE))
                 .getAssistIntent(mContext, false, UserHandle.USER_CURRENT) != null;
+<<<<<<< HEAD
         mCameraDisabled = cameraDisabledByAdmin || disabledBySimState || !cameraPresent
+=======
+        mCameraDisabled = cameraDisabledByAdmin || disabledBySimState || !cameraTargetPresent
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 || !currentUserSetup;
         mSearchDisabled = disabledBySimState || !searchActionAvailable || !searchTargetPresent
                 || !currentUserSetup;
@@ -313,6 +373,7 @@ public class KeyguardSelectorView extends LinearLayout implements KeyguardSecuri
     }
 
     public void updateResources() {
+<<<<<<< HEAD
         String storedTargets = Settings.System.getStringForUser(mContext.getContentResolver(),
                 Settings.System.LOCKSCREEN_TARGETS, UserHandle.USER_CURRENT);
         if (storedTargets == null) {
@@ -439,6 +500,29 @@ public class KeyguardSelectorView extends LinearLayout implements KeyguardSecuri
             mGlowPadView.setTargetDescriptions(description);
             mGlowPadView.setDirectionDescriptions(directionDescription);
         }
+=======
+        // Update the search icon with drawable from the search .apk
+        if (!mSearchDisabled) {
+            Intent intent = ((SearchManager) mContext.getSystemService(Context.SEARCH_SERVICE))
+                    .getAssistIntent(mContext, false, UserHandle.USER_CURRENT);
+            if (intent != null) {
+                // XXX Hack. We need to substitute the icon here but haven't formalized
+                // the public API. The "_google" metadata will be going away, so
+                // DON'T USE IT!
+                ComponentName component = intent.getComponent();
+                boolean replaced = mGlowPadView.replaceTargetDrawablesIfPresent(component,
+                        ASSIST_ICON_METADATA_NAME + "_google", R.drawable.ic_action_assist_generic);
+
+                if (!replaced && !mGlowPadView.replaceTargetDrawablesIfPresent(component,
+                            ASSIST_ICON_METADATA_NAME, R.drawable.ic_action_assist_generic)) {
+                        Slog.w(TAG, "Couldn't grab icon from package " + component);
+                }
+            }
+        }
+
+        mGlowPadView.setEnableTarget(R.drawable.ic_lockscreen_camera, !mCameraDisabled);
+        mGlowPadView.setEnableTarget(R.drawable.ic_action_assist_generic, !mSearchDisabled);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     void doTransition(View view, float to) {
@@ -451,10 +535,13 @@ public class KeyguardSelectorView extends LinearLayout implements KeyguardSecuri
 
     public void setKeyguardCallback(KeyguardSecurityCallback callback) {
         mCallback = callback;
+<<<<<<< HEAD
         mShortcuts = (KeyguardShortcuts) findViewById(R.id.shortcuts);
         if (mShortcuts != null) {
             mShortcuts.setKeyguardCallback(callback);
         }
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     public void setLockPatternUtils(LockPatternUtils utils) {

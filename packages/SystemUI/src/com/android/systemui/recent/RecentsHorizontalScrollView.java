@@ -21,7 +21,10 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.database.DataSetObserver;
 import android.graphics.Canvas;
+<<<<<<< HEAD
 import android.graphics.Rect;
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.FloatMath;
@@ -373,6 +376,7 @@ public class RecentsHorizontalScrollView extends HorizontalScrollView
     public void setCallback(RecentsCallback callback) {
         mCallback = callback;
     }
+<<<<<<< HEAD
 
     @Override
     public void onRtlPropertiesChanged(int layoutDirection) {
@@ -389,4 +393,6 @@ public class RecentsHorizontalScrollView extends HorizontalScrollView
 
         return res;
     }
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 }

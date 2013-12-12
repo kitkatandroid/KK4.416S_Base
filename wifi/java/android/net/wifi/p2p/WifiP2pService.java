@@ -194,8 +194,11 @@ public class WifiP2pService extends IWifiP2pManager.Stub {
     /* Invitation to join an existing p2p group */
     private boolean mJoinExistingGroup;
 
+<<<<<<< HEAD
     private boolean mIsInvite = false;
 
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     /* Track whether we are in p2p discovery. This is used to avoid sending duplicate
      * broadcasts
      */
@@ -1159,7 +1162,10 @@ public class WifiP2pService extends IWifiP2pManager.Stub {
                 case WifiMonitor.P2P_INVITATION_RECEIVED_EVENT:
                     WifiP2pGroup group = (WifiP2pGroup) message.obj;
                     WifiP2pDevice owner = group.getOwner();
+<<<<<<< HEAD
                     mIsInvite = true;
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
                     if (owner == null) {
                         loge("Ignored invitation from null owner");
@@ -1193,11 +1199,16 @@ public class WifiP2pService extends IWifiP2pManager.Stub {
                     break;
                 case WifiMonitor.P2P_PROV_DISC_PBC_REQ_EVENT:
                 case WifiMonitor.P2P_PROV_DISC_ENTER_PIN_EVENT:
+<<<<<<< HEAD
+=======
+                case WifiMonitor.P2P_PROV_DISC_SHOW_PIN_EVENT:
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                     //We let the supplicant handle the provision discovery response
                     //and wait instead for the GO_NEGOTIATION_REQUEST_EVENT.
                     //Handling provision discovery and issuing a p2p_connect before
                     //group negotiation comes through causes issues
                     break;
+<<<<<<< HEAD
                 case WifiMonitor.P2P_PROV_DISC_SHOW_PIN_EVENT:
                     WifiP2pProvDiscEvent provDisc = (WifiP2pProvDiscEvent) message.obj;
                     WifiP2pDevice device = provDisc.device;
@@ -1210,6 +1221,8 @@ public class WifiP2pService extends IWifiP2pManager.Stub {
                     sendPeersChangedBroadcast();
                     transitionTo(mGroupNegotiationState);
                     break;
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 case WifiP2pManager.CREATE_GROUP:
                     mAutonomousGroup = true;
                     int netId = message.arg1;
@@ -1915,11 +1928,15 @@ public class WifiP2pService extends IWifiP2pManager.Stub {
                     } else {
                         mSavedPeerConfig.wps.setup = WpsInfo.PBC;
                     }
+<<<<<<< HEAD
                     if (DBG) logd("mGroup.isGroupOwner()" + mGroup.isGroupOwner());
                     if (mGroup.isGroupOwner()) {
                         if (DBG) logd("Local device is Group Owner, transiting to mUserAuthorizingJoinState");
                         transitionTo(mUserAuthorizingJoinState);
                     }
+=======
+                    transitionTo(mUserAuthorizingJoinState);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                     break;
                 case WifiMonitor.P2P_GROUP_STARTED_EVENT:
                     loge("Duplicate group creation event notice, ignore");
@@ -2144,6 +2161,7 @@ public class WifiP2pService extends IWifiP2pManager.Stub {
         dialog.show();
     }
 
+<<<<<<< HEAD
     private void notifyP2pProvDiscShowPinRequest(String pin, String peerAddress) {
         Resources r = Resources.getSystem();
         final String tempDevAddress = peerAddress;
@@ -2174,6 +2192,8 @@ public class WifiP2pService extends IWifiP2pManager.Stub {
         dialog.show();
     }
 
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     private void notifyInvitationReceived() {
         Resources r = Resources.getSystem();
         final WpsInfo wps = mSavedPeerConfig.wps;
@@ -2354,6 +2374,7 @@ public class WifiP2pService extends IWifiP2pManager.Stub {
      * @param config for the peer
      */
     private void p2pConnectWithPinDisplay(WifiP2pConfig config) {
+<<<<<<< HEAD
         boolean join = false;
         WifiP2pDevice dev = fetchCurrentDeviceDetails(config);
 
@@ -2364,13 +2385,21 @@ public class WifiP2pService extends IWifiP2pManager.Stub {
         }
 
         String pin = mWifiNative.p2pConnect(config, join);
+=======
+        WifiP2pDevice dev = fetchCurrentDeviceDetails(config);
+
+        String pin = mWifiNative.p2pConnect(config, dev.isGroupOwner());
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         try {
             Integer.parseInt(pin);
             notifyInvitationSent(pin, config.deviceAddress);
         } catch (NumberFormatException ignore) {
             // do nothing if p2pConnect did not return a pin
         }
+<<<<<<< HEAD
         mIsInvite = false;
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     /**

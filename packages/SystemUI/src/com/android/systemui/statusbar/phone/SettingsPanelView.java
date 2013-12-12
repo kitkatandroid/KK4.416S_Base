@@ -18,6 +18,7 @@ package com.android.systemui.statusbar.phone;
 
 import android.content.Context;
 import android.content.res.Resources;
+<<<<<<< HEAD
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -28,12 +29,19 @@ import android.graphics.PorterDuff.Mode;
 import android.net.Uri;
 import android.os.UserHandle;
 import android.provider.Settings;
+=======
+import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import android.util.AttributeSet;
 import android.util.EventLog;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.accessibility.AccessibilityEvent;
+<<<<<<< HEAD
 import android.widget.ImageView;
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
 import com.android.systemui.EventLogTags;
 import com.android.systemui.R;
@@ -44,19 +52,29 @@ import com.android.systemui.statusbar.policy.LocationController;
 import com.android.systemui.statusbar.policy.NetworkController;
 import com.android.systemui.statusbar.policy.RotationLockController;
 
+<<<<<<< HEAD
 import java.io.File;
 
 public class SettingsPanelView extends PanelView {
     public static final boolean DEBUG_GESTURES = true;
 
     private QuickSettingsController mQS;
+=======
+public class SettingsPanelView extends PanelView {
+    public static final boolean DEBUG_GESTURES = true;
+
+    private QuickSettings mQS;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     private QuickSettingsContainerView mQSContainer;
 
     Drawable mHandleBar;
     int mHandleBarHeight;
     View mHandleView;
+<<<<<<< HEAD
     Drawable mBackgroundDrawable;
     ImageView mBackground;
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
     public SettingsPanelView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -72,11 +90,17 @@ public class SettingsPanelView extends PanelView {
         mHandleBar = resources.getDrawable(R.drawable.status_bar_close);
         mHandleBarHeight = resources.getDimensionPixelSize(R.dimen.close_handle_height);
         mHandleView = findViewById(R.id.handle);
+<<<<<<< HEAD
         mBackground = (ImageView) findViewById(R.id.notification_wallpaper);
         setBackgroundDrawables();
     }
 
     public void setQuickSettings(QuickSettingsController qs) {
+=======
+    }
+
+    public void setQuickSettings(QuickSettings qs) {
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         mQS = qs;
     }
 
@@ -98,6 +122,13 @@ public class SettingsPanelView extends PanelView {
     public void setup(NetworkController networkController, BluetoothController bluetoothController,
             BatteryController batteryController, LocationController locationController,
             RotationLockController rotationLockController) {
+<<<<<<< HEAD
+=======
+        if (mQS != null) {
+            mQS.setup(networkController, bluetoothController, batteryController,
+                    locationController, rotationLockController);
+        }
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     void updateResources() {
@@ -169,6 +200,7 @@ public class SettingsPanelView extends PanelView {
         }
         return super.onTouchEvent(event);
     }
+<<<<<<< HEAD
 
     private void setDefaultBackground(int resource, int color, int alpha) {
         setBackgroundResource(resource);
@@ -221,4 +253,6 @@ public class SettingsPanelView extends PanelView {
         }
     }
 
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 }

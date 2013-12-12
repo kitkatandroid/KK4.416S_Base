@@ -18,7 +18,10 @@ package com.android.systemui.recent;
 
 import android.app.ActivityOptions;
 import android.content.ActivityNotFoundException;
+<<<<<<< HEAD
 import android.content.Context;
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -27,6 +30,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+<<<<<<< HEAD
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
@@ -39,6 +43,14 @@ import android.view.View;
 
 import com.android.internal.util.slim.DeviceUtils;
 
+=======
+import android.os.UserHandle;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.Display;
+import android.view.View;
+
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import com.android.systemui.R;
 import com.android.systemui.RecentsComponent;
 import com.android.systemui.SystemUI;
@@ -78,6 +90,7 @@ public class Recents extends SystemUI implements RecentsComponent {
                 }
 
             } else {
+<<<<<<< HEAD
                 final IWindowManager windowManagerService = IWindowManager.Stub.asInterface(
                         ServiceManager.getService(Context.WINDOW_SERVICE));
 
@@ -102,6 +115,8 @@ public class Recents extends SystemUI implements RecentsComponent {
                 } catch (RemoteException e) {
                 }
 
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 Bitmap first = null;
                 if (firstTask.getThumbnail() instanceof BitmapDrawable) {
                     first = ((BitmapDrawable) firstTask.getThumbnail()).getBitmap();
@@ -160,6 +175,7 @@ public class Recents extends SystemUI implements RecentsComponent {
                         x = dm.widthPixels - x - res.getDimensionPixelSize(
                                 R.dimen.status_bar_recents_thumbnail_width);
                     }
+<<<<<<< HEAD
                     if (expandedDesktopHidesNavigationBar) {
                         y += getCurrentNavigationBarSize;
                     }
@@ -170,6 +186,10 @@ public class Recents extends SystemUI implements RecentsComponent {
                             DeviceUtils.isPhone(mContext) ? 1 : 0,
                             UserHandle.USER_CURRENT) == 1;
 
+=======
+
+                } else { // if (config.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                     float thumbTopMargin = res.getDimensionPixelSize(
                             R.dimen.status_bar_recents_thumbnail_top_margin);
                     float thumbBgPadding = res.getDimensionPixelSize(
@@ -191,9 +211,13 @@ public class Recents extends SystemUI implements RecentsComponent {
                     float statusBarHeight = res.getDimensionPixelSize(
                             com.android.internal.R.dimen.status_bar_height);
                     float recentsItemTopPadding = statusBarHeight;
+<<<<<<< HEAD
                     if (expandedDesktopHidesStatusBar) {
                         statusBarHeight = 0;
                     }
+=======
+
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                     float height = thumbTopMargin
                             + thumbHeight
                             + 2 * thumbBgPadding + textPadding + labelTextHeight
@@ -208,6 +232,7 @@ public class Recents extends SystemUI implements RecentsComponent {
                             - recentsScrollViewRightPadding);
                     y = (int) ((dm.heightPixels - statusBarHeight - height) / 2f + thumbTopMargin
                             + recentsItemTopPadding + thumbBgPadding + statusBarHeight);
+<<<<<<< HEAD
                     if (expandedDesktopHidesNavigationBar) {
                         if (navigationBarCanMove) {
                             x += getCurrentNavigationBarSize;
@@ -215,6 +240,8 @@ public class Recents extends SystemUI implements RecentsComponent {
                             y += (int) (getCurrentNavigationBarSize / 2f);
                         }
                     }
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 }
 
                 ActivityOptions opts = ActivityOptions.makeThumbnailScaleDownAnimation(

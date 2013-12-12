@@ -75,11 +75,14 @@ to allow the user to enjoy full screen content without distraction.</p>
   the traditional hardware keys. It houses the device navigation controls Back, Home, and
   Recents, and also displays a menu for apps written for Android 2.3 or earlier.</p>
 </li>
+<<<<<<< HEAD
 <li>
 <h4>Combined Bar</h4>
 <p>On tablet form factors the status and navigation bars are combined into a single bar at the
   bottom of the screen.</p>
 </li>
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 </ol>
 
 </div>
@@ -101,7 +104,13 @@ notification opens the associated app. <a href="{@docRoot}design/patterns/notifi
 
     <img src="{@docRoot}design/media/notifications_dismiss.png">
 
+<<<<<<< HEAD
 <p>Notifications can be expanded to uncover more details and relevant actions. When collapsed, notifications have a one-line title and a one-line message.The recommended layout for a notification includes two lines. If necessary, you can add a third line.</p>
+=======
+<p>Notifications can be expanded to uncover more details and relevant actions. When collapsed, notifications
+  have a one-line title and a one-line message.The recommended layout for a notification includes two lines.
+  If necessary, you can add a third line.</p>
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 <p>Swiping a notification right or left removes it from the notification drawer.</p>
 
   </div>
@@ -114,11 +123,16 @@ notification opens the associated app. <a href="{@docRoot}design/patterns/notifi
 <div class="layout-content-row">
   <div class="layout-content-col span-7">
 
+<<<<<<< HEAD
     <img src="{@docRoot}design/media/ui_overview_app_ui.png">
+=======
+    <img src="{@docRoot}design/media/app_structure_drawer.png">
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
   </div>
   <div class="layout-content-col span-6 with-callouts">
 
+<<<<<<< HEAD
 <p>A typical Android app consists of action bars and the app content area.</p>
 <ol>
 <li>
@@ -131,17 +145,36 @@ notification opens the associated app. <a href="{@docRoot}design/patterns/notifi
 <h4>View Control</h4>
 <p>Allows users to switch between the different views that your app provides. Views typically
   consist of different arrangements of your data or different functional aspects of your app.</p>
+=======
+<p>A typical Android app uses action bars, and many apps will include a navigation drawer.</p>
+<ol>
+<li>
+<h4>Action Bar</h4>
+<p>The command and control center for your app. The action bar surfaces the most important actions
+  for the current view, and may include simple controls for switching between views.</p>
+<p><a href="{@docRoot}design/patterns/actionbar.html">More on the Action Bar</a></p>
+</li>
+<li>
+<h4>Navigation Drawer</h4>
+<p>If your app's structure is more complex, the navigation drawer can display the main navigation
+  options. The navigation drawer expands from the left edge of the screen, overlaying the content
+  area but not the action bar.</p>
+<p><a href="{@docRoot}design/patterns/navigation-drawer.html">More on the Navigation Drawer</a></p>
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 </li>
 <li>
 <h4>Content Area</h4>
 <p>The space where the content of your app is displayed.</p>
 </li>
+<<<<<<< HEAD
 <li>
 <h4>Split Action Bar</h4>
 <p>Split action bars provide a way to distribute actions across additional bars located below
   the main action bar or at the bottom of the screen. In this example, a split action bar moves
   important actions that won't fit in the main bar to the bottom.</p>
 </li>
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 </ol>
 
   </div>

@@ -107,7 +107,11 @@ public class Am extends BaseCommand {
                 "       am switch-user <USER_ID>\n" +
                 "       am stop-user <USER_ID>\n" +
                 "       am stack create <TASK_ID> <RELATIVE_STACK_BOX_ID> <POSITION> <WEIGHT>\n" +
+<<<<<<< HEAD
                 "       am stack movetask <STACK_ID> <TASK_ID> [true|false]\n" +
+=======
+                "       am stack movetask <TASK_ID> <STACK_ID> [true|false]\n" +
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 "       am stack resize <STACK_ID> <WEIGHT>\n" +
                 "       am stack boxes\n" +
                 "       am stack box <STACK_BOX_ID>\n" +

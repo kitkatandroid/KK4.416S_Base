@@ -47,6 +47,10 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CancellationSignal;
+<<<<<<< HEAD
+=======
+import android.os.OperationCanceledException;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import android.os.Parcelable;
 import android.provider.DocumentsContract;
 import android.provider.DocumentsContract.Document;
@@ -76,6 +80,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.documentsui.DocumentsActivity.State;
+<<<<<<< HEAD
+=======
+import com.android.documentsui.ProviderExecutor.Preemptable;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import com.android.documentsui.RecentsProvider.StateColumns;
 import com.android.documentsui.model.DocumentInfo;
 import com.android.documentsui.model.RootInfo;
@@ -83,7 +91,10 @@ import com.google.android.collect.Lists;
 
 import java.util.ArrayList;
 import java.util.List;
+<<<<<<< HEAD
 import java.util.concurrent.atomic.AtomicInteger;
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
 /**
  * Display the documents inside a single directory.
@@ -126,9 +137,13 @@ public class DirectoryFragment extends Fragment {
     private static final String EXTRA_QUERY = "query";
     private static final String EXTRA_IGNORE_STATE = "ignoreState";
 
+<<<<<<< HEAD
     private static AtomicInteger sLoaderId = new AtomicInteger(4000);
 
     private final int mLoaderId = sLoaderId.incrementAndGet();
+=======
+    private final int mLoaderId = 42;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
     public static void showNormal(FragmentManager fm, RootInfo root, DocumentInfo doc, int anim) {
         show(fm, TYPE_NORMAL, root, doc, null, anim);
@@ -528,7 +543,11 @@ public class DirectoryFragment extends Fragment {
             if (iconThumb != null) {
                 final ThumbnailAsyncTask oldTask = (ThumbnailAsyncTask) iconThumb.getTag();
                 if (oldTask != null) {
+<<<<<<< HEAD
                     oldTask.reallyCancel();
+=======
+                    oldTask.preempt();
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                     iconThumb.setTag(null);
                 }
             }
@@ -794,7 +813,11 @@ public class DirectoryFragment extends Fragment {
 
             final ThumbnailAsyncTask oldTask = (ThumbnailAsyncTask) iconThumb.getTag();
             if (oldTask != null) {
+<<<<<<< HEAD
                 oldTask.reallyCancel();
+=======
+                oldTask.preempt();
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 iconThumb.setTag(null);
             }
 
@@ -818,7 +841,11 @@ public class DirectoryFragment extends Fragment {
                     final ThumbnailAsyncTask task = new ThumbnailAsyncTask(
                             uri, iconMime, iconThumb, mThumbSize);
                     iconThumb.setTag(task);
+<<<<<<< HEAD
                     task.executeOnExecutor(ProviderExecutor.forAuthority(docAuthority));
+=======
+                    ProviderExecutor.forAuthority(docAuthority).execute(task);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 }
             }
 
@@ -988,7 +1015,12 @@ public class DirectoryFragment extends Fragment {
         }
     }
 
+<<<<<<< HEAD
     private static class ThumbnailAsyncTask extends AsyncTask<Uri, Void, Bitmap> {
+=======
+    private static class ThumbnailAsyncTask extends AsyncTask<Uri, Void, Bitmap>
+            implements Preemptable {
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         private final Uri mUri;
         private final ImageView mIconMime;
         private final ImageView mIconThumb;
@@ -1004,7 +1036,12 @@ public class DirectoryFragment extends Fragment {
             mSignal = new CancellationSignal();
         }
 
+<<<<<<< HEAD
         public void reallyCancel() {
+=======
+        @Override
+        public void preempt() {
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             cancel(false);
             mSignal.cancel();
         }
@@ -1028,7 +1065,13 @@ public class DirectoryFragment extends Fragment {
                     thumbs.put(mUri, result);
                 }
             } catch (Exception e) {
+<<<<<<< HEAD
                 Log.w(TAG, "Failed to load thumbnail for " + mUri + ": " + e);
+=======
+                if (!(e instanceof OperationCanceledException)) {
+                    Log.w(TAG, "Failed to load thumbnail for " + mUri + ": " + e);
+                }
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             } finally {
                 ContentProviderClient.releaseQuietly(client);
             }

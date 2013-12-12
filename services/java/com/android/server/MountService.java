@@ -62,6 +62,10 @@ import android.util.Xml;
 import com.android.internal.annotations.GuardedBy;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.app.IMediaContainerService;
+<<<<<<< HEAD
+=======
+import com.android.internal.util.IndentingPrintWriter;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import com.android.internal.util.Preconditions;
 import com.android.internal.util.XmlUtils;
 import com.android.server.NativeDaemonConnector.Command;
@@ -173,6 +177,11 @@ class MountService extends IMountService.Stub
          * 600 series - Unsolicited broadcasts.
          */
         public static final int VolumeStateChange              = 605;
+<<<<<<< HEAD
+=======
+        public static final int VolumeUuidChange               = 613;
+        public static final int VolumeUserLabelChange          = 614;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         public static final int VolumeDiskInserted             = 630;
         public static final int VolumeDiskRemoved              = 631;
         public static final int VolumeBadRemoval               = 632;
@@ -661,6 +670,10 @@ class MountService extends IMountService.Stub
         final String oldState;
         synchronized (mVolumesLock) {
             oldState = mVolumeStates.put(path, state);
+<<<<<<< HEAD
+=======
+            volume.setState(state);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
 
         if (state.equals(oldState)) {
@@ -801,6 +814,29 @@ class MountService extends IMountService.Stub
             notifyVolumeStateChange(
                     cooked[2], cooked[3], Integer.parseInt(cooked[7]),
                             Integer.parseInt(cooked[10]));
+<<<<<<< HEAD
+=======
+        } else if (code == VoldResponseCode.VolumeUuidChange) {
+            // Format: nnn <label> <path> <uuid>
+            final String path = cooked[2];
+            final String uuid = (cooked.length > 3) ? cooked[3] : null;
+
+            final StorageVolume vol = mVolumesByPath.get(path);
+            if (vol != null) {
+                vol.setUuid(uuid);
+            }
+
+        } else if (code == VoldResponseCode.VolumeUserLabelChange) {
+            // Format: nnn <label> <path> <label>
+            final String path = cooked[2];
+            final String userLabel = (cooked.length > 3) ? cooked[3] : null;
+
+            final StorageVolume vol = mVolumesByPath.get(path);
+            if (vol != null) {
+                vol.setUserLabel(userLabel);
+            }
+
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         } else if ((code == VoldResponseCode.VolumeDiskInserted) ||
                    (code == VoldResponseCode.VolumeDiskRemoved) ||
                    (code == VoldResponseCode.VolumeBadRemoval)) {
@@ -1230,6 +1266,10 @@ class MountService extends IMountService.Stub
 
                             // Until we hear otherwise, treat as unmounted
                             mVolumeStates.put(volume.getPath(), Environment.MEDIA_UNMOUNTED);
+<<<<<<< HEAD
+=======
+                            volume.setState(Environment.MEDIA_UNMOUNTED);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                         }
                     }
 
@@ -1273,6 +1313,10 @@ class MountService extends IMountService.Stub
         } else {
             // Place stub status for early callers to find
             mVolumeStates.put(volume.getPath(), Environment.MEDIA_MOUNTED);
+<<<<<<< HEAD
+=======
+            volume.setState(Environment.MEDIA_MOUNTED);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
     }
 
@@ -2743,6 +2787,7 @@ class MountService extends IMountService.Stub
     }
 
     @Override
+<<<<<<< HEAD
     protected void dump(FileDescriptor fd, PrintWriter pw, String[] args) {
         if (mContext.checkCallingOrSelfPermission(android.Manifest.permission.DUMP) != PackageManager.PERMISSION_GRANTED) {
             pw.println("Permission Denial: can't dump ActivityManager from from pid="
@@ -2791,6 +2836,61 @@ class MountService extends IMountService.Stub
         pw.println();
         pw.println("  mConnection:");
         mConnector.dump(fd, pw, args);
+=======
+    protected void dump(FileDescriptor fd, PrintWriter writer, String[] args) {
+        mContext.enforceCallingOrSelfPermission(android.Manifest.permission.DUMP, TAG);
+
+        final IndentingPrintWriter pw = new IndentingPrintWriter(writer, "  ", 160);
+
+        synchronized (mObbMounts) {
+            pw.println("mObbMounts:");
+            pw.increaseIndent();
+            final Iterator<Entry<IBinder, List<ObbState>>> binders = mObbMounts.entrySet()
+                    .iterator();
+            while (binders.hasNext()) {
+                Entry<IBinder, List<ObbState>> e = binders.next();
+                pw.println(e.getKey() + ":");
+                pw.increaseIndent();
+                final List<ObbState> obbStates = e.getValue();
+                for (final ObbState obbState : obbStates) {
+                    pw.println(obbState);
+                }
+                pw.decreaseIndent();
+            }
+            pw.decreaseIndent();
+
+            pw.println();
+            pw.println("mObbPathToStateMap:");
+            pw.increaseIndent();
+            final Iterator<Entry<String, ObbState>> maps = mObbPathToStateMap.entrySet().iterator();
+            while (maps.hasNext()) {
+                final Entry<String, ObbState> e = maps.next();
+                pw.print(e.getKey());
+                pw.print(" -> ");
+                pw.println(e.getValue());
+            }
+            pw.decreaseIndent();
+        }
+
+        synchronized (mVolumesLock) {
+            pw.println();
+            pw.println("mVolumes:");
+            pw.increaseIndent();
+            for (StorageVolume volume : mVolumes) {
+                pw.println(volume);
+                pw.increaseIndent();
+                pw.println("Current state: " + mVolumeStates.get(volume.getPath()));
+                pw.decreaseIndent();
+            }
+            pw.decreaseIndent();
+        }
+
+        pw.println();
+        pw.println("mConnection:");
+        pw.increaseIndent();
+        mConnector.dump(fd, pw, args);
+        pw.decreaseIndent();
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     /** {@inheritDoc} */

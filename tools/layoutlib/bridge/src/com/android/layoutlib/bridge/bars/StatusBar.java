@@ -45,10 +45,14 @@ public class StatusBar extends CustomBar {
         // We do know the order though.
         // 0 is the spacer
         loadIcon(1, "stat_sys_wifi_signal_4_fully.png", density);
+<<<<<<< HEAD
         Drawable drawable = loadIcon(2, ResourceType.DRAWABLE, "stat_sys_battery_charge");
         if (drawable instanceof LevelListDrawable) {
             ((LevelListDrawable) drawable).setLevel(100);
         }
+=======
+        loadIcon(2, "stat_sys_battery_charge_anim100.png", density);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     @Override

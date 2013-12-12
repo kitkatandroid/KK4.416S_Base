@@ -184,12 +184,27 @@ public class ICU_Delegate {
         result.longStandAloneMonthNames = result.longMonthNames;
         result.shortStandAloneMonthNames = result.shortMonthNames;
 
+<<<<<<< HEAD
         result.longWeekdayNames = new String[] {
                 "Monday" ,"Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
         result.shortWeekdayNames = new String[] {
                 "Mon" ,"Tue", "Wed", "Thu", "Fri", "Sat", "Sun" };
         result.longStandAloneWeekdayNames = result.longWeekdayNames;
         result.shortStandAloneWeekdayNames = result.shortWeekdayNames;
+=======
+        // The platform code expects this to begin at index 1, rather than 0. It maps it directly to
+        // the constants from java.util.Calendar.<weekday>
+        result.longWeekdayNames = new String[] {
+                "", "Sunday", "Monday" ,"Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
+        result.shortWeekdayNames = new String[] {
+                "", "Sun", "Mon" ,"Tue", "Wed", "Thu", "Fri", "Sat" };
+        result.tinyWeekdayNames = new String[] {
+                "", "S", "M", "T", "W", "T", "F", "S" };
+
+        result.longStandAloneWeekdayNames = result.longWeekdayNames;
+        result.shortStandAloneWeekdayNames = result.shortWeekdayNames;
+        result.tinyStandAloneWeekdayNames = result.tinyWeekdayNames;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
         result.fullTimeFormat = "";
         result.longTimeFormat = "";

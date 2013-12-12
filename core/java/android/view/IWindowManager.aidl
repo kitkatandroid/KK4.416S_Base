@@ -19,7 +19,10 @@ package android.view;
 import com.android.internal.view.IInputContext;
 import com.android.internal.view.IInputMethodClient;
 
+<<<<<<< HEAD
 import android.content.Intent;
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import android.content.res.CompatibilityInfo;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
@@ -79,7 +82,12 @@ interface IWindowManager
     void addWindowToken(IBinder token, int type);
     void removeWindowToken(IBinder token);
     void addAppToken(int addPos, IApplicationToken token, int groupId, int stackId,
+<<<<<<< HEAD
             int requestedOrientation, boolean fullscreen, boolean showWhenLocked, int userId);
+=======
+            int requestedOrientation, boolean fullscreen, boolean showWhenLocked, int userId,
+            int configChanges);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     void setAppGroupId(IBinder token, int groupId);
     void setAppOrientation(IApplicationToken token, int requestedOrientation);
     int getAppOrientation(IApplicationToken token);
@@ -121,6 +129,7 @@ interface IWindowManager
     boolean inKeyguardRestrictedInputMode();
     void dismissKeyguard();
 
+<<<<<<< HEAD
     /**
      * Tell keyguard to show a custom intent after asking for the user's
      * credentials.
@@ -128,6 +137,8 @@ interface IWindowManager
      */
     void showCustomIntentOnKeyguard(inout Intent intent);
 
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     void closeSystemDialogs(String reason);
 
     // These can only be called with the SET_ANIMATON_SCALE permission.
@@ -219,7 +230,11 @@ interface IWindowManager
     /**
      * Called by the status bar to notify Views of changes to System UI visiblity.
      */
+<<<<<<< HEAD
     void statusBarVisibilityChanged(int visibility);
+=======
+    oneway void statusBarVisibilityChanged(int visibility);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
     /**
      * Block until the given window has been drawn to the screen.
@@ -289,6 +304,7 @@ interface IWindowManager
      * @param enabled Whether touch exploration is enabled.
      */
     void setTouchExplorationEnabled(boolean enabled);
+<<<<<<< HEAD
 
     /**
      * Get the current navigation bar state when expanded desktop is enabled.
@@ -311,4 +327,6 @@ interface IWindowManager
      * @hide
      */
     int getCurrentNavigationBarSize();
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 }

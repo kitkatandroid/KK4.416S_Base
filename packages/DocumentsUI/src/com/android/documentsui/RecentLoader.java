@@ -55,6 +55,13 @@ import java.util.concurrent.TimeUnit;
 public class RecentLoader extends AsyncTaskLoader<DirectoryResult> {
     private static final boolean LOGD = true;
 
+<<<<<<< HEAD
+=======
+    // TODO: clean up cursor ownership so background thread doesn't traverse
+    // previously returned cursors for filtering/sorting; this currently races
+    // with the UI thread.
+
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     private static final int MAX_OUTSTANDING_RECENTS = 4;
     private static final int MAX_OUTSTANDING_RECENTS_SVELTE = 2;
 

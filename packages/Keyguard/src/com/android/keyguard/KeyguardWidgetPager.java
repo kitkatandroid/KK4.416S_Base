@@ -194,7 +194,13 @@ public class KeyguardWidgetPager extends PagedView implements PagedView.PageSwit
 
     @Override
     public void onPageEndWarp() {
+<<<<<<< HEAD
         hideOutlinesAndSidePages();
+=======
+        // if we're moving to the warp page, then immediately hide the other widgets.
+        int duration = getPageWarpIndex() == getNextPage() ? 0 : -1;
+        animateOutlinesAndSidePages(false, duration);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         mViewStateManager.onPageEndWarp();
     }
 
@@ -669,7 +675,11 @@ public class KeyguardWidgetPager extends PagedView implements PagedView.PageSwit
                 // On the very first measure pass, if the challenge is showing, we need to make sure
                 // that the widget on the current page is small.
                 if (challengeShowing && i == mCurrentPage && !mHasMeasure) {
+<<<<<<< HEAD
                     frame.shrinkWidget();
+=======
+                    frame.shrinkWidget(true);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 }
             }
         }

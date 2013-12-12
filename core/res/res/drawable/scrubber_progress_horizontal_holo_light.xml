@@ -19,10 +19,18 @@
             android:drawable="@android:drawable/scrubber_track_holo_light" />
     <item android:id="@android:id/secondaryProgress">
         <scale android:scaleWidth="100%"
+<<<<<<< HEAD
                android:drawable="@android:drawable/scrubber_secondary_holo_light" />
     </item>
     <item android:id="@android:id/progress">
         <scale android:scaleWidth="100%"
                android:drawable="@android:drawable/scrubber_primary_holo_light" />
+=======
+               android:drawable="@android:drawable/scrubber_secondary_holo" />
+    </item>
+    <item android:id="@android:id/progress">
+        <scale android:scaleWidth="100%"
+               android:drawable="@android:drawable/scrubber_primary_holo" />
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     </item>
 </layer-list>

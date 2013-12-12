@@ -1,9 +1,12 @@
 /*
  * Copyright (C) 2007 The Android Open Source Project
+<<<<<<< HEAD
  * Copyright (c) 2010-2013, The Linux Foundation. All rights reserved.
  *
  * Not a Contribution. Apache license notifications and license are
  * retained for attribution purposes only.
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,7 +43,10 @@ import static com.android.server.NetworkManagementService.NetdResponseCode.TtyLi
 import static com.android.server.NetworkManagementSocketTagger.PROP_QTAGUID_ENABLED;
 
 import android.content.Context;
+<<<<<<< HEAD
 import android.content.res.Resources;
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import android.net.INetworkManagementEventObserver;
 import android.net.InterfaceConfiguration;
 import android.net.LinkAddress;
@@ -59,11 +65,17 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.SystemClock;
 import android.os.SystemProperties;
+<<<<<<< HEAD
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Slog;
 import android.util.SparseBooleanArray;
 import java.util.List;
+=======
+import android.util.Log;
+import android.util.Slog;
+import android.util.SparseBooleanArray;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
 import com.android.internal.app.IBatteryStats;
 import com.android.internal.net.NetworkStatsFactory;
@@ -82,12 +94,18 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Inet4Address;
+<<<<<<< HEAD
 import java.net.Inet6Address;
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import java.net.InetAddress;
 import java.net.InterfaceAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
+<<<<<<< HEAD
 import java.net.UnknownHostException;
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -129,7 +147,10 @@ public class NetworkManagementService extends INetworkManagementService.Stub
         public static final int TtyListResult             = 113;
         public static final int TetheringStatsListResult  = 114;
 
+<<<<<<< HEAD
         public static final int CommandOkay               = 200;
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         public static final int TetherStatusResult        = 210;
         public static final int IpFwdStatusResult         = 211;
         public static final int InterfaceGetCfgResult     = 213;
@@ -141,7 +162,10 @@ public class NetworkManagementService extends INetworkManagementService.Stub
         public static final int DnsProxyQueryResult       = 222;
         public static final int ClatdStatusResult         = 223;
         public static final int GetMarkResult             = 225;
+<<<<<<< HEAD
         public static final int V6RtrAdvResult            = 226;
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
         public static final int InterfaceChange           = 600;
         public static final int BandwidthControl          = 601;
@@ -574,6 +598,7 @@ public class NetworkManagementService extends INetworkManagementService.Stub
     }
 
     @Override
+<<<<<<< HEAD
     public void addUpstreamV6Interface(String iface) throws IllegalStateException {
         mContext.enforceCallingOrSelfPermission(
                 android.Manifest.permission.ACCESS_NETWORK_STATE, "NetworkManagementService");
@@ -607,6 +632,8 @@ public class NetworkManagementService extends INetworkManagementService.Stub
     }
 
     @Override
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     public InterfaceConfiguration getInterfaceConfig(String iface) {
         mContext.enforceCallingOrSelfPermission(CONNECTIVITY_INTERNAL, TAG);
 
@@ -1119,10 +1146,14 @@ public class NetworkManagementService extends INetworkManagementService.Stub
             WifiConfiguration wifiConfig, String wlanIface) {
         mContext.enforceCallingOrSelfPermission(CONNECTIVITY_INTERNAL, TAG);
         try {
+<<<<<<< HEAD
             if (mContext.getResources().getBoolean(
                         com.android.internal.R.bool.config_wifiApFirmwareReload)) {
                 wifiFirmwareReload(wlanIface, "AP");
             }
+=======
+            wifiFirmwareReload(wlanIface, "AP");
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             if (wifiConfig == null) {
                 mConnector.execute("softap", "set", wlanIface);
             } else {
@@ -1820,6 +1851,7 @@ public class NetworkManagementService extends INetworkManagementService.Stub
 
         pw.print("Firewall enabled: "); pw.println(mFirewallEnabled);
     }
+<<<<<<< HEAD
 
     @Override
     public boolean replaceSrcRoute(String iface, byte[] ip, byte[] gateway, int routeId) {
@@ -1954,4 +1986,6 @@ public class NetworkManagementService extends INetworkManagementService.Stub
         }
         return true;
     }
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 }

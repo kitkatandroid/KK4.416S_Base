@@ -175,11 +175,15 @@ static void agps_status_callback(AGpsStatus* agps_status)
     uint32_t ipaddr;
     // ipaddr field was not included in original AGpsStatus
     if (agps_status->size >= sizeof(AGpsStatus))
+<<<<<<< HEAD
 #ifdef NEW_QC_GPS
         ipaddr = agps_status->ipv4_addr;
 #else
         ipaddr = agps_status->ipaddr;
 #endif
+=======
+        ipaddr = agps_status->ipaddr;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     else
         ipaddr = 0xFFFFFFFF;
     env->CallVoidMethod(mCallbacksObj, method_reportAGpsStatus,
@@ -490,7 +494,11 @@ static jint android_location_GpsLocationProvider_read_sv_status(JNIEnv* env, job
 }
 
 static void android_location_GpsLocationProvider_agps_set_reference_location_cellid(JNIEnv* env,
+<<<<<<< HEAD
         jobject obj, jint type, jint mcc, jint mnc, jint lac, jint psc, jint cid)
+=======
+        jobject obj, jint type, jint mcc, jint mnc, jint lac, jint cid)
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 {
     AGpsRefLocation location;
 
@@ -503,6 +511,7 @@ static void android_location_GpsLocationProvider_agps_set_reference_location_cel
         case AGPS_REF_LOCATION_TYPE_GSM_CELLID:
         case AGPS_REF_LOCATION_TYPE_UMTS_CELLID:
             location.type = type;
+<<<<<<< HEAD
             location.u.cellID.type = type;
             location.u.cellID.mcc = mcc;
             location.u.cellID.mnc = mnc;
@@ -510,6 +519,11 @@ static void android_location_GpsLocationProvider_agps_set_reference_location_cel
 #ifdef AGPS_USE_PSC
             location.u.cellID.psc = psc;
 #endif
+=======
+            location.u.cellID.mcc = mcc;
+            location.u.cellID.mnc = mnc;
+            location.u.cellID.lac = lac;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             location.u.cellID.cid = cid;
             break;
         default:
@@ -606,11 +620,15 @@ static void android_location_GpsLocationProvider_agps_data_conn_open(JNIEnv* env
         return;
     }
     const char *apnStr = env->GetStringUTFChars(apn, NULL);
+<<<<<<< HEAD
 #ifdef NEW_QC_GPS
     sAGpsInterface->data_conn_open(0, apnStr, 0);
 #else
     sAGpsInterface->data_conn_open(apnStr);
 #endif
+=======
+    sAGpsInterface->data_conn_open(apnStr);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     env->ReleaseStringUTFChars(apn, apnStr);
 }
 
@@ -620,11 +638,15 @@ static void android_location_GpsLocationProvider_agps_data_conn_closed(JNIEnv* e
         ALOGE("no AGPS interface in agps_data_conn_closed");
         return;
     }
+<<<<<<< HEAD
 #ifdef NEW_QC_GPS
     sAGpsInterface->data_conn_closed(0);
 #else
     sAGpsInterface->data_conn_closed();
 #endif
+=======
+    sAGpsInterface->data_conn_closed();
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 }
 
 static void android_location_GpsLocationProvider_agps_data_conn_failed(JNIEnv* env, jobject obj)
@@ -633,11 +655,15 @@ static void android_location_GpsLocationProvider_agps_data_conn_failed(JNIEnv* e
         ALOGE("no AGPS interface in agps_data_conn_failed");
         return;
     }
+<<<<<<< HEAD
 #ifdef NEW_QC_GPS
     sAGpsInterface->data_conn_failed(0);
 #else
     sAGpsInterface->data_conn_failed();
 #endif
+=======
+    sAGpsInterface->data_conn_failed();
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 }
 
 static void android_location_GpsLocationProvider_set_agps_server(JNIEnv* env, jobject obj,
@@ -776,7 +802,11 @@ static JNINativeMethod sMethods[] = {
     {"native_agps_data_conn_closed", "()V", (void*)android_location_GpsLocationProvider_agps_data_conn_closed},
     {"native_agps_data_conn_failed", "()V", (void*)android_location_GpsLocationProvider_agps_data_conn_failed},
     {"native_agps_set_id","(ILjava/lang/String;)V",(void*)android_location_GpsLocationProvider_agps_set_id},
+<<<<<<< HEAD
     {"native_agps_set_ref_location_cellid","(IIIIII)V",(void*)android_location_GpsLocationProvider_agps_set_reference_location_cellid},
+=======
+    {"native_agps_set_ref_location_cellid","(IIIII)V",(void*)android_location_GpsLocationProvider_agps_set_reference_location_cellid},
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     {"native_set_agps_server", "(ILjava/lang/String;I)V", (void*)android_location_GpsLocationProvider_set_agps_server},
     {"native_send_ni_response", "(II)V", (void*)android_location_GpsLocationProvider_send_ni_response},
     {"native_agps_ni_message", "([BI)V", (void *)android_location_GpsLocationProvider_agps_send_ni_message},

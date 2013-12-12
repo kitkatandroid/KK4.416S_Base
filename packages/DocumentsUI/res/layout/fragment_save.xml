@@ -51,6 +51,7 @@
             android:singleLine="true"
             android:selectAllOnFocus="true" />
 
+<<<<<<< HEAD
         <Button
             android:id="@android:id/button1"
             android:layout_width="wrap_content"
@@ -60,6 +61,33 @@
             android:textAllCaps="true"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:padding="8dp" />
+=======
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@android:id/button1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="?android:attr/selectableItemBackground"
+                android:text="@string/menu_save"
+                android:textAllCaps="true"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:padding="8dp" />
+
+            <ProgressBar
+                android:id="@android:id/progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                android:indeterminate="true"
+                android:padding="8dp"
+                style="?android:attr/progressBarStyle" />
+
+        </FrameLayout>
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
     </LinearLayout>
 

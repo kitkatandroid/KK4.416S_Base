@@ -994,6 +994,7 @@ public abstract class Transition implements Cloneable {
      * false otherwise
      */
     void captureValues(ViewGroup sceneRoot, boolean start) {
+<<<<<<< HEAD
         if (start) {
             mStartValues.viewValues.clear();
             mStartValues.idValues.clear();
@@ -1003,6 +1004,9 @@ public abstract class Transition implements Cloneable {
             mEndValues.idValues.clear();
             mEndValues.itemIdValues.clear();
         }
+=======
+        clearValues(start);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         if (mTargetIds.size() > 0 || mTargets.size() > 0) {
             if (mTargetIds.size() > 0) {
                 for (int i = 0; i < mTargetIds.size(); ++i) {
@@ -1055,6 +1059,26 @@ public abstract class Transition implements Cloneable {
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * Clear valuesMaps for specified start/end state
+     *
+     * @param start true if the start values should be cleared, false otherwise
+     */
+    void clearValues(boolean start) {
+        if (start) {
+            mStartValues.viewValues.clear();
+            mStartValues.idValues.clear();
+            mStartValues.itemIdValues.clear();
+        } else {
+            mEndValues.viewValues.clear();
+            mEndValues.idValues.clear();
+            mEndValues.itemIdValues.clear();
+        }
+    }
+
+    /**
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
      * Recursive method which captures values for an entire view hierarchy,
      * starting at some root view. Transitions without targetIDs will use this
      * method to capture values for all possible views.
@@ -1246,7 +1270,12 @@ public abstract class Transition implements Cloneable {
             Animator anim = runningAnimators.keyAt(i);
             if (anim != null) {
                 AnimationInfo oldInfo = runningAnimators.get(anim);
+<<<<<<< HEAD
                 if (oldInfo != null) {
+=======
+                if (oldInfo != null && oldInfo.view != null &&
+                        oldInfo.view.getContext() == sceneRoot.getContext()) {
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                     boolean cancel = false;
                     TransitionValues oldValues = oldInfo.values;
                     View oldView = oldInfo.view;

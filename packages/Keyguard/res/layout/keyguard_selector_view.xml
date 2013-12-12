@@ -39,6 +39,7 @@
         android:clipToPadding="false"
         android:gravity="center">
 
+<<<<<<< HEAD
         <LinearLayout
             android:id="@+id/keyguard_message_and_shortcuts"
             android:orientation="vertical"
@@ -58,6 +59,11 @@
                 android:layout_gravity="top"/>
 
         </LinearLayout>
+=======
+        <include layout="@layout/keyguard_message_area"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
         <View
             android:id="@+id/keyguard_selector_view_frame"

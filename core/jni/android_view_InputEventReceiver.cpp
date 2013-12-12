@@ -56,7 +56,12 @@ public:
     status_t initialize();
     void dispose();
     status_t finishInputEvent(uint32_t seq, bool handled);
+<<<<<<< HEAD
     status_t consumeEvents(JNIEnv* env, bool consumeBatches, nsecs_t frameTime);
+=======
+    status_t consumeEvents(JNIEnv* env, bool consumeBatches, nsecs_t frameTime,
+            bool* outConsumedBatch);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
 protected:
     virtual ~NativeInputEventReceiver();
@@ -167,7 +172,11 @@ int NativeInputEventReceiver::handleEvent(int receiveFd, int events, void* data)
 
     if (events & ALOOPER_EVENT_INPUT) {
         JNIEnv* env = AndroidRuntime::getJNIEnv();
+<<<<<<< HEAD
         status_t status = consumeEvents(env, false /*consumeBatches*/, -1);
+=======
+        status_t status = consumeEvents(env, false /*consumeBatches*/, -1, NULL);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         mMessageQueue->raiseAndClearException(env, "handleReceiveCallback");
         return status == OK || status == NO_MEMORY ? 1 : 0;
     }
@@ -214,7 +223,11 @@ int NativeInputEventReceiver::handleEvent(int receiveFd, int events, void* data)
 }
 
 status_t NativeInputEventReceiver::consumeEvents(JNIEnv* env,
+<<<<<<< HEAD
         bool consumeBatches, nsecs_t frameTime) {
+=======
+        bool consumeBatches, nsecs_t frameTime, bool* outConsumedBatch) {
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 #if DEBUG_DISPATCH_CYCLE
     ALOGD("channel '%s' ~ Consuming input events, consumeBatches=%s, frameTime=%lld.",
             getInputChannelName(), consumeBatches ? "true" : "false", frameTime);
@@ -223,6 +236,12 @@ status_t NativeInputEventReceiver::consumeEvents(JNIEnv* env,
     if (consumeBatches) {
         mBatchedInputEventPending = false;
     }
+<<<<<<< HEAD
+=======
+    if (outConsumedBatch) {
+        *outConsumedBatch = false;
+    }
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
     ScopedLocalRef<jobject> receiverObj(env, NULL);
     bool skipCallbacks = false;
@@ -285,6 +304,7 @@ status_t NativeInputEventReceiver::consumeEvents(JNIEnv* env,
                         static_cast<KeyEvent*>(inputEvent));
                 break;
 
+<<<<<<< HEAD
             case AINPUT_EVENT_TYPE_MOTION:
 #if DEBUG_DISPATCH_CYCLE
                 ALOGD("channel '%s' ~ Received motion event.", getInputChannelName());
@@ -292,6 +312,19 @@ status_t NativeInputEventReceiver::consumeEvents(JNIEnv* env,
                 inputEventObj = android_view_MotionEvent_obtainAsCopy(env,
                         static_cast<MotionEvent*>(inputEvent));
                 break;
+=======
+            case AINPUT_EVENT_TYPE_MOTION: {
+#if DEBUG_DISPATCH_CYCLE
+                ALOGD("channel '%s' ~ Received motion event.", getInputChannelName());
+#endif
+                MotionEvent* motionEvent = static_cast<MotionEvent*>(inputEvent);
+                if ((motionEvent->getAction() & AMOTION_EVENT_ACTION_MOVE) && outConsumedBatch) {
+                    *outConsumedBatch = true;
+                }
+                inputEventObj = android_view_MotionEvent_obtainAsCopy(env, motionEvent);
+                break;
+            }
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
             default:
                 assert(false); // InputConsumer should prevent this from ever happening
@@ -370,16 +403,32 @@ static void nativeFinishInputEvent(JNIEnv* env, jclass clazz, jint receiverPtr,
     }
 }
 
+<<<<<<< HEAD
 static void nativeConsumeBatchedInputEvents(JNIEnv* env, jclass clazz, jint receiverPtr,
         jlong frameTimeNanos) {
     sp<NativeInputEventReceiver> receiver =
             reinterpret_cast<NativeInputEventReceiver*>(receiverPtr);
     status_t status = receiver->consumeEvents(env, true /*consumeBatches*/, frameTimeNanos);
+=======
+static bool nativeConsumeBatchedInputEvents(JNIEnv* env, jclass clazz, jint receiverPtr,
+        jlong frameTimeNanos) {
+    sp<NativeInputEventReceiver> receiver =
+            reinterpret_cast<NativeInputEventReceiver*>(receiverPtr);
+    bool consumedBatch;
+    status_t status = receiver->consumeEvents(env, true /*consumeBatches*/, frameTimeNanos,
+            &consumedBatch);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     if (status && status != DEAD_OBJECT && !env->ExceptionCheck()) {
         String8 message;
         message.appendFormat("Failed to consume batched input event.  status=%d", status);
         jniThrowRuntimeException(env, message.string());
+<<<<<<< HEAD
     }
+=======
+        return false;
+    }
+    return consumedBatch;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 }
 
 
@@ -392,7 +441,11 @@ static JNINativeMethod gMethods[] = {
             (void*)nativeDispose },
     { "nativeFinishInputEvent", "(IIZ)V",
             (void*)nativeFinishInputEvent },
+<<<<<<< HEAD
     { "nativeConsumeBatchedInputEvents", "(IJ)V",
+=======
+    { "nativeConsumeBatchedInputEvents", "(IJ)Z",
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             (void*)nativeConsumeBatchedInputEvents },
 };
 

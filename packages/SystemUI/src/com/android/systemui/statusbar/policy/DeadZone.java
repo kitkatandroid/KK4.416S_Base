@@ -22,7 +22,11 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.os.SystemClock;
 import android.util.AttributeSet;
+<<<<<<< HEAD
 import android.util.Log;
+=======
+import android.util.Slog;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -75,12 +79,19 @@ public class DeadZone extends View {
         mVertical = (index == VERTICAL);
 
         if (DEBUG)
+<<<<<<< HEAD
             Log.v(TAG, this + " size=[" + mSizeMin + "-" + mSizeMax + "] hold=" + mHold
                     + (mVertical ? " vertical" : " horizontal"));
 
         setFlashOnTouchCapture(context.getResources().getBoolean(R.bool.config_dead_zone_flash));
 
         a.recycle();
+=======
+            Slog.v(TAG, this + " size=[" + mSizeMin + "-" + mSizeMax + "] hold=" + mHold
+                    + (mVertical ? " vertical" : " horizontal"));
+
+        setFlashOnTouchCapture(context.getResources().getBoolean(R.bool.config_dead_zone_flash));
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     static float lerp(float a, float b, float f) {
@@ -108,7 +119,11 @@ public class DeadZone extends View {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (DEBUG) {
+<<<<<<< HEAD
             Log.v(TAG, this + " onTouch: " + MotionEvent.actionToString(event.getAction()));
+=======
+            Slog.v(TAG, this + " onTouch: " + MotionEvent.actionToString(event.getAction()));
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
 
         final int action = event.getAction();
@@ -116,12 +131,20 @@ public class DeadZone extends View {
             poke(event);
         } else if (action == MotionEvent.ACTION_DOWN) {
             if (DEBUG) {
+<<<<<<< HEAD
                 Log.v(TAG, this + " ACTION_DOWN: " + event.getX() + "," + event.getY());
+=======
+                Slog.v(TAG, this + " ACTION_DOWN: " + event.getX() + "," + event.getY());
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             }
             int size = (int) getSize(event.getEventTime());
             if ((mVertical && event.getX() < size) || event.getY() < size) {
                 if (CHATTY) {
+<<<<<<< HEAD
                     Log.v(TAG, "consuming errant click: (" + event.getX() + "," + event.getY() + ")");
+=======
+                    Slog.v(TAG, "consuming errant click: (" + event.getX() + "," + event.getY() + ")");
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 }
                 if (mShouldFlash) {
                     post(mDebugFlash);
@@ -136,7 +159,11 @@ public class DeadZone extends View {
     public void poke(MotionEvent event) {
         mLastPokeTime = event.getEventTime();
         if (DEBUG)
+<<<<<<< HEAD
             Log.v(TAG, "poked! size=" + getSize(mLastPokeTime));
+=======
+            Slog.v(TAG, "poked! size=" + getSize(mLastPokeTime));
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         if (mShouldFlash) postInvalidate();
     }
 

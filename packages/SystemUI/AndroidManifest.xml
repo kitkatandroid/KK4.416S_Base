@@ -34,8 +34,11 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.MANAGE_NETWORK_POLICY" />
+<<<<<<< HEAD
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="com.android.phone.CHANGE_NETWORK_MODE" />
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
     <!-- Physical hardware -->
     <uses-permission android:name="android.permission.MANAGE_USB" />
@@ -73,6 +76,7 @@
     <!-- Keyguard -->
     <uses-permission android:name="android.permission.CONTROL_KEYGUARD" />
 
+<<<<<<< HEAD
     <!-- Kill app permission -->
     <uses-permission android:name="android.permission.FORCE_STOP_PACKAGES" />
 
@@ -82,6 +86,10 @@
 
     <!-- Reboot -->
     <uses-permission android:name="android.permission.REBOOT" />
+=======
+    <!-- Wifi Display -->
+    <uses-permission android:name="android.permission.CONFIGURE_WIFI_DISPLAY" />
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
     <application
         android:persistent="true"
@@ -107,9 +115,12 @@
             android:process=":screenshot"
             android:exported="false" />
 
+<<<<<<< HEAD
         <receiver android:name=".screenshot.DeleteScreenshot"
                 android:exported="true" />
 
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         <service android:name=".LoadAverageService"
                 android:exported="true" />
 

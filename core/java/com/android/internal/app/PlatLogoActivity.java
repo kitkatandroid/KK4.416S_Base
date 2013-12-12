@@ -27,7 +27,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.method.AllCapsTransformationMethod;
 import android.text.method.TransformationMethod;
+<<<<<<< HEAD
 import android.os.SystemProperties;
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
@@ -44,7 +47,10 @@ import android.widget.Toast;
 public class PlatLogoActivity extends Activity {
     FrameLayout mContent;
     int mCount;
+<<<<<<< HEAD
     private boolean mIsSlim;
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     final Handler mHandler = new Handler();
     static final int BGCOLOR = 0xffed1d24;
 
@@ -86,16 +92,23 @@ public class PlatLogoActivity extends Activity {
         final int p = (int)(4 * metrics.density);
 
         final TextView tv = new TextView(this);
+<<<<<<< HEAD
 
         mIsSlim = SystemProperties.get("ro.slim.version") != null;
 
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         if (light != null) tv.setTypeface(light);
         tv.setTextSize(30);
         tv.setPadding(p, p, p, p);
         tv.setTextColor(0xFFFFFFFF);
         tv.setGravity(Gravity.CENTER);
         tv.setTransformationMethod(new AllCapsTransformationMethod(this));
+<<<<<<< HEAD
         tv.setText((mIsSlim ? "SlimKAT " : "Android ") + Build.VERSION.RELEASE);
+=======
+        tv.setText("Android " + Build.VERSION.RELEASE);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         tv.setVisibility(View.INVISIBLE);
 
         mContent.addView(bg);

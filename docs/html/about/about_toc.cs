@@ -7,6 +7,16 @@
     </ul>
   </li> 
   <li class="nav-section">
+<<<<<<< HEAD
+=======
+    <div class="nav-section-header"><a href="<?cs var:toroot ?>about/versions/kitkat.html">
+      <span class="en">KitKat</span></a></div>
+      <ul>
+        <li><a href="<?cs var:toroot ?>about/versions/android-4.4.html">Android 4.4 APIs</a></li>
+      </ul>
+  </li>
+  <li class="nav-section">
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     <div class="nav-section-header"><a href="<?cs var:toroot ?>about/versions/jelly-bean.html">
       <span class="en">Jelly Bean</span></a></div>
       <ul>

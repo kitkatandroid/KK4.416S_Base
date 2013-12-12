@@ -95,6 +95,14 @@ public class CreateDirectoryFragment extends DialogFragment {
         }
 
         @Override
+<<<<<<< HEAD
+=======
+        protected void onPreExecute() {
+            mActivity.setPending(true);
+        }
+
+        @Override
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         protected DocumentInfo doInBackground(Void... params) {
             final ContentResolver resolver = mActivity.getContentResolver();
             ContentProviderClient client = null;
@@ -120,6 +128,11 @@ public class CreateDirectoryFragment extends DialogFragment {
             } else {
                 Toast.makeText(mActivity, R.string.create_error, Toast.LENGTH_SHORT).show();
             }
+<<<<<<< HEAD
+=======
+
+            mActivity.setPending(false);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
     }
 }

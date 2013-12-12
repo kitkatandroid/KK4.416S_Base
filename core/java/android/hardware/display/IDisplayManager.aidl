@@ -29,11 +29,22 @@ interface IDisplayManager {
 
     void registerCallback(in IDisplayManagerCallback callback);
 
+<<<<<<< HEAD
     // No permissions required.
     void scanWifiDisplays();
 
     // Requires CONFIGURE_WIFI_DISPLAY permission to connect to an unknown device.
     // No permissions required to connect to a known device.
+=======
+    // Requires CONFIGURE_WIFI_DISPLAY permission.
+    // The process must have previously registered a callback.
+    void startWifiDisplayScan();
+
+    // Requires CONFIGURE_WIFI_DISPLAY permission.
+    void stopWifiDisplayScan();
+
+    // Requires CONFIGURE_WIFI_DISPLAY permission.
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     void connectWifiDisplay(String address);
 
     // No permissions required.
@@ -45,6 +56,15 @@ interface IDisplayManager {
     // Requires CONFIGURE_WIFI_DISPLAY permission.
     void forgetWifiDisplay(String address);
 
+<<<<<<< HEAD
+=======
+    // Requires CONFIGURE_WIFI_DISPLAY permission.
+    void pauseWifiDisplay();
+
+    // Requires CONFIGURE_WIFI_DISPLAY permission.
+    void resumeWifiDisplay();
+
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     // No permissions required.
     WifiDisplayStatus getWifiDisplayStatus();
 
@@ -55,10 +75,13 @@ interface IDisplayManager {
 
     // No permissions required but must be same Uid as the creator.
     void releaseVirtualDisplay(in IBinder token);
+<<<<<<< HEAD
 
     // Requires CONFIGURE_WIFI_DISPLAY permission.
     void pauseWifiDisplay();
 
     // Requires CONFIGURE_WIFI_DISPLAY permission.
     void resumeWifiDisplay();
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 }

@@ -92,8 +92,11 @@ final class ElectronBeam {
     private boolean mSurfaceVisible;
     private float mSurfaceAlpha;
 
+<<<<<<< HEAD
     private int mElectronBeamMode;
 
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     // Texture names.  We only use one texture, which contains the screenshot.
     private final int[] mTexNames = new int[1];
     private boolean mTexNamesGenerated;
@@ -119,6 +122,7 @@ final class ElectronBeam {
      */
     public static final int MODE_FADE = 2;
 
+<<<<<<< HEAD
     /**
      * Animates a scale down of the screen
      */
@@ -128,6 +132,11 @@ final class ElectronBeam {
     public ElectronBeam(DisplayManagerService displayManager, int mode) {
         mDisplayManager = displayManager;
         mElectronBeamMode = mode;
+=======
+
+    public ElectronBeam(DisplayManagerService displayManager) {
+        mDisplayManager = displayManager;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     /**
@@ -167,7 +176,11 @@ final class ElectronBeam {
         // times.  The rest of the animation should run smoothly thereafter.
         // The frames we draw here aren't visible because we are essentially just
         // painting the screenshot as-is.
+<<<<<<< HEAD
         if (mode == MODE_COOL_DOWN || mode == MODE_SCALE_DOWN) {
+=======
+        if (mode == MODE_COOL_DOWN) {
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             for (int i = 0; i < DEJANK_FRAMES; i++) {
                 draw(1.0f);
             }
@@ -228,16 +241,20 @@ final class ElectronBeam {
         if (!attachEglContext()) {
             return false;
         }
+<<<<<<< HEAD
 
         if (mSurfaceLayout == null) {
             return false;
         }
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         try {
             // Clear frame to solid black.
             GLES10.glClearColor(0f, 0f, 0f, 1f);
             GLES10.glClear(GLES10.GL_COLOR_BUFFER_BIT);
 
             // Draw the frame.
+<<<<<<< HEAD
             if (mElectronBeamMode == 2 || (mElectronBeamMode == 3 && mSurfaceLayout.isLandscape())) {
                 // Draw the frame vertical.
                 if (level < VSTRETCH_DURATION) {
@@ -254,6 +271,12 @@ final class ElectronBeam {
                 } else {
                     drawVStretch(1.0f - ((level - HSTRETCH_DURATION) / VSTRETCH_DURATION));
                 }
+=======
+            if (level < HSTRETCH_DURATION) {
+                drawHStretch(1.0f - (level / HSTRETCH_DURATION));
+            } else {
+                drawVStretch(1.0f - ((level - HSTRETCH_DURATION) / VSTRETCH_DURATION));
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             }
             if (checkGlErrors("drawFrame")) {
                 return false;
@@ -266,6 +289,7 @@ final class ElectronBeam {
         return showSurface(1.0f);
     }
 
+<<<<<<< HEAD
     private void drawScaled(float scale) {
         final float curvedScale = scurve(scale, 8.0f);
 
@@ -315,6 +339,8 @@ final class ElectronBeam {
         GLES10.glDisable(GLES10.GL_BLEND);
     }
 
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     /**
      * Draws a frame where the content of the electron beam is collapsing inwards upon
      * itself vertically with red / green / blue channels dispersing and eventually
@@ -420,6 +446,7 @@ final class ElectronBeam {
         }
     }
 
+<<<<<<< HEAD
     private void setVStretchQuad(FloatBuffer vtx, float dw, float dh, float a) {
         final float w;
         final float h;
@@ -430,11 +457,17 @@ final class ElectronBeam {
             w = dw + (dw * a);
             h = dh - (dh * a);
         }
+=======
+    private static void setVStretchQuad(FloatBuffer vtx, float dw, float dh, float a) {
+        final float w = dw + (dw * a);
+        final float h = dh - (dh * a);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         final float x = (dw - w) * 0.5f;
         final float y = (dh - h) * 0.5f;
         setQuad(vtx, x, y, w, h);
     }
 
+<<<<<<< HEAD
     private void setHStretchQuad(FloatBuffer vtx, float dw, float dh, float a) {
         final float w;
         final float h;
@@ -445,6 +478,11 @@ final class ElectronBeam {
             w = dw + (dw * a);
             h = 1.0f;
         }
+=======
+    private static void setHStretchQuad(FloatBuffer vtx, float dw, float dh, float a) {
+        final float w = 2 * dw * (1.0f - a);
+        final float h = 1.0f;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         final float x = (dw - w) * 0.5f;
         final float y = (dh - h) * 0.5f;
         setQuad(vtx, x, y, w, h);
@@ -774,7 +812,10 @@ final class ElectronBeam {
     private static final class NaturalSurfaceLayout implements DisplayTransactionListener {
         private final DisplayManagerService mDisplayManager;
         private SurfaceControl mSurfaceControl;
+<<<<<<< HEAD
         private boolean mIsLandscape;
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
         public NaturalSurfaceLayout(DisplayManagerService displayManager, SurfaceControl surfaceControl) {
             mDisplayManager = displayManager;
@@ -789,10 +830,13 @@ final class ElectronBeam {
             mDisplayManager.unregisterDisplayTransactionListener(this);
         }
 
+<<<<<<< HEAD
         public boolean isLandscape() {
             return mIsLandscape;
         }
 
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         @Override
         public void onDisplayTransaction() {
             synchronized (this) {
@@ -805,22 +849,34 @@ final class ElectronBeam {
                     case Surface.ROTATION_0:
                         mSurfaceControl.setPosition(0, 0);
                         mSurfaceControl.setMatrix(1, 0, 0, 1);
+<<<<<<< HEAD
                         mIsLandscape = false;
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                         break;
                     case Surface.ROTATION_90:
                         mSurfaceControl.setPosition(0, displayInfo.logicalHeight);
                         mSurfaceControl.setMatrix(0, -1, 1, 0);
+<<<<<<< HEAD
                         mIsLandscape = true;
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                         break;
                     case Surface.ROTATION_180:
                         mSurfaceControl.setPosition(displayInfo.logicalWidth, displayInfo.logicalHeight);
                         mSurfaceControl.setMatrix(-1, 0, 0, -1);
+<<<<<<< HEAD
                         mIsLandscape = false;
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                         break;
                     case Surface.ROTATION_270:
                         mSurfaceControl.setPosition(displayInfo.logicalWidth, 0);
                         mSurfaceControl.setMatrix(0, 1, -1, 0);
+<<<<<<< HEAD
                         mIsLandscape = true;
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                         break;
                 }
             }

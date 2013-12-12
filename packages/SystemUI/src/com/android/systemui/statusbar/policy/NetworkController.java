@@ -310,10 +310,13 @@ public class NetworkController extends BroadcastReceiver implements DemoMode {
         cluster.setIsAirplaneMode(mAirplaneMode, mAirplaneIconId);
     }
 
+<<<<<<< HEAD
     public void removeNetworkSignalChangedCallback(NetworkSignalChangedCallback cb) {
         mSignalsChangedCallbacks.remove(cb);
     }
 
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     void notifySignalsChangedCallbacks(NetworkSignalChangedCallback cb) {
         // only show wifi in the cluster if connected or if wifi-only
         boolean wifiEnabled = mWifiEnabled && (mWifiConnected || !mHasMobileDataFeature);
@@ -607,6 +610,10 @@ public class NetworkController extends BroadcastReceiver implements DemoMode {
                 case TelephonyManager.NETWORK_TYPE_HSDPA:
                 case TelephonyManager.NETWORK_TYPE_HSUPA:
                 case TelephonyManager.NETWORK_TYPE_HSPA:
+<<<<<<< HEAD
+=======
+                case TelephonyManager.NETWORK_TYPE_HSPAP:
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                     if (mHspaDataDistinguishable) {
                         mDataIconList = TelephonyIcons.DATA_H[mInetCondition];
                         mDataTypeIconId = R.drawable.stat_sys_data_fully_connected_h;
@@ -621,6 +628,7 @@ public class NetworkController extends BroadcastReceiver implements DemoMode {
                                 R.string.accessibility_data_connection_3g);
                     }
                     break;
+<<<<<<< HEAD
                 case TelephonyManager.NETWORK_TYPE_HSPAP:
                     mDataIconList = TelephonyIcons.DATA_HP[mInetCondition];
                     mDataTypeIconId = R.drawable.stat_sys_data_fully_connected_hp;
@@ -628,6 +636,8 @@ public class NetworkController extends BroadcastReceiver implements DemoMode {
                     mContentDescriptionDataType = mContext.getString(
                             R.string.accessibility_data_connection_HP);
                     break;
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 case TelephonyManager.NETWORK_TYPE_CDMA:
                     if (!mShowAtLeastThreeGees) {
                         // display 1xRTT for IS95A/B

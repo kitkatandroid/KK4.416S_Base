@@ -491,6 +491,7 @@ public final class Settings {
 
     /**
      * @hide
+<<<<<<< HEAD
      * Activity Action: Show the "app ops" details screen.
      * <p>
      * Input: The Intent's data URI specifies the application package name
@@ -504,6 +505,8 @@ public final class Settings {
 
     /**
      * @hide
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
      * Activity Action: Show the "app ops" settings screen.
      * <p>
      * Input: Nothing.
@@ -1038,9 +1041,12 @@ public final class Settings {
             MOVED_TO_SECURE.add(Secure.LOCK_PATTERN_ENABLED);
             MOVED_TO_SECURE.add(Secure.LOCK_PATTERN_VISIBLE);
             MOVED_TO_SECURE.add(Secure.LOCK_PATTERN_TACTILE_FEEDBACK_ENABLED);
+<<<<<<< HEAD
             MOVED_TO_SECURE.add(Secure.LOCK_NUMPAD_RANDOM);
             MOVED_TO_SECURE.add(Secure.LOCK_BEFORE_UNLOCK);
             MOVED_TO_SECURE.add(Secure.LOCK_PATTERN_SIZE);
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             MOVED_TO_SECURE.add(Secure.LOGGING_ID);
             MOVED_TO_SECURE.add(Secure.PARENTAL_CONTROL_ENABLED);
             MOVED_TO_SECURE.add(Secure.PARENTAL_CONTROL_LAST_UPDATE);
@@ -1851,6 +1857,7 @@ public final class Settings {
         public static final int SCREEN_BRIGHTNESS_MODE_AUTOMATIC = 1;
 
         /**
+<<<<<<< HEAD
          * Custom automatic brightness light sensor levels.
          * The value is a comma separated int array with length N.
          * Example: "100,300,3000".
@@ -1887,6 +1894,8 @@ public final class Settings {
         public static final String AUTO_BRIGHTNESS_TWILIGHT_ADJUSTMENT = "auto_brightness_twilight_adjustment";
 
         /**
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
          * Control whether the process CPU usage meter should be shown.
          *
          * @deprecated Use {@link Global#SHOW_PROCESSES} instead
@@ -2012,6 +2021,7 @@ public final class Settings {
             "notifications_use_ring_volume";
 
         /**
+<<<<<<< HEAD
          * Volume Overlay Mode, This is behaviour of the volume overlay panel
          * Defaults to 1 - which is expandable
          * @hide
@@ -2060,6 +2070,8 @@ public final class Settings {
         public static final String VOLUME_LINK_NOTIFICATION = "volume_link_notification";
 
         /**
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
          * Whether silent mode should allow vibration feedback. This is used
          * internally in AudioService and the Sound settings activity to
          * coordinate decoupling of vibrate and silent modes. This setting
@@ -2255,6 +2267,7 @@ public final class Settings {
         public static final String ACCELEROMETER_ROTATION = "accelerometer_rotation";
 
         /**
+<<<<<<< HEAD
          * Control the type of rotation which can be performed using the accelerometer
          * if ACCELEROMETER_ROTATION is enabled.
          * Value is a bitwise combination of
@@ -2268,6 +2281,8 @@ public final class Settings {
         public static final String ACCELEROMETER_ROTATION_ANGLES = "accelerometer_rotation_angles";
 
         /**
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
          * Default screen rotation when no other policy applies.
          * When {@link #ACCELEROMETER_ROTATION} is zero and no on-screen Activity expresses a
          * preference, this rotation value will be used. Must be one of the
@@ -2365,6 +2380,7 @@ public final class Settings {
         public static final String NOTIFICATION_LIGHT_PULSE = "notification_light_pulse";
 
         /**
+<<<<<<< HEAD
          * What color to use for the notification LED by default
          * @hide
          */
@@ -2463,6 +2479,8 @@ public final class Settings {
         public static final String BATTERY_LIGHT_FULL_COLOR = "battery_light_full_color";
 
         /**
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
          * Show pointer location on screen?
          * 0 = no
          * 1 = yes
@@ -2517,6 +2535,7 @@ public final class Settings {
         public static final String LOCKSCREEN_DISABLED = "lockscreen.disabled";
 
         /**
+<<<<<<< HEAD
          * Stores values for custom lockscreen targets
          * @hide
          */
@@ -2569,6 +2588,8 @@ public final class Settings {
                 "lockscreen_use_widget_container_carousel";
 
         /**
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
          * @deprecated Use {@link android.provider.Settings.Global#LOW_BATTERY_SOUND}
          * instead
          * @hide
@@ -2679,6 +2700,7 @@ public final class Settings {
         public static final String EGG_MODE = "egg_mode";
 
         /**
+<<<<<<< HEAD
          * Show or hide clock
          * 0 - hide
          * 1 - show (default)
@@ -3138,6 +3160,8 @@ public final class Settings {
         public static final String LOCKSCREEN_QUICK_UNLOCK_CONTROL = "lockscreen_quick_unlock_control";
 
         /**
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
@@ -3202,6 +3226,7 @@ public final class Settings {
             POINTER_SPEED,
             VIBRATE_WHEN_RINGING,
             RINGTONE,
+<<<<<<< HEAD
             NOTIFICATION_SOUND,
             QUIET_HOURS_ENABLED,
             QUIET_HOURS_START,
@@ -3209,6 +3234,9 @@ public final class Settings {
             QUIET_HOURS_MUTE,
             QUIET_HOURS_STILL,
             QUIET_HOURS_DIM,
+=======
+            NOTIFICATION_SOUND
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         };
 
         // Settings moved to Settings.Secure
@@ -3339,6 +3367,7 @@ public final class Settings {
                 Global.WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON;
 
         /**
+<<<<<<< HEAD
          * wake up when plugged or unplugged
          *
          * @hide
@@ -3346,6 +3375,8 @@ public final class Settings {
         public static final String WAKEUP_WHEN_PLUGGED_UNPLUGGED = "wakeup_when_plugged_unplugged";
 
         /**
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
          * @deprecated Use
          * {@link android.provider.Settings.Global#WIFI_NETWORKS_AVAILABLE_REPEAT_DELAY} instead
          */
@@ -3540,7 +3571,10 @@ public final class Settings {
             MOVED_TO_GLOBAL.add(Settings.Global.USE_GOOGLE_MAIL);
             MOVED_TO_GLOBAL.add(Settings.Global.WEB_AUTOFILL_QUERY_URL);
             MOVED_TO_GLOBAL.add(Settings.Global.WIFI_COUNTRY_CODE);
+<<<<<<< HEAD
             MOVED_TO_GLOBAL.add(Settings.Global.WIFI_COUNTRY_CODE_USER);
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             MOVED_TO_GLOBAL.add(Settings.Global.WIFI_FRAMEWORK_SCAN_INTERVAL_MS);
             MOVED_TO_GLOBAL.add(Settings.Global.WIFI_FREQUENCY_BAND);
             MOVED_TO_GLOBAL.add(Settings.Global.WIFI_IDLE_MS);
@@ -4138,6 +4172,7 @@ public final class Settings {
         public static final String LOCK_PATTERN_VISIBLE = "lock_pattern_visible_pattern";
 
         /**
+<<<<<<< HEAD
          * Whether the NumKeyPad will change the orders of numbers
          * in a PIN locked lockscreen
          * 0 = off | 1 = always | 2 = only on request
@@ -4159,6 +4194,8 @@ public final class Settings {
         public static final String LOCK_PATTERN_SIZE = "lock_pattern_size";
 
         /**
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
          * Whether lock pattern will vibrate as user enters (0 = false, 1 =
          * true)
          *
@@ -5125,6 +5162,7 @@ public final class Settings {
         public static final String SMS_DEFAULT_APPLICATION = "sms_default_application";
 
         /**
+<<<<<<< HEAD
          * Whether newly installed apps should run with privacy guard by default
          * @hide
          */
@@ -5137,6 +5175,8 @@ public final class Settings {
         public static final String PRIVACY_GUARD_NOTIFICATION = "privacy_guard_notification";
 
         /**
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
          * Name of a package that the current user has explicitly allowed to see all of that
          * user's notifications.
          *
@@ -5212,9 +5252,13 @@ public final class Settings {
             MOUNT_UMS_AUTOSTART,
             MOUNT_UMS_PROMPT,
             MOUNT_UMS_NOTIFY_ENABLED,
+<<<<<<< HEAD
             UI_NIGHT_MODE,
             PRIVACY_GUARD_DEFAULT,
             PRIVACY_GUARD_NOTIFICATION
+=======
+            UI_NIGHT_MODE
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         };
 
         /**
@@ -5526,6 +5570,7 @@ public final class Settings {
         public static final String POWER_SOUNDS_ENABLED = "power_sounds_enabled";
 
         /**
+<<<<<<< HEAD
          * Whether to sound when charger power is connected/disconnected
          * @hide
          */
@@ -5544,6 +5589,8 @@ public final class Settings {
         public static final String POWER_NOTIFICATIONS_RINGTONE = "power_notifications_ringtone";
 
         /**
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
          * URI for the "wireless charging started" sound.
          * @hide
          */
@@ -6023,12 +6070,15 @@ public final class Settings {
         */
        public static final String WIFI_COUNTRY_CODE = "wifi_country_code";
 
+<<<<<<< HEAD
         /**
          * 802.11 country code in ISO 3166 format custom user value
          * @hide
          */
         public static final String WIFI_COUNTRY_CODE_USER = "wifi_country_code_user";
 
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
        /**
         * The interval in milliseconds to issue wake up scans when wifi needs
         * to connect. This is necessary to connect to an access point when
@@ -6746,9 +6796,12 @@ public final class Settings {
             AUTO_TIME,
             AUTO_TIME_ZONE,
             POWER_SOUNDS_ENABLED,
+<<<<<<< HEAD
             POWER_NOTIFICATIONS_ENABLED,
             POWER_NOTIFICATIONS_VIBRATE,
             POWER_NOTIFICATIONS_RINGTONE,
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             DOCK_SOUNDS_ENABLED,
             USB_MASS_STORAGE_ENABLED,
             ENABLE_ACCESSIBILITY_GLOBAL_GESTURE_ENABLED,

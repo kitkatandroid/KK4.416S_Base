@@ -693,7 +693,11 @@ public class ServiceState implements Parcelable {
         mOperatorNumeric = m.getString("operator-numeric");
         mIsManualNetworkSelection = m.getBoolean("manual");
         mRilVoiceRadioTechnology = m.getInt("radioTechnology");
+<<<<<<< HEAD
         mRilVoiceRadioTechnology = m.getInt("dataRadioTechnology");
+=======
+        mRilDataRadioTechnology = m.getInt("dataRadioTechnology");
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         mCssIndicator = m.getBoolean("cssIndicator");
         mNetworkId = m.getInt("networkId");
         mSystemId = m.getInt("systemId");

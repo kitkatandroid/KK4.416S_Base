@@ -38,9 +38,28 @@ import java.util.Locale;
  * the specified subtype of the designated IME directly.
  *
  * <p>It should be defined in an XML resource file of the input method with the
+<<<<<<< HEAD
  * <code>&lt;subtype&gt;</code> element. For more information, see the guide to
  * <a href="{@docRoot}resources/articles/creating-input-method.html">
  * Creating an Input Method</a>.</p>
+=======
+ * <code>&lt;subtype&gt;</code> element, which resides within an {@code &lt;input-method>} element.
+ * For more information, see the guide to
+ * <a href="{@docRoot}guide/topics/text/creating-input-method.html">
+ * Creating an Input Method</a>.</p>
+ *
+ * @see InputMethodInfo
+ *
+ * @attr ref android.R.styleable#InputMethod_Subtype_label
+ * @attr ref android.R.styleable#InputMethod_Subtype_icon
+ * @attr ref android.R.styleable#InputMethod_Subtype_imeSubtypeLocale
+ * @attr ref android.R.styleable#InputMethod_Subtype_imeSubtypeMode
+ * @attr ref android.R.styleable#InputMethod_Subtype_imeSubtypeExtraValue
+ * @attr ref android.R.styleable#InputMethod_Subtype_isAuxiliary
+ * @attr ref android.R.styleable#InputMethod_Subtype_overridesImplicitlyEnabledSubtype
+ * @attr ref android.R.styleable#InputMethod_Subtype_subtypeId
+ * @attr ref android.R.styleable#InputMethod_Subtype_isAsciiCapable
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
  */
 public final class InputMethodSubtype implements Parcelable {
     private static final String TAG = InputMethodSubtype.class.getSimpleName();
@@ -521,6 +540,16 @@ public final class InputMethodSubtype implements Parcelable {
     private static int hashCodeInternal(String locale, String mode, String extraValue,
             boolean isAuxiliary, boolean overridesImplicitlyEnabledSubtype,
             boolean isAsciiCapable) {
+<<<<<<< HEAD
+=======
+        // CAVEAT: Must revisit how to compute needsToCalculateCompatibleHashCode when a new
+        // attribute is added in order to avoid enabled subtypes being unexpectedly disabled.
+        final boolean needsToCalculateCompatibleHashCode = !isAsciiCapable;
+        if (needsToCalculateCompatibleHashCode) {
+            return Arrays.hashCode(new Object[] {locale, mode, extraValue, isAuxiliary,
+                    overridesImplicitlyEnabledSubtype});
+        }
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         return Arrays.hashCode(new Object[] {locale, mode, extraValue, isAuxiliary,
                 overridesImplicitlyEnabledSubtype, isAsciiCapable});
     }

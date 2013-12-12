@@ -20,9 +20,13 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.content.res.XmlResourceParser;
+<<<<<<< HEAD
 import android.util.ArrayMap;
 import android.util.AttributeSet;
 import android.util.SparseArray;
+=======
+import android.util.AttributeSet;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import android.util.Xml;
 import android.view.InflateException;
 import android.view.ViewGroup;
@@ -43,6 +47,7 @@ import java.util.ArrayList;
  */
 public class TransitionInflater {
 
+<<<<<<< HEAD
     // We only need one inflater for any given context. Also, this allows us to associate
     // ids with unique instances per-Context, used to avoid re-inflating
     // already-inflated resources into new/different instances
@@ -52,6 +57,9 @@ public class TransitionInflater {
     private Context mContext;
     // TODO: do we need id maps for transitions and transitionMgrs as well?
     SparseArray<Scene> mScenes = new SparseArray<Scene>();
+=======
+    private Context mContext;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
     private TransitionInflater(Context context) {
         mContext = context;
@@ -61,6 +69,7 @@ public class TransitionInflater {
      * Obtains the TransitionInflater from the given context.
      */
     public static TransitionInflater from(Context context) {
+<<<<<<< HEAD
         TransitionInflater inflater = sInflaterMap.get(context);
         if (inflater != null) {
             return inflater;
@@ -68,6 +77,9 @@ public class TransitionInflater {
         inflater = new TransitionInflater(context);
         sInflaterMap.put(context, inflater);
         return inflater;
+=======
+        return new TransitionInflater(context);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     /**

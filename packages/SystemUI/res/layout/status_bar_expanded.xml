@@ -29,12 +29,15 @@
     android:layout_marginStart="@dimen/notification_panel_margin_left"
     >
 
+<<<<<<< HEAD
     <ImageView
         android:id="@+id/notification_wallpaper"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop" />
 
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     <View
         android:id="@+id/handle"
         android:layout_width="match_parent"
@@ -100,6 +103,7 @@
             </ScrollView>
         </FrameLayout>
     </LinearLayout>
+<<<<<<< HEAD
     <HorizontalScrollView
         android:id="@+id/custom_notification_scrollview"
         android:layout_width="match_parent"
@@ -119,4 +123,6 @@
             android:orientation="horizontal"
             />
     </HorizontalScrollView>
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 </com.android.systemui.statusbar.phone.NotificationPanelView><!-- end of sliding panel -->

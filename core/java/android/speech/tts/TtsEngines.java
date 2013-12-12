@@ -44,6 +44,10 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
+<<<<<<< HEAD
+=======
+import java.util.MissingResourceException;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
 /**
  * Support class for querying the list of available engines
@@ -369,6 +373,7 @@ public class TtsEngines {
     public String getDefaultLocale() {
         final Locale locale = Locale.getDefault();
 
+<<<<<<< HEAD
         // Note that the default locale might have an empty variant
         // or language, and we take care that the construction is
         // the same as {@link #getV1Locale} i.e no trailing delimiters
@@ -391,6 +396,36 @@ public class TtsEngines {
         }
 
         return defaultLocale;
+=======
+        try {
+            // Note that the default locale might have an empty variant
+            // or language, and we take care that the construction is
+            // the same as {@link #getV1Locale} i.e no trailing delimiters
+            // or spaces.
+            String defaultLocale = locale.getISO3Language();
+            if (TextUtils.isEmpty(defaultLocale)) {
+                Log.w(TAG, "Default locale is empty.");
+                return "";
+            }
+
+            if (!TextUtils.isEmpty(locale.getISO3Country())) {
+                defaultLocale += LOCALE_DELIMITER + locale.getISO3Country();
+            } else {
+                // Do not allow locales of the form lang--variant with
+                // an empty country.
+                return defaultLocale;
+            }
+            if (!TextUtils.isEmpty(locale.getVariant())) {
+                defaultLocale += LOCALE_DELIMITER + locale.getVariant();
+            }
+
+            return defaultLocale;
+        } catch (MissingResourceException e) {
+            // Default locale does not have a ISO 3166 and/or ISO 639-2/T codes. Return the
+            // default "eng-usa" (that would be the result of Locale.getDefault() == Locale.US).
+            return "eng-usa";
+        }
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     /**

@@ -49,7 +49,10 @@ import org.xmlpull.v1.XmlSerializer;
 
 import android.app.ActivityManager;
 import android.app.ActivityManagerNative;
+<<<<<<< HEAD
 import android.app.AppOpsManager;
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import android.app.IActivityManager;
 import android.app.admin.IDevicePolicyManager;
 import android.app.backup.IBackupManager;
@@ -222,6 +225,17 @@ public class PackageManagerService extends IPackageManager.Stub {
     static final int REMOVE_CHATTY = 1<<16;
 
     /**
+<<<<<<< HEAD
+=======
+     * Timeout (in milliseconds) after which the watchdog should declare that
+     * our handler thread is wedged.  The usual default for such things is one
+     * minute but we sometimes do very lengthy I/O operations on this thread,
+     * such as installing multi-gigabyte applications, so ours needs to be longer.
+     */
+    private static final long WATCHDOG_TIMEOUT = 1000*60*10;     // ten minutes
+
+    /**
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
      * Whether verification is enabled by default.
      */
     private static final boolean DEFAULT_VERIFY_ENABLE = true;
@@ -427,8 +441,11 @@ public class PackageManagerService extends IPackageManager.Stub {
     PackageParser.Package mPlatformPackage;
     ComponentName mCustomResolverComponentName;
 
+<<<<<<< HEAD
     private AppOpsManager mAppOps;
 
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     boolean mResolverReplaced = false;
 
     // Set of pending broadcasts for aggregating enable/disable of components.
@@ -871,6 +888,7 @@ public class PackageManagerService extends IPackageManager.Stub {
                                 deleteOld = true;
                             }
 
+<<<<<<< HEAD
                             if (!update && !isSystemApp(res.pkg.applicationInfo)) {
                                 boolean privacyGuard = android.provider.Settings.Secure.getIntForUser(
                                         mContext.getContentResolver(),
@@ -883,6 +901,8 @@ public class PackageManagerService extends IPackageManager.Stub {
                                 }
                             }
 
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                             // Log current value of "unknown sources" setting
                             EventLog.writeEvent(EventLogTags.UNKNOWN_SOURCES_ENABLED,
                                 getUnknownSourcesSettings());
@@ -1102,7 +1122,10 @@ public class PackageManagerService extends IPackageManager.Stub {
         mSettings.addSharedUserLPw("android.uid.shell", SHELL_UID,
                 ApplicationInfo.FLAG_SYSTEM|ApplicationInfo.FLAG_PRIVILEGED);
 
+<<<<<<< HEAD
         mAppOps = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         String separateProcesses = SystemProperties.get("debug.separate_processes");
         if (separateProcesses != null && separateProcesses.length() > 0) {
             if ("*".equals(separateProcesses)) {
@@ -1131,7 +1154,12 @@ public class PackageManagerService extends IPackageManager.Stub {
         synchronized (mPackages) {
             mHandlerThread.start();
             mHandler = new PackageHandler(mHandlerThread.getLooper());
+<<<<<<< HEAD
             Watchdog.getInstance().addThread(mHandler, mHandlerThread.getName());
+=======
+            Watchdog.getInstance().addThread(mHandler, mHandlerThread.getName(),
+                    WATCHDOG_TIMEOUT);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
             File dataDir = Environment.getDataDirectory();
             mAppDataDir = new File(dataDir, "data");
@@ -1285,7 +1313,12 @@ public class PackageManagerService extends IPackageManager.Stub {
                 frameworkDir.getPath(), OBSERVER_EVENTS, true, false);
             mFrameworkInstallObserver.startWatching();
             scanDirLI(frameworkDir, PackageParser.PARSE_IS_SYSTEM
+<<<<<<< HEAD
                     | PackageParser.PARSE_IS_SYSTEM_DIR,
+=======
+                    | PackageParser.PARSE_IS_SYSTEM_DIR
+                    | PackageParser.PARSE_IS_PRIVILEGED,
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                     scanMode | SCAN_NO_DEX, 0);
 
             // Collected privileged system packages.
@@ -1460,6 +1493,7 @@ public class PackageManagerService extends IPackageManager.Stub {
                 mSettings.readDefaultPreferredAppsLPw(this, 0);
             }
 
+<<<<<<< HEAD
             // Disable components marked for disabling at build-time
             for (String name : mContext.getResources().getStringArray(
                     com.android.internal.R.array.config_disabledComponents)) {
@@ -1475,6 +1509,8 @@ public class PackageManagerService extends IPackageManager.Stub {
                 pkgSetting.disableComponentLPw(className, UserHandle.USER_OWNER);
             }
 
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             // can downgrade to reader
             mSettings.writeLPr();
 
@@ -1793,6 +1829,27 @@ public class PackageManagerService extends IPackageManager.Stub {
                 state, userId);
     }
 
+<<<<<<< HEAD
+=======
+    public boolean isPackageAvailable(String packageName, int userId) {
+        if (!sUserManager.exists(userId)) return false;
+        enforceCrossUserPermission(Binder.getCallingUid(), userId, false, "is package available");
+        synchronized (mPackages) {
+            PackageParser.Package p = mPackages.get(packageName);
+            if (p != null) {
+                final PackageSetting ps = (PackageSetting) p.mExtras;
+                if (ps != null) {
+                    final PackageUserState state = ps.readUserState(userId);
+                    if (state != null) {
+                        return PackageParser.isAvailable(state);
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     @Override
     public PackageInfo getPackageInfo(String packageName, int flags, int userId) {
         if (!sUserManager.exists(userId)) return null;
@@ -4419,6 +4476,7 @@ public class PackageManagerService extends IPackageManager.Stub {
         }
 
         final String pkgName = pkg.packageName;
+<<<<<<< HEAD
 
         if (pkgName == null) {
             Slog.e(TAG, "NULL package name found in " + pkg.mScanPath + ", skipping!");
@@ -4426,6 +4484,9 @@ public class PackageManagerService extends IPackageManager.Stub {
             return null;
         }
 
+=======
+        
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         final long scanFileTime = scanFile.lastModified();
         final boolean forceDex = (scanMode&SCAN_FORCE_DEX) != 0;
         pkg.applicationInfo.processName = fixProcessName(
@@ -4987,6 +5048,21 @@ public class PackageManagerService extends IPackageManager.Stub {
                         permissionMap.put(p.info.name, bp);
                     }
                     if (bp.perm == null) {
+<<<<<<< HEAD
+=======
+                        if (bp.sourcePackage != null
+                                && !bp.sourcePackage.equals(p.info.packageName)) {
+                            // If this is a permission that was formerly defined by a non-system
+                            // app, but is now defined by a system app (following an upgrade),
+                            // discard the previous declaration and consider the system's to be
+                            // canonical.
+                            if (isSystemApp(p.owner)) {
+                                Slog.i(TAG, "New decl " + p.owner + " of permission  "
+                                        + p.info.name + " is system");
+                                bp.sourcePackage = null;
+                            }
+                        }
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                         if (bp.sourcePackage == null
                                 || bp.sourcePackage.equals(p.info.packageName)) {
                             BasePermission tree = findPermissionTreeLP(p.info.name);
@@ -9993,6 +10069,13 @@ public class PackageManagerService extends IPackageManager.Stub {
         // writer
         int callingUid = Binder.getCallingUid();
         enforceCrossUserPermission(callingUid, userId, true, "add preferred activity");
+<<<<<<< HEAD
+=======
+        if (filter.countActions() == 0) {
+            Slog.w(TAG, "Cannot set a preferred activity with no filter actions");
+            return;
+        }
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         synchronized (mPackages) {
             if (mContext.checkCallingOrSelfPermission(
                     android.Manifest.permission.SET_PREFERRED_APPLICATIONS)
@@ -10023,11 +10106,19 @@ public class PackageManagerService extends IPackageManager.Stub {
         }
         if (filter.countDataAuthorities() != 0
                 || filter.countDataPaths() != 0
+<<<<<<< HEAD
                 || filter.countDataSchemes() != 0
                 || filter.countDataTypes() != 0) {
             throw new IllegalArgumentException(
                     "replacePreferredActivity expects filter to have no data authorities, " +
                     "paths, schemes or types.");
+=======
+                || filter.countDataSchemes() > 1
+                || filter.countDataTypes() != 0) {
+            throw new IllegalArgumentException(
+                    "replacePreferredActivity expects filter to have no data authorities, " +
+                    "paths, or types; and at most one scheme.");
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
         synchronized (mPackages) {
             if (mContext.checkCallingOrSelfPermission(
@@ -10044,6 +10135,7 @@ public class PackageManagerService extends IPackageManager.Stub {
             }
 
             final int callingUserId = UserHandle.getCallingUserId();
+<<<<<<< HEAD
             ArrayList<PreferredActivity> removed = null;
             PreferredIntentResolver pir = mSettings.mPreferredActivities.get(callingUserId);
             if (pir != null) {
@@ -10069,6 +10161,29 @@ public class PackageManagerService extends IPackageManager.Stub {
                         PreferredActivity pa = removed.get(i);
                         pir.removeFilter(pa);
                     }
+=======
+            PreferredIntentResolver pir = mSettings.mPreferredActivities.get(callingUserId);
+            if (pir != null) {
+                Intent intent = new Intent(filter.getAction(0)).addCategory(filter.getCategory(0));
+                if (filter.countDataSchemes() == 1) {
+                    Uri.Builder builder = new Uri.Builder();
+                    builder.scheme(filter.getDataScheme(0));
+                    intent.setData(builder.build());
+                }
+                List<PreferredActivity> matches = pir.queryIntent(
+                        intent, null, true, callingUserId);
+                if (DEBUG_PREFERRED) {
+                    Slog.i(TAG, matches.size() + " preferred matches for " + intent);
+                }
+                for (int i = 0; i < matches.size(); i++) {
+                    PreferredActivity pa = matches.get(i);
+                    if (DEBUG_PREFERRED) {
+                        Slog.i(TAG, "Removing preferred activity "
+                                + pa.mPref.mComponent + ":");
+                        filter.dump(new LogPrinter(Log.INFO, TAG), "  ");
+                    }
+                    pir.removeFilter(pa);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 }
             }
             addPreferredActivityInternal(filter, match, set, activity, true, callingUserId);

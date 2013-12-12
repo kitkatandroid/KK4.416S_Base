@@ -89,7 +89,11 @@ void usage(void)
         "   Prints the OBB signature information of a file.\n\n", gProgName);
 }
 
+<<<<<<< HEAD
 void doAdd(const char* filename, PackageInfo* info) {
+=======
+void doAdd(const char* filename, struct PackageInfo* info) {
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     ObbFile *obb = new ObbFile();
     if (obb->readFrom(filename)) {
         fprintf(stderr, "ERROR: %s: OBB signature already present\n", filename);
@@ -182,7 +186,11 @@ int main(int argc, char* const argv[])
 {
     int opt;
     int option_index = 0;
+<<<<<<< HEAD
     PackageInfo package_info;
+=======
+    struct PackageInfo package_info;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
     int result = 1;    // pessimistically assume an error.
 

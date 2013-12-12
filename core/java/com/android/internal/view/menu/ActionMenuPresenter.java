@@ -721,7 +721,12 @@ public class ActionMenuPresenter extends BaseMenuPresenter
             if (subMenu == null) return false;
 
             mOpenSubMenuId = ((SubMenuBuilder) subMenu).getItem().getItemId();
+<<<<<<< HEAD
             return false;
+=======
+            final MenuPresenter.Callback cb = getCallback();
+            return cb != null ? cb.onOpenSubMenu(subMenu) : false;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
 
         @Override
@@ -729,6 +734,13 @@ public class ActionMenuPresenter extends BaseMenuPresenter
             if (menu instanceof SubMenuBuilder) {
                 ((SubMenuBuilder) menu).getRootMenu().close(false);
             }
+<<<<<<< HEAD
+=======
+            final MenuPresenter.Callback cb = getCallback();
+            if (cb != null) {
+                cb.onCloseMenu(menu, allMenusAreClosing);
+            }
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
     }
 

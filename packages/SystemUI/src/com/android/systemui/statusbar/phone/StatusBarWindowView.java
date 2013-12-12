@@ -77,7 +77,11 @@ public class StatusBarWindowView extends FrameLayout
         boolean down = event.getAction() == KeyEvent.ACTION_DOWN;
         switch (event.getKeyCode()) {
         case KeyEvent.KEYCODE_BACK:
+<<<<<<< HEAD
             if (!down && !event.isCanceled()) {
+=======
+            if (!down) {
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 mService.animateCollapsePanels();
             }
             return true;
@@ -113,7 +117,11 @@ public class StatusBarWindowView extends FrameLayout
             handled = super.onTouchEvent(ev);
         }
         final int action = ev.getAction();
+<<<<<<< HEAD
         if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL) {
+=======
+        if (!handled && (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL)) {
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             mService.setInteracting(StatusBarManager.WINDOW_STATUS_BAR, false);
         }
         return handled;

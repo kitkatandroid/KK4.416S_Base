@@ -144,6 +144,7 @@ public class FileUtils {
         }
     }
 
+<<<<<<< HEAD
     /** returns the FAT file system volume ID for the volume mounted 
      * at the given mount point, or -1 for failure
      * @param mountPoint point for FAT volume
@@ -151,6 +152,8 @@ public class FileUtils {
      */
     public static native int getFatVolumeId(String mountPoint);
 
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     /**
      * Perform an fsync on the given FileOutputStream.  The stream at this
      * point must be flushed but not yet closed.

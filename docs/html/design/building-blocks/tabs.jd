@@ -35,7 +35,11 @@ to the next/previous view, swipe left or right.</p>
     </video>
     <div class="figure-caption">
       Scrolling tabs in the Play Store app.
+<<<<<<< HEAD
       <div class="video-instructions">&nbsp;</div>
+=======
+      <div class="video-instructions-image">&nbsp;</div>
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     </div>
 
   </div>
@@ -55,6 +59,7 @@ to the next/previous view, swipe left or right.</p>
 <div class="figure-caption">
   Tabs in the Google Play Movies app.
 </div>
+<<<<<<< HEAD
 
 
 
@@ -66,3 +71,5 @@ permits fast view switching even on narrower screens.</p>
 
 <img src="{@docRoot}design/media/tabs_stacked.png">
 
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1

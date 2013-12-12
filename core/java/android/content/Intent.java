@@ -2317,6 +2317,7 @@ public class Intent implements Parcelable, Cloneable {
             "android.intent.action.NEW_OUTGOING_CALL";
 
     /**
+<<<<<<< HEAD
      * Broadcast Action: An outgoing sms is about to be sent.
      *
      * The Intent will have the following extras:
@@ -2336,6 +2337,8 @@ public class Intent implements Parcelable, Cloneable {
             "android.intent.action.NEW_OUTGOING_SMS";
 
     /**
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
      * Broadcast Action: Have the device reboot.  This is only for use by
      * system code.
      *

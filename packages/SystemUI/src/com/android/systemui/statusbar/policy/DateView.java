@@ -39,7 +39,10 @@ public class DateView extends TextView {
 
     private final Date mCurrentTime = new Date();
 
+<<<<<<< HEAD
     private SimpleDateFormat mWeekdayFormat;
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     private SimpleDateFormat mDateFormat;
     private String mLastText;
 
@@ -89,6 +92,7 @@ public class DateView extends TextView {
 
     protected void updateClock() {
         if (mDateFormat == null) {
+<<<<<<< HEAD
             final String weekdayFormat = getContext().getString(R.string.system_ui_weekday_pattern);
             final String dateFormat = getContext().getString(R.string.system_ui_date_pattern);
             final Locale l = Locale.getDefault();
@@ -97,16 +101,26 @@ public class DateView extends TextView {
 
             mDateFormat = new SimpleDateFormat(dateFmt, l);
             mWeekdayFormat = new SimpleDateFormat(weekdayFmt, l);
+=======
+            final String dateFormat = getContext().getString(R.string.system_ui_date_pattern);
+            final Locale l = Locale.getDefault();
+            final String fmt = ICU.getBestDateTimePattern(dateFormat, l.toString());
+            mDateFormat = new SimpleDateFormat(fmt, l);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
 
         mCurrentTime.setTime(System.currentTimeMillis());
 
+<<<<<<< HEAD
         StringBuilder builder = new StringBuilder();
         builder.append(mWeekdayFormat.format(mCurrentTime));
         builder.append("\n");
         builder.append(mDateFormat.format(mCurrentTime));
 
         final String text = builder.toString();
+=======
+        final String text = mDateFormat.format(mCurrentTime);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         if (!text.equals(mLastText)) {
             setText(text);
             mLastText = text;

@@ -35,7 +35,10 @@
 
 #include <cutils/sockets.h>
 #include <netinet/tcp.h>
+<<<<<<< HEAD
 #include <ScopedUtfChars.h>
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
 namespace android {
 
@@ -53,14 +56,23 @@ socket_connect_local(JNIEnv *env, jobject object,
                         jobject fileDescriptor, jstring name, jint namespaceId)
 {
     int ret;
+<<<<<<< HEAD
     int fd;
 
+=======
+    const char *nameUtf8;
+    int fd;
+
+    nameUtf8 = env->GetStringUTFChars(name, NULL);
+
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     fd = jniGetFDFromFileDescriptor(env, fileDescriptor);
 
     if (env->ExceptionOccurred() != NULL) {
         return;
     }
 
+<<<<<<< HEAD
     ScopedUtfChars nameUtf8(env, name);
 
     ret = socket_local_client_connect(
@@ -69,6 +81,16 @@ socket_connect_local(JNIEnv *env, jobject object,
                 namespaceId,
                 SOCK_STREAM);
 
+=======
+    ret = socket_local_client_connect(
+                fd,
+                nameUtf8,
+                namespaceId,
+                SOCK_STREAM);
+
+    env->ReleaseStringUTFChars(name, nameUtf8);
+
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     if (ret < 0) {
         jniThrowIOException(env, errno);
         return;
@@ -87,10 +109,18 @@ socket_bind_local (JNIEnv *env, jobject object, jobject fileDescriptor,
 {
     int ret;
     int fd;
+<<<<<<< HEAD
 
     if (name == NULL) {
         jniThrowNullPointerException(env, NULL);
         return;
+=======
+    const char *nameUtf8;
+
+
+    if (name == NULL) {
+        jniThrowNullPointerException(env, NULL);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     fd = jniGetFDFromFileDescriptor(env, fileDescriptor);
@@ -99,9 +129,17 @@ socket_bind_local (JNIEnv *env, jobject object, jobject fileDescriptor,
         return;
     }
 
+<<<<<<< HEAD
     ScopedUtfChars nameUtf8(env, name);
 
     ret = socket_local_server_bind(fd, nameUtf8.c_str(), namespaceId);
+=======
+    nameUtf8 = env->GetStringUTFChars(name, NULL);
+
+    ret = socket_local_server_bind(fd, nameUtf8, namespaceId);
+
+    env->ReleaseStringUTFChars(name, nameUtf8);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
     if (ret < 0) {
         jniThrowIOException(env, errno);
@@ -446,7 +484,10 @@ static int socket_process_cmsg(JNIEnv *env, jobject thisJ, struct msghdr * pMsg)
             if (count < 0) {
                 jniThrowException(env, "java/io/IOException",
                     "invalid cmsg length");
+<<<<<<< HEAD
                 return -1;
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             }
 
             fdArray = env->NewObjectArray(count, class_FileDescriptor, NULL);

@@ -361,12 +361,26 @@ public final class PrintManagerService extends IPrintManager.Stub {
         }
 
         synchronized (mLock) {
+<<<<<<< HEAD
             pw.println("PRINT MANAGER STATE (dumpsys print)");
             final int userStateCount = mUserStates.size();
             for (int i = 0; i < userStateCount; i++) {
                 UserState userState = mUserStates.get(i);
                 userState.dump(fd, pw, "");
                 pw.println();
+=======
+            final long identity = Binder.clearCallingIdentity();
+            try {
+                pw.println("PRINT MANAGER STATE (dumpsys print)");
+                final int userStateCount = mUserStates.size();
+                for (int i = 0; i < userStateCount; i++) {
+                    UserState userState = mUserStates.valueAt(i);
+                    userState.dump(fd, pw, "");
+                    pw.println();
+                }
+            } finally {
+                Binder.restoreCallingIdentity(identity);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             }
         }
     }

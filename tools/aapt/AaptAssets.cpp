@@ -2487,6 +2487,18 @@ status_t AaptAssets::filter(Bundle* bundle)
                 continue;
             }
 
+<<<<<<< HEAD
+=======
+            // Get the preferred density if there is one. We do not match exactly for density.
+            // If our preferred density is hdpi but we only have mdpi and xhdpi resources, we
+            // pick xhdpi.
+            uint32_t preferredDensity = 0;
+            const SortedVector<uint32_t>* preferredConfigs = prefFilter.configsForAxis(AXIS_DENSITY);
+            if (preferredConfigs != NULL && preferredConfigs->size() > 0) {
+                preferredDensity = (*preferredConfigs)[0];
+            }
+
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             // Now deal with preferred configurations.
             for (int axis=AXIS_START; axis<=AXIS_END; axis++) {
                 for (size_t k=0; k<grp->getFiles().size(); k++) {
@@ -2512,12 +2524,37 @@ status_t AaptAssets::filter(Bundle* bundle)
                         // This is a resource we would prefer not to have.  Check
                         // to see if have a similar variation that we would like
                         // to have and, if so, we can drop it.
+<<<<<<< HEAD
+=======
+
+                        uint32_t bestDensity = config.density;
+
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                         for (size_t m=0; m<grp->getFiles().size(); m++) {
                             if (m == k) continue;
                             sp<AaptFile> mfile = grp->getFiles().valueAt(m);
                             const ResTable_config& mconfig(mfile->getGroupEntry().toParams());
                             if (AaptGroupEntry::configSameExcept(config, mconfig, axis)) {
+<<<<<<< HEAD
                                 if (prefFilter.match(axis, mconfig)) {
+=======
+                                if (axis == AXIS_DENSITY && preferredDensity > 0) {
+                                    // See if there is a better density resource
+                                    if (mconfig.density < bestDensity &&
+                                            mconfig.density > preferredDensity &&
+                                            bestDensity > preferredDensity) {
+                                        // This density is between our best density and
+                                        // the preferred density, therefore it is better.
+                                        bestDensity = mconfig.density;
+                                    } else if (mconfig.density > bestDensity &&
+                                            bestDensity < preferredDensity) {
+                                        // This density is better than our best density and
+                                        // our best density was smaller than our preferred
+                                        // density, so it is better.
+                                        bestDensity = mconfig.density;
+                                    }
+                                } else if (prefFilter.match(axis, mconfig)) {
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                                     if (bundle->getVerbose()) {
                                         printf("Pruning unneeded resource: %s\n",
                                                 file->getPrintableSource().string());
@@ -2528,6 +2565,19 @@ status_t AaptAssets::filter(Bundle* bundle)
                                 }
                             }
                         }
+<<<<<<< HEAD
+=======
+
+                        if (axis == AXIS_DENSITY && preferredDensity > 0 &&
+                                bestDensity != config.density) {
+                            if (bundle->getVerbose()) {
+                                printf("Pruning unneeded resource: %s\n",
+                                        file->getPrintableSource().string());
+                            }
+                            grp->removeFile(k);
+                            k--;
+                        }
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                     }
                 }
             }

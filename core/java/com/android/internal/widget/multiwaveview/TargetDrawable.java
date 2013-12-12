@@ -28,11 +28,17 @@ public class TargetDrawable {
     private static final boolean DEBUG = false;
 
     public static final int[] STATE_ACTIVE =
+<<<<<<< HEAD
             { android.R.attr.state_enabled,
                 android.R.attr.state_active, -android.R.attr.state_focused };
     public static final int[] STATE_INACTIVE =
             { android.R.attr.state_enabled,
                 -android.R.attr.state_active , -android.R.attr.state_focused };
+=======
+            { android.R.attr.state_enabled, android.R.attr.state_active };
+    public static final int[] STATE_INACTIVE =
+            { android.R.attr.state_enabled, -android.R.attr.state_active };
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     public static final int[] STATE_FOCUSED =
             { android.R.attr.state_enabled, -android.R.attr.state_active,
                 android.R.attr.state_focused };
@@ -63,6 +69,7 @@ public class TargetDrawable {
         setState(STATE_INACTIVE);
     }
 
+<<<<<<< HEAD
     public TargetDrawable(Resources res, Drawable drawable) {
         mResourceId = 0;
         // Mutate the drawable so we can animate shared drawable properties.
@@ -71,6 +78,8 @@ public class TargetDrawable {
         setState(STATE_INACTIVE);
     }
 
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     public TargetDrawable(TargetDrawable other) {
         mResourceId = other.mResourceId;
         // Mutate the drawable so we can animate shared drawable properties.

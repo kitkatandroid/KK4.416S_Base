@@ -334,6 +334,30 @@ public final class CameraCharacteristics extends CameraMetadata {
 
     /**
      * <p>
+<<<<<<< HEAD
+=======
+     * If set to 1, the HAL will always split result
+     * metadata for a single capture into multiple buffers,
+     * returned using multiple process_capture_result calls.
+     * </p>
+     * <p>
+     * Does not need to be listed in static
+     * metadata. Support for partial results will be reworked in
+     * future versions of camera service. This quirk will stop
+     * working at that point; DO NOT USE without careful
+     * consideration of future support.
+     * </p>
+     *
+     * <b>Optional</b> - This value may be null on some devices.
+     *
+     * @hide
+     */
+    public static final Key<Byte> QUIRKS_USE_PARTIAL_RESULT =
+            new Key<Byte>("android.quirks.usePartialResult", byte.class);
+
+    /**
+     * <p>
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
      * How many output streams can be allocated at
      * the same time for each type of stream
      * </p>

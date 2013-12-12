@@ -1048,7 +1048,11 @@ please see themes_device_defaults.xml.
         <item name="presentationTheme">@android:style/Theme.Holo.Dialog.Presentation</item>
 
         <!-- Toast attributes -->
+<<<<<<< HEAD
         <item name="toastFrameBackground">@android:drawable/toast_frame_holo</item>
+=======
+        <item name="toastFrameBackground">@android:drawable/toast_frame</item>
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
         <!-- Panel attributes -->
         <item name="panelBackground">@android:drawable/menu_hardkey_panel_holo_dark</item>
@@ -1363,7 +1367,11 @@ please see themes_device_defaults.xml.
         <item name="presentationTheme">@android:style/Theme.Holo.Light.Dialog.Presentation</item>
 
         <!-- Toast attributes -->
+<<<<<<< HEAD
         <item name="toastFrameBackground">@android:drawable/toast_frame_holo</item>
+=======
+        <item name="toastFrameBackground">@android:drawable/toast_frame</item>
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
         <!-- Panel attributes -->
         <item name="panelBackground">@android:drawable/menu_hardkey_panel_holo_light</item>

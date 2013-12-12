@@ -1,10 +1,13 @@
 /* //device/java/android/android/os/INetworkManagementService.aidl
 **
 ** Copyright 2007, The Android Open Source Project
+<<<<<<< HEAD
 ** Copyright (c) 2010-2013, The Linux Foundation. All rights reserved.
 **
 ** Not a Contribution. Apache license notifications and license are
 ** retained for attribution purposes only.
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 **
 ** Licensed under the Apache License, Version 2.0 (the "License");
 ** you may not use this file except in compliance with the License.
@@ -199,6 +202,7 @@ interface INetworkManagementService
     void disableNat(String internalInterface, String externalInterface);
 
     /**
+<<<<<<< HEAD
      * Add an upstream IPv6 interface
      */
     void addUpstreamV6Interface(String iface);
@@ -209,6 +213,8 @@ interface INetworkManagementService
     void removeUpstreamV6Interface(String iface);
 
     /**
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
      ** PPPD
      **/
 
@@ -455,6 +461,7 @@ interface INetworkManagementService
      * Determine whether the clatd (464xlat) service has been started
      */
     boolean isClatdStarted();
+<<<<<<< HEAD
 
    /**
     ** Policy Routing
@@ -478,4 +485,6 @@ interface INetworkManagementService
     * address from a custom routing table denoted by routeId
     */
    boolean delSrcRoute(in byte[] ip, int routeId);
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 }

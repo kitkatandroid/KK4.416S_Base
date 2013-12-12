@@ -170,6 +170,12 @@ public class PhoneStatusBarView extends PanelBar {
         mBar.makeExpandedInvisibleSoon();
         mFadingPanel = null;
         mLastFullyOpenedPanel = null;
+<<<<<<< HEAD
+=======
+        if (mScrimColor != 0 && ActivityManager.isHighEndGfx()) {
+            mBar.mStatusBarWindow.setBackgroundColor(0);
+        }
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     @Override
@@ -244,6 +250,7 @@ public class PhoneStatusBarView extends PanelBar {
 
         mBar.animateHeadsUp(mNotificationPanel == panel, mPanelExpandedFractionSum);
 
+<<<<<<< HEAD
         updateShortcutsVisibility();
     }
 
@@ -273,4 +280,8 @@ public class PhoneStatusBarView extends PanelBar {
         }
     }
 
+=======
+        mBar.updateCarrierLabelVisibility(false);
+    }
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 }

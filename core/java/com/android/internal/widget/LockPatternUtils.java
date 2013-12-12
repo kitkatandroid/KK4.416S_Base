@@ -91,11 +91,14 @@ public class LockPatternUtils {
     public static final int MIN_LOCK_PATTERN_SIZE = 4;
 
     /**
+<<<<<<< HEAD
      * The default size of the pattern lockscreen. Ex: 3x3
      */
     public static final byte PATTERN_SIZE_DEFAULT = 3;
 
     /**
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
      * The minimum number of dots the user must include in a wrong pattern
      * attempt for it to be counted against the counts that affect
      * {@link #FAILED_ATTEMPTS_BEFORE_TIMEOUT} and {@link #FAILED_ATTEMPTS_BEFORE_RESET}
@@ -744,6 +747,7 @@ public class LockPatternUtils {
      * @param string The pattern serialized with {@link #patternToString}
      * @return The pattern.
      */
+<<<<<<< HEAD
     public List<LockPatternView.Cell> stringToPattern(String string) {
         List<LockPatternView.Cell> result = Lists.newArrayList();
 
@@ -754,6 +758,15 @@ public class LockPatternUtils {
         for (int i = 0; i < bytes.length; i++) {
             byte b = bytes[i];
             result.add(LockPatternView.Cell.of(b / size, b % size, size));
+=======
+    public static List<LockPatternView.Cell> stringToPattern(String string) {
+        List<LockPatternView.Cell> result = Lists.newArrayList();
+
+        final byte[] bytes = string.getBytes();
+        for (int i = 0; i < bytes.length; i++) {
+            byte b = bytes[i];
+            result.add(LockPatternView.Cell.of(b / 3, b % 3));
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
         return result;
     }
@@ -763,7 +776,11 @@ public class LockPatternUtils {
      * @param pattern The pattern.
      * @return The pattern in string form.
      */
+<<<<<<< HEAD
     public String patternToString(List<LockPatternView.Cell> pattern) {
+=======
+    public static String patternToString(List<LockPatternView.Cell> pattern) {
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         if (pattern == null) {
             return "";
         }
@@ -772,7 +789,11 @@ public class LockPatternUtils {
         byte[] res = new byte[patternSize];
         for (int i = 0; i < patternSize; i++) {
             LockPatternView.Cell cell = pattern.get(i);
+<<<<<<< HEAD
             res[i] = (byte) (cell.getRow() * getLockPatternSize() + cell.getColumn());
+=======
+            res[i] = (byte) (cell.getRow() * 3 + cell.getColumn());
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
         return new String(res);
     }
@@ -784,7 +805,11 @@ public class LockPatternUtils {
      * @param pattern the gesture pattern.
      * @return the hash of the pattern in a byte array.
      */
+<<<<<<< HEAD
     public byte[] patternToHash(List<LockPatternView.Cell> pattern) {
+=======
+    public static byte[] patternToHash(List<LockPatternView.Cell> pattern) {
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         if (pattern == null) {
             return null;
         }
@@ -793,7 +818,11 @@ public class LockPatternUtils {
         byte[] res = new byte[patternSize];
         for (int i = 0; i < patternSize; i++) {
             LockPatternView.Cell cell = pattern.get(i);
+<<<<<<< HEAD
             res[i] = (byte) (cell.getRow() * getLockPatternSize() + cell.getColumn());
+=======
+            res[i] = (byte) (cell.getRow() * 3 + cell.getColumn());
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-1");
@@ -962,6 +991,7 @@ public class LockPatternUtils {
     }
 
     /**
+<<<<<<< HEAD
      * @return the pattern lockscreen size
      */
     public byte getLockPatternSize() {
@@ -980,6 +1010,8 @@ public class LockPatternUtils {
     }
 
     /**
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
      * Set and store the lockout deadline, meaning the user can't attempt his/her unlock
      * pattern until the deadline has passed.
      * @return the chosen deadline.

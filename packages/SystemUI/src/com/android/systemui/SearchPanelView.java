@@ -24,6 +24,7 @@ import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+<<<<<<< HEAD
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
@@ -35,6 +36,9 @@ import android.graphics.drawable.StateListDrawable;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
+=======
+import android.content.res.Resources;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
@@ -43,6 +47,7 @@ import android.provider.Settings;
 import android.util.AttributeSet;
 import android.util.EventLog;
 import android.util.Log;
+<<<<<<< HEAD
 import android.view.HapticFeedbackConstants;
 import android.view.IWindowManager;
 import android.view.MotionEvent;
@@ -64,15 +69,30 @@ import com.android.internal.util.slim.SlimActions;
 import com.android.internal.widget.multiwaveview.GlowPadView;
 import com.android.internal.widget.multiwaveview.GlowPadView.OnTriggerListener;
 import com.android.internal.widget.multiwaveview.TargetDrawable;
+=======
+import android.view.IWindowManager;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.view.ViewTreeObserver.OnPreDrawListener;
+import android.widget.FrameLayout;
+
+import com.android.internal.widget.multiwaveview.GlowPadView;
+import com.android.internal.widget.multiwaveview.GlowPadView.OnTriggerListener;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import com.android.systemui.statusbar.BaseStatusBar;
 import com.android.systemui.statusbar.CommandQueue;
 import com.android.systemui.statusbar.StatusBarPanel;
 import com.android.systemui.statusbar.phone.KeyguardTouchDelegate;
 import com.android.systemui.statusbar.phone.PhoneStatusBar;
 
+<<<<<<< HEAD
 import java.io.File;
 import java.util.ArrayList;
 
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 public class SearchPanelView extends FrameLayout implements
         StatusBarPanel, ActivityOptions.OnAnimationStartedListener {
     private static final int SEARCH_PANEL_HOLD_DURATION = 0;
@@ -88,6 +108,7 @@ public class SearchPanelView extends FrameLayout implements
     private View mSearchTargetsContainer;
     private GlowPadView mGlowPadView;
     private IWindowManager mWm;
+<<<<<<< HEAD
     private Resources mResources;
 
     private ArrayList<ButtonConfig> mButtonsConfig;
@@ -97,6 +118,8 @@ public class SearchPanelView extends FrameLayout implements
     private boolean mSearchPanelLock;
     private int mTarget;
     private boolean mAppIsBinded;
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
     public SearchPanelView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
@@ -106,6 +129,7 @@ public class SearchPanelView extends FrameLayout implements
         super(context, attrs, defStyle);
         mContext = context;
         mWm = IWindowManager.Stub.asInterface(ServiceManager.getService("window"));
+<<<<<<< HEAD
         mResources = mContext.getResources();
     }
 
@@ -183,6 +207,9 @@ public class SearchPanelView extends FrameLayout implements
         }
     }
     final GlowPadTriggerListener mGlowPadViewListener = new GlowPadTriggerListener();
+=======
+    }
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
     private void startAssistActivity() {
         if (!mBar.isDeviceProvisioned()) return;
@@ -226,6 +253,40 @@ public class SearchPanelView extends FrameLayout implements
         }
     }
 
+<<<<<<< HEAD
+=======
+    class GlowPadTriggerListener implements GlowPadView.OnTriggerListener {
+        boolean mWaitingForLaunch;
+
+        public void onGrabbed(View v, int handle) {
+        }
+
+        public void onReleased(View v, int handle) {
+        }
+
+        public void onGrabbedStateChange(View v, int handle) {
+            if (!mWaitingForLaunch && OnTriggerListener.NO_HANDLE == handle) {
+                mBar.hideSearchPanel();
+            }
+        }
+
+        public void onTrigger(View v, final int target) {
+            final int resId = mGlowPadView.getResourceIdForTarget(target);
+            switch (resId) {
+                case com.android.internal.R.drawable.ic_action_assist_generic:
+                    mWaitingForLaunch = true;
+                    startAssistActivity();
+                    vibrate();
+                    break;
+            }
+        }
+
+        public void onFinishFinalAnimation() {
+        }
+    }
+    final GlowPadTriggerListener mGlowPadViewListener = new GlowPadTriggerListener();
+
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     @Override
     public void onAnimationStarted() {
         postDelayed(new Runnable() {
@@ -244,7 +305,10 @@ public class SearchPanelView extends FrameLayout implements
         // TODO: fetch views
         mGlowPadView = (GlowPadView) findViewById(R.id.glow_pad_view);
         mGlowPadView.setOnTriggerListener(mGlowPadViewListener);
+<<<<<<< HEAD
         updateSettings();
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     private void maybeSwapSearchIcon() {
@@ -382,6 +446,7 @@ public class SearchPanelView extends FrameLayout implements
         return ((SearchManager) mContext.getSystemService(Context.SEARCH_SERVICE))
                 .getAssistIntent(mContext, false, UserHandle.USER_CURRENT) != null;
     }
+<<<<<<< HEAD
 
     public void updateSettings() {
         mButtonsConfig = ButtonsHelper.getNavRingConfig(mContext);
@@ -580,4 +645,6 @@ public class SearchPanelView extends FrameLayout implements
         return mAppIsBinded;
     }
 
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 }

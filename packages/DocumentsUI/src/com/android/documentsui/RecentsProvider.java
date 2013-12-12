@@ -16,24 +16,57 @@
 
 package com.android.documentsui;
 
+<<<<<<< HEAD
+=======
+import static com.android.documentsui.model.DocumentInfo.getCursorString;
+
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import android.content.ContentProvider;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
+<<<<<<< HEAD
 import android.content.UriMatcher;
+=======
+import android.content.Intent;
+import android.content.UriMatcher;
+import android.content.pm.ResolveInfo;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
+<<<<<<< HEAD
+=======
+import android.os.Bundle;
+import android.provider.DocumentsContract;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import android.provider.DocumentsContract.Document;
 import android.provider.DocumentsContract.Root;
 import android.text.format.DateUtils;
 import android.util.Log;
 
+<<<<<<< HEAD
 public class RecentsProvider extends ContentProvider {
     private static final String TAG = "RecentsProvider";
 
     public static final long MAX_HISTORY_IN_MILLIS = 45 * DateUtils.DAY_IN_MILLIS;
+=======
+import com.android.documentsui.model.DocumentStack;
+import com.android.documentsui.model.DurableUtils;
+import com.android.internal.util.Predicate;
+import com.google.android.collect.Sets;
+
+import libcore.io.IoUtils;
+
+import java.io.IOException;
+import java.util.Set;
+
+public class RecentsProvider extends ContentProvider {
+    private static final String TAG = "RecentsProvider";
+
+    private static final long MAX_HISTORY_IN_MILLIS = 45 * DateUtils.DAY_IN_MILLIS;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
     private static final String AUTHORITY = "com.android.documentsui.recents";
 
@@ -43,6 +76,12 @@ public class RecentsProvider extends ContentProvider {
     private static final int URI_STATE = 2;
     private static final int URI_RESUME = 3;
 
+<<<<<<< HEAD
+=======
+    public static final String METHOD_PURGE = "purge";
+    public static final String METHOD_PURGE_PACKAGE = "purgePackage";
+
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     static {
         sMatcher.addURI(AUTHORITY, "recent", URI_RECENT);
         // state/authority/rootId/docId
@@ -231,4 +270,119 @@ public class RecentsProvider extends ContentProvider {
     public int delete(Uri uri, String selection, String[] selectionArgs) {
         throw new UnsupportedOperationException("Unsupported Uri " + uri);
     }
+<<<<<<< HEAD
+=======
+
+    @Override
+    public Bundle call(String method, String arg, Bundle extras) {
+        if (METHOD_PURGE.equals(method)) {
+            // Purge references to unknown authorities
+            final Intent intent = new Intent(DocumentsContract.PROVIDER_INTERFACE);
+            final Set<String> knownAuth = Sets.newHashSet();
+            for (ResolveInfo info : getContext()
+                    .getPackageManager().queryIntentContentProviders(intent, 0)) {
+                knownAuth.add(info.providerInfo.authority);
+            }
+
+            purgeByAuthority(new Predicate<String>() {
+                @Override
+                public boolean apply(String authority) {
+                    // Purge unknown authorities
+                    return !knownAuth.contains(authority);
+                }
+            });
+
+            return null;
+
+        } else if (METHOD_PURGE_PACKAGE.equals(method)) {
+            // Purge references to authorities in given package
+            final Intent intent = new Intent(DocumentsContract.PROVIDER_INTERFACE);
+            intent.setPackage(arg);
+            final Set<String> packageAuth = Sets.newHashSet();
+            for (ResolveInfo info : getContext()
+                    .getPackageManager().queryIntentContentProviders(intent, 0)) {
+                packageAuth.add(info.providerInfo.authority);
+            }
+
+            if (!packageAuth.isEmpty()) {
+                purgeByAuthority(new Predicate<String>() {
+                    @Override
+                    public boolean apply(String authority) {
+                        // Purge authority matches
+                        return packageAuth.contains(authority);
+                    }
+                });
+            }
+
+            return null;
+
+        } else {
+            return super.call(method, arg, extras);
+        }
+    }
+
+    /**
+     * Purge all internal data whose authority matches the given
+     * {@link Predicate}.
+     */
+    private void purgeByAuthority(Predicate<String> predicate) {
+        final SQLiteDatabase db = mHelper.getWritableDatabase();
+        final DocumentStack stack = new DocumentStack();
+
+        Cursor cursor = db.query(TABLE_RECENT, null, null, null, null, null, null);
+        try {
+            while (cursor.moveToNext()) {
+                try {
+                    final byte[] rawStack = cursor.getBlob(
+                            cursor.getColumnIndex(RecentColumns.STACK));
+                    DurableUtils.readFromArray(rawStack, stack);
+
+                    if (stack.root != null && predicate.apply(stack.root.authority)) {
+                        final String key = getCursorString(cursor, RecentColumns.KEY);
+                        db.delete(TABLE_RECENT, RecentColumns.KEY + "=?", new String[] { key });
+                    }
+                } catch (IOException ignored) {
+                }
+            }
+        } finally {
+            IoUtils.closeQuietly(cursor);
+        }
+
+        cursor = db.query(TABLE_STATE, new String[] {
+                StateColumns.AUTHORITY }, null, null, StateColumns.AUTHORITY, null, null);
+        try {
+            while (cursor.moveToNext()) {
+                final String authority = getCursorString(cursor, StateColumns.AUTHORITY);
+                if (predicate.apply(authority)) {
+                    db.delete(TABLE_STATE, StateColumns.AUTHORITY + "=?", new String[] {
+                            authority });
+                    Log.d(TAG, "Purged state for " + authority);
+                }
+            }
+        } finally {
+            IoUtils.closeQuietly(cursor);
+        }
+
+        cursor = db.query(TABLE_RESUME, null, null, null, null, null, null);
+        try {
+            while (cursor.moveToNext()) {
+                try {
+                    final byte[] rawStack = cursor.getBlob(
+                            cursor.getColumnIndex(ResumeColumns.STACK));
+                    DurableUtils.readFromArray(rawStack, stack);
+
+                    if (stack.root != null && predicate.apply(stack.root.authority)) {
+                        final String packageName = getCursorString(
+                                cursor, ResumeColumns.PACKAGE_NAME);
+                        db.delete(TABLE_RESUME, ResumeColumns.PACKAGE_NAME + "=?",
+                                new String[] { packageName });
+                    }
+                } catch (IOException ignored) {
+                }
+            }
+        } finally {
+            IoUtils.closeQuietly(cursor);
+        }
+    }
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 }

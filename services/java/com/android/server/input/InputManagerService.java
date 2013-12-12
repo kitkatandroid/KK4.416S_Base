@@ -294,6 +294,10 @@ public class InputManagerService extends IInputManager.Stub
         IntentFilter filter = new IntentFilter(Intent.ACTION_PACKAGE_ADDED);
         filter.addAction(Intent.ACTION_PACKAGE_REMOVED);
         filter.addAction(Intent.ACTION_PACKAGE_CHANGED);
+<<<<<<< HEAD
+=======
+        filter.addAction(Intent.ACTION_PACKAGE_REPLACED);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         filter.addDataScheme("package");
         mContext.registerReceiver(new BroadcastReceiver() {
             @Override

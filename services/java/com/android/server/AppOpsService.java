@@ -31,7 +31,10 @@ import java.util.Map;
 
 import android.app.AppOpsManager;
 import android.content.Context;
+<<<<<<< HEAD
 import android.content.pm.PackageInfo;
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.AsyncTask;
@@ -1081,6 +1084,7 @@ public class AppOpsService extends IAppOpsService.Stub {
             }
         }
     }
+<<<<<<< HEAD
 
     @Override
     public List<Integer> getPrivacyGuardOpsForPackage(String packageName) {
@@ -1212,4 +1216,6 @@ public class AppOpsService extends IAppOpsService.Stub {
                     ? AppOpsManager.MODE_IGNORED : AppOpsManager.MODE_ALLOWED);
         }
     }
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 }

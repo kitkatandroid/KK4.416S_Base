@@ -68,6 +68,11 @@ interface IBatteryStats {
     void noteFullWifiLockReleasedFromSource(in WorkSource ws);
     void noteWifiScanStartedFromSource(in WorkSource ws);
     void noteWifiScanStoppedFromSource(in WorkSource ws);
+<<<<<<< HEAD
+=======
+    void noteWifiBatchedScanStartedFromSource(in WorkSource ws, int csph);
+    void noteWifiBatchedScanStoppedFromSource(in WorkSource ws);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     void noteWifiMulticastEnabledFromSource(in WorkSource ws);
     void noteWifiMulticastDisabledFromSource(in WorkSource ws);
     void noteNetworkInterfaceType(String iface, int type);

@@ -14,7 +14,11 @@
  * limitations under the License.
  */
 
+<<<<<<< HEAD
 
+=======
+ 
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 package com.android.server.power;
 
 import android.app.ActivityManagerNative;
@@ -47,7 +51,10 @@ import com.android.internal.telephony.ITelephony;
 
 import android.util.Log;
 import android.view.WindowManager;
+<<<<<<< HEAD
 import android.view.KeyEvent;
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
 public final class ShutdownThread extends Thread {
     // constants
@@ -60,11 +67,19 @@ public final class ShutdownThread extends Thread {
 
     // length of vibration before shutting down
     private static final int SHUTDOWN_VIBRATE_MS = 500;
+<<<<<<< HEAD
 
     // state tracking
     private static Object sIsStartedGuard = new Object();
     private static boolean sIsStarted = false;
 
+=======
+    
+    // state tracking
+    private static Object sIsStartedGuard = new Object();
+    private static boolean sIsStarted = false;
+    
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     private static boolean mReboot;
     private static boolean mRebootSafeMode;
     private static String mRebootReason;
@@ -77,7 +92,11 @@ public final class ShutdownThread extends Thread {
 
     // static instance of this thread
     private static final ShutdownThread sInstance = new ShutdownThread();
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     private final Object mActionDoneSync = new Object();
     private boolean mActionDone;
     private Context mContext;
@@ -87,10 +106,17 @@ public final class ShutdownThread extends Thread {
     private Handler mHandler;
 
     private static AlertDialog sConfirmDialog;
+<<<<<<< HEAD
 
     private ShutdownThread() {
     }
 
+=======
+    
+    private ShutdownThread() {
+    }
+ 
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     /**
      * Request a clean shutdown, waiting for subsystems to clean up their
      * state etc.  Must be called from a Looper thread in which its UI
@@ -130,6 +156,7 @@ public final class ShutdownThread extends Thread {
             if (sConfirmDialog != null) {
                 sConfirmDialog.dismiss();
             }
+<<<<<<< HEAD
             if (mReboot && !mRebootSafeMode){
                 sConfirmDialog = new AlertDialog.Builder(context)
                         .setTitle(com.android.internal.R.string.reboot_system)
@@ -173,6 +200,9 @@ public final class ShutdownThread extends Thread {
                         });
             } else {
                 sConfirmDialog = new AlertDialog.Builder(context)
+=======
+            sConfirmDialog = new AlertDialog.Builder(context)
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                     .setTitle(mRebootSafeMode
                             ? com.android.internal.R.string.reboot_safemode_title
                             : com.android.internal.R.string.power_off)
@@ -184,13 +214,19 @@ public final class ShutdownThread extends Thread {
                     })
                     .setNegativeButton(com.android.internal.R.string.no, null)
                     .create();
+<<<<<<< HEAD
             }
 
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             closer.dialog = sConfirmDialog;
             sConfirmDialog.setOnDismissListener(closer);
             sConfirmDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_KEYGUARD_DIALOG);
             sConfirmDialog.show();
+<<<<<<< HEAD
 
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         } else {
             beginShutdownSequence(context);
         }
@@ -259,6 +295,7 @@ public final class ShutdownThread extends Thread {
         // throw up an indeterminate system dialog to indicate radio is
         // shutting down.
         ProgressDialog pd = new ProgressDialog(context);
+<<<<<<< HEAD
         if (mReboot) {
             pd.setTitle(context.getText(com.android.internal.R.string.reboot_system));
             pd.setMessage(context.getText(com.android.internal.R.string.reboot_progress));
@@ -266,6 +303,10 @@ public final class ShutdownThread extends Thread {
             pd.setTitle(context.getText(com.android.internal.R.string.power_off));
             pd.setMessage(context.getText(com.android.internal.R.string.shutdown_progress));
         }
+=======
+        pd.setTitle(context.getText(com.android.internal.R.string.power_off));
+        pd.setMessage(context.getText(com.android.internal.R.string.shutdown_progress));
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         pd.setIndeterminate(true);
         pd.setCancelable(false);
         pd.getWindow().setType(WindowManager.LayoutParams.TYPE_KEYGUARD_DIALOG);
@@ -345,14 +386,22 @@ public final class ShutdownThread extends Thread {
         }
 
         Log.i(TAG, "Sending shutdown broadcast...");
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         // First send the high-level shut down broadcast.
         mActionDone = false;
         Intent intent = new Intent(Intent.ACTION_SHUTDOWN);
         intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
         mContext.sendOrderedBroadcastAsUser(intent,
                 UserHandle.ALL, null, br, mHandler, 0, null, null);
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         final long endTime = SystemClock.elapsedRealtime() + MAX_BROADCAST_TIME;
         synchronized (mActionDoneSync) {
             while (!mActionDone) {
@@ -367,9 +416,15 @@ public final class ShutdownThread extends Thread {
                 }
             }
         }
+<<<<<<< HEAD
 
         Log.i(TAG, "Shutting down activity manager...");
 
+=======
+        
+        Log.i(TAG, "Shutting down activity manager...");
+        
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         final IActivityManager am =
             ActivityManagerNative.asInterface(ServiceManager.checkService("activity"));
         if (am != null) {
@@ -508,7 +563,11 @@ public final class ShutdownThread extends Thread {
                             Log.e(TAG, "RemoteException during NFC shutdown", ex);
                             nfcOff = true;
                         }
+<<<<<<< HEAD
                         if (nfcOff) {
+=======
+                        if (radioOff) {
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                             Log.i(TAG, "NFC turned off.");
                         }
                     }

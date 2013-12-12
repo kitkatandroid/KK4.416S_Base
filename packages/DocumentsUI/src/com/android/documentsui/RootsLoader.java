@@ -25,6 +25,11 @@ import com.android.documentsui.model.RootInfo;
 import java.util.Collection;
 
 public class RootsLoader extends AsyncTaskLoader<Collection<RootInfo>> {
+<<<<<<< HEAD
+=======
+    private final ForceLoadContentObserver mObserver = new ForceLoadContentObserver();
+
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     private final RootsCache mRoots;
     private final State mState;
 
@@ -34,6 +39,12 @@ public class RootsLoader extends AsyncTaskLoader<Collection<RootInfo>> {
         super(context);
         mRoots = roots;
         mState = state;
+<<<<<<< HEAD
+=======
+
+        getContext().getContentResolver()
+                .registerContentObserver(RootsCache.sNotificationUri, false, mObserver);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     @Override
@@ -77,5 +88,10 @@ public class RootsLoader extends AsyncTaskLoader<Collection<RootInfo>> {
         onStopLoading();
 
         mResult = null;
+<<<<<<< HEAD
+=======
+
+        getContext().getContentResolver().unregisterContentObserver(mObserver);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 }

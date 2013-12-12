@@ -15,6 +15,10 @@
  */
 
 #define LOG_TAG "Trace"
+<<<<<<< HEAD
+=======
+// #define LOG_NDEBUG 0
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
 #include <JNIHelp.h>
 #include <ScopedUtfChars.h>
@@ -46,6 +50,11 @@ static jlong android_os_Trace_nativeGetEnabledTags(JNIEnv* env, jclass clazz) {
 static void android_os_Trace_nativeTraceCounter(JNIEnv* env, jclass clazz,
         jlong tag, jstring nameStr, jint value) {
     ScopedUtfChars name(env, nameStr);
+<<<<<<< HEAD
+=======
+
+    ALOGV("%s: %lld %s %d", __FUNCTION__, tag, name.c_str(), value);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     atrace_int(tag, name.c_str(), value);
 }
 
@@ -55,11 +64,21 @@ static void android_os_Trace_nativeTraceBegin(JNIEnv* env, jclass clazz,
     ScopedStringChars jchars(env, nameStr);
     String8 utf8Chars(reinterpret_cast<const char16_t*>(jchars.get()), jchars.size());
     sanitizeString(utf8Chars);
+<<<<<<< HEAD
+=======
+
+    ALOGV("%s: %lld %s", __FUNCTION__, tag, utf8Chars.string());
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     atrace_begin(tag, utf8Chars.string());
 }
 
 static void android_os_Trace_nativeTraceEnd(JNIEnv* env, jclass clazz,
         jlong tag) {
+<<<<<<< HEAD
+=======
+
+    ALOGV("%s: %lld", __FUNCTION__, tag);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     atrace_end(tag);
 }
 
@@ -69,6 +88,11 @@ static void android_os_Trace_nativeAsyncTraceBegin(JNIEnv* env, jclass clazz,
     ScopedStringChars jchars(env, nameStr);
     String8 utf8Chars(reinterpret_cast<const char16_t*>(jchars.get()), jchars.size());
     sanitizeString(utf8Chars);
+<<<<<<< HEAD
+=======
+
+    ALOGV("%s: %lld %s %d", __FUNCTION__, tag, utf8Chars.string(), cookie);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     atrace_async_begin(tag, utf8Chars.string(), cookie);
 }
 
@@ -78,16 +102,31 @@ static void android_os_Trace_nativeAsyncTraceEnd(JNIEnv* env, jclass clazz,
     ScopedStringChars jchars(env, nameStr);
     String8 utf8Chars(reinterpret_cast<const char16_t*>(jchars.get()), jchars.size());
     sanitizeString(utf8Chars);
+<<<<<<< HEAD
+=======
+
+    ALOGV("%s: %lld %s %d", __FUNCTION__, tag, utf8Chars.string(), cookie);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     atrace_async_end(tag, utf8Chars.string(), cookie);
 }
 
 static void android_os_Trace_nativeSetAppTracingAllowed(JNIEnv* env,
         jclass clazz, jboolean allowed) {
+<<<<<<< HEAD
+=======
+    ALOGV("%s: %d", __FUNCTION__, allowed);
+
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     atrace_set_debuggable(allowed);
 }
 
 static void android_os_Trace_nativeSetTracingEnabled(JNIEnv* env,
         jclass clazz, jboolean enabled) {
+<<<<<<< HEAD
+=======
+    ALOGV("%s: %d", __FUNCTION__, enabled);
+
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     atrace_set_tracing_enabled(enabled);
 }
 

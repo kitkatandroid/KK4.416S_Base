@@ -274,6 +274,7 @@ public abstract class DialogPreference extends Preference implements
      * @param state Optional instance state to restore on the dialog
      */
     protected void showDialog(Bundle state) {
+<<<<<<< HEAD
         // Create the dialog
         final Dialog dialog = mDialog = createDialog();
         if (state != null) {
@@ -294,6 +295,12 @@ public abstract class DialogPreference extends Preference implements
 
         mWhichButtonClicked = DialogInterface.BUTTON_NEGATIVE;
 
+=======
+        Context context = getContext();
+
+        mWhichButtonClicked = DialogInterface.BUTTON_NEGATIVE;
+        
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         mBuilder = new AlertDialog.Builder(context)
             .setTitle(mDialogTitle)
             .setIcon(mDialogIcon)
@@ -307,12 +314,30 @@ public abstract class DialogPreference extends Preference implements
         } else {
             mBuilder.setMessage(mDialogMessage);
         }
+<<<<<<< HEAD
 
         onPrepareDialogBuilder(mBuilder);
 
         getPreferenceManager().registerOnActivityDestroyListener(this);
 
         return mBuilder.create();
+=======
+        
+        onPrepareDialogBuilder(mBuilder);
+        
+        getPreferenceManager().registerOnActivityDestroyListener(this);
+        
+        // Create the dialog
+        final Dialog dialog = mDialog = mBuilder.create();
+        if (state != null) {
+            dialog.onRestoreInstanceState(state);
+        }
+        if (needInputMethod()) {
+            requestInputMethod(dialog);
+        }
+        dialog.setOnDismissListener(this);
+        dialog.show();
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     /**

@@ -358,6 +358,7 @@ public class SystemSensorManager extends SensorManager {
             mListener = listener;
         }
 
+<<<<<<< HEAD
         public void addSensorEvent(Sensor sensor) {
             SensorEvent t = new SensorEvent(Sensor.getMaxLengthValuesArray(sensor,
                     mManager.mTargetSdkLevel));
@@ -366,6 +367,22 @@ public class SystemSensorManager extends SensorManager {
 
         public void removeSensorEvent(Sensor sensor) {
             mSensorsEvents.delete(sensor.getHandle());
+=======
+        @Override
+        public void addSensorEvent(Sensor sensor) {
+            SensorEvent t = new SensorEvent(Sensor.getMaxLengthValuesArray(sensor,
+                    mManager.mTargetSdkLevel));
+            synchronized (mSensorsEvents) {
+                mSensorsEvents.put(sensor.getHandle(), t);
+            }
+        }
+
+        @Override
+        public void removeSensorEvent(Sensor sensor) {
+            synchronized (mSensorsEvents) {
+                mSensorsEvents.delete(sensor.getHandle());
+            }
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
 
         // Called from native code.
@@ -374,9 +391,20 @@ public class SystemSensorManager extends SensorManager {
         protected void dispatchSensorEvent(int handle, float[] values, int inAccuracy,
                 long timestamp) {
             final Sensor sensor = sHandleToSensor.get(handle);
+<<<<<<< HEAD
             SensorEvent t = mSensorsEvents.get(handle);
             if (t == null) {
                 Log.e(TAG, "Error: Sensor Event is null for Sensor: " + sensor);
+=======
+            SensorEvent t = null;
+            synchronized (mSensorsEvents) {
+                t = mSensorsEvents.get(handle);
+            }
+
+            if (t == null) {
+                // This may happen if the client has unregistered and there are pending events in
+                // the queue waiting to be delivered. Ignore.
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                 return;
             }
             // Copy from the values array.
@@ -427,6 +455,7 @@ public class SystemSensorManager extends SensorManager {
             mListener = listener;
         }
 
+<<<<<<< HEAD
         public void addSensorEvent(Sensor sensor) {
             TriggerEvent t = new TriggerEvent(Sensor.getMaxLengthValuesArray(sensor,
                     mManager.mTargetSdkLevel));
@@ -435,6 +464,22 @@ public class SystemSensorManager extends SensorManager {
 
         public void removeSensorEvent(Sensor sensor) {
             mTriggerEvents.delete(sensor.getHandle());
+=======
+        @Override
+        public void addSensorEvent(Sensor sensor) {
+            TriggerEvent t = new TriggerEvent(Sensor.getMaxLengthValuesArray(sensor,
+                    mManager.mTargetSdkLevel));
+            synchronized (mTriggerEvents) {
+                mTriggerEvents.put(sensor.getHandle(), t);
+            }
+        }
+
+        @Override
+        public void removeSensorEvent(Sensor sensor) {
+            synchronized (mTriggerEvents) {
+                mTriggerEvents.delete(sensor.getHandle());
+            }
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
 
         // Called from native code.
@@ -443,7 +488,14 @@ public class SystemSensorManager extends SensorManager {
         protected void dispatchSensorEvent(int handle, float[] values, int accuracy,
                 long timestamp) {
             final Sensor sensor = sHandleToSensor.get(handle);
+<<<<<<< HEAD
             TriggerEvent t = mTriggerEvents.get(handle);
+=======
+            TriggerEvent t = null;
+            synchronized (mTriggerEvents) {
+                t = mTriggerEvents.get(handle);
+            }
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             if (t == null) {
                 Log.e(TAG, "Error: Trigger Event is null for Sensor: " + sensor);
                 return;

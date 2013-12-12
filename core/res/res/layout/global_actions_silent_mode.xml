@@ -30,7 +30,10 @@
         android:focusable="true"
         >
         <ImageView
+<<<<<<< HEAD
             android:id="@+id/icon1"
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             android:layout_width="48dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -59,7 +62,10 @@
         android:focusable="true"
         >
         <ImageView
+<<<<<<< HEAD
             android:id="@+id/icon2"
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             android:layout_width="48dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -89,7 +95,10 @@
         android:focusable="true"
         >
         <ImageView
+<<<<<<< HEAD
             android:id="@+id/icon3"
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             android:layout_width="48dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -103,4 +112,8 @@
             android:background="@drawable/silent_mode_indicator"
             />
     </LinearLayout>
+<<<<<<< HEAD
 </LinearLayout>
+=======
+</LinearLayout>
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1

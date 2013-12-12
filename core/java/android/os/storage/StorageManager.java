@@ -39,7 +39,10 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
+<<<<<<< HEAD
 import com.google.android.collect.Lists;
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
 /**
  * StorageManager is the interface to the systems storage service. The storage
@@ -560,9 +563,12 @@ public class StorageManager {
         } catch (RemoteException e) {
             Log.e(TAG, "Failed to get volume state", e);
             return null;
+<<<<<<< HEAD
         } catch (IllegalArgumentException e) {
             Log.e(TAG, "Failed to get volume state", e);
             return null;
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
     }
 
@@ -649,6 +655,7 @@ public class StorageManager {
         return Settings.Global.getLong(mResolver, Settings.Global.SYS_STORAGE_FULL_THRESHOLD_BYTES,
                 DEFAULT_FULL_THRESHOLD_BYTES);
     }
+<<<<<<< HEAD
 
     /** {@hide} */
     public static ArrayList<StorageVolume> getPhysicalExternalVolume(StorageVolume[] volumesphy) {
@@ -661,4 +668,6 @@ public class StorageManager {
         }
         return volumes;
     }
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 }

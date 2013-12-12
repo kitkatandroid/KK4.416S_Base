@@ -20,6 +20,10 @@ import android.app.Service;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.os.AsyncTask;
+<<<<<<< HEAD
+=======
+import android.os.Bundle;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 import android.os.IBinder;
 import android.os.Message;
 import android.os.ParcelFileDescriptor;
@@ -440,6 +444,10 @@ public final class PrintSpoolerService extends Service {
 
     private void removeObsoletePrintJobs() {
         synchronized (mLock) {
+<<<<<<< HEAD
+=======
+            boolean persistState = false;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             final int printJobCount = mPrintJobs.size();
             for (int i = printJobCount - 1; i >= 0; i--) {
                 PrintJobInfo printJob = mPrintJobs.get(i);
@@ -449,9 +457,18 @@ public final class PrintSpoolerService extends Service {
                         Slog.i(LOG_TAG, "[REMOVE] " + printJob.getId().flattenToString());
                     }
                     removePrintJobFileLocked(printJob.getId());
+<<<<<<< HEAD
                 }
             }
             mPersistanceManager.writeStateLocked();
+=======
+                    persistState = true;
+                }
+            }
+            if (persistState) {
+                mPersistanceManager.writeStateLocked();
+            }
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         }
     }
 
@@ -543,7 +560,11 @@ public final class PrintSpoolerService extends Service {
         final int printJobCount = mPrintJobs.size();
         for (int i = 0; i < printJobCount; i++) {
             PrintJobInfo printJob = mPrintJobs.get(i);
+<<<<<<< HEAD
             if (isActiveState(printJob.getState())
+=======
+            if (isActiveState(printJob.getState()) && printJob.getPrinterId() != null
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                     && printJob.getPrinterId().getServiceName().equals(service)) {
                 return true;
             }
@@ -623,6 +644,19 @@ public final class PrintSpoolerService extends Service {
         }
     }
 
+<<<<<<< HEAD
+=======
+    public void setPrintJobAdvancedOptionsNoPersistence(PrintJobId printJobId,
+            Bundle advancedOptions) {
+        synchronized (mLock) {
+            PrintJobInfo printJob = getPrintJobInfo(printJobId, PrintManager.APP_ID_ANY);
+            if (printJob != null) {
+                printJob.setAdvancedOptions(advancedOptions);
+            }
+        }
+    }
+
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     public void setPrintJobPrintDocumentInfoNoPersistence(PrintJobId printJobId,
             PrintDocumentInfo info) {
         synchronized (mLock) {
@@ -704,6 +738,17 @@ public final class PrintSpoolerService extends Service {
         private static final String ATTR_STATE_REASON = "stateReason";
         private static final String ATTR_CANCELLING = "cancelling";
 
+<<<<<<< HEAD
+=======
+        private static final String TAG_ADVANCED_OPTIONS = "advancedOptions";
+        private static final String TAG_ADVANCED_OPTION = "advancedOption";
+        private static final String ATTR_KEY = "key";
+        private static final String ATTR_TYPE = "type";
+        private static final String ATTR_VALUE = "value";
+        private static final String TYPE_STRING = "string";
+        private static final String TYPE_INT = "int";
+
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         private static final String TAG_MEDIA_SIZE = "mediaSize";
         private static final String TAG_RESOLUTION = "resolution";
         private static final String TAG_MARGINS = "margins";
@@ -780,6 +825,13 @@ public final class PrintSpoolerService extends Service {
                 for (int j = 0; j < printJobCount; j++) {
                     PrintJobInfo printJob = printJobs.get(j);
 
+<<<<<<< HEAD
+=======
+                    if (!shouldPersistPrintJob(printJob)) {
+                        continue;
+                    }
+
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                     serializer.startTag(null, TAG_JOB);
 
                     serializer.attribute(null, ATTR_ID, printJob.getId().flattenToString());
@@ -899,6 +951,33 @@ public final class PrintSpoolerService extends Service {
                         serializer.endTag(null, TAG_DOCUMENT_INFO);
                     }
 
+<<<<<<< HEAD
+=======
+                    Bundle advancedOptions = printJob.getAdvancedOptions();
+                    if (advancedOptions != null) {
+                        serializer.startTag(null, TAG_ADVANCED_OPTIONS);
+                        for (String key : advancedOptions.keySet()) {
+                            Object value = advancedOptions.get(key);
+                            if (value instanceof String) {
+                                String stringValue = (String) value;
+                                serializer.startTag(null, TAG_ADVANCED_OPTION);
+                                serializer.attribute(null, ATTR_KEY, key);
+                                serializer.attribute(null, ATTR_TYPE, TYPE_STRING);
+                                serializer.attribute(null, ATTR_VALUE, stringValue);
+                                serializer.endTag(null, TAG_ADVANCED_OPTION);
+                            } else if (value instanceof Integer) {
+                                String intValue = Integer.toString((Integer) value);
+                                serializer.startTag(null, TAG_ADVANCED_OPTION);
+                                serializer.attribute(null, ATTR_KEY, key);
+                                serializer.attribute(null, ATTR_TYPE, TYPE_INT);
+                                serializer.attribute(null, ATTR_VALUE, intValue);
+                                serializer.endTag(null, TAG_ADVANCED_OPTION);
+                            }
+                        }
+                        serializer.endTag(null, TAG_ADVANCED_OPTIONS);
+                    }
+
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                     serializer.endTag(null, TAG_JOB);
 
                     if (DEBUG_PERSISTENCE) {
@@ -1027,6 +1106,10 @@ public final class PrintSpoolerService extends Service {
                 skipEmptyTextTags(parser);
                 expect(parser, XmlPullParser.END_TAG, TAG_PAGE_RANGE);
                 parser.next();
+<<<<<<< HEAD
+=======
+                skipEmptyTextTags(parser);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             }
             if (pageRanges != null) {
                 PageRange[] pageRangesArray = new PageRange[pageRanges.size()];
@@ -1057,8 +1140,13 @@ public final class PrintSpoolerService extends Service {
                     final int labelResId = (labelResIdString != null)
                             ? Integer.parseInt(labelResIdString) : 0;
                     label = parser.getAttributeValue(null, ATTR_LABEL);
+<<<<<<< HEAD
                     MediaSize mediaSize = new MediaSize(id, label, packageName, labelResId,
                                 widthMils, heightMils);
+=======
+                    MediaSize mediaSize = new MediaSize(id, label, packageName,
+                                widthMils, heightMils, labelResId);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                     builder.setMediaSize(mediaSize);
                     parser.next();
                     skipEmptyTextTags(parser);
@@ -1127,6 +1215,35 @@ public final class PrintSpoolerService extends Service {
                 parser.next();
             }
 
+<<<<<<< HEAD
+=======
+            skipEmptyTextTags(parser);
+            if (accept(parser, XmlPullParser.START_TAG, TAG_ADVANCED_OPTIONS)) {
+                parser.next();
+                skipEmptyTextTags(parser);
+                Bundle advancedOptions = new Bundle();
+                while (accept(parser, XmlPullParser.START_TAG, TAG_ADVANCED_OPTION)) {
+                    String key = parser.getAttributeValue(null, ATTR_KEY);
+                    String value = parser.getAttributeValue(null, ATTR_VALUE);
+                    String type = parser.getAttributeValue(null, ATTR_TYPE);
+                    if (TYPE_STRING.equals(type)) {
+                        advancedOptions.putString(key, value);
+                    } else if (TYPE_INT.equals(type)) {
+                        advancedOptions.putInt(key, Integer.valueOf(value));
+                    }
+                    parser.next();
+                    skipEmptyTextTags(parser);
+                    expect(parser, XmlPullParser.END_TAG, TAG_ADVANCED_OPTION);
+                    parser.next();
+                    skipEmptyTextTags(parser);
+                }
+                printJob.setAdvancedOptions(advancedOptions);
+                skipEmptyTextTags(parser);
+                expect(parser, XmlPullParser.END_TAG, TAG_ADVANCED_OPTIONS);
+                parser.next();
+            }
+
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             mPrintJobs.add(printJob);
 
             if (DEBUG_PERSISTENCE) {

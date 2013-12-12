@@ -29,17 +29,26 @@ final class BroadcastFilter extends IntentFilter {
     final String requiredPermission;
     final int owningUid;
     final int owningUserId;
+<<<<<<< HEAD
     final boolean isSystem;
 
     BroadcastFilter(IntentFilter _filter, ReceiverList _receiverList,
             String _packageName, String _requiredPermission, int _owningUid, int _userId, boolean _isSystem) {
+=======
+
+    BroadcastFilter(IntentFilter _filter, ReceiverList _receiverList,
+            String _packageName, String _requiredPermission, int _owningUid, int _userId) {
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         super(_filter);
         receiverList = _receiverList;
         packageName = _packageName;
         requiredPermission = _requiredPermission;
         owningUid = _owningUid;
         owningUserId = _userId;
+<<<<<<< HEAD
         isSystem = _isSystem;
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
     
     public void dump(PrintWriter pw, String prefix) {
@@ -73,6 +82,7 @@ final class BroadcastFilter extends IntentFilter {
         sb.append('}');
         return sb.toString();
     }
+<<<<<<< HEAD
 
     @Override
     public int onCompareTie(IntentFilter other) {
@@ -85,4 +95,6 @@ final class BroadcastFilter extends IntentFilter {
             return 1;
         return 0;
     }
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 }

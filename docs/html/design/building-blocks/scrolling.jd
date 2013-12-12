@@ -8,7 +8,11 @@ scrolling speed is proportional to the speed of the gesture.</p>
 
 <p>Appears during scrolling to indicate what portion of the content is currently in view.</p>
 
+<<<<<<< HEAD
 <div class="framed-galaxynexus-land-span-13">
+=======
+<div class="framed-nexus5-land-span-13">
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
   <video class="play-on-hover" autoplay>
     <source src="{@docRoot}design/media/scroll_indicator.mp4" type="video/mp4">
     <source src="{@docRoot}design/media/scroll_indicator.webm" type="video/webm">
@@ -26,7 +30,11 @@ to quickly navigate to the items that begin with a particular letter. With index
 indicator appears even when the user isn't scrolling. Touching or dragging it causes the current
 letter to pop up in a prominent way.</p>
 
+<<<<<<< HEAD
 <div class="framed-galaxynexus-land-span-13">
+=======
+<div class="framed-nexus5-land-span-13">
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
   <video class="play-on-hover" autoplay>
     <source src="{@docRoot}design/media/scroll_index.mp4" type="video/mp4">
     <source src="{@docRoot}design/media/scroll_index.webm" type="video/webm">

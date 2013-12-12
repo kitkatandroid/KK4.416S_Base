@@ -60,6 +60,11 @@ public final class PrintServiceInfo implements Parcelable {
 
     private final String mAddPrintersActivityName;
 
+<<<<<<< HEAD
+=======
+    private final String mAdvancedPrintOptionsActivityName;
+
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     /**
      * Creates a new instance.
      *
@@ -70,6 +75,10 @@ public final class PrintServiceInfo implements Parcelable {
         mResolveInfo = parcel.readParcelable(null);
         mSettingsActivityName = parcel.readString();
         mAddPrintersActivityName = parcel.readString();
+<<<<<<< HEAD
+=======
+        mAdvancedPrintOptionsActivityName = parcel.readString();
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     /**
@@ -78,14 +87,25 @@ public final class PrintServiceInfo implements Parcelable {
      * @param resolveInfo The service resolve info.
      * @param settingsActivityName Optional settings activity name.
      * @param addPrintersActivityName Optional add printers activity name.
+<<<<<<< HEAD
      */
     public PrintServiceInfo(ResolveInfo resolveInfo, String settingsActivityName,
             String addPrintersActivityName) {
+=======
+     * @param advancedPrintOptionsActivityName Optional advanced print options activity.
+     */
+    public PrintServiceInfo(ResolveInfo resolveInfo, String settingsActivityName,
+            String addPrintersActivityName, String advancedPrintOptionsActivityName) {
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         mId = new ComponentName(resolveInfo.serviceInfo.packageName,
                 resolveInfo.serviceInfo.name).flattenToString();
         mResolveInfo = resolveInfo;
         mSettingsActivityName = settingsActivityName;
         mAddPrintersActivityName = addPrintersActivityName;
+<<<<<<< HEAD
+=======
+        mAdvancedPrintOptionsActivityName = advancedPrintOptionsActivityName;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     /**
@@ -99,6 +119,10 @@ public final class PrintServiceInfo implements Parcelable {
     public static PrintServiceInfo create(ResolveInfo resolveInfo, Context context) {
         String settingsActivityName = null;
         String addPrintersActivityName = null;
+<<<<<<< HEAD
+=======
+        String advancedPrintOptionsActivityName = null;
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
         XmlResourceParser parser = null;
         PackageManager packageManager = context.getPackageManager();
@@ -128,6 +152,12 @@ public final class PrintServiceInfo implements Parcelable {
                     addPrintersActivityName = attributes.getString(
                             com.android.internal.R.styleable.PrintService_addPrintersActivity);
 
+<<<<<<< HEAD
+=======
+                    advancedPrintOptionsActivityName = attributes.getString(com.android.internal
+                            .R.styleable.PrintService_advancedPrintOptionsActivity);
+
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
                     attributes.recycle();
                 }
             } catch (IOException ioe) {
@@ -144,7 +174,12 @@ public final class PrintServiceInfo implements Parcelable {
             }
         }
 
+<<<<<<< HEAD
         return new PrintServiceInfo(resolveInfo, settingsActivityName, addPrintersActivityName);
+=======
+        return new PrintServiceInfo(resolveInfo, settingsActivityName,
+                addPrintersActivityName, advancedPrintOptionsActivityName);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     /**
@@ -195,6 +230,22 @@ public final class PrintServiceInfo implements Parcelable {
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * The advanced print options activity name.
+     * <p>
+     * <strong>Statically set from
+     * {@link PrintService#SERVICE_META_DATA meta-data}.</strong>
+     * </p>
+     *
+     * @return The advanced print options activity name.
+     */
+    public String getAdvancedOptionsActivityName() {
+        return mAdvancedPrintOptionsActivityName;
+    }
+
+    /**
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
      * {@inheritDoc}
      */
     public int describeContents() {
@@ -206,6 +257,10 @@ public final class PrintServiceInfo implements Parcelable {
         parcel.writeParcelable(mResolveInfo, 0);
         parcel.writeString(mSettingsActivityName);
         parcel.writeString(mAddPrintersActivityName);
+<<<<<<< HEAD
+=======
+        parcel.writeString(mAdvancedPrintOptionsActivityName);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     }
 
     @Override
@@ -243,6 +298,11 @@ public final class PrintServiceInfo implements Parcelable {
         builder.append(", resolveInfo=").append(mResolveInfo);
         builder.append(", settingsActivityName=").append(mSettingsActivityName);
         builder.append(", addPrintersActivityName=").append(mAddPrintersActivityName);
+<<<<<<< HEAD
+=======
+        builder.append(", advancedPrintOptionsActivityName=")
+                .append(mAdvancedPrintOptionsActivityName);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         builder.append("}");
         return builder.toString();
     }

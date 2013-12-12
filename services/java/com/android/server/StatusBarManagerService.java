@@ -146,7 +146,11 @@ public class StatusBarManagerService extends IStatusBarService.Stub
 
         if (mBar != null) {
             try {
+<<<<<<< HEAD
                 mBar.animateExpandSettingsPanel(true);
+=======
+                mBar.animateExpandSettingsPanel();
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             } catch (RemoteException ex) {
             }
         }
@@ -408,6 +412,7 @@ public class StatusBarManagerService extends IStatusBarService.Stub
         }
     }
 
+<<<<<<< HEAD
     @Override
     public void setAutoRotate(boolean enabled) {
         if (mBar != null) {
@@ -462,6 +467,8 @@ public class StatusBarManagerService extends IStatusBarService.Stub
         }
     }
 
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     private void enforceStatusBar() {
         mContext.enforceCallingOrSelfPermission(android.Manifest.permission.STATUS_BAR,
                 "StatusBarManagerService");

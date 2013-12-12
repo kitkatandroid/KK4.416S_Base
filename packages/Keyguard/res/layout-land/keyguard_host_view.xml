@@ -49,6 +49,7 @@
             androidprv:layout_childType="widget"
             androidprv:layout_maxWidth="480dp"
             androidprv:layout_maxHeight="480dp" />
+<<<<<<< HEAD
         <include layout="@layout/keyguard_widget_pager_carousel"
             android:id="@+id/app_widget_container_carousel"
             android:layout_width="match_parent"
@@ -57,6 +58,8 @@
             androidprv:layout_childType="widget"
             androidprv:layout_maxWidth="480dp"
             androidprv:layout_maxHeight="480dp" />
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         <include layout="@layout/keyguard_multi_user_selector"/>
 
         <View android:layout_width="match_parent"
@@ -68,6 +71,11 @@
             android:id="@+id/keyguard_security_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+<<<<<<< HEAD
+=======
+            android:clipChildren="false"
+            android:clipToPadding="false"
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             androidprv:layout_childType="challenge"
             androidprv:layout_centerWithinArea="0.55">
             <com.android.keyguard.KeyguardSecurityViewFlipper

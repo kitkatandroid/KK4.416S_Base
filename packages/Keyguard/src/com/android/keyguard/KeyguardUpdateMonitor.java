@@ -743,8 +743,12 @@ public class KeyguardUpdateMonitor {
      */
     private void handleBatteryUpdate(BatteryStatus status) {
         if (DEBUG) Log.d(TAG, "handleBatteryUpdate");
+<<<<<<< HEAD
         final boolean batteryUpdateInteresting = isBatteryUpdateInteresting(
                 mBatteryStatus, status);
+=======
+        final boolean batteryUpdateInteresting = isBatteryUpdateInteresting(mBatteryStatus, status);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         mBatteryStatus = status;
         if (batteryUpdateInteresting) {
             for (int i = 0; i < mCallbacks.size(); i++) {
@@ -816,7 +820,11 @@ public class KeyguardUpdateMonitor {
         for (int i = 0; i < mCallbacks.size(); i++) {
             KeyguardUpdateMonitorCallback cb = mCallbacks.get(i).get();
             if (cb != null) {
+<<<<<<< HEAD
                 cb.onKeyguardVisibilityChanged(isShowing);
+=======
+                cb.onKeyguardVisibilityChangedRaw(isShowing);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             }
         }
     }

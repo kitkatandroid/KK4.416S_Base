@@ -24,7 +24,10 @@
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
+<<<<<<< HEAD
         android:paddingStart="8dp"
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         android:paddingEnd="10dp"
         android:src="@drawable/ic_qs_brightness_auto_off"
         />
@@ -37,6 +40,7 @@
         android:layout_gravity="center_vertical"
         systemui:text="@string/status_bar_settings_auto_brightness_label"
         />
+<<<<<<< HEAD
     <View
         android:id="@+id/brightness_setup_button_placeholder"
         android:layout_width="8dp"
@@ -58,4 +62,6 @@
         android:src="@drawable/ic_qs_settings"
         android:background="?android:attr/selectableItemBackground"
         />
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 </LinearLayout>

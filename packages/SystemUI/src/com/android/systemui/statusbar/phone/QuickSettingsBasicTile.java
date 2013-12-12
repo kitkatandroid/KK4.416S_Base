@@ -55,7 +55,11 @@ class QuickSettingsBasicTile extends QuickSettingsTileView {
     }
 
     @Override
+<<<<<<< HEAD
     public void setContent(int layoutId, LayoutInflater inflater) {
+=======
+    void setContent(int layoutId, LayoutInflater inflater) {
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         throw new RuntimeException("why?");
     }
 

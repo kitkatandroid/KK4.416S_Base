@@ -23,7 +23,10 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+<<<<<<< HEAD
         android:background="@color/editable_background"
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         android:orientation="vertical">
 
         <TextView
@@ -36,19 +39,33 @@
             android:layout_marginBottom="32dip"
             android:layout_gravity="center"
             style="?android:attr/buttonBarButtonStyle"
+<<<<<<< HEAD
             android:singleLine="true"
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
             android:ellipsize="end"
             android:text="@string/print_error_default_message"
             android:textColor="@color/important_text"
             android:textSize="16sp">
         </TextView>
 
+<<<<<<< HEAD
+=======
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/action_button_background">
+
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
         <View
             android:layout_width="fill_parent"
             android:layout_height="1dip"
             android:background="@color/separator">
         </View>
 
+<<<<<<< HEAD
     </LinearLayout>
 
     <Button
@@ -61,5 +78,19 @@
         android:textSize="16sp"
         android:textColor="@color/important_text">
     </Button>
+=======
+        <Button
+            android:id="@+id/ok_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="fill_horizontal"
+            style="?android:attr/buttonBarButtonStyle"
+            android:text="@android:string/ok"
+            android:textSize="16sp"
+            android:textColor="@color/important_text">
+        </Button>
+
+    </FrameLayout>
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
 </LinearLayout>

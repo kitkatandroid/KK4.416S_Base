@@ -63,8 +63,11 @@ interface IWifiManager
 
     void setCountryCode(String country, boolean persist);
 
+<<<<<<< HEAD
     String getCountryCode();
 
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     void setFrequencyBand(int band, boolean persist);
 
     int getFrequencyBand();
@@ -119,7 +122,11 @@ interface IWifiManager
 
     void enableTdlsWithMacAddress(String remoteMacAddress, boolean enable);
 
+<<<<<<< HEAD
     boolean requestBatchedScan(in BatchedScanSettings requested, IBinder binder);
+=======
+    boolean requestBatchedScan(in BatchedScanSettings requested, IBinder binder, in WorkSource ws);
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 
     void stopBatchedScan(in BatchedScanSettings requested);
 

@@ -20,6 +20,7 @@
               android:background="@drawable/item_background_activated_holo_dark"
               android:gravity="center_vertical">
 
+<<<<<<< HEAD
     <ImageView android:layout_width="56dp"
                android:layout_height="56dp"
                android:scaleType="center"
@@ -27,6 +28,8 @@
                android:visibility="gone"
                android:duplicateParentState="true" />
 
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
     <LinearLayout android:layout_width="0dp"
                   android:layout_height="match_parent"
                   android:layout_weight="1"
@@ -53,6 +56,7 @@
                   android:duplicateParentState="true" />
     </LinearLayout>
 
+<<<<<<< HEAD
     <ImageButton
         android:layout_width="56dp"
         android:layout_height="56dp"
@@ -63,4 +67,6 @@
         android:visibility="gone"
         android:duplicateParentState="true" />
 
+=======
+>>>>>>> feef9887e8f8eb6f64fc1b4552c02efb5755cdc1
 </LinearLayout>
